@@ -4,13 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MKG Stay | 旅宿预订 · MKG Japan</title>
-  <meta name="description" content="直接预订 MKG Japan 旗下精品酒店与民宿，享受官网专属优惠价格。" />
+  <meta name="description" content="MKG Japan 旗下精品酒店与民宿官网直订平台，享受最优惠价格。" />
   <style>
     :root{
       --navy:#11234a;--navy-2:#0b1733;--gold:#c9a65b;--gold-2:#e8d49a;
       --ink:#182033;--muted:#667085;--line:#e7eaf0;--bg:#f7f5f1;--card:#ffffff;
-      --green:#16866a;--red:#bd3b35;--blue:#2f67a9;
-      --shadow:0 24px 70px rgba(11,23,51,.16);--radius:22px;--radius-sm:14px;
+      --green:#16866a;--shadow:0 24px 70px rgba(11,23,51,.16);--radius:22px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth;overflow-x:hidden}
@@ -31,140 +30,65 @@
     .nav-cta{padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:white!important}
 
     /* ── Hero ── */
-    .stay-hero{background:var(--navy-2);color:white;padding:64px 0 48px;text-align:center}
-    .stay-hero .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border:1px solid rgba(232,212,154,.4);border-radius:999px;color:var(--gold-2);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.06);margin-bottom:20px}
-    .stay-hero h1{font-size:clamp(32px,5vw,52px);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px}
-    .stay-hero p{color:rgba(255,255,255,.76);font-size:16px;max-width:560px;margin:0 auto}
+    .stay-hero{background:var(--navy-2);color:white;padding:80px 0 60px;text-align:center;position:relative;overflow:hidden}
+    .stay-hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-80px;height:140px;background:var(--bg);transform:rotate(-2deg)}
+    .stay-hero .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid rgba(232,212,154,.4);border-radius:999px;color:var(--gold-2);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.06);margin-bottom:20px}
+    .stay-hero h1{font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px;position:relative;z-index:1}
+    .stay-hero p{color:rgba(255,255,255,.76);font-size:16px;max-width:540px;margin:0 auto;position:relative;z-index:1}
 
-    /* ── 搜索栏 ── */
-    .search-bar{background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 28px;margin:-36px auto 48px;position:relative;z-index:10;display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:16px;align-items:end}
-    .field label{display:block;font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
-    .field input,.field select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;color:var(--ink);font-family:inherit;background:white;outline:none;transition:.2s}
-    .field input:focus,.field select:focus{border-color:var(--gold)}
-    .search-btn{padding:13px 24px;border-radius:12px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:15px;border:none;cursor:pointer;white-space:nowrap;transition:.2s;font-family:inherit}
-    .search-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(201,166,91,.3)}
-
-    /* ── 物件列表 ── */
-    .section-head{margin-bottom:28px}
-    .kicker{color:var(--gold);font-weight:900;letter-spacing:.16em;font-size:12px;text-transform:uppercase;margin-bottom:8px}
-    h2{font-size:clamp(22px,2.6vw,32px);line-height:1.15;margin:0 0 8px;color:var(--navy);letter-spacing:-.02em}
-    .lead{color:var(--muted);font-size:15px;margin:0}
-
-    .hotel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:64px}
-    .hotel-card{background:white;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 12px 40px rgba(11,23,51,.06);transition:.22s}
-    .hotel-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-    .hotel-img{width:100%;height:220px;object-fit:cover;background:#ddd;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:14px}
-    .hotel-img img{width:100%;height:100%;object-fit:cover}
-    .hotel-body{padding:24px}
-    .hotel-tag{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
-    .hotel-tag.open{background:#e8f3ee;color:#166348}
-    .hotel-tag.plan{background:#fef3e2;color:#92570d}
-    .hotel-card h3{margin:0 0 8px;font-size:20px;color:var(--navy);line-height:1.2}
-    .hotel-card .addr{color:var(--muted);font-size:13px;margin-bottom:14px;display:flex;align-items:center;gap:5px}
-    .hotel-meta{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap}
-    .hotel-meta span{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:4px}
-    .hotel-meta b{color:var(--ink)}
-    .hotel-price{display:flex;align-items:baseline;gap:6px;margin-bottom:16px}
-    .hotel-price .from{font-size:12px;color:var(--muted)}
-    .hotel-price .amount{font-size:26px;font-weight:900;color:var(--navy)}
-    .hotel-price .per{font-size:12px;color:var(--muted)}
-    .hotel-price .direct-badge{padding:4px 10px;border-radius:999px;background:#e8f3ee;color:#166348;font-size:11px;font-weight:800;margin-left:8px}
-    .hotel-actions{display:flex;gap:10px}
-    .btn-book{flex:1;padding:12px;border-radius:12px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;text-align:center}
-    .btn-book:hover{box-shadow:0 8px 20px rgba(201,166,91,.3);transform:translateY(-1px)}
-    .btn-detail{padding:12px 16px;border-radius:12px;border:1.5px solid var(--line);background:white;color:var(--ink);font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s}
-    .btn-detail:hover{border-color:var(--gold);color:var(--gold)}
-
-    /* ── 预订弹窗 ── */
-    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(11,23,51,.6);z-index:100;backdrop-filter:blur(4px);padding:20px;overflow-y:auto}
-    .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center}
-    .modal{background:white;border-radius:var(--radius);width:min(700px,100%);margin:auto;overflow:hidden;box-shadow:var(--shadow)}
-    .modal-header{background:var(--navy);color:white;padding:24px 28px;display:flex;align-items:center;justify-content:space-between}
-    .modal-header h3{margin:0;font-size:20px}
-    .modal-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:24px;cursor:pointer;padding:0;line-height:1}
-    .modal-close:hover{color:white}
-    .modal-body{padding:28px}
-
-    /* 步骤进度 */
-    .steps{display:flex;gap:0;margin-bottom:28px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
-    .step{flex:1;padding:12px;text-align:center;font-size:12px;font-weight:700;color:var(--muted);background:white;border-right:1px solid var(--line);transition:.2s}
-    .step:last-child{border-right:none}
-    .step.active{background:var(--gold);color:var(--navy-2)}
-    .step.done{background:#e8f3ee;color:#166348}
-
-    /* 步骤1：日期+房型 */
-    .date-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
-    .form-field label{display:block;font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
-    .form-field input,.form-field select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;color:var(--ink);font-family:inherit;background:white;outline:none;transition:.2s}
-    .form-field input:focus,.form-field select:focus{border-color:var(--gold)}
-
-    .room-list{display:grid;gap:14px;margin-top:20px}
-    .room-item{border:2px solid var(--line);border-radius:16px;padding:18px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;cursor:pointer;transition:.2s}
-    .room-item:hover{border-color:var(--gold)}
-    .room-item.selected{border-color:var(--gold);background:#fffbf2}
-    .room-item h4{margin:0 0 4px;color:var(--navy);font-size:16px}
-    .room-item p{margin:0;color:var(--muted);font-size:13px}
-    .room-price{text-align:right}
-    .room-price b{display:block;font-size:22px;color:var(--navy);font-weight:900}
-    .room-price small{color:var(--muted);font-size:12px}
-    .room-avail{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;margin-top:5px}
-    .room-avail.ok{background:#e8f3ee;color:#166348}
-    .room-avail.few{background:#fef3e2;color:#92570d}
-
-    /* 步骤2：填写信息 */
-    .guest-form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .guest-form .full{grid-column:1/-1}
-    .notice-box{background:#f8f8fb;border:1px solid var(--line);border-radius:14px;padding:16px;font-size:13px;color:var(--muted);margin-top:16px;line-height:1.7}
-    .notice-box b{color:var(--ink);display:block;margin-bottom:4px}
-
-    /* 步骤3：确认 */
-    .confirm-summary{background:#f8f8fb;border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:20px}
-    .confirm-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
-    .confirm-row:last-child{border-bottom:none;font-weight:800;font-size:16px;color:var(--navy)}
-    .confirm-row span:first-child{color:var(--muted)}
-    .total-price{font-size:28px;font-weight:900;color:var(--navy)}
-
-    /* 步骤4：完成 */
-    .success-box{text-align:center;padding:20px 0}
-    .success-icon{width:64px;height:64px;border-radius:50%;background:#e8f3ee;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px}
-    .success-box h3{color:var(--navy);margin:0 0 10px;font-size:24px}
-    .success-box p{color:var(--muted);margin:0 0 24px}
-    .booking-ref{background:#f8f8fb;border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;margin-bottom:20px}
-    .booking-ref small{color:var(--muted);font-size:12px;display:block;margin-bottom:4px}
-    .booking-ref b{font-size:22px;color:var(--navy);letter-spacing:.1em}
-
-    /* 按钮行 */
-    .modal-footer{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
-    .btn-prev{padding:13px 24px;border-radius:12px;border:1.5px solid var(--line);background:white;color:var(--ink);font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s}
-    .btn-prev:hover{border-color:var(--gold)}
-    .btn-next{padding:13px 28px;border-radius:12px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s}
-    .btn-next:hover{box-shadow:0 8px 20px rgba(201,166,91,.3);transform:translateY(-1px)}
-    .btn-next:disabled{opacity:.5;cursor:not-allowed;transform:none}
-
-    /* ── API 状态提示 ── */
-    .api-notice{background:#fef3e2;border:1px solid #f5c97a;border-radius:14px;padding:14px 18px;font-size:13px;color:#7d5b18;margin-bottom:28px;display:flex;align-items:center;gap:10px}
-
-    /* ── 直订优势 ── */
-    .perks{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:48px 0}
-    .perk{background:white;border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center}
-    .perk-icon{font-size:28px;margin-bottom:12px}
-    .perk h4{margin:0 0 6px;color:var(--navy);font-size:16px}
+    /* ── 直订优势条 ── */
+    .perks-bar{background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 36px;margin:60px auto 56px;display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+    .perk{text-align:center;padding:0 24px}
+    .perk:not(:last-child){border-right:1px solid var(--line)}
+    .perk-icon{font-size:26px;margin-bottom:10px}
+    .perk h4{margin:0 0 5px;color:var(--navy);font-size:15px;font-weight:800}
     .perk p{margin:0;color:var(--muted);font-size:13px}
 
-    /* ── 响应式 ── */
-    @media(max-width:768px){
-      .search-bar{grid-template-columns:1fr 1fr;gap:12px}
-      .search-bar .field:nth-child(3){grid-column:1/-1}
-      .search-btn{grid-column:1/-1}
-      .hotel-grid{grid-template-columns:1fr}
-      .perks{grid-template-columns:1fr}
-      .guest-form{grid-template-columns:1fr}
-      .guest-form .full{grid-column:1}
-      .date-row{grid-template-columns:1fr}
-    }
-    @media(max-width:480px){
-      .search-bar{grid-template-columns:1fr}
-      .modal-body{padding:20px}
+    /* ── 分类区块 ── */
+    .section{padding:48px 0}
+    .section+.section{padding-top:0}
+    .kicker{color:var(--gold);font-weight:900;letter-spacing:.16em;font-size:12px;text-transform:uppercase;margin-bottom:10px}
+    h2{font-size:clamp(22px,2.6vw,32px);line-height:1.15;margin:0 0 6px;color:var(--navy);letter-spacing:-.02em}
+    .lead{color:var(--muted);font-size:15px;margin:0 0 32px}
+    .divider{height:1px;background:var(--line);margin:48px 0}
+
+    /* ── 物件卡片 ── */
+    .prop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .prop-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 32px rgba(11,23,51,.05);transition:.22s;display:flex;flex-direction:column}
+    .prop-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .prop-img{height:200px;background:#ddd;overflow:hidden;position:relative}
+    .prop-img img{width:100%;height:100%;object-fit:cover;transition:.4s}
+    .prop-card:hover .prop-img img{transform:scale(1.04)}
+    .prop-img .no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:13px;background:#f0ece5}
+    .prop-tag{position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.05em;backdrop-filter:blur(6px)}
+    .prop-tag.open{background:rgba(22,134,106,.9);color:white}
+    .prop-tag.soon{background:rgba(146,87,13,.85);color:white}
+    .prop-body{padding:22px;flex:1;display:flex;flex-direction:column}
+    .prop-body h3{margin:0 0 6px;color:var(--navy);font-size:18px;line-height:1.25;font-weight:800}
+    .prop-addr{color:var(--muted);font-size:13px;margin-bottom:12px;display:flex;align-items:center;gap:4px}
+    .prop-meta{display:flex;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+    .prop-meta span{font-size:12px;color:var(--muted)}
+    .prop-meta b{color:var(--ink)}
+    .prop-price{display:flex;align-items:baseline;gap:5px;margin-bottom:18px;margin-top:auto;padding-top:14px;border-top:1px solid var(--line)}
+    .prop-price .from{font-size:12px;color:var(--muted)}
+    .prop-price .amount{font-size:24px;font-weight:900;color:var(--navy)}
+    .prop-price .per{font-size:12px;color:var(--muted)}
+    .prop-price .badge{padding:3px 9px;border-radius:999px;background:#e8f3ee;color:var(--green);font-size:11px;font-weight:800;margin-left:6px}
+    .btn-enter{width:100%;padding:13px;border-radius:12px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;text-align:center;display:block}
+    .btn-enter:hover{box-shadow:0 8px 20px rgba(201,166,91,.3);transform:translateY(-1px)}
+    .btn-enter.coming{background:#f0ece5;color:var(--muted);cursor:default}
+    .btn-enter.coming:hover{box-shadow:none;transform:none}
+
+    /* ── 页脚 ── */
+    footer{background:var(--navy-2);color:rgba(255,255,255,.6);text-align:center;padding:32px;font-size:13px;margin-top:64px}
+    footer a{color:var(--gold);margin:0 8px}
+
+    @media(max-width:900px){.prop-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){
+      .prop-grid{grid-template-columns:1fr}
+      .perks-bar{grid-template-columns:1fr;gap:20px}
+      .perk{border-right:none!important;border-bottom:1px solid var(--line);padding:0 0 20px}
+      .perk:last-child{border-bottom:none;padding-bottom:0}
     }
   </style>
 </head>
@@ -180,7 +104,7 @@
         <a href="index.html#about">关于我们</a>
         <a href="index.html#services">事业内容</a>
         <a href="index.html#portfolio">项目一览</a>
-        <a class="nav-book" href="stay.html">预订旅宿 · MKG Stay</a>
+        <a class="nav-book" href="stay.html">MKG Stay</a>
         <a class="nav-cta" href="index.html#contact">联系我们</a>
       </nav>
     </div>
@@ -190,431 +114,133 @@
     <div class="wrap">
       <div class="eyebrow">MKG Stay · 官网直接预订</div>
       <h1>旅宿预订</h1>
-      <p>官网直订享最优价格，无额外手续费，预订直连 PMS 系统即时确认</p>
+      <p>官网直订享最优价格，预订即时确认，无需支付 OTA 平台手续费</p>
     </div>
   </section>
 
   <div class="wrap">
 
-    <!-- 搜索栏 -->
-    <div class="search-bar">
-      <div class="field">
-        <label>入住日期</label>
-        <input type="date" id="checkIn" />
-      </div>
-      <div class="field">
-        <label>退房日期</label>
-        <input type="date" id="checkOut" />
-      </div>
-      <div class="field">
-        <label>入住人数</label>
-        <select id="guestCount">
-          <option value="1">1 名</option>
-          <option value="2" selected>2 名</option>
-          <option value="3">3 名</option>
-          <option value="4">4 名</option>
-        </select>
-      </div>
-      <button class="search-btn" onclick="searchRooms()">搜索客室</button>
-    </div>
-
-    <!-- API 状态提示（对接完成后删除此块） -->
-    <div class="api-notice" id="apiNotice">
-      ⚠️ 目前显示模拟数据，SmartOrder API 对接完成后将显示实时价格与库存。
-    </div>
-
     <!-- 直订优势 -->
-    <div class="perks">
+    <div class="perks-bar">
       <div class="perk">
         <div class="perk-icon">💴</div>
         <h4>官网最优价</h4>
-        <p>无 OTA 平台佣金，价格比第三方平台低 10–15%</p>
+        <p>比 Booking.com / Airbnb 等平台低 10–15%</p>
       </div>
       <div class="perk">
         <div class="perk-icon">⚡</div>
-        <h4>即时确认</h4>
-        <p>预订直连 PMS，秒速确认，无需等待人工审核</p>
+        <h4>预订即时确认</h4>
+        <p>直连 PMS 系统，秒速确认，确认邮件自动发送</p>
       </div>
       <div class="perk">
         <div class="perk-icon">🛎</div>
         <h4>专属服务</h4>
-        <p>直订客人享受优先入住安排及专属客房升级</p>
+        <p>直订客人享受优先入住安排及客房升级优先权</p>
       </div>
     </div>
 
-    <!-- 物件列表 -->
-    <div class="section-head">
-      <div class="kicker">Our Properties</div>
-      <h2>旗下旅宿</h2>
-      <p class="lead">精品酒店与民宿，官网直订可享最优惠价格</p>
-    </div>
+    <!-- 酒店 -->
+    <section class="section" id="hotels">
+      <div class="kicker">Hotel</div>
+      <h2>精品酒店</h2>
+      <p class="lead">专业设计，提供高品质住宿体验</p>
+      <div class="prop-grid">
 
-    <div class="hotel-grid" id="hotelGrid">
-
-      <!-- MKG HOME 新宿 -->
-      <div class="hotel-card">
-        <div class="hotel-img">
-          <img src="assets/shinjuku.jpg" alt="MKG HOME 新宿" onerror="this.parentElement.innerHTML='📷 MKG HOME 新宿'">
-        </div>
-        <div class="hotel-body">
-          <span class="hotel-tag open">● 运营中</span>
-          <h3>MKG HOME 新宿</h3>
-          <div class="addr">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            東京都新宿区大久保
+        <div class="prop-card">
+          <div class="prop-img">
+            <img src="assets/asakusa.jpg" alt="MKG HOTEL Asakusa" onerror="this.parentElement.innerHTML='<div class=no-img>MKG HOTEL Asakusa</div>'">
+            <span class="prop-tag open">● 运营中</span>
           </div>
-          <div class="hotel-meta">
-            <span>🛏 <b>7</b> 间客室</span>
-            <span>👥 最多 <b>4</b> 名</span>
-            <span>🏢 7层民宿</span>
-          </div>
-          <div class="hotel-price">
-            <span class="from">最低</span>
-            <span class="amount" id="price-shinjuku">¥12,000</span>
-            <span class="per">/ 晚</span>
-            <span class="direct-badge">官网直订</span>
-          </div>
-          <div class="hotel-actions">
-            <button class="btn-book" onclick="openBooking('shinjuku')">立即预订</button>
-            <button class="btn-detail" onclick="showDetail('shinjuku')">查看详情</button>
+          <div class="prop-body">
+            <h3>MKG HOTEL Asakusa</h3>
+            <div class="prop-addr">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              東京都台東区駒形
+            </div>
+            <div class="prop-meta">
+              <span>🛏 <b>9</b> 间客室</span>
+              <span>⭐ <b>9.2</b> / Booking.com</span>
+            </div>
+            <div class="prop-price">
+              <span class="from">最低</span>
+              <span class="amount">¥18,000</span>
+              <span class="per">/ 晚</span>
+              <span class="badge">官网直订</span>
+            </div>
+            <span class="btn-enter coming">API 对接准备中</span>
           </div>
         </div>
+
       </div>
+    </section>
 
-      <!-- MKG HOTEL Asakusa -->
-      <div class="hotel-card">
-        <div class="hotel-img">
-          <img src="assets/asakusa.jpg" alt="MKG HOTEL Asakusa" onerror="this.parentElement.innerHTML='📷 MKG HOTEL Asakusa'">
+    <div class="divider"></div>
+
+    <!-- 民宿 -->
+    <section class="section" id="guesthouses">
+      <div class="kicker">Guesthouse</div>
+      <h2>精品民宿</h2>
+      <p class="lead">家居风格，感受东京本地生活</p>
+      <div class="prop-grid">
+
+        <div class="prop-card">
+          <div class="prop-img">
+            <img src="assets/shinjuku.jpg" alt="MKG HOME 新宿" onerror="this.parentElement.innerHTML='<div class=no-img>MKG HOME 新宿</div>'">
+            <span class="prop-tag open">● 运营中</span>
+          </div>
+          <div class="prop-body">
+            <h3>MKG HOME 新宿</h3>
+            <div class="prop-addr">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              東京都新宿区大久保
+            </div>
+            <div class="prop-meta">
+              <span>🛏 <b>7</b> 间客室</span>
+              <span>👥 最多 <b>4</b> 名</span>
+            </div>
+            <div class="prop-price">
+              <span class="from">最低</span>
+              <span class="amount">¥12,000</span>
+              <span class="per">/ 晚</span>
+              <span class="badge">官网直订</span>
+            </div>
+            <a class="btn-enter" href="home-shinjuku.html">查看详情 & 预订 →</a>
+          </div>
         </div>
-        <div class="hotel-body">
-          <span class="hotel-tag open">● 运营中</span>
-          <h3>MKG HOTEL Asakusa</h3>
-          <div class="addr">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            東京都台東区駒形
+
+        <div class="prop-card">
+          <div class="prop-img">
+            <img src="assets/shiba.jpg" alt="MKG HOME SHIBA" onerror="this.parentElement.innerHTML='<div class=no-img>MKG HOME SHIBA</div>'">
+            <span class="prop-tag open">● 运营中</span>
           </div>
-          <div class="hotel-meta">
-            <span>🛏 <b>9</b> 间客室</span>
-            <span>⭐ <b>9.2</b> Booking</span>
-            <span>🏅 精品设计型</span>
-          </div>
-          <div class="hotel-price">
-            <span class="from">最低</span>
-            <span class="amount">¥18,000</span>
-            <span class="per">/ 晚</span>
-            <span class="direct-badge">官网直订</span>
-          </div>
-          <div class="hotel-actions">
-            <button class="btn-book" onclick="alert('浅草店 API 对接准备中，敬请期待')">即将开放</button>
-            <button class="btn-detail" onclick="showDetail('asakusa')">查看详情</button>
+          <div class="prop-body">
+            <h3>MKG HOME SHIBA</h3>
+            <div class="prop-addr">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              東京都港区芝（東京タワー近く）
+            </div>
+            <div class="prop-meta">
+              <span>🛏 <b>6</b> 间客室</span>
+              <span>🗼 近东京铁塔</span>
+            </div>
+            <div class="prop-price">
+              <span class="from">最低</span>
+              <span class="amount">¥14,000</span>
+              <span class="per">/ 晚</span>
+              <span class="badge">官网直订</span>
+            </div>
+            <span class="btn-enter coming">即将开放</span>
           </div>
         </div>
+
       </div>
+    </section>
 
-    </div>
   </div>
 
-  <!-- ── 预订弹窗 ── -->
-  <div class="modal-overlay" id="bookingModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 id="modalTitle">预订 MKG HOME 新宿</h3>
-        <button class="modal-close" onclick="closeBooking()">×</button>
-      </div>
-      <div class="modal-body">
-
-        <!-- 步骤进度条 -->
-        <div class="steps">
-          <div class="step active" id="step1-tab">① 选择日期 & 房型</div>
-          <div class="step" id="step2-tab">② 填写信息</div>
-          <div class="step" id="step3-tab">③ 确认预订</div>
-          <div class="step" id="step4-tab">✓ 完成</div>
-        </div>
-
-        <!-- 步骤1 -->
-        <div id="step1">
-          <div class="date-row">
-            <div class="form-field">
-              <label>入住日期</label>
-              <input type="date" id="modal-checkin" oninput="updateNights()" />
-            </div>
-            <div class="form-field">
-              <label>退房日期</label>
-              <input type="date" id="modal-checkout" oninput="updateNights()" />
-            </div>
-          </div>
-          <div class="form-field" style="margin-bottom:20px">
-            <label>入住人数</label>
-            <select id="modal-guests">
-              <option value="1">1 名</option>
-              <option value="2" selected>2 名</option>
-              <option value="3">3 名</option>
-              <option value="4">4 名</option>
-            </select>
-          </div>
-
-          <div style="font-size:13px;color:var(--muted);margin-bottom:12px">请选择房型：</div>
-          <div class="room-list" id="roomList">
-            <!-- JS 动态生成 -->
-          </div>
-        </div>
-
-        <!-- 步骤2 -->
-        <div id="step2" style="display:none">
-          <div class="guest-form">
-            <div class="form-field">
-              <label>姓名（拼音 / 英文）</label>
-              <input type="text" id="g-name" placeholder="ZHANG SAN" />
-            </div>
-            <div class="form-field">
-              <label>联系电话</label>
-              <input type="tel" id="g-phone" placeholder="+81 90-0000-0000" />
-            </div>
-            <div class="form-field full">
-              <label>电子邮箱</label>
-              <input type="email" id="g-email" placeholder="example@email.com" />
-            </div>
-            <div class="form-field full">
-              <label>特殊要求（选填）</label>
-              <input type="text" id="g-note" placeholder="如：早到行李寄存、高楼层偏好等" />
-            </div>
-          </div>
-          <div class="notice-box">
-            <b>入住须知</b>
-            Check-in: 15:00 以后 &nbsp;|&nbsp; Check-out: 11:00 以前<br>
-            本预订为即时确认，确认邮件将发送至您填写的邮箱。<br>
-            取消政策：入住前 3 日前可免费取消，之后收取首晚房费。
-          </div>
-        </div>
-
-        <!-- 步骤3 -->
-        <div id="step3" style="display:none">
-          <div class="confirm-summary" id="confirmSummary">
-            <!-- JS 动态生成 -->
-          </div>
-          <div class="notice-box">
-            点击"确认预订"即视为同意上述取消政策。预订确认邮件将发送至您填写的邮箱地址。
-          </div>
-        </div>
-
-        <!-- 步骤4：完成 -->
-        <div id="step4" style="display:none">
-          <div class="success-box">
-            <div class="success-icon">✓</div>
-            <h3>预订成功！</h3>
-            <p>确认邮件已发送至您的邮箱，请注意查收。</p>
-            <div class="booking-ref">
-              <small>预订编号</small>
-              <b id="bookingRef">--</b>
-            </div>
-            <p style="font-size:13px;color:var(--muted)">如需修改或取消，请联系 dq@mkgjp.com 或致电 03-6279-2482</p>
-          </div>
-        </div>
-
-        <!-- 底部按钮 -->
-        <div class="modal-footer" id="modalFooter">
-          <button class="btn-prev" id="btnPrev" onclick="prevStep()" style="visibility:hidden">← 上一步</button>
-          <button class="btn-next" id="btnNext" onclick="nextStep()">下一步 →</button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ── 模拟数据（API 对接后替换此处） ──
-    // TODO: 对接 GET /cms/api/v3/hotels/{hotelId}/rooms (hotelId: 51401486)
-    // TODO: 对接 GET /booking/api/v3/avail/{hotelId}
-    const MOCK_ROOMS = {
-      shinjuku: [
-        { id: 'R101', name: '标准双人间', desc: '22㎡ · 双床 · 禁烟 · 2楼', price: 12000, capacity: 2, avail: 3 },
-        { id: 'R201', name: '豪华大床间', desc: '28㎡ · 大床 · 禁烟 · 5楼', price: 16800, capacity: 2, avail: 1 },
-        { id: 'R301', name: '家庭四人间', desc: '38㎡ · 双床+加床 · 禁烟 · 7楼', price: 22000, capacity: 4, avail: 2 },
-      ]
-    };
-
-    let currentHotel = 'shinjuku';
-    let currentStep = 1;
-    let selectedRoom = null;
-
-    // 初始化日期
-    window.addEventListener('DOMContentLoaded', () => {
-      const today = new Date();
-      const tomorrow = new Date(today);
-      tomorrow.setDate(today.getDate() + 1);
-      const dayAfter = new Date(today);
-      dayAfter.setDate(today.getDate() + 2);
-
-      const fmt = d => d.toISOString().split('T')[0];
-      document.getElementById('checkIn').value = fmt(tomorrow);
-      document.getElementById('checkOut').value = fmt(dayAfter);
-      document.getElementById('modal-checkin').value = fmt(tomorrow);
-      document.getElementById('modal-checkout').value = fmt(dayAfter);
-    });
-
-    function searchRooms() {
-      const ci = document.getElementById('checkIn').value;
-      const co = document.getElementById('checkOut').value;
-      if (!ci || !co || ci >= co) {
-        alert('请选择正确的入住和退房日期');
-        return;
-      }
-      document.getElementById('modal-checkin').value = ci;
-      document.getElementById('modal-checkout').value = co;
-      document.getElementById('modal-guests').value = document.getElementById('guestCount').value;
-      openBooking('shinjuku');
-    }
-
-    function openBooking(hotel) {
-      currentHotel = hotel;
-      currentStep = 1;
-      selectedRoom = null;
-      renderRooms();
-      updateStepUI();
-      document.getElementById('bookingModal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeBooking() {
-      document.getElementById('bookingModal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function renderRooms() {
-      const rooms = MOCK_ROOMS[currentHotel] || [];
-      const ci = document.getElementById('modal-checkin').value;
-      const co = document.getElementById('modal-checkout').value;
-      const nights = ci && co ? Math.max(1, Math.round((new Date(co)-new Date(ci))/86400000)) : 1;
-
-      document.getElementById('roomList').innerHTML = rooms.map(r => `
-        <div class="room-item" id="room-${r.id}" onclick="selectRoom('${r.id}')">
-          <div>
-            <h4>${r.name}</h4>
-            <p>${r.desc}</p>
-            <span class="room-avail ${r.avail <= 1 ? 'few' : 'ok'}">
-              ${r.avail <= 1 ? '⚠ 仅剩 '+r.avail+' 间' : '✓ 有空房'}
-            </span>
-          </div>
-          <div class="room-price">
-            <b>¥${r.price.toLocaleString()}</b>
-            <small>/ 晚 · 共 ${nights} 晚</small>
-            <br><small style="color:var(--navy);font-weight:700">合计 ¥${(r.price*nights).toLocaleString()}</small>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function selectRoom(id) {
-      selectedRoom = (MOCK_ROOMS[currentHotel] || []).find(r => r.id === id);
-      document.querySelectorAll('.room-item').forEach(el => el.classList.remove('selected'));
-      document.getElementById('room-' + id)?.classList.add('selected');
-      document.getElementById('btnNext').disabled = false;
-    }
-
-    function updateNights() {
-      renderRooms();
-    }
-
-    function getNights() {
-      const ci = document.getElementById('modal-checkin').value;
-      const co = document.getElementById('modal-checkout').value;
-      return ci && co ? Math.max(1, Math.round((new Date(co)-new Date(ci))/86400000)) : 1;
-    }
-
-    function buildConfirmSummary() {
-      const ci = document.getElementById('modal-checkin').value;
-      const co = document.getElementById('modal-checkout').value;
-      const nights = getNights();
-      const total = selectedRoom ? selectedRoom.price * nights : 0;
-      const name = document.getElementById('g-name').value || '—';
-      const email = document.getElementById('g-email').value || '—';
-
-      return `
-        <div class="confirm-row"><span>物件</span><span>MKG HOME 新宿</span></div>
-        <div class="confirm-row"><span>房型</span><span>${selectedRoom?.name || '—'}</span></div>
-        <div class="confirm-row"><span>入住</span><span>${ci}</span></div>
-        <div class="confirm-row"><span>退房</span><span>${co}</span></div>
-        <div class="confirm-row"><span>晚数</span><span>${nights} 晚</span></div>
-        <div class="confirm-row"><span>人数</span><span>${document.getElementById('modal-guests').value} 名</span></div>
-        <div class="confirm-row"><span>姓名</span><span>${name}</span></div>
-        <div class="confirm-row"><span>邮箱</span><span>${email}</span></div>
-        <div class="confirm-row"><span>合计金额</span><span class="total-price">¥${total.toLocaleString()}</span></div>
-      `;
-    }
-
-    function nextStep() {
-      if (currentStep === 1) {
-        if (!selectedRoom) { alert('请选择房型'); return; }
-        const ci = document.getElementById('modal-checkin').value;
-        const co = document.getElementById('modal-checkout').value;
-        if (!ci || !co || ci >= co) { alert('请选择正确的日期'); return; }
-      }
-      if (currentStep === 2) {
-        const name = document.getElementById('g-name').value.trim();
-        const email = document.getElementById('g-email').value.trim();
-        if (!name) { alert('请填写姓名'); return; }
-        if (!email || !email.includes('@')) { alert('请填写正确的邮箱'); return; }
-        document.getElementById('confirmSummary').innerHTML = buildConfirmSummary();
-      }
-      if (currentStep === 3) {
-        submitBooking();
-        return;
-      }
-      currentStep++;
-      updateStepUI();
-    }
-
-    function prevStep() {
-      if (currentStep > 1) { currentStep--; updateStepUI(); }
-    }
-
-    function updateStepUI() {
-      for (let i = 1; i <= 4; i++) {
-        const panel = document.getElementById('step' + i);
-        const tab = document.getElementById('step' + i + '-tab');
-        if (panel) panel.style.display = i === currentStep ? 'block' : 'none';
-        if (tab) {
-          tab.classList.toggle('active', i === currentStep);
-          tab.classList.toggle('done', i < currentStep);
-        }
-      }
-      const prev = document.getElementById('btnPrev');
-      const next = document.getElementById('btnNext');
-      const footer = document.getElementById('modalFooter');
-
-      prev.style.visibility = currentStep > 1 && currentStep < 4 ? 'visible' : 'hidden';
-
-      if (currentStep === 4) {
-        footer.style.display = 'none';
-      } else {
-        footer.style.display = 'flex';
-        next.textContent = currentStep === 3 ? '确认预订 ✓' : '下一步 →';
-        next.disabled = currentStep === 1 && !selectedRoom;
-      }
-    }
-
-    function submitBooking() {
-      // TODO: 对接 POST /booking/api/v3/hotels/51401486/reservations/book
-      // 目前模拟提交
-      const ref = 'MKG-' + Date.now().toString(36).toUpperCase().slice(-8);
-      document.getElementById('bookingRef').textContent = ref;
-      currentStep = 4;
-      updateStepUI();
-    }
-
-    function showDetail(hotel) {
-      if (hotel === 'shinjuku') {
-        alert('MKG HOME 新宿\n\n東京都新宿区大久保\n7层民宿 · 7间客室 · 最多4名\n\n详情页开发中，敬请期待。');
-      } else {
-        alert('MKG HOTEL Asakusa\n\n東京都台東区駒形\n精品酒店 · 9间客室 · Booking评分9.2\n\n详情页开发中，敬请期待。');
-      }
-    }
-
-    // 点击弹窗外关闭
-    document.getElementById('bookingModal').addEventListener('click', function(e) {
-      if (e.target === this) closeBooking();
-    });
-  </script>
+  <footer>
+    <p>© 2026 株式会社MKG Japan · <a href="index.html">返回官网</a> · <a href="index.html#contact">联系我们</a></p>
+  </footer>
 
 </body>
 </html>
