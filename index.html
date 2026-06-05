@@ -1,0 +1,1448 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MKG Japan | 日本不动产投资・酒店开发・资产运营管理</title>
+  <meta name="description" content="株式会社MKG Japan — 专注东京核心区域不动产投资、酒店开发与民宿运营管理，为投资者提供从资产筛选到开业运营的全链条服务。" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.mkgjp.com/" />
+
+  <!-- Open Graph / 社交分享 -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.mkgjp.com/" />
+  <meta property="og:title" content="MKG Japan | 日本不动产投资・酒店开发・资产运营管理" />
+  <meta property="og:description" content="专注东京核心区域不动产投资、酒店开发与民宿运营管理，为投资者提供从资产筛选到开业运营的全链条服务。" />
+  <meta property="og:image" content="https://www.mkgjp.com/assets/tokyo_hero.jpg" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MKG Japan | 日本不动产投资・酒店开发" />
+  <meta name="twitter:description" content="专注东京核心区域不动产投资、酒店开发与民宿运营管理。" />
+  <meta name="twitter:image" content="https://www.mkgjp.com/assets/tokyo_hero.jpg" />
+
+  <!-- 结构化数据 JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "株式会社MKG Japan",
+    "url": "https://www.mkgjp.com/",
+    "logo": "https://www.mkgjp.com/assets/logo.png",
+    "description": "专注东京核心区域不动产投资、酒店开发与民宿运营管理",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "百人町1-20-5 5F",
+      "addressLocality": "新宿区",
+      "addressRegion": "東京都",
+      "postalCode": "169-0073",
+      "addressCountry": "JP"
+    },
+    "telephone": "+81-3-6279-2482",
+    "areaServed": "Tokyo, Japan",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "MKG Group",
+      "url": "https://www.mkg.com.sg/"
+    }
+  }
+  </script>
+  <style>
+    :root{
+      --navy:#11234a;
+      --navy-2:#0b1733;
+      --gold:#c9a65b;
+      --gold-2:#e8d49a;
+      --ink:#182033;
+      --muted:#667085;
+      --line:#e7eaf0;
+      --bg:#f7f5f1;
+      --card:#ffffff;
+      --green:#16866a;
+      --red:#bd3b35;
+      --blue:#2f67a9;
+      --shadow:0 24px 70px rgba(11,23,51,.16);
+      --radius:22px;
+      --radius-sm:14px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","Noto Sans JP","PingFang SC","Hiragino Sans","Microsoft YaHei",Arial,sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.65;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .wrap{width:min(1040px,calc(100% - 40px));margin:0 auto}
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(1.2) blur(12px);
+      background:rgba(11,23,51,.94);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--gold);letter-spacing:.02em}
+    .brand img{width:64px;height:auto}
+    .brand small{display:block;font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+    .links{display:flex;align-items:center;gap:16px;font-size:13px;color:rgba(255,255,255,.88);font-weight:650;white-space:nowrap}
+    .links a{opacity:1}
+    .links a:hover{color:var(--gold)}
+    .nav-cta{padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:white!important}
+    .nav-book{padding:11px 16px;border-radius:999px;background:var(--gold);color:var(--navy-2)!important;font-weight:800;box-shadow:0 10px 24px rgba(201,166,91,.25)}
+    .lang-sw{display:flex;gap:3px;margin-left:8px}
+    .lang-sw button{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.82);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer;transition:.2s;letter-spacing:.04em}
+    .lang-sw button:hover,.lang-sw button.active{background:var(--gold);border-color:var(--gold);color:var(--navy-2)}
+    .hero{
+      position:relative;min-height:760px;color:#fff;overflow:hidden;background:var(--navy-2);
+    }
+    .hero::before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(90deg,rgba(11,23,51,.96) 0%,rgba(11,23,51,.82) 43%,rgba(11,23,51,.26) 100%),
+        url("assets/tokyo_hero.jpg") right center/cover no-repeat;
+    }
+    .hero::after{
+      content:"";position:absolute;left:-10%;right:-10%;bottom:-130px;height:220px;
+      background:var(--bg);transform:rotate(-3deg);
+    }
+    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;min-height:760px;padding:86px 0 130px}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 13px;border:1px solid rgba(232,212,154,.45);border-radius:999px;color:var(--gold-2);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.06)}
+    .eyebrow::before{content:"";width:8px;height:8px;border-radius:999px;background:var(--gold)}
+    h1{margin:24px 0 20px;font-size:clamp(42px,6vw,62px);line-height:1.04;letter-spacing:-.04em}
+    .hero p{font-size:18px;color:rgba(255,255,255,.82);max-width:650px;margin:0 0 30px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border-radius:999px;font-weight:800;border:1px solid transparent;transition:.2s ease}
+    .btn.primary{background:var(--gold);color:var(--navy-2)}
+    .btn.primary:hover{transform:translateY(-2px);box-shadow:0 18px 34px rgba(201,166,91,.25)}
+    .btn.ghost{border-color:rgba(255,255,255,.28);color:white;background:rgba(255,255,255,.06)}
+    .btn.ghost:hover{background:rgba(255,255,255,.12)}
+    .hero-card{
+      align-self:end;justify-self:end;width:min(430px,100%);
+      padding:24px;border-radius:var(--radius);background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);box-shadow:var(--shadow);backdrop-filter:blur(12px)
+    }
+    .hero-card h3{margin:0 0 14px;font-size:18px}
+    .mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .mini-stat{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:15px 12px}
+    .mini-stat b{display:block;color:var(--gold-2);font-size:28px;line-height:1}
+    .mini-stat span{display:block;font-size:12px;color:rgba(255,255,255,.76);margin-top:8px}
+    .section{padding:44px 0}
+    .section.tight{padding-top:24px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:34px}
+    .kicker{color:var(--gold);font-weight:900;letter-spacing:.16em;font-size:12px;text-transform:uppercase;margin-bottom:10px}
+    h2{font-size:clamp(22px,2.6vw,34px);line-height:1.15;margin:0;color:var(--navy);letter-spacing:-.02em;text-wrap:balance}
+    .lead{color:var(--muted);font-size:15px;max-width:520px;margin:0;text-wrap:pretty}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 12px 40px rgba(11,23,51,.05)}
+    .card h3{margin:0 0 10px;color:var(--navy);font-size:18px;line-height:1.3}
+    .card p{margin:0;color:var(--muted)}
+    .card .num{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:#f4ead2;color:var(--navy);font-weight:900;margin-bottom:18px}
+    .about-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center}
+    .about-panel{background:var(--navy);color:white;border-radius:calc(var(--radius) + 8px);padding:42px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+    .about-panel::after{content:"";position:absolute;width:260px;height:260px;right:-110px;bottom:-110px;border-radius:50%;background:rgba(201,166,91,.22)}
+    .about-panel h3{font-size:28px;margin:0 0 14px;text-wrap:balance}
+    .about-panel p{color:rgba(255,255,255,.76);margin:0}
+    .principles{display:grid;gap:16px}
+    .principle{display:flex;gap:14px;padding:20px;background:white;border-radius:18px;border:1px solid var(--line)}
+    .principle strong{display:block;color:var(--navy);font-size:18px;margin-bottom:3px}
+    .principle span{color:var(--muted);font-size:14px}
+    .dot{width:12px;height:12px;border-radius:50%;background:var(--gold);margin-top:9px;flex:0 0 auto}
+    .license-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .license{background:white;border:1px solid var(--line);border-radius:20px;padding:22px;min-height:188px;display:flex;flex-direction:column;justify-content:space-between}
+    .license b{display:block;color:var(--navy);font-size:18px;line-height:1.3}
+    .license small{display:block;color:var(--muted);margin-top:8px}
+    .badge{display:inline-flex;width:max-content;padding:7px 10px;border-radius:999px;background:#f6ecd4;color:#7d5b18;font-size:12px;font-weight:800}
+    .badge.reg{background:#e8f3ee;color:#166348}
+    .portfolio{
+      display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;align-items:center;
+      background:white;border:1px solid var(--line);border-radius:32px;padding:24px;box-shadow:0 14px 50px rgba(11,23,51,.06)
+    }
+    .portfolio img{border-radius:22px;background:#f8f8f8;border:1px solid var(--line)}
+    .stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:22px 0}
+    .stat{border-radius:18px;padding:18px;background:#f8f8fb;border:1px solid var(--line);cursor:pointer;transition:.18s}
+    .stat:hover{box-shadow:0 8px 24px rgba(11,23,51,.08);transform:translateY(-2px)}
+    .stat b{display:block;font-size:34px;color:var(--navy);line-height:1}
+    .stat span{display:block;color:var(--muted);font-size:13px;margin-top:8px}
+    .stat.green{border-left:7px solid var(--green)}
+    .stat.red{border-left:7px solid var(--red)}
+    .expand-panel{display:none;margin-top:8px;background:#f8f8fb;border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13px;color:var(--ink)}
+    .expand-panel.open{display:block}
+    .expand-panel ul{margin:6px 0 0;padding-left:18px;color:var(--muted)}
+    .expand-panel ul li{margin-bottom:4px}
+    .expand-hint{font-size:11px;color:var(--gold);margin-top:6px;font-weight:700;letter-spacing:.04em}
+    /* 运营实绩 merged into portfolio section */
+    .ops-showcase{margin-top:40px;display:grid;grid-template-columns:.72fr 1.28fr;gap:28px;align-items:stretch}
+    .ops-photo{position:relative;min-height:400px;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:#ddd}
+    .ops-photo img{width:100%;height:100%;object-fit:cover}
+    .ops-photo .overlay{position:absolute;left:18px;right:18px;bottom:18px;background:rgba(11,23,51,.78);color:white;border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:16px;backdrop-filter:blur(10px)}
+    .ops-photo .overlay b{display:block;font-size:18px}
+    .rating{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:18px}
+    .rating-card{background:#eef4ff;border:1px solid #b6cdf2;border-radius:20px;padding:20px}
+    .rating-card.airbnb{background:#fff1f2;border-color:#f5bdc4}
+    .rating-card b{font-size:34px;color:#2460a8}
+    .rating-card.airbnb b{color:#e44a5b}
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+    .gallery figure{margin:0;background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+    .gallery img{width:100%;height:155px;object-fit:cover}
+    .gallery figcaption{padding:9px 11px;font-size:12px;color:var(--muted)}
+    /* Asakusa卡片 缩略图条 */
+    .thumb-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+    .thumb-strip figure{margin:0;overflow:hidden;cursor:zoom-in}
+    .thumb-strip figure:not(:last-child){border-right:1px solid var(--line)}
+    .thumb-strip img{width:100%;height:90px;object-fit:cover;display:block;transition:.3s;cursor:zoom-in;pointer-events:auto}
+    .thumb-strip figure:hover img{transform:scale(1.06)}
+    /* 项目展示卡片 */
+    .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px}
+    .proj-card{background:white;border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:0 12px 40px rgba(11,23,51,.07);transition:.2s}
+    .proj-card:hover{transform:translateY(-4px);box-shadow:0 20px 52px rgba(11,23,51,.13)}
+    .proj-card .thumb{position:relative;height:210px;background:#e8e8e8;overflow:hidden}
+    .proj-card .thumb img{width:100%;height:100%;object-fit:cover;transition:.3s}
+    .proj-card:hover .thumb img{transform:scale(1.04)}
+    .proj-card .thumb .status{position:absolute;top:14px;left:14px;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em}
+    .status.building{background:#fef3c7;color:#92400e}
+    .status.operating{background:#d1fae5;color:#065f46}
+    .status.planning{background:#fef3c7;color:#92400e}
+    .proj-card .body{padding:20px 22px 22px}
+    .proj-card .proj-name{font-size:17px;font-weight:800;color:var(--navy);margin:0 0 6px;line-height:1.3}
+    .proj-card .proj-loc{font-size:13px;color:var(--muted);margin:0 0 14px;display:flex;align-items:center;gap:5px}
+    .proj-card .proj-loc::before{content:"📍";font-size:12px}
+    .proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+    .proj-tag{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12px;color:var(--ink)}
+    .proj-more{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--gold);cursor:pointer}
+    .proj-more::after{content:"›";font-size:16px}
+    .proj-detail{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.7}
+    .proj-detail.open{display:block}
+    .card-slider{position:relative;overflow:hidden}
+    .card-slides{display:flex;transition:transform .35s ease}
+    .card-slides img{min-width:100%;height:210px;object-fit:cover;display:block}
+    .slide-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.42);color:#fff;border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:3;transition:.18s}
+    .slide-btn:hover{background:rgba(0,0,0,.7)}
+    .slide-btn.prev{left:10px}
+    .slide-btn.next{right:10px}
+    .slide-dots{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:3}
+    .slide-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer;transition:.18s}
+    .slide-dot.active{background:#fff}
+    .contact{background:var(--navy-2);color:white;padding:86px 0 36px}
+    .contact-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:start}
+    .contact h2{color:white}
+    .contact .lead{color:rgba(255,255,255,.72)}
+    .contact-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:28px;padding:28px}
+    .contact-card p{margin:0 0 14px;color:rgba(255,255,255,.78)}
+    .contact-card b{color:white}
+    .form-grid{display:grid;gap:12px}
+    input,textarea,select{
+      width:100%;border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:14px 15px;
+      background:rgba(255,255,255,.08);color:white;font:inherit;outline:none
+    }
+    input::placeholder,textarea::placeholder{color:rgba(255,255,255,.48)}
+    textarea{min-height:112px;resize:vertical}
+    .form-note{font-size:12px;color:rgba(255,255,255,.55);margin-top:10px}
+    footer{border-top:1px solid rgba(255,255,255,.12);margin-top:58px;padding-top:24px;color:rgba(255,255,255,.55);font-size:13px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .note{background:#fffaf0;border:1px solid #f0d690;color:#6a4c0c;border-radius:18px;padding:16px;margin-top:18px;font-size:14px}
+    .mobile-menu{display:none}
+    .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;padding:6px;cursor:pointer;background:none;border:none}
+    .hamburger span{display:block;height:2px;background:var(--navy);border-radius:2px;transition:.25s}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mobile-nav-drawer{display:none;position:fixed;top:102px;left:0;right:0;max-height:calc(100vh - 102px);overflow-y:auto;background:#fff;border-bottom:2px solid var(--line);box-shadow:0 12px 32px rgba(11,23,51,.12);z-index:999;padding:16px 0}
+    .mobile-nav-drawer a{display:block;padding:13px 24px;font-size:15px;font-weight:700;color:var(--navy);border-bottom:1px solid var(--line)}
+    .mobile-nav-drawer a:last-child{border-bottom:none}
+    .mobile-nav-drawer a:hover{background:var(--bg);color:var(--gold)}
+    .mobile-nav-drawer .drawer-book{background:var(--gold);color:var(--navy-2)!important;margin:12px 16px 4px;border-radius:999px;text-align:center;border-bottom:none}
+    .mobile-nav-drawer .drawer-cta{background:var(--navy);color:#fff!important;margin:4px 16px 8px;border-radius:999px;text-align:center;border-bottom:none}
+    /* ── 项目分组标题 ────────────────────────────── */
+    .proj-group-hd{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:800;color:var(--navy);letter-spacing:.04em;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+    .pgdot{width:10px;height:10px;border-radius:50%;flex:0 0 auto}
+    .pgdot.operating{background:var(--green)}
+    .pgdot.building{background:#f59e0b}
+    .proj-scores{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+    .proj-score{padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800}
+    .proj-score.bk{background:#e8f0fb;color:#1a4d9e}
+    .proj-score.ab{background:#fff0f1;color:#c8364a}
+    .proj-book{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:999px;background:var(--gold);color:var(--navy-2);font-size:13px;font-weight:800;transition:.2s}
+    .proj-book:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(201,166,91,.25)}
+    .proj-book.bk{background:var(--blue);color:#fff}
+    .proj-book.bk:hover{box-shadow:0 8px 20px rgba(47,103,169,.28)}
+    .proj-book.ab{background:#e44a5b;color:#fff}
+    .proj-book.ab:hover{box-shadow:0 8px 20px rgba(228,74,91,.28)}
+    .proj-book-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .proj-detail-lk{font-size:13px;font-weight:700;color:var(--gold);opacity:.85}
+    .proj-detail-lk:hover{opacity:1}
+    /* ── MKG Stay 旅宿专区 ────────────────────────── */
+    .stay-section{background:var(--navy-2);padding:94px 0}
+    .stay-section .kicker{color:var(--gold)}
+    .stay-section h2{color:#fff}
+    .stay-section .lead{color:rgba(255,255,255,.72)}
+    .stay-featured{
+      display:grid;grid-template-columns:1.15fr .85fr;gap:0;
+      border-radius:32px;overflow:hidden;background:#fff;
+      box-shadow:0 24px 80px rgba(0,0,0,.32);margin-bottom:24px;
+    }
+    .stay-featured .sf-photo{position:relative;min-height:460px;background:#c8c2b8;overflow:hidden}
+    .stay-featured .sf-photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .stay-featured .sf-overlay{position:absolute;left:0;right:0;bottom:0;padding:20px 24px;
+      background:linear-gradient(transparent,rgba(11,23,51,.72));color:#fff}
+    .sf-scores{display:flex;gap:10px;margin-top:10px}
+    .sf-score{padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800}
+    .sf-score.bk{background:var(--blue);color:#fff}
+    .sf-score.ab{background:#e44a5b;color:#fff}
+    .stay-featured .sf-info{padding:40px;display:flex;flex-direction:column;justify-content:center}
+    .sf-info .kicker{margin-bottom:8px}
+    .sf-info h3{font-size:28px;color:var(--navy);margin:0 0 8px;line-height:1.2}
+    .sf-info .sf-loc{font-size:13px;color:var(--muted);margin:0 0 16px;display:flex;align-items:center;gap:5px}
+    .sf-info .sf-loc::before{content:"📍";font-size:12px}
+    .sf-info p{color:var(--muted);font-size:15px;margin:0 0 18px;line-height:1.7}
+    .sf-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+    .sf-tag{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12px;color:var(--ink)}
+    .sf-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:999px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:15px;transition:.2s;width:max-content}
+    .sf-cta:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(201,166,91,.3)}
+    .sf-cta.bk{background:var(--blue);color:#fff}
+    .sf-cta.bk:hover{box-shadow:0 16px 32px rgba(37,99,235,.3)}
+    .sf-btn-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .sf-detail-link{font-size:14px;font-weight:700;color:var(--gold);opacity:.85;text-decoration:none}
+    .sf-detail-link:hover{opacity:1}
+    .sc-book-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:999px;background:#e44a5b;color:#fff;font-size:13px;font-weight:800;transition:.2s;text-decoration:none}
+    .sc-book-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(228,74,91,.3)}
+    .sc-book-btn.bk{background:var(--blue)}
+    .sc-book-btn.bk:hover{box-shadow:0 8px 20px rgba(37,99,235,.3)}
+    .sc-btn-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .stay-sub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .stay-sub-card{
+      background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);
+      border-radius:24px;overflow:hidden;transition:.2s;
+    }
+    .stay-sub-card:hover{background:rgba(255,255,255,.12);transform:translateY(-3px)}
+    .stay-sub-card .sc-photo{height:200px;overflow:hidden;background:#2a3550;position:relative}
+    .stay-sub-card .sc-photo img{width:100%;height:100%;object-fit:cover}
+    .stay-sub-card .sc-photo .sc-badge{position:absolute;top:14px;left:14px;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800}
+    .sc-badge.ab{background:#e44a5b;color:#fff}
+    .sc-badge.soon{background:#fef3c7;color:#92400e}
+    .stay-sub-card .sc-body{padding:22px}
+    .sc-body h4{font-size:17px;color:#fff;margin:0 0 6px;line-height:1.3}
+    .sc-body .sc-loc{font-size:13px;color:rgba(255,255,255,.55);margin:0 0 10px}
+    .sc-body p{font-size:14px;color:rgba(255,255,255,.68);margin:0 0 16px;line-height:1.6}
+    .sc-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--gold)}
+    .sc-link:hover{opacity:.8}
+    .sc-placeholder{min-height:460px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:rgba(255,255,255,.32);background:rgba(255,255,255,.04);border-radius:32px;border:2px dashed rgba(255,255,255,.12)}
+    .sc-placeholder .ph-plus{font-size:52px;font-weight:300;color:rgba(255,255,255,.2)}
+    @media (max-width: 960px){
+      .links{display:none}
+      .mobile-menu{display:flex!important}
+      .hamburger{display:flex}
+      .hero-grid,.about-grid,.portfolio,.ops-showcase,.contact-grid{grid-template-columns:1fr}
+      .hero{min-height:auto}
+      .hero-grid{min-height:auto;padding:80px 0 120px}
+      .hero-card{justify-self:start}
+      .cards,.license-grid,.gallery,.render-grid{grid-template-columns:1fr 1fr}
+      .stat-row{grid-template-columns:1fr}
+      .stay-featured{grid-template-columns:1fr}
+      .stay-featured .sf-photo{min-height:300px}
+      .stay-sub-grid{grid-template-columns:1fr}
+      .proj-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 640px){
+      .wrap{width:min(100% - 24px,1160px)}
+      .nav{height:64px}
+      .brand{gap:6px}
+      .brand img{width:54px}
+      .brand small{display:none}
+      .brand span{font-size:14px}
+      .hero::before{background:linear-gradient(90deg,rgba(11,23,51,.96),rgba(11,23,51,.82)),url("assets/tokyo_hero.jpg") center/cover no-repeat}
+      .hero-grid{padding:60px 0 90px;gap:32px}
+      h1{font-size:clamp(32px,8vw,48px)}
+      .hero p{font-size:15px}
+      .hero-actions{gap:10px}
+      .btn{padding:12px 18px;font-size:14px}
+      .hero-card{padding:16px;width:100%}
+      .mini-stat b{font-size:22px}
+      .about-panel{padding:28px}
+      .about-panel h3{font-size:22px}
+      .mini-grid,.cards,.license-grid,.rating,.gallery,.render-grid{grid-template-columns:1fr}
+      .proj-grid{grid-template-columns:1fr}
+      .section{padding:28px 0}
+      .section-head{margin-bottom:24px}
+      h2{font-size:clamp(20px,5vw,28px)}
+      .contact-grid{gap:24px}
+      .contact-card{padding:20px}
+      .sf-info{padding:24px}
+      .sf-info h3{font-size:22px}
+      footer{font-size:12px;gap:8px}
+      .section-head{display:block}
+      .lead{margin-top:12px}
+      .ops-photo{min-height:320px}
+      .render img{height:220px}
+      footer{display:block}
+      .topbar-right-label{display:none}
+    }
+
+
+    /* ── 桌面端语言下拉 ── */
+    .desk-lang-wrap{position:relative}
+    .desk-lang-btn{
+      display:flex;align-items:center;gap:5px;
+      background:none;border:1px solid rgba(201,168,91,.4);
+      border-radius:999px;padding:7px 14px;
+      font-size:13px;font-weight:700;color:var(--gold);
+      cursor:pointer;white-space:nowrap;transition:.2s;
+      margin-left:4px;
+    }
+    .desk-lang-btn:hover{background:var(--bg);border-color:var(--gold);color:var(--gold)}
+    .desk-lang-menu{
+      display:none;position:absolute;top:calc(100% + 8px);right:0;
+      background:#fff;border:1px solid var(--line);
+      border-radius:14px;box-shadow:0 12px 32px rgba(11,23,51,.14);
+      overflow:hidden;min-width:140px;z-index:1000;
+    }
+    .desk-lang-menu.open{display:block}
+    .desk-lang-menu button{
+      display:block;width:100%;padding:11px 18px;
+      text-align:left;background:none;border:none;
+      font-size:14px;font-weight:700;color:var(--navy);
+      cursor:pointer;transition:.15s;border-bottom:1px solid var(--line);
+    }
+    .desk-lang-menu button:last-child{border-bottom:none}
+    .desk-lang-menu button:hover{background:var(--bg);color:var(--gold)}
+    @media (max-width: 960px){
+      .desk-lang-wrap{display:none}
+    }
+    /* ── 手机端顶栏隐藏 ── */
+    @media (max-width: 960px){
+      .group-topbar{display:none!important}
+      .mobile-nav-drawer{top:64px!important}
+    }
+    /* ── 手机端语言切换下拉 ── */
+    .mobile-lang-wrap{display:none;position:relative}
+    @media (max-width: 960px){
+      .mobile-lang-wrap{display:block;margin-left:auto}
+    }
+    .mobile-lang-btn{
+      display:flex;align-items:center;gap:5px;
+      background:none;border:1px solid rgba(17,35,74,.25);
+      border-radius:999px;padding:6px 12px;
+      font-size:13px;font-weight:700;color:var(--navy);
+      cursor:pointer;white-space:nowrap;transition:.2s;
+    }
+    .mobile-lang-btn:hover{background:var(--bg);border-color:var(--gold)}
+    .mobile-lang-menu{
+      display:none;position:absolute;top:calc(100% + 6px);right:0;
+      background:#fff;border:1px solid var(--line);
+      border-radius:14px;box-shadow:0 12px 32px rgba(11,23,51,.14);
+      overflow:hidden;min-width:130px;z-index:1000;
+    }
+    .mobile-lang-menu.open{display:block}
+    .mobile-lang-menu button{
+      display:block;width:100%;padding:11px 16px;
+      text-align:left;background:none;border:none;
+      font-size:14px;font-weight:700;color:var(--navy);
+      cursor:pointer;transition:.15s;border-bottom:1px solid var(--line);
+    }
+    .mobile-lang-menu button:last-child{border-bottom:none}
+    .mobile-lang-menu button:hover{background:var(--bg);color:var(--gold)}
+
+    /* ── Gallery Lightbox ── */
+    #lb-overlay{display:none;position:fixed;inset:0;background:rgba(8,16,36,.8);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:9999;align-items:center;justify-content:center}
+    #lb-overlay.open{display:flex}
+    #lb-img{max-width:90vw;max-height:86vh;border-radius:16px;object-fit:contain;box-shadow:0 32px 80px rgba(0,0,0,.5);transition:opacity .18s}
+    #lb-close{position:absolute;top:20px;right:24px;background:rgba(255,255,255,.18);border:none;color:#fff;font-size:24px;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;z-index:2}
+    #lb-close:hover{background:rgba(255,255,255,.32)}
+    #lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.16);border:none;color:#fff;font-size:22px;width:52px;height:52px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;z-index:2}
+    #lb-prev{left:20px}
+    #lb-next{right:20px}
+    #lb-prev:hover,#lb-next:hover{background:rgba(255,255,255,.32)}
+    #lb-prev.hidden,#lb-next.hidden{opacity:0;pointer-events:none}
+    #lb-counter{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:13px;font-weight:600;letter-spacing:.06em;background:rgba(0,0,0,.35);padding:4px 14px;border-radius:999px}
+    .proj-card .thumb img{cursor:zoom-in}
+    .thumb-strip figure img{cursor:zoom-in}
+
+    /* ── Map legend ── */
+    .map-wrap{position:relative;display:inline-block;width:100%;border-radius:22px;overflow:hidden;background:var(--gold);-webkit-transform:translateZ(0);transform:translateZ(0)}
+    .map-wrap>img{border-radius:0!important;background:var(--gold)!important;display:block;width:100%}
+    .map-wrap::before{content:"";position:absolute;top:0;left:0;width:34px;height:30px;background:var(--gold);clip-path:polygon(0 0,100% 0,0 100%);z-index:2;pointer-events:none}
+    .map-legend{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:10px 14px;font-size:12px;line-height:1.8;backdrop-filter:blur(6px);box-shadow:0 4px 16px rgba(0,0,0,.10);z-index:3}
+    .ml-row{display:flex;align-items:center;gap:8px}
+    .ml-icon{flex:0 0 16px;width:16px;height:16px;display:inline-block}
+    .ml-icon.yellow{border-radius:50%;background:#f59e0b}
+    .ml-icon.green{background:var(--green);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+    .ml-icon.red{background:var(--red);clip-path:polygon(50% 0%,62.5% 28%,93% 25%,75% 50%,93% 75%,62.5% 72%,50% 100%,37.5% 72%,7% 75%,25% 50%,7% 25%,37.5% 28%)}
+  </style>
+</head>
+<body>
+
+  <!-- Group Topbar -->
+  <div class="group-topbar" style="background:#fff;border-bottom:1px solid rgba(17,35,74,.1);padding:0 20px;height:38px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:rgba(17,35,74,.6);letter-spacing:.03em;position:relative;z-index:200">
+    <!-- 左：集团标识 -->
+    <span style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase">
+      <span style="width:7px;height:7px;border-radius:50%;background:var(--gold);display:inline-block"></span>
+      MKG Group
+    </span>
+    <!-- 中：地区站点切换 -->
+    <span style="display:flex;align-items:center;gap:6px;font-size:12.5px">
+      <a href="https://www.mkg.com.sg/zh/" target="_blank" rel="noopener"
+         style="color:rgba(17,35,74,.45);text-decoration:none;padding:4px 12px;border-radius:999px;border:1px solid rgba(17,35,74,.15);transition:.15s"
+         onmouseover="this.style.borderColor='rgba(201,166,91,.6)';this.style.color='#c9a65b'"
+         onmouseout="this.style.borderColor='rgba(17,35,74,.15)';this.style.color='rgba(17,35,74,.45)'">
+        🇸🇬 Singapore
+      </a>
+      <span style="color:rgba(17,35,74,.25);font-size:11px">▸</span>
+      <span style="color:var(--navy-2);font-weight:700;padding:4px 12px;border-radius:999px;background:rgba(201,166,91,.15);border:1px solid rgba(201,166,91,.5)">
+        🇯🇵 Japan
+      </span>
+    </span>
+    <!-- 右：说明文字 -->
+    <span style="font-size:11.5px;color:rgba(17,35,74,.35);letter-spacing:.02em">A MKG Group Company</span>
+  </div>
+
+  <header class="topbar">
+    <div class="wrap nav">
+      <a href="#" class="brand">
+        <img src="assets/logo.png" alt="MKG Japan logo">
+        <span>MKG Japan<small>Real Estate & Hospitality Assets</small></span>
+      </a>
+      <nav class="links" aria-label="Main navigation">
+        <a href="#about" data-i18n="nav.about">关于我们</a>
+        <a href="#services" data-i18n="nav.services">事业内容</a>
+        <a href="#portfolio" data-i18n="nav.projects">项目一览</a>
+        <a href="#development" data-i18n="nav.stay">旅宿预订</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a class="nav-book" href="stay.html" data-i18n="nav.book">预订旅宿 · MKG Stay</a>
+        <a class="nav-cta" href="#contact" data-i18n="nav.contact">联系我们</a>
+        <div class="desk-lang-wrap">
+          <button class="desk-lang-btn" id="deskLangBtn" onclick="toggleDeskLang()" aria-label="Language">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span id="deskLangLabel">語言</span> ▾
+          </button>
+          <div class="desk-lang-menu" id="deskLangMenu">
+            <button onclick="setLang('ja');closeDeskLang();updateAllLangLabels('言語','言語')">🇯🇵 日本語</button>
+            <button onclick="setLang('en');closeDeskLang();updateAllLangLabels('Language','Language')">🇺🇸 English</button>
+            <button onclick="setLang('zh');closeDeskLang();updateAllLangLabels('语言','语言')">🇨🇳 中文</button>
+          </div>
+        </div>
+      </nav>
+      <div class="mobile-lang-wrap">
+        <button class="mobile-lang-btn" id="langBtn" onclick="toggleLangMenu()" aria-label="Language">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> <span id="langLabel">語言</span> ▾
+        </button>
+        <div class="mobile-lang-menu" id="langMenu">
+          <button onclick="setLang('ja');closeLangMenu();updateAllLangLabels('言語','日本語')">🇯🇵 日本語</button>
+          <button onclick="setLang('en');closeLangMenu();updateAllLangLabels('Language','English')">🇺🇸 English</button>
+          <button onclick="setLang('zh');closeLangMenu();updateAllLangLabels('语言','中文')">🇨🇳 中文</button>
+        </div>
+      </div>
+      <button class="hamburger" id="hamBtn" onclick="toggleDrawer()" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="mobile-nav-drawer" id="navDrawer">
+    <a href="#about" onclick="closeDrawer()" data-i18n="nav.about">关于我们</a>
+    <a href="#services" onclick="closeDrawer()" data-i18n="nav.services">事业内容</a>
+    <a href="#portfolio" onclick="closeDrawer()" data-i18n="nav.projects">项目一览</a>
+    <a href="#development" onclick="closeDrawer()" data-i18n="nav.stay">旅宿预订</a>
+    <a href="faq.html" onclick="closeDrawer()" data-i18n="nav.faq">FAQ</a>
+    <a class="drawer-book" href="stay.html" data-i18n="nav.book">预订旅宿 · MKG Stay</a>
+    <a class="drawer-cta" href="#contact" onclick="closeDrawer()" data-i18n="nav.contact">联系我们</a>
+
+  </nav>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">MKG Japan Official Website</span>
+          <h1 data-i18n="hero.title">深耕日本不动产与酒店资产管理</h1>
+          <p>
+            <span data-i18n="hero.desc">株式会社 MKG Japan 专注于东京不动产投资、酒店开发、民宿运营与资产管理，为投资人及合作伙伴提供从资产筛选、开发建设到运营管理的一站式解决方案。</span>
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="stay.html" data-i18n="nav.book">预订旅宿 · MKG Stay</a>
+            <a class="btn ghost" href="#services" data-i18n="hero.btn2">查看业务范围</a>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <h3 data-i18n="hero.map">东京项目布局概览</h3>
+          <div class="mini-grid">
+            <div class="mini-stat"><b>3</b><span data-i18n="hero.stat1">运营中<br>酒店・民宿</span></div>
+            <div class="mini-stat"><b>4</b><span data-i18n="hero.stat2">建设中/规划<br>酒店プロジェクト</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section tight" id="about">
+      <div class="wrap about-grid">
+        <div class="about-panel">
+          <div class="kicker" data-i18n="about.kicker">About MKG Japan</div>
+          <h3 data-i18n="about.title">日本资产配置与运营管理平台</h3>
+          <p>
+            <span data-i18n="about.desc">MKG Japan 依托集团资源与日本本地运营团队，围绕不动产买卖、土地开发、酒店及民宿运营管理等领域，提供长期、稳健、可执行的资产管理服务。</span>
+          </p>
+        </div>
+        <div class="principles">
+          <div class="principle"><span class="dot"></span><div><strong data-i18n="about.v1">长期主义</strong><span><span data-i18n="about.v1d">着眼长远，稳健布局，在东京核心区域寻找具备长期价值的资产。</span></span></div></div>
+          <div class="principle"><span class="dot"></span><div><strong data-i18n="about.v2">价值创造</strong><span><span data-i18n="about.v2d">通过专业运营、精细化管理与项目开发，持续提升资产收益与体验品质。</span></span></div></div>
+          <div class="principle"><span class="dot"></span><div><strong data-i18n="about.v3">携手共赢</strong><span><span data-i18n="about.v3d">与投资人、合作伙伴及本地专业机构协同合作，推动项目稳定落地。</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker" data-i18n="svc.kicker">Core Services</div>
+            <h2 data-i18n="svc.title">三大核心业务</h2>
+          </div>
+          <p class="lead" data-i18n="svc.desc">从土地/二手整栋物业筛选到开业运营，为投资者提供全链条服务</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="num">01</div>
+            <h3 data-i18n="svc.s1t">土地/二手整栋物业筛选与投资分析</h3>
+            <p><span data-i18n="svc.s1d">聚焦东京核心商圈及高成长潜力区域，通过市场调研、资产评估与交易执行，甄选具备长期增值潜力的优质资产——包括开发用地，以及适合改造为酒店的二手整栋物业。</span></p>
+          </article>
+          <article class="card">
+            <div class="num">02</div>
+            <h3 data-i18n="svc.s2t">开发建造・改造翻新</h3>
+            <p><span data-i18n="svc.s2d">提供土地取得后的新建开发，以及二手整栋物业的改造翻新服务，涵盖项目规划、建筑设计、工程管理全流程，与日本本地专业机构深度合作，确保项目品质与执行效率。</span></p>
+          </article>
+          <article class="card">
+            <div class="num">03</div>
+            <h3 data-i18n="svc.s3t">酒店/民宿运营管理</h3>
+            <p><span data-i18n="svc.s3d">专注酒店及民宿运营，通过定价管理、平台运营、客户体验管理与日常维护，提升资产收益与长期运营价值。</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="licenses">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker" data-i18n="cred.kicker">Trust & Credentials</div>
+            <h2 data-i18n="cred.title">专业资质与市场认可</h2>
+          </div>
+          <p class="lead" style="max-width:none"><span data-i18n="cred.desc">持有日本政府颁发的经营许可与注册资质，并获得国际主要住宿平台的品质认证。</span></p>
+        </div>
+        <div class="license-grid">
+          <div class="license">
+            <span class="badge">宅建业许可</span>
+            <div><b>宅地建物取引业许可</b><small><span data-i18n="cred.c1d">持有日本都道府县知事颁发的宅地建物取引业许可，可依法开展不动产买卖及中介业务。</span></small></div>
+          </div>
+          <div class="license">
+            <span class="badge reg">住宅宿泊管理注册</span>
+            <div><b>住宅宿泊管理业者注册</b><small><span data-i18n="cred.c2d">经日本国土交通大臣注册，依法开展民宿委托管理业务，并符合《住宅宿泊事业法》相关规定。</span></small></div>
+          </div>
+          <div class="license">
+            <span class="badge" data-i18n="cred.platform">平台认可</span>
+            <div><b>Booking.com Traveller Review Awards 2025</b><small><span data-i18n="cred.p1d">年度旅客好评奖，体现住宿体验与客户满意度。</span></small></div>
+          </div>
+          <div class="license">
+            <span class="badge" data-i18n="cred.platform">平台认可</span>
+            <div><b>Airbnb Superhost</b><small><span data-i18n="cred.p2d">超赞房东认证，体现稳定服务品质与高评价运营能力。</span></small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="portfolio">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker" data-i18n="proj.kicker">Project Distribution</div>
+            <h2 data-i18n="proj.title">东京都内项目分布与资产管理概况</h2>
+          </div>
+          <p class="lead"><span data-i18n="proj.desc">以东京核心区域为基础，涵盖运营中的酒店与民宿，以及多个在建开发项目，点击项目卡片查看详细信息。</span></p>
+        </div>
+        <div class="portfolio">
+          <div class="map-wrap">
+            <img loading="lazy" src="assets/tokyo_project_map.png" alt="MKG Japan project distribution map in Tokyo" style="width:100%;display:block">
+            <div class="map-legend">
+              <div class="ml-row"><span class="ml-icon yellow"></span><span data-i18n="legend.yellow">二手整栋物业</span></div>
+              <div class="ml-row"><span class="ml-icon green"></span><span data-i18n="legend.green">运营中酒店/民宿</span></div>
+              <div class="ml-row"><span class="ml-icon red"></span><span data-i18n="legend.red">建造/规划中</span></div>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size:28px;color:var(--navy);margin:0 0 12px;" data-i18n="proj.sub">以东京为核心的资产布局</h3>
+            <p style="color:var(--muted);margin:0;"><span data-i18n="proj.subdesc">项目涵盖运营中酒店与民宿，以及多个在建酒店・公寓项目。通过本地化运营与项目管理，形成从资产持有到开发运营的综合布局。</span></p>
+            <div class="stat-row">
+              <div class="stat green" onclick="togglePanel('panel-ops')">
+                <b>3</b><span data-i18n="proj.op">运营中酒店/民宿</span>
+                <div class="expand-hint" data-i18n="panel.hint">▼ 点击查看详情</div>
+                <div class="expand-panel" id="panel-ops">
+                  <strong>MKG Hotel Asakusa</strong>
+                  <ul>
+                    <li data-i18n="ops.asakusa1">台東区駒形 / 和モダン精品酒店</li>
+                    <li data-i18n="ops.asakusa2">客室数：9室</li>
+                    <li>Booking.com 9.2 / Airbnb 4.89 ★ Superhost</li>
+                  </ul>
+                  <strong style="display:block;margin-top:10px">MKG HOME SHIBA</strong>
+                  <ul>
+                    <li data-i18n="ops.shiba1">港区芝 / 全6室</li>
+                    <li data-i18n="ops.shiba2">东京铁塔附近 / Airbnb 运营中</li>
+                  </ul>
+                  <strong style="display:block;margin-top:10px">MKG HOME 新宿</strong>
+                  <ul>
+                    <li data-i18n="ops.shinjuku1">新宿区大久保 / 新大久保駅7分</li>
+                    <li data-i18n="ops.shinjuku2">7层精品民宿 / Airbnb 运营中</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="stat red" onclick="togglePanel('panel-dev')">
+                <b>4</b><span data-i18n="proj.build">设计/建造/规划中</span>
+                <div class="expand-hint" data-i18n="panel.hint">▼ 点击查看详情</div>
+                <div class="expand-panel" id="panel-dev">
+                  <strong>MKG HOTEL OKACHIMACHI</strong>
+                  <ul><li data-i18n="dev.under">建设中</li></ul>
+                  <strong style="display:block;margin-top:8px">MKG HOTEL RYUSEN</strong>
+                  <ul><li data-i18n="dev.under">建设中</li></ul>
+                  <strong style="display:block;margin-top:8px">MKG HOTEL KITAUENO</strong>
+                  <ul><li data-i18n="dev.under">建设中</li></ul>
+                  <strong style="display:block;margin-top:8px">MKG HOTEL NIHONBASHI</strong>
+                  <ul><li data-i18n="dev.plan">规划中</li></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── 项目一览（运营中 + 在建合并） ──────────────────── -->
+    <section class="section" id="development" data-also="mkgstay">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker" data-i18n="allproj.kicker">All Projects</div>
+            <h2 data-i18n="allproj.title">项目一览</h2>
+          </div>
+          <p class="lead"><span data-i18n="allproj.desc">运营中旅宿与在建开发项目分区展示，点击卡片查看详情。</span></p>
+        </div>
+
+        <!-- ▌运营中 -->
+        <div class="proj-group-hd">
+          <span class="pgdot operating"></span><span data-i18n="allproj.op">运营中</span>
+        </div>
+        <div class="proj-grid" style="margin-bottom:48px">
+          <!-- MKG Hotel Asakusa -->
+          <div class="proj-card">
+            <div class="thumb" style="height:220px">
+              <img loading="lazy" src="assets/r502_a.jpg" alt="MKG Hotel Asakusa">
+              <span class="status operating" data-i18n="allproj.op">运营中</span>
+            </div>
+            <div class="thumb-strip">
+              <figure><img loading="lazy" src="assets/r01_a.jpg" alt="客室①"></figure>
+              <figure><img loading="lazy" src="assets/r02_a.jpg" alt="客室②"></figure>
+              <figure><img loading="lazy" src="assets/tatami_lounge.jpg" alt="畳ラウンジ"></figure>
+              <figure><img loading="lazy" src="assets/premium_bath.jpg" alt="バスルーム"></figure>
+            </div>
+            <div class="body">
+              <p class="proj-name">MKG Hotel Asakusa</p>
+              <p class="proj-loc" data-i18n="loc.asakusa">台東区駒形2-4-9</p>
+              <div class="proj-tags">
+                <span class="proj-tag" data-i18n="tag.boutique">精品酒店</span>
+                <span class="proj-tag" data-i18n="tag.rooms9">全9室</span>
+                <span class="proj-tag" data-i18n="tag.wamodern">和式现代</span>
+              </div>
+              <div class="proj-scores">
+                <span class="proj-score bk">Booking.com 9.2</span>
+                <span class="proj-score ab">Airbnb 4.89★</span>
+              </div>
+              <div class="proj-book-row">
+                <a class="proj-book bk" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener" data-i18n="card.bookbk">立即预订 · Booking.com →</a>
+                <a class="proj-detail-lk" href="stay-asakusa.html" data-i18n="card.allrooms">查看全部房型 →</a>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 港区芝公園 民宿 -->
+          <div class="proj-card">
+            <div class="thumb" style="height:220px">
+              <img loading="lazy" src="assets/shiba/cover_main.jpg" alt="MKG HOME SHIBA">
+              <span class="status operating" data-i18n="allproj.op">运营中</span>
+            </div>
+            <div class="thumb-strip">
+              <figure><img loading="lazy" src="assets/shiba/p_room_overview.jpg" alt="客室①"></figure>
+              <figure><img loading="lazy" src="assets/shiba/p_room_large.jpg" alt="客室②"></figure>
+              <figure><img loading="lazy" src="assets/shiba/p_dining.jpg" alt="ダイニング"></figure>
+              <figure><img loading="lazy" src="assets/shiba/p_bath.jpg" alt="バスルーム"></figure>
+            </div>
+            <div class="body">
+              <p class="proj-name">MKG HOME SHIBA</p>
+              <p class="proj-loc" data-i18n="loc.shiba">東京都港区芝2-27-4</p>
+              <div class="proj-tags">
+                <span class="proj-tag" data-i18n="tag.minpaku">民宿</span>
+                <span class="proj-tag" data-i18n="tag.rooms6">全6室</span>
+                <span class="proj-tag">Airbnb</span>
+                <span class="proj-tag" data-i18n="tag.tokyotower">东京铁塔附近</span>
+              </div>
+              <div class="proj-book-row">
+                <a class="proj-book ab" href="https://www.airbnb.com" target="_blank" rel="noopener" data-i18n="card.airbnb">Airbnb 立即预订 →</a>
+                <a class="proj-detail-lk" href="stay-shiba.html" data-i18n="card.viewroom">查看客室 →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 新宿区大久保 民宿 -->
+          <div class="proj-card">
+            <div class="thumb" style="height:220px">
+              <img loading="lazy" src="assets/shinjuku/cover_main.jpg" alt="MKG HOME 新宿">
+              <span class="status operating" data-i18n="allproj.op">运营中</span>
+            </div>
+            <div class="thumb-strip">
+              <figure><img loading="lazy" src="assets/shinjuku/room_detail.jpg" alt="客室"></figure>
+              <figure><img loading="lazy" src="assets/shinjuku/dining.jpg" alt="ダイニング"></figure>
+              <figure><img loading="lazy" src="assets/shinjuku/kitchen.jpg" alt="キッチン"></figure>
+              <figure><img loading="lazy" src="assets/shinjuku/amenities.jpg" alt="アメニティ"></figure>
+            </div>
+            <div class="body">
+              <p class="proj-name">MKG HOME 新宿</p>
+              <p class="proj-loc" data-i18n="loc.shinjuku">東京都新宿区百人町1-20-5 7F</p>
+              <div class="proj-tags">
+                <span class="proj-tag" data-i18n="tag.minpaku">民宿</span>
+                <span class="proj-tag" data-i18n="tag.floors7">7层楼</span>
+                <span class="proj-tag">Airbnb</span>
+                <span class="proj-tag" data-i18n="tag.shinjuku">新宿・大久保</span>
+              </div>
+              <div class="proj-book-row">
+                <a class="proj-book ab" href="https://www.airbnb.com" target="_blank" rel="noopener" data-i18n="card.airbnb">Airbnb 立即预订 →</a>
+                <a class="proj-detail-lk" href="stay-shinjuku.html" data-i18n="card.viewroom">查看客室 →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ▌建设中 -->
+        <div class="proj-group-hd">
+          <span class="pgdot building"></span><span data-i18n="allproj.build">建設中・規劃中</span>
+        </div>
+        <div class="proj-grid" style="margin-bottom:36px">
+          <!-- 台东三丁目 -->
+          <div class="proj-card">
+            <div class="thumb" style="height:220px">
+              <img loading="lazy" src="assets/render_okachi_final.jpg" alt="MKG HOTEL OKACHIMACHI エントランスイメージ">
+              <span class="status building" data-i18n="status.building">建设中</span>
+            </div>
+            <div class="thumb-strip">
+              <figure><img loading="lazy" src="assets/okachi_t2.jpg" alt="エントランスB"></figure>
+              <figure><img loading="lazy" src="assets/okachi_t3.jpg" alt="客室A"></figure>
+              <figure><img loading="lazy" src="assets/okachi_t4.jpg" alt="客室B"></figure>
+              <figure><img loading="lazy" src="assets/okachi_t1.jpg" alt="エントランスA"></figure>
+            </div>
+            <div class="body">
+              <p class="proj-name">MKG HOTEL OKACHIMACHI</p>
+              <p class="proj-loc" data-i18n="loc.okachi">東京都台東区台東3丁目</p>
+              <div class="proj-tags">
+                <span class="proj-tag" data-i18n="tag.newhotel">新建酒店</span>
+                <span class="proj-tag" data-i18n="tag.renderout">效果图公开中</span>
+                <span class="proj-tag" data-i18n="tag.building">建设中</span>
+              </div>
+              <span class="proj-more" onclick="toggleDetail('d2')" data-i18n="proj.more">查看详情</span>
+              <div class="proj-detail" id="d2" data-i18n="det.okachi">台东区台东3丁目新建酒店项目（MKG HOTEL OKACHIMACHI）。外观效果图已公开，建设阶段进行中。</div>
+            </div>
+          </div>
+          <!-- 龙泉 -->
+          <div class="proj-card">
+            <div class="thumb" style="height:220px">
+              <img loading="lazy" src="assets/render_ryusen_final.jpg" alt="MKG HOTEL RYUSEN 客室イメージ">
+              <span class="status building" data-i18n="status.building">建设中</span>
+            </div>
+            <div class="thumb-strip">
+              <figure><img loading="lazy" src="assets/ryusen_t1.jpg" alt="客室①"></figure>
+              <figure><img loading="lazy" src="assets/ryusen_t2.jpg" alt="エレベーターホール"></figure>
+              <figure><img loading="lazy" src="assets/ryusen_t3.jpg" alt="客室②"></figure>
+              <figure><img loading="lazy" src="assets/ryusen_t4.jpg" alt="禅スタイル"></figure>
+            </div>
+            <div class="body">
+              <p class="proj-name">MKG HOTEL RYUSEN</p>
+              <p class="proj-loc" data-i18n="loc.ryusen">東京都台東区龍泉</p>
+              <div class="proj-tags">
+                <span class="proj-tag" data-i18n="tag.newhotel">新建酒店</span>
+                <span class="proj-tag" data-i18n="tag.renderout">效果图公开中</span>
+                <span class="proj-tag" data-i18n="tag.building">建设中</span>
+              </div>
+              <span class="proj-more" onclick="toggleDetail('d3')" data-i18n="proj.more">查看详情</span>
+              <div class="proj-detail" id="d3" data-i18n="det.ryusen">台东区龙泉地区新建酒店项目（MKG HOTEL RYUSEN）。外观效果图（景观规划图）已公开，建设阶段进行中。</div>
+            </div>
+          </div>
+          <!-- 北上野 -->
+          <div class="proj-card">
+            <div class="thumb">
+              <img loading="lazy" src="assets/kitaueno_01.jpg" alt="MKG HOTEL KITAUENO 客室イメージ">
+              <span class="status building" data-i18n="status.building">建设中</span>
+            </div>
+            <div class="thumb-strip">
+              <figure><img loading="lazy" src="assets/kitaueno_02.jpg" alt="客室②"></figure>
+              <figure><img loading="lazy" src="assets/kitaueno_03.jpg" alt="エントランス"></figure>
+              <figure><img loading="lazy" src="assets/kitaueno_04.jpg" alt="バスルーム①"></figure>
+              <figure><img loading="lazy" src="assets/kitaueno_05.jpg" alt="バスルーム②"></figure>
+            </div>
+            <div class="body">
+              <p class="proj-name">MKG HOTEL KITAUENO</p>
+              <p class="proj-loc" data-i18n="loc.kitaueno">東京都台東区北上野</p>
+              <div class="proj-tags">
+                <span class="proj-tag" data-i18n="tag.newhotel">新建酒店</span>
+                <span class="proj-tag" data-i18n="tag.renderout">效果图公开中</span>
+                <span class="proj-tag" data-i18n="tag.building">建设中</span>
+              </div>
+              <span class="proj-more" onclick="toggleDetail('d4')" data-i18n="proj.more">查看详情</span>
+              <div class="proj-detail" id="d4" data-i18n="det.kitaueno">台东区北上野地区酒店开发项目，建设阶段进行中，室内效果图已公开。</div>
+            </div>
+          </div>
+          <!-- 日本桥 -->
+          <div class="proj-card">
+            <div class="thumb" style="background:linear-gradient(135deg,#f0ece4,#e0d5c0);display:flex;align-items:center;justify-content:center">
+              <div style="text-align:center;color:#7a6840;font-size:13px;font-weight:700" data-i18n="loc.nihonbashi.ph">中央区<br>日本橋</div>
+              <span class="status planning" data-i18n="status.planning">规划中</span>
+            </div>
+            <div class="body">
+              <p class="proj-name">MKG HOTEL NIHONBASHI</p>
+              <p class="proj-loc" data-i18n="loc.nihonbashi">東京都中央区日本橋エリア</p>
+              <div class="proj-tags">
+                <span class="proj-tag" data-i18n="tag.planning">规划中</span>
+                <span class="proj-tag" data-i18n="tag.detailna">详情未公开</span>
+              </div>
+              <span class="proj-more" onclick="toggleDetail('d5')" data-i18n="proj.more">查看详情</span>
+              <div class="proj-detail" id="d5" data-i18n="det.nihonbashi">日本桥地区开发项目，目前处于规划阶段，详细信息请参阅投资者资料。</div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FAQ Teaser -->
+  <section style="padding:44px 0;background:#fff" id="faq-preview">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">FAQ</div>
+          <h2 data-i18n="faq.title">常见问题</h2>
+        </div>
+        <p class="lead"><span data-i18n="faq.desc">关于投资流程、税费成本与运营管理的高频问题</span></p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:32px">
+
+        <div style="background:var(--bg);border-radius:14px;border:1px solid var(--line);padding:22px 24px">
+          <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:8px">Q</div>
+          <div style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px" data-i18n="faq.q1">外国人可以在日本购买不动产吗？</div>
+          <div style="font-size:14px;color:var(--muted);line-height:1.7" data-i18n="faq.a1">可以。日本对外国人购置不动产无特别限制，外国个人或法人均可自由购入土地及建筑物。</div>
+        </div>
+
+        <div style="background:var(--bg);border-radius:14px;border:1px solid var(--line);padding:22px 24px">
+          <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:8px">Q</div>
+          <div style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px" data-i18n="faq.q2">购入时附带税费大概占多少？</div>
+          <div style="font-size:14px;color:var(--muted);line-height:1.7" data-i18n="faq.a2">购入时附带费用（税费＋中介费＋登记费等）合计约为成交总价的 7～10%。</div>
+        </div>
+
+        <div style="background:var(--bg);border-radius:14px;border:1px solid var(--line);padding:22px 24px">
+          <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:8px">Q</div>
+          <div style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px" data-i18n="faq.q3">买地新建 vs 二手整栋改造，各需多久？各有什么优劣？</div>
+          <div style="font-size:14px;color:var(--muted);line-height:1.7" data-i18n="faq.a3">新建约需1.5～2年，设计自由度高、资产价值稳定；二手整栋改造约6～10个月，开业快、投入低，各有侧重。</div>
+        </div>
+
+        <div style="background:var(--bg);border-radius:14px;border:1px solid var(--line);padding:22px 24px">
+          <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:8px">Q</div>
+          <div style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px" data-i18n="faq.q4">投资者需要亲自管理日常运营吗？</div>
+          <div style="font-size:14px;color:var(--muted);line-height:1.7" data-i18n="faq.a4">不需要。我们提供全委托运营管理服务，涵盖人员聘用培训管理、OTA预订、定价策略、设施维护及收支管理等。</div>
+        </div>
+
+      </div>
+      <div style="text-align:center">
+        <a href="faq.html" style="display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:999px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;transition:.2s" data-i18n="faq.more">查看全部问题 & 专业术语解释 →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="kicker" data-i18n="contact.kicker">Contact</div>
+        <h2 data-i18n="contact.title">联系我们</h2>
+        <p class="lead"><span data-i18n="contact.desc">如果您对日本不动产投资、酒店开发或民宿运营管理感兴趣，欢迎通过以下方式与我们联系。</span></p>
+        <div class="contact-card" style="margin-top:28px;">
+          <p><b>株式会社 MKG Japan</b></p>
+          <p>〒169-0073 東京都新宿区百人町 1-20-5 5F</p>
+          <p>TEL: 03-6279-2482</p>
+          <div style="margin-top:20px;border-radius:12px;overflow:hidden;border:1px solid var(--line)">
+            <iframe
+              src="https://maps.google.com/maps?q=東京都新宿区百人町1-20-5&output=embed&hl=zh-CN&z=16"
+              width="100%" height="240" style="border:0;display:block"
+              allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <form id="contact-form" class="form-grid"
+              action="https://formspree.io/f/xbdbzwwg"
+              method="POST">
+          <input type="text"  name="name"    required
+                 data-i18n-ph="form.name"  placeholder="姓名 / お名前">
+          <input type="email" name="email"   required
+                 data-i18n-ph="form.email" placeholder="邮箱 / メールアドレス">
+          <select name="topic">
+            <option value="" data-i18n="form.topic">咨询内容 / お問い合わせ内容</option>
+            <option value="不动产投资"      data-i18n="form.opt1">不动产投资</option>
+            <option value="酒店・民宿预订"  data-i18n="form.opt2">酒店・民宿预订咨询</option>
+            <option value="酒店・民宿运营"  data-i18n="form.opt3">酒店・民宿运营管理</option>
+            <option value="开发建造合作"    data-i18n="form.opt4">开发建造项目合作</option>
+            <option value="其他">其他 / その他 / Other</option>
+          </select>
+          <textarea name="message" rows="4"
+                    data-i18n-ph="form.placeholder"
+                    placeholder="请简单描述您的需求"></textarea>
+          <!-- Formspree honeypot anti-spam -->
+          <input type="text" name="_gotcha" style="display:none">
+          <input type="hidden" name="_subject" value="【MKG Japan 官网】新咨询">
+          <button class="btn primary" type="submit" data-i18n="form.submit">提交咨询</button>
+        </form>
+        <p id="form-success" style="display:none;color:#16866a;font-weight:700;margin-top:12px;text-align:center;">
+          ✓ 已收到您的咨询，我们将尽快与您联系。
+        </p>
+      </div>
+    </div>
+    <div class="wrap">
+      <footer>
+        <span>© 2026 MKG Japan. All rights reserved.</span>
+        <span style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          <span>MKG Japan は</span>
+          <a href="https://www.mkg.com.sg/zh/" target="_blank" rel="noopener"
+             style="color:var(--gold);text-decoration:none;font-weight:600;transition:.15s"
+             onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+            MKG Group（新加坡）
+          </a>
+          <span data-i18n="footer.sub2">旗下日本法人</span>
+        </span>
+      </footer>
+    </div>
+  </section>
+
+  <script>
+    // 联系表单 — Formspree AJAX提交
+    document.addEventListener('DOMContentLoaded', function() {
+      var form = document.getElementById('contact-form');
+      if (!form) return;
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type=submit]');
+        btn.disabled = true;
+        btn.textContent = '发送中…';
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(function(r) {
+          if (r.ok) {
+            form.style.display = 'none';
+            document.getElementById('form-success').style.display = 'block';
+          } else {
+            btn.disabled = false;
+            btn.textContent = '提交咨询';
+            alert('提交失败，请直接发送邮件至 dq@mkgjp.com');
+          }
+        }).catch(function() {
+          btn.disabled = false;
+          btn.textContent = '提交咨询';
+          alert('网络错误，请直接发送邮件至 dq@mkgjp.com');
+        });
+      });
+    });
+
+    function togglePanel(id) {
+      var el = document.getElementById(id);
+      el.classList.toggle('open');
+    }
+    function slideCard(btn, dir) {
+  var slider = btn.parentElement;
+  var slides = slider.querySelector('.card-slides');
+  var dots = slider.querySelectorAll('.slide-dot');
+  var total = slides.children.length;
+  var cur = parseInt(slider.dataset.cur || 0);
+  cur = (cur + dir + total) % total;
+  slider.dataset.cur = cur;
+  slides.style.transform = 'translateX(-' + (cur * 100) + '%)';
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === cur); });
+}
+// タッチスワイプ対応
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.card-slider').forEach(function(sl) {
+    var tx = 0;
+    sl.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+    sl.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - tx;
+      if(Math.abs(dx) > 40) slideCard(sl.querySelector(dx < 0 ? '.next' : '.prev'), dx < 0 ? 1 : -1);
+    }, {passive:true});
+  });
+});
+function toggleDetail(id) {
+      var el = document.getElementById(id);
+      el.classList.toggle('open');
+    }
+  </script>
+<script>
+function toggleLangMenu(){
+  document.getElementById('langMenu').classList.toggle('open');
+  closeDeskLang();
+}
+function closeLangMenu(){
+  document.getElementById('langMenu').classList.remove('open');
+}
+function toggleDeskLang(){
+  document.getElementById('deskLangMenu').classList.toggle('open');
+  closeLangMenu();
+}
+function closeDeskLang(){
+  document.getElementById('deskLangMenu').classList.remove('open');
+}
+function updateAllLangLabels(deskLabel, mobileLabel){
+  var dl = document.getElementById('deskLangLabel');
+  var ml = document.getElementById('langLabel');
+  if(dl) dl.textContent = deskLabel;
+  if(ml) ml.textContent = mobileLabel;
+}
+// 点击外部关闭所有语言菜单
+document.addEventListener('click', function(e){
+  var mwrap = document.querySelector('.mobile-lang-wrap');
+  var dwrap = document.querySelector('.desk-lang-wrap');
+  if(mwrap && !mwrap.contains(e.target)) closeLangMenu();
+  if(dwrap && !dwrap.contains(e.target)) closeDeskLang();
+});
+
+function toggleDrawer(){
+  var d=document.getElementById('navDrawer');
+  var b=document.getElementById('hamBtn');
+  var open=d.style.display==='block';
+  d.style.display=open?'none':'block';
+  b.classList.toggle('open',!open);
+}
+function closeDrawer(){
+  document.getElementById('navDrawer').style.display='none';
+  document.getElementById('hamBtn').classList.remove('open');
+}
+// スクロールで閉じる
+window.addEventListener('scroll',function(){closeDrawer();},{ passive:true });
+</script>
+
+<script>
+const I18N = {
+  zh: {
+    'nav.about':'关于我们','nav.services':'事业内容','nav.projects':'项目一览',
+    'nav.stay':'旅宿预订','nav.contact':'联系我们','nav.book':'预订旅宿 · MKG Stay',
+    'hero.title':'深耕日本不动产与酒店资产管理',
+    'hero.desc':'株式会社 MKG Japan 专注于东京不动产投资、酒店开发、民宿运营与资产管理，为投资人及合作伙伴提供从资产筛选、开发建设到运营管理的一站式解决方案。',
+    'hero.btn2':'查看业务范围','hero.map':'东京项目布局概览',
+    'hero.stat1':'运营中<br>酒店/民宿','hero.stat2':'建设中/规划<br>酒店项目',
+    'about.kicker':'About MKG Japan','about.title':'日本资产配置与运营管理平台',
+    'about.desc':'MKG Japan 依托集团资源与日本本地运营团队，围绕不动产买卖、土地开发、酒店及民宿运营管理等领域，提供长期、稳健、可执行的资产管理服务。',
+    'about.v1':'长期主义','about.v2':'价值创造','about.v3':'携手共赢',
+    'about.v1d':'着眼长远，稳健布局，在东京核心区域寻找具备长期价值的资产。',
+    'about.v2d':'通过专业运营、精细化管理与项目开发，持续提升资产收益与体验品质。',
+    'about.v3d':'与投资人、合作伙伴及本地专业机构协同合作，推动项目稳定落地。',
+    'svc.kicker':'Core Services','svc.title':'三大核心业务',
+    'svc.desc':'从土地/二手整栋物业筛选到开业运营，为投资者提供全链条服务',
+    'svc.s1t':'土地/二手整栋物业筛选与投资分析',
+    'svc.s1d':'聚焦东京核心商圈及高成长潜力区域，通过市场调研、资产评估与交易执行，甄选具备长期增值潜力的优质资产——包括开发用地，以及适合改造为酒店的二手整栋物业。',
+    'svc.s2t':'开发建造/改造翻新',
+    'svc.s2d':'提供土地取得后的新建开发，以及二手整栋物业的改造翻新服务，涵盖项目规划、建筑设计、工程管理全流程，与日本本地专业机构深度合作，确保项目品质与执行效率。',
+    'svc.s3t':'酒店/民宿运营管理',
+    'svc.s3d':'专注酒店及民宿运营，通过定价管理、平台运营、客户体验管理与日常维护，提升资产收益与长期运营价值。',
+    'cred.kicker':'Trust & Credentials','cred.title':'专业资质与市场认可',
+    'cred.desc':'持有日本政府颁发的经营许可与注册资质，并获得国际主要住宿平台的品质认证。',
+    'cred.c1d':'经都道府県知事核发的不动产经营免許，依法从事不动产买卖及仲介业务。',
+    'cred.c2d':'经日本国土交通大臣注册，依法开展民宿委托管理业务，并符合《住宅宿泊事业法》相关规定。',
+    'cred.platform':'平台认可',
+    'cred.p1d':'年度旅客好评奖，体现住宿体验与客户满意度。',
+    'cred.p2d':'超赞房东认证，体现稳定服务品质与高评价运营能力。',
+    'proj.kicker':'Project Distribution','proj.title':'东京都内项目分布与资产管理概况',
+    'proj.desc':'以东京核心区域为基础，涵盖运营中的酒店与民宿，以及多个在建开发项目，点击项目卡片查看详细信息。',
+    'proj.sub':'以东京为核心的资产布局',
+    'proj.subdesc':'项目涵盖运营中酒店与民宿，以及多个在建酒店/公寓项目。通过本地化运营与项目管理，形成从资产持有到开发运营的综合布局。',
+    'proj.op':'运营中酒店/民宿','proj.build':'设计/建造/规划中',
+    'allproj.kicker':'All Projects','allproj.title':'项目一览',
+    'allproj.desc':'运营中旅宿与在建开发项目分区展示，点击卡片查看详情。',
+    'allproj.op':'运营中','allproj.build':'建设中/规划中',
+    'card.bookbk':'立即预订 · Booking.com →','card.allrooms':'查看全部房型 →','card.viewroom':'查看客室 →','card.airbnb':'Airbnb 立即预订 →',
+    'panel.hint':'▼ 点击查看详情',
+    'ops.asakusa1':'台东区驹形 / 日式现代精品酒店','ops.asakusa2':'客室数：9室',
+    'ops.shiba1':'港区芝 / 全6室','ops.shiba2':'东京铁塔附近 / Airbnb 运营中',
+    'ops.shinjuku1':'新宿区大久保 / 新大久保站步行7分','ops.shinjuku2':'7层精品民宿 / Airbnb 运营中',
+    'dev.under':'建设中','dev.plan':'规划中',
+    'tag.boutique':'精品酒店','tag.rooms9':'全9室','tag.wamodern':'和式现代',
+    'tag.minpaku':'民宿','tag.rooms6':'全6室','tag.tokyotower':'东京铁塔附近',
+    'tag.floors7':'7层楼','tag.shinjuku':'新宿・大久保',
+    'tag.newhotel':'新建酒店','tag.renderout':'效果图公开中','tag.building':'建设中',
+    'tag.planning':'规划中','tag.detailna':'详情未公开',
+    'proj.more':'查看详情','status.building':'建设中','status.planning':'规划中',
+    'det.okachi':'台东区台东3丁目新建酒店项目（MKG HOTEL OKACHIMACHI）。外观效果图已公开，建设阶段进行中。',
+    'det.ryusen':'台东区龙泉地区新建酒店项目（MKG HOTEL RYUSEN）。外观效果图已公开，建设阶段进行中。',
+    'det.kitaueno':'台东区北上野地区酒店开发项目，建设阶段进行中，室内效果图已公开。',
+    'det.nihonbashi':'日本桥地区开发项目，目前处于规划阶段，详细信息请参阅投资者资料。',
+    'loc.asakusa':'台东区驹形2-4-9','loc.shiba':'港区芝2-27-4',
+    'loc.shinjuku':'新宿区百人町1-20-5 7F',
+    'loc.okachi':'台东区台东3丁目','loc.ryusen':'台东区龙泉',
+    'loc.kitaueno':'台东区北上野','loc.nihonbashi':'中央区日本桥地区',
+    'loc.kitaueno.ph':'台东区<br>北上野','loc.nihonbashi.ph':'中央区<br>日本桥',
+    'contact.kicker':'Contact','contact.title':'联系我们',
+    'contact.desc':'如果您对日本不动产投资、酒店开发或民宿运营管理感兴趣，欢迎通过以下方式与我们联系。',
+    'form.name':'您的姓名','form.email':'电子邮箱','form.topic':'咨询类型',
+    'form.opt1':'不动产投资','form.opt2':'酒店/民宿预订咨询','form.opt3':'酒店/民宿运营管理',
+    'form.opt4':'开发建造项目合作','form.placeholder':'请简单描述您的需求','form.submit':'提交咨询',
+    'footer.sub':'MKG Japan 是 MKG Group（新加坡）旗下日本法人','footer.sub2':'旗下日本法人',
+    'legend.yellow':'二手整栋物业','legend.green':'运营中酒店/民宿','legend.red':'建造/规划中',
+    'nav.faq':'FAQ',
+    'faq.title':'常见问题','faq.desc':'关于投资流程、税费成本与运营管理的高频问题',
+    'faq.q1':'外国人可以在日本购买不动产吗？','faq.a1':'可以。日本对外国人购置不动产无特别限制，外国个人或法人均可自由购入土地及建筑物。',
+    'faq.q2':'购入时附带税费大概占多少？','faq.a2':'购入时附带费用（税费＋中介费＋登记费等）合计约为成交总价的 7～10%。',
+    'faq.q3':'买地新建 vs 二手整栋改造，各需多久？各有什么优劣？','faq.a3':'新建约需1.5～2年，设计自由度高、资产价值稳定；二手整栋改造约6～10个月，开业快、投入低，各有侧重。',
+    'faq.q4':'投资者需要亲自管理日常运营吗？','faq.a4':'不需要。我们提供全委托运营管理服务，涵盖人员聘用培训管理、OTA预订、定价策略、设施维护及收支管理等。',
+    'faq.more':'查看全部问题 & 专业术语解释 →',
+  },
+  ja: {
+    'nav.about':'会社概要','nav.services':'事業内容','nav.projects':'プロジェクト',
+    'nav.stay':'旅宿一覧','nav.contact':'お問い合わせ','nav.book':'旅宿を予約 · MKG Stay','nav.faq':'FAQ',
+    'hero.title':'日本の不動産・<br>ホテル資産管理<br>スペシャリスト',
+    'hero.desc':'株式会社MKG Japanは、東京における不動産投資・ホテル開発・民宿運営・資産管理を専門とし、投資家・パートナーに対して物件選定から開発・運営管理まで一貫したソリューションを提供します。',
+    'hero.btn2':'事業内容を見る','hero.map':'東京プロジェクト概要',
+    'hero.stat1':'運営中<br>ホテル・民宿','hero.stat2':'建設中／計画中<br>ホテルプロジェクト',
+    'about.kicker':'About MKG Japan','about.title':'日本における資産配置・運営管理プラットフォーム',
+    'about.desc':'MKG Japanはグループリソースと日本ローカルチームを活かし、不動産売買・土地開発・ホテル及び民宿の運営管理において、長期的・安定的・実行可能な資産管理サービスを提供します。',
+    'about.v1':'長期的視点','about.v2':'価値創造','about.v3':'共創・共栄',
+    'about.v1d':'長期的視野で東京中心部の長期的価値を持つ優良資産を安定的に選定します。',
+    'about.v2d':'専門的な運営・緻密な管理・プロジェクト開発を通じて、資産収益と体験品質を継続的に向上させます。',
+    'about.v3d':'投資家・パートナー・地元専門機関と連携し、プロジェクトの安定的な実現を推進します。',
+    'svc.kicker':'Core Services','svc.title':'3つのコアビジネス',
+    'svc.desc':'土地/中古一棟物件選定から開業・運営まで、投資家向けワンストップサービス',
+    'svc.s1t':'土地/中古一棟物件選定・投資分析',
+    'svc.s1d':'東京中心部および高成長エリアに特化し、市場調査・資産評価・取引執行を通じて、長期的な付加価値を持つ優良資産を選定します。開発用地や、ホテルへのコンバージョンに適した中古一棟物件も対象です。',
+    'svc.s2t':'開発建設・リノベーション',
+    'svc.s2d':'土地取得後の新築開発および中古一棟物件のリノベーションサービスを提供します。プロジェクト企画・建築設計・工事管理の全プロセスをカバーし、日本の専門機関と深く連携して品質と効率を確保します。',
+    'svc.s3t':'ホテル・民宿運営管理',
+    'svc.s3d':'ホテル及び民宿の運営に特化し、価格管理・プラットフォーム運営・顧客体験管理・日常メンテナンスを通じて、資産収益と長期的運営価値を向上させます。',
+    'cred.kicker':'Trust & Credentials','cred.title':'専門資格と市場認知',
+    'cred.desc':'日本政府発行の営業許可・登録資格を保有し、国際的な主要宿泊プラットフォームから品質認定を受けています。',
+    'cred.c1d':'都道府県知事より交付された不動産経営免許に基づき、不動産売買および仲介業務を適法に行います。',
+    'cred.c2d':'国土交通大臣の登録を受け、住宅宿泊事業法に基づく民宿委託管理業務を適法に行います。',
+    'cred.platform':'プラットフォーム認定',
+    'cred.p1d':'年間旅行者高評価賞。宿泊体験と顧客満足度の高さを示します。',
+    'cred.p2d':'Airbnb スーパーホスト認定。安定したサービス品質と高評価運営能力を示します。',
+    'proj.kicker':'Project Distribution','proj.title':'東京都内プロジェクト分布・資産管理概況',
+    'proj.desc':'東京を中心に、運営中のホテル・民宿と建設中の開発プロジェクトをカバーしています。',
+    'proj.sub':'東京を中心とした資産ポートフォリオ',
+    'proj.subdesc':'運営中のホテル・民宿と複数の建設中ホテル・アパートプロジェクトを含みます。ローカル運営とプロジェクト管理により、資産保有から開発・運営に至る総合的な布局を形成しています。',
+    'proj.op':'運営中 ホテル・民宿','proj.build':'設計・建設・計画中',
+    'allproj.kicker':'All Projects','allproj.title':'プロジェクト一覧',
+    'allproj.desc':'運営中旅宿と建設中開発プロジェクトをエリア別に表示します。カードをクリックして詳細をご覧ください。',
+    'allproj.op':'運営中','allproj.build':'建設中・計画中',
+    'card.bookbk':'今すぐ予約 · Booking.com →','card.allrooms':'全客室を見る →','card.viewroom':'客室を見る →','card.airbnb':'Airbnb で予約 →',
+    'panel.hint':'▼ クリックして詳細を見る',
+    'ops.asakusa1':'台東区駒形 / 和モダン精品ホテル','ops.asakusa2':'客室数：9室',
+    'ops.shiba1':'港区芝 / 全6室','ops.shiba2':'東京タワー近接 / Airbnb 運営中',
+    'ops.shinjuku1':'新宿区大久保 / 新大久保駅徒歩7分','ops.shinjuku2':'7階建て精品民宿 / Airbnb 運営中',
+    'dev.under':'建設中','dev.plan':'計画中',
+    'tag.boutique':'精品ホテル','tag.rooms9':'全9室','tag.wamodern':'和モダン',
+    'tag.minpaku':'民宿','tag.rooms6':'全6室','tag.tokyotower':'東京タワー近接',
+    'tag.floors7':'7階建て','tag.shinjuku':'新宿・大久保',
+    'tag.newhotel':'新築ホテル','tag.renderout':'概念図公開中','tag.building':'建設中',
+    'tag.planning':'計画中','tag.detailna':'詳細未公開',
+    'proj.more':'詳細を見る','status.building':'建設中','status.planning':'計画中',
+    'det.okachi':'台東区台東3丁目の新築ホテル計画（MKG HOTEL OKACHIMACHI）。外観パース公開中。現在建設フェーズ進行中。',
+    'det.ryusen':'台東区龍泉エリアの新築ホテル計画（MKG HOTEL RYUSEN）。外観パース公開中。現在建設フェーズ進行中。',
+    'det.kitaueno':'台東区北上野エリアのホテル開発プロジェクト。建設フェーズ進行中。室内効果図公開中。',
+    'det.nihonbashi':'日本橋エリアの開発プロジェクト。現在計画フェーズ。詳細は投資家向け資料をご参照ください。',
+    'loc.asakusa':'台東区駒形2-4-9','loc.shiba':'港区芝2-27-4',
+    'loc.shinjuku':'新宿区百人町1-20-5 7F',
+    'loc.okachi':'台東区台東3丁目','loc.ryusen':'台東区龍泉',
+    'loc.kitaueno':'台東区北上野','loc.nihonbashi':'中央区日本橋エリア',
+    'loc.kitaueno.ph':'台東区<br>北上野','loc.nihonbashi.ph':'中央区<br>日本橋',
+    'contact.kicker':'Contact','contact.title':'お問い合わせ',
+    'contact.desc':'日本の不動産投資、ホテル開発、民宿運営管理にご興味のある方は、以下の方法でお気軽にお問い合わせください。',
+    'form.name':'お名前','form.email':'メールアドレス','form.topic':'お問い合わせ内容',
+    'form.opt1':'不動産投資','form.opt2':'ホテル・民宿予約に関するお問い合わせ','form.opt3':'ホテル・民宿運営管理',
+    'form.opt4':'開発建設プロジェクトの協業','form.placeholder':'お問い合わせ内容を簡単にご記入ください','form.submit':'送信する',
+    'footer.sub':'MKG Japan は MKG Group（シンガポール）傘下の日本法人です','footer.sub2':'傘下の日本法人',
+    'legend.yellow':'中古一棟物件','legend.green':'運営中ホテル・民宿','legend.red':'建設・計画中',
+    'faq.title':'よくある質問','faq.desc':'投資フロー・税費用・運営管理に関するよくあるご質問',
+    'faq.q1':'外国人は日本で不動産を購入できますか？','faq.a1':'はい。日本は外国人の不動産取得に特別な制限を設けておらず、外国人個人・法人ともに自由に購入できます。',
+    'faq.q2':'購入時の付帯費用はどのくらいですか？','faq.a2':'税金・仲介手数料・登記費用等の付帯費用は、成約価格の 7～10% 程度が目安です。',
+    'faq.q3':'新築 vs 中古一棟リノベ：期間と優劣は？','faq.a3':'新築は約1.5〜2年で自由度・資産価値が高く、リノベは6〜10か月で早期収益化・低投資を実現。目的に応じて選択。',
+    'faq.q4':'投資家が日常運営を管理する必要はありますか？','faq.a4':'不要です。スタッフ採用・育成・OTA予約管理・価格戦略・設備メンテ・収支管理など全業務を委託管理しています。',
+    'faq.more':'すべての質問 & 専門用語を見る →',
+  },
+  en: {
+    'nav.about':'About Us','nav.services':'Services','nav.projects':'Projects',
+    'nav.stay':'Properties','nav.contact':'Contact','nav.book':'Book a Stay · MKG Stay',
+    'hero.title':'Tokyo Real Estate Development & Hotel Asset Management',
+    'hero.desc':'MKG Japan specializes in real estate investment, hotel development, guesthouse operations, and asset management in Tokyo — providing end-to-end solutions from asset selection and development to operations management for investors and partners.',
+    'hero.btn2':'Our Services','hero.map':'Tokyo Project Overview',
+    'hero.stat1':'Operating Hotels<br>& Guesthouses','hero.stat2':'Under Development<br>& Planning',
+    'about.kicker':'About MKG Japan','about.title':'Japan Real Estate & Hospitality Asset Platform',
+    'about.desc':'Leveraging group resources and a local Japan team, MKG Japan delivers long-term, stable, and actionable asset management services across real estate transactions, land development, hotel and guesthouse operations.',
+    'about.v1':'Long-term Vision','about.v2':'Value Creation','about.v3':'Partnership',
+    'about.v1d':'Taking a long-term view to identify assets with enduring value in Tokyo\u2019s core districts.',
+    'about.v2d':'Continuously enhancing asset returns and experience quality through expert operations and development.',
+    'about.v3d':'Collaborating with investors, partners, and local specialists to ensure stable project delivery.',
+    'svc.kicker':'Core Services','svc.title':'Three Core Business Areas',
+    'svc.desc':'End-to-end service for investors — from land and existing building acquisition to hotel operations',
+    'svc.s1t':'Land & Existing Building<br>Acquisition · Investment Analysis',
+    'svc.s1d':'Focusing on Tokyo\u2019s core commercial districts and high-growth areas, we identify premium assets with long-term appreciation potential through market research, valuation, and transaction execution — including development land and buildings suitable for hotel conversion.',
+    'svc.s2t':'Development & Renovation',
+    'svc.s2d':'We provide new construction services after land acquisition and renovation of existing buildings, covering project planning, architectural design, and construction management — in deep collaboration with local Japanese specialists to ensure quality and efficiency.',
+    'svc.s3t':'Hotel & Guesthouse Operations',
+    'svc.s3d':'Specializing in hotel and guesthouse management, we enhance asset returns and long-term operational value through revenue management, platform operations, guest experience management, and daily maintenance.',
+    'cred.kicker':'Trust & Credentials','cred.title':'Professional Credentials & Recognition',
+    'cred.desc':'Holding government-issued operating licenses and registered qualifications, with quality certifications from leading international accommodation platforms.',
+    'cred.c1d':'Real estate brokerage license issued by the prefectural governor, authorizing lawful real estate sales and brokerage operations.',
+    'cred.c2d':'Registered by the Minister of Land, Infrastructure, Transport and Tourism to conduct licensed guesthouse management under the Minpaku Business Act.',
+    'cred.platform':'Platform Recognition',
+    'cred.p1d':'Annual Traveller Review Award — recognizing outstanding accommodation experience and guest satisfaction.',
+    'cred.p2d':'Airbnb Superhost — recognizing consistent service quality and high-rated operational performance.',
+    'proj.kicker':'Project Distribution','proj.title':'Tokyo Project Distribution & Asset Management Overview',
+    'proj.desc':'Centered on Tokyo, covering operating hotels & guesthouses and development projects under construction.',
+    'proj.sub':'Tokyo-Centered Asset Portfolio',
+    'proj.subdesc':'The portfolio includes operating hotels and guesthouses, as well as multiple hotel and apartment projects under construction. Through localized operations and project management, we have built a comprehensive presence from asset ownership to development and operations.',
+    'proj.op':'Operating Hotels & Guesthouses','proj.build':'Design · Construction · Planning',
+    'allproj.kicker':'All Projects','allproj.title':'All Projects',
+    'allproj.desc':'Operating properties and development projects listed by category. Click a card to view details.',
+    'allproj.op':'Operating','allproj.build':'Under Construction / Planning',
+    'card.bookbk':'Book Now · Booking.com →','card.allrooms':'View All Room Types →','card.viewroom':'View Rooms →','card.airbnb':'Book on Airbnb →',
+    'panel.hint':'▼ Click to expand',
+    'ops.asakusa1':'Taito-ku Komagata / Japanese Modern Boutique','ops.asakusa2':'9 Guest Rooms',
+    'ops.shiba1':'Minato-ku Shiba / 6 Rooms','ops.shiba2':'Near Tokyo Tower / Listed on Airbnb',
+    'ops.shinjuku1':'Shinjuku Okubo / 7 min from Shin-Okubo Stn','ops.shinjuku2':'7-Floor Boutique Guesthouse / Listed on Airbnb',
+    'dev.under':'Under Construction','dev.plan':'Planning Stage',
+    'tag.boutique':'Boutique Hotel','tag.rooms9':'9 Rooms','tag.wamodern':'Japanese Modern',
+    'tag.minpaku':'Guesthouse','tag.rooms6':'6 Rooms','tag.tokyotower':'Near Tokyo Tower',
+    'tag.floors7':'7 Floors','tag.shinjuku':'Shinjuku / Okubo',
+    'tag.newhotel':'New Build','tag.renderout':'Renders Released','tag.building':'Under Construction',
+    'tag.planning':'Planning','tag.detailna':'Details TBA',
+    'proj.more':'View Details','status.building':'Under Construction','status.planning':'Planning',
+    'det.okachi':'New-build hotel in Taito 3-chome, Taito-ku (MKG HOTEL OKACHIMACHI). Exterior renders released. Currently under construction.',
+    'det.ryusen':'New-build hotel in Ryusen, Taito-ku (MKG HOTEL RYUSEN). Exterior renders released. Currently under construction.',
+    'det.kitaueno':'Hotel development project in Kitaueno, Taito-ku. Construction in progress. Interior renders now available.',
+    'det.nihonbashi':'Development project in the Nihonbashi area. Currently in planning phase. Details available in investor materials.',
+    'loc.asakusa':'2-4-9 Komagata, Taito-ku','loc.shiba':'2-27-4 Shiba, Minato-ku',
+    'loc.shinjuku':'1-20-5 Hyakunincho, Shinjuku-ku 7F',
+    'loc.okachi':'Taito 3-chome, Taito-ku','loc.ryusen':'Ryusen, Taito-ku',
+    'loc.kitaueno':'Kitaueno, Taito-ku','loc.nihonbashi':'Nihonbashi Area, Chuo-ku',
+    'loc.kitaueno.ph':'Taito-ku<br>Kitaueno','loc.nihonbashi.ph':'Chuo-ku<br>Nihonbashi',
+    'contact.kicker':'Contact','contact.title':'Contact Us',
+    'contact.desc':'If you are interested in Japan real estate investment, hotel development, or guesthouse management, please reach out through the following channels.',
+    'form.name':'Your Name','form.email':'Email Address','form.topic':'Inquiry Type',
+    'form.opt1':'Real Estate Investment','form.opt2':'Hotel / Guesthouse Booking Inquiry','form.opt3':'Hotel / Guesthouse Operations',
+    'form.opt4':'Development & Construction Partnership','form.placeholder':'Please briefly describe your inquiry','form.submit':'Submit Inquiry',
+    'footer.sub':'MKG Japan is a subsidiary of MKG Group (Singapore)','footer.sub2':'subsidiary in Japan',
+    'legend.yellow':'Existing Whole-Building','legend.green':'Operating Hotels/Guesthouses','legend.red':'Under Construction/Planning',
+    'faq.title':'FAQ','faq.desc':'Common questions about investment process, taxes, and property management',
+    'faq.q1':'Can foreigners buy real estate in Japan?','faq.a1':'Yes. Japan places no special restrictions on foreign ownership. Both foreign individuals and corporations can freely purchase land and buildings.',
+    'faq.q2':'What are the typical acquisition costs?','faq.a2':'Total acquisition costs (taxes, brokerage, registration fees, etc.) are typically 7–10% of the purchase price.',
+    'faq.q3':'New build vs. existing building renovation: timeline &amp; trade-offs?','faq.a3':'New build (~1.5–2 yrs): full design freedom, stable asset value. Renovation (~6–10 mo): faster revenue, lower upfront cost. Each suits different investor goals.',
+    'faq.q4':'Do investors need to manage daily operations?','faq.a4':'No. We provide full-delegation management covering staff, OTA reservations, pricing strategy, maintenance, and financial reporting.',
+    'faq.more':'View all FAQs & Glossary →',
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if (I18N[lang] && I18N[lang][k]) el.innerHTML = I18N[lang][k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const k = el.dataset.i18nPh;
+    if (I18N[lang] && I18N[lang][k]) el.placeholder = I18N[lang][k];
+  });
+  document.querySelectorAll('.lang-sw button').forEach(b => {
+    b.classList.toggle('active', b.dataset.l === lang);
+  });
+  sessionStorage.setItem('mkgjp_lang', lang);
+  document.documentElement.lang = lang === 'ja' ? 'ja' : lang === 'en' ? 'en' : 'zh';
+}
+
+(function(){
+  const saved = sessionStorage.getItem('mkgjp_lang') || 'ja';
+  setLang(saved);
+  const labels = {'zh':['语言','语言'],'ja':['言語','言語'],'en':['Language','Language']};
+  const l = labels[saved] || labels['ja'];
+  const dl = document.getElementById('deskLangLabel');
+  const ml = document.getElementById('langLabel');
+  if(dl) dl.textContent = l[0];
+  if(ml) ml.textContent = l[1];
+})();
+</script>
+
+<!-- Gallery Lightbox overlay -->
+<div id="lb-overlay">
+  <button id="lb-close" onclick="lbHide()">✕</button>
+  <button id="lb-prev" onclick="lbNav(-1)">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next" onclick="lbNav(1)">&#8250;</button>
+  <div id="lb-counter"></div>
+</div>
+
+<script>
+var _lbGallery = [], _lbIdx = 0;
+
+function lbOpen(images, idx){
+  _lbGallery = images;
+  _lbIdx = idx;
+  lbRender();
+  document.getElementById('lb-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function lbRender(){
+  var img = document.getElementById('lb-img');
+  var total = _lbGallery.length;
+  img.style.opacity = '0';
+  setTimeout(function(){
+    img.src = _lbGallery[_lbIdx].src;
+    img.alt = _lbGallery[_lbIdx].alt || '';
+    img.style.opacity = '1';
+  }, 80);
+  document.getElementById('lb-counter').textContent = (_lbIdx+1) + ' / ' + total;
+  document.getElementById('lb-prev').classList.toggle('hidden', _lbIdx === 0);
+  document.getElementById('lb-next').classList.toggle('hidden', _lbIdx === total-1);
+}
+function lbNav(dir){
+  var n = _lbIdx + dir;
+  if(n >= 0 && n < _lbGallery.length){ _lbIdx = n; lbRender(); }
+}
+function lbHide(){
+  document.getElementById('lb-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lb-overlay').addEventListener('click', function(e){
+  if(e.target === this) lbHide();
+});
+document.addEventListener('keydown', function(e){
+  if(!document.getElementById('lb-overlay').classList.contains('open')) return;
+  if(e.key==='Escape') lbHide();
+  if(e.key==='ArrowLeft') lbNav(-1);
+  if(e.key==='ArrowRight') lbNav(1);
+});
+
+// 为每张项目卡的图片绑定gallery
+document.querySelectorAll('.proj-card').forEach(function(card){
+  var imgs = Array.from(card.querySelectorAll('.thumb img, .thumb-strip figure img'));
+  imgs.forEach(function(img, idx){
+    img.addEventListener('click', function(e){
+      e.stopPropagation();
+      lbOpen(imgs.map(function(i){ return {src:i.src,alt:i.alt}; }), idx);
+    });
+  });
+});
+</script>
+
+
+</body>
+</html>
