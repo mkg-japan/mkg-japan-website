@@ -100,6 +100,34 @@
     .info-row .val{color:var(--ink);font-weight:600}
     .amenity-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 
+    /* ── 图片画廊 ── */
+    .gallery{margin-bottom:40px}
+    .gallery-main{width:100%;height:320px;border-radius:16px;overflow:hidden;margin-bottom:8px;cursor:pointer}
+    .gallery-main img{width:100%;height:100%;object-fit:cover;transition:.4s}
+    .gallery-main img:hover{transform:scale(1.02)}
+    .gallery-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .gallery-thumb{height:80px;border-radius:10px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:.2s}
+    .gallery-thumb.active{border-color:var(--gold)}
+    .gallery-thumb img{width:100%;height:100%;object-fit:cover;transition:.3s}
+    .gallery-thumb:hover img{transform:scale(1.06)}
+
+    /* ── 设施详细 ── */
+    .amenity-section{margin-bottom:32px}
+    .amenity-category{margin-bottom:16px}
+    .amenity-category h4{font-size:13px;font-weight:800;color:var(--navy);margin:0 0 8px;letter-spacing:.04em}
+    .amenity-tags{display:flex;flex-wrap:wrap;gap:6px}
+    .amenity-tag{padding:5px 11px;background:#f0ece5;border-radius:999px;font-size:12px;color:var(--ink);font-weight:600}
+
+    /* ── FAQ ── */
+    .faq-list{margin-bottom:40px}
+    .faq-item{background:white;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+    .faq-q{width:100%;background:none;border:none;padding:16px 20px;text-align:left;font-size:14px;font-weight:700;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:inherit}
+    .faq-q:hover{background:#f8f8fb}
+    .faq-q .arrow{font-size:16px;color:var(--gold);transition:.25s;flex-shrink:0}
+    .faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+    .faq-a{display:none;padding:0 20px 16px;color:var(--muted);font-size:14px;line-height:1.75}
+    .faq-item.open .faq-a{display:block}
+
     /* ── 预订弹窗 ── */
     .modal-overlay{display:none;position:fixed;inset:0;background:rgba(11,23,51,.6);z-index:100;backdrop-filter:blur(4px);padding:20px;overflow-y:auto}
     .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center}
@@ -179,18 +207,18 @@
           <div class="prop-tags">
             <span class="prop-tag open">● 运营中</span>
             <span class="prop-tag info">🏠 精品民宿</span>
-            <span class="prop-tag info">📍 新宿区大久保</span>
+            <span class="prop-tag info">📍 新宿区百人町</span>
           </div>
           <h1>MKG HOME 新宿</h1>
           <div class="addr">
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            東京都新宿区大久保 — 新宿駅・大久保駅 步行约 7 分钟
+            東京都新宿区百人町1-20-5 7F — 新大久保駅（JR山手線）步行约 3 分钟
           </div>
-          <p class="prop-desc">位于东京新宿区大久保的精品民宿，提供 7 间风格各异的客室，最多可容纳 4 名房客。交通便利，步行即可抵达新宿、歌舞伎町等核心区域。</p>
+          <p class="prop-desc">位于东京新宿区百人町的精品民宿，整栋7层楼全为独立整套民宿，配备全配厨房、洗衣机、独立卫浴及阳台，最多可入住6名宾客。智能门锁自助入住，24小时灵活办理。</p>
           <div class="prop-stats">
-            <div class="prop-stat"><b>7</b><span>间客室</span></div>
-            <div class="prop-stat"><b>1–4</b><span>可住人数</span></div>
-            <div class="prop-stat"><b>7F</b><span>楼层</span></div>
+            <div class="prop-stat"><b>50㎡</b><span>整套面积</span></div>
+            <div class="prop-stat"><b>最多6名</b><span>可住人数</span></div>
+            <div class="prop-stat"><b>7F</b><span>顶层</span></div>
           </div>
         </div>
         <!-- 右侧预订卡片 -->
@@ -219,6 +247,8 @@
               <option value="2" selected>2 名</option>
               <option value="3">3 名</option>
               <option value="4">4 名</option>
+              <option value="5">5 名</option>
+              <option value="6">6 名</option>
             </select>
           </div>
           <button class="btn-search" onclick="scrollToRooms()">查看可用客室 ↓</button>
@@ -234,18 +264,42 @@
 
       <!-- 左侧：客室列表 + 物件信息 -->
       <div>
+        <!-- ── 照片欣赏 ── -->
+        <div class="section-title">照片欣赏</div>
+        <div class="gallery">
+          <div class="gallery-main">
+            <img id="galleryMain" src="assets/shinjuku/cover_main.jpg" alt="MKG HOME 新宿">
+          </div>
+          <div class="gallery-thumbs">
+            <div class="gallery-thumb active" onclick="switchPhoto(this,'assets/shinjuku/cover_main.jpg')">
+              <img src="assets/shinjuku/cover_main.jpg" alt="客厅全景">
+            </div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,'assets/shinjuku/room_detail.jpg')">
+              <img src="assets/shinjuku/room_detail.jpg" alt="客室细节">
+            </div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,'assets/shinjuku/dining.jpg')">
+              <img src="assets/shinjuku/dining.jpg" alt="餐厅">
+            </div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,'assets/shinjuku/kitchen.jpg')">
+              <img src="assets/shinjuku/kitchen.jpg" alt="厨房">
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 可用客室 ── -->
         <div class="section-title" id="rooms-section">可用客室</div>
-
-        <!-- TODO: 替换为 GET /booking/api/v3/avail/51401486 实时数据 -->
         <div class="room-list" id="roomList">
-
-          <div class="room-card" id="rc-R101" onclick="selectAndBook('R101')">
+          <!-- TODO: 接入 SmartOrder API GET /booking/api/v3/avail/51401486 实时数据 -->
+          <div class="room-card" id="rc-R701" onclick="selectAndBook('R701')">
             <div>
-              <h4>标准双人间</h4>
-              <p>22㎡ · 禁烟 · 2楼 · 城市景观</p>
+              <h4>7F 整套民宿 · 独立整套</h4>
+              <p>约 50㎡ · 禁烟 · 7楼顶层 · 阳台城市景观</p>
               <div class="room-amenities">
-                <span class="amenity">双床</span>
+                <span class="amenity">双人床 × 3</span>
+                <span class="amenity">全配厨房</span>
+                <span class="amenity">洗衣机</span>
                 <span class="amenity">独立卫浴</span>
+                <span class="amenity">阳台</span>
                 <span class="amenity">免费 Wi-Fi</span>
                 <span class="amenity">空调</span>
               </div>
@@ -253,81 +307,140 @@
             </div>
             <div class="room-price-block">
               <b>¥12,000</b>
-              <small>/ 晚</small>
-              <span class="total" id="total-R101"></span>
+              <small>/ 晚起</small>
+              <span class="total" id="total-R701"></span>
               <button class="btn-book-room">预订此房型</button>
             </div>
           </div>
-
-          <div class="room-card" id="rc-R201" onclick="selectAndBook('R201')">
-            <div>
-              <h4>豪华大床间</h4>
-              <p>28㎡ · 禁烟 · 5楼 · 开阔视野</p>
-              <div class="room-amenities">
-                <span class="amenity">大床</span>
-                <span class="amenity">独立卫浴</span>
-                <span class="amenity">免费 Wi-Fi</span>
-                <span class="amenity">空调</span>
-                <span class="amenity">迷你冰箱</span>
-              </div>
-              <span class="room-avail few">⚠ 仅剩 1 间</span>
-            </div>
-            <div class="room-price-block">
-              <b>¥16,800</b>
-              <small>/ 晚</small>
-              <span class="total" id="total-R201"></span>
-              <button class="btn-book-room">预订此房型</button>
-            </div>
-          </div>
-
-          <div class="room-card" id="rc-R301" onclick="selectAndBook('R301')">
-            <div>
-              <h4>家庭四人间</h4>
-              <p>38㎡ · 禁烟 · 7楼 · 顶层视野</p>
-              <div class="room-amenities">
-                <span class="amenity">双床 + 加床 ×2</span>
-                <span class="amenity">独立卫浴</span>
-                <span class="amenity">免费 Wi-Fi</span>
-                <span class="amenity">空调</span>
-                <span class="amenity">小厨房</span>
-              </div>
-              <span class="room-avail ok">✓ 有空房</span>
-            </div>
-            <div class="room-price-block">
-              <b>¥22,000</b>
-              <small>/ 晚</small>
-              <span class="total" id="total-R301"></span>
-              <button class="btn-book-room">预订此房型</button>
-            </div>
-          </div>
-
         </div>
 
-        <!-- 物件信息 -->
+        <!-- ── 设施 & 设备 ── -->
+        <div class="section-title">设施 &amp; 设备</div>
+        <div class="info-block amenity-section">
+          <div class="amenity-category">
+            <h4>🛏 基本设备</h4>
+            <div class="amenity-tags">
+              <span class="amenity-tag">空调</span>
+              <span class="amenity-tag">免费高速 Wi-Fi</span>
+              <span class="amenity-tag">平板电视</span>
+              <span class="amenity-tag">床单及毛巾</span>
+              <span class="amenity-tag">拖鞋</span>
+              <span class="amenity-tag">免费洗漱用品</span>
+              <span class="amenity-tag">矿泉水</span>
+              <span class="amenity-tag">电梯</span>
+            </div>
+          </div>
+          <div class="amenity-category">
+            <h4>🍳 厨房设备</h4>
+            <div class="amenity-tags">
+              <span class="amenity-tag">全配厨房</span>
+              <span class="amenity-tag">IH 炉灶台</span>
+              <span class="amenity-tag">微波炉</span>
+              <span class="amenity-tag">冰箱</span>
+              <span class="amenity-tag">厨具炊具</span>
+              <span class="amenity-tag">电热水壶</span>
+              <span class="amenity-tag">餐桌</span>
+            </div>
+          </div>
+          <div class="amenity-category">
+            <h4>🚿 浴室</h4>
+            <div class="amenity-tags">
+              <span class="amenity-tag">步入式淋浴</span>
+              <span class="amenity-tag">坐浴喷洗器（冲水马桶）</span>
+              <span class="amenity-tag">吹风机</span>
+            </div>
+          </div>
+          <div class="amenity-category" style="margin-bottom:0">
+            <h4>🏠 生活便利</h4>
+            <div class="amenity-tags">
+              <span class="amenity-tag">洗衣机</span>
+              <span class="amenity-tag">阳台（城市景观）</span>
+              <span class="amenity-tag">休息区</span>
+              <span class="amenity-tag">24H 自助 Check-in</span>
+              <span class="amenity-tag">智能门锁</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 物件详情 ── -->
         <div class="section-title">物件详情</div>
         <div class="info-block">
           <h3>基本信息</h3>
-          <div class="info-row"><span class="lbl">地址</span><span class="val">東京都新宿区大久保</span></div>
-          <div class="info-row"><span class="lbl">最近车站</span><span class="val">JR山手线 大久保駅・新大久保駅（步行约 5–7 分）</span></div>
-          <div class="info-row"><span class="lbl">Check-in</span><span class="val">15:00 以后</span></div>
-          <div class="info-row"><span class="lbl">Check-out</span><span class="val">11:00 以前</span></div>
-          <div class="info-row"><span class="lbl">取消政策</span><span class="val">入住 3 日前免费取消；之后收取首晚房费</span></div>
+          <div class="info-row"><span class="lbl">地址</span><span class="val">東京都新宿区百人町1-20-5 7F</span></div>
+          <div class="info-row"><span class="lbl">最近车站</span><span class="val">新大久保駅（JR山手線）步行约 3 分 ／ 大久保駅（JR中央・総武線）步行约 5 分 ／ 新宿駅 步行约 10 分</span></div>
+          <div class="info-row"><span class="lbl">Check-in</span><span class="val">16:00 – 00:00</span></div>
+          <div class="info-row"><span class="lbl">Check-out</span><span class="val">11:00 以前（延迟退房 ¥3,000 / 小时）</span></div>
+          <div class="info-row"><span class="lbl">取消政策</span><span class="val">入住前 3 日（72小时）免费取消；之后收取首晚房费</span></div>
+          <div class="info-row"><span class="lbl">禁烟</span><span class="val">室内全面禁烟</span></div>
+          <div class="info-row"><span class="lbl">宠物</span><span class="val">不允许携带宠物</span></div>
+          <div class="info-row"><span class="lbl">儿童</span><span class="val">0–3 岁儿童与成人同住免费</span></div>
+          <div class="info-row"><span class="lbl">停车</span><span class="val">周边停车场紧缺，建议公共交通</span></div>
           <div class="info-row"><span class="lbl">语言支持</span><span class="val">中文 / 日本語 / English</span></div>
         </div>
-        <div class="info-block">
-          <h3>设施 & 服务</h3>
-          <div class="amenity-grid">
-            <span class="amenity">免费 Wi-Fi</span>
-            <span class="amenity">全客室空调</span>
-            <span class="amenity">独立卫浴</span>
-            <span class="amenity">24H 自助 Check-in</span>
-            <span class="amenity">行李寄存</span>
-            <span class="amenity">禁烟楼层</span>
-            <span class="amenity">附近便利店</span>
-            <span class="amenity">观光咨询</span>
+
+        <!-- ── 交通 & 地图 ── -->
+        <div class="section-title">交通 &amp; 地图</div>
+        <div class="info-block" style="padding:0;overflow:hidden">
+          <div style="padding:20px 24px 16px">
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:14px">
+              <div>🚇 <b>新大久保駅</b>（JR山手線）— 步行约 <b>3 分钟</b></div>
+              <div>🚇 <b>大久保駅</b>（JR中央・総武線）— 步行约 <b>5 分钟</b></div>
+              <div>🚇 <b>新宿駅</b>（各线路）— 步行约 <b>10 分钟</b></div>
+            </div>
           </div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.2!2d139.700!3d35.701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cd6da7a4a01%3A0x5c3bec24f23ac6ae!2z5p2x5Lqs6YO95paw5a6_5Yy65Y2X5Lq677yR5LiB55uu77yS77yQ4oiS77yV!5e0!3m2!1szh-CN!2sjp!4v1700000000"
+            width="100%" height="300" style="border:0;display:block" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-      </div>
+
+        <!-- ── 常见问题 ── -->
+        <div class="section-title">常见问题</div>
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Check-in / Check-out 时间是？<span class="arrow">▼</span>
+            </button>
+            <div class="faq-a">Check-in：16:00–00:00；Check-out：11:00 以前。如需提前入住或延迟退房，请提前通过预订平台联系我们确认（延迟退房收费 ¥3,000 / 小时）。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              取消预订的政策是怎样的？<span class="arrow">▼</span>
+            </button>
+            <div class="faq-a">入住前 3 日（72小时）内取消免手续费；之后取消将收取第一晚房费作为违约金。如需取消，请通过预订平台消息功能联系我们。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              民宿是否有前台？如何办理入住？<span class="arrow">▼</span>
+            </button>
+            <div class="faq-a">本民宿为全程自助入住，无实体前台。系统将于入住前发送智能门锁密码，凭密码自行开锁入住，24 小时均可办理，非常便利。如有任何问题，请随时通过预订平台消息联系我们。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              可以寄存行李吗？<span class="arrow">▼</span>
+            </button>
+            <div class="faq-a">可视情况提供行李寄存。如需在入住前或退房后寄存行李，请提前通过预订平台联系我们，我们将根据当时情况告知是否可以安排。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              周边停车方便吗？<span class="arrow">▼</span>
+            </button>
+            <div class="faq-a">周边停车场较为紧缺，强烈建议乘坐公共交通出行。最近的新大久保駅（JR山手线）步行仅约 3 分钟，交通极为便利。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              官网直订比 OTA 平台有什么优惠？<span class="arrow">▼</span>
+            </button>
+            <div class="faq-a">官网直订价格比 Airbnb / Booking.com 等平台低约 10–15%，且无中间平台手续费。同时预订流程更简单直接，有任何问题均可第一时间与我们沟通。</div>
+          </div>
+
+        </div>
 
       <!-- 右侧空白占位（预订卡片已在 hero 区域） -->
       <div></div>
@@ -369,6 +482,8 @@
               <option value="2" selected>2 名</option>
               <option value="3">3 名</option>
               <option value="4">4 名</option>
+              <option value="5">5 名</option>
+              <option value="6">6 名</option>
             </select>
           </div>
           <div style="font-size:13px;color:var(--muted);margin-bottom:10px;font-weight:700">已选房型：</div>
@@ -438,9 +553,7 @@
     // ── 模拟数据（API 对接后替换）──
     // TODO: GET /booking/api/v3/avail/51401486
     const ROOMS = {
-      'R101': { name: '标准双人间', desc: '22㎡ · 禁烟 · 2楼', price: 12000 },
-      'R201': { name: '豪华大床间', desc: '28㎡ · 禁烟 · 5楼', price: 16800 },
-      'R301': { name: '家庭四人间', desc: '38㎡ · 禁烟 · 7楼', price: 22000 },
+      'R701': { name: '7F 整套民宿 · 独立整套', desc: '约50㎡ · 禁烟 · 7楼顶层 · 最多6名', price: 12000 },
     };
 
     let currentStep = 1;
@@ -603,6 +716,17 @@
     document.getElementById('bookingModal').addEventListener('click', e => {
       if (e.target === document.getElementById('bookingModal')) closeModal();
     });
+
+    function switchPhoto(thumb, src) {
+      document.getElementById('galleryMain').src = src;
+      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+    }
+
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+    }
   </script>
 
 </body>
