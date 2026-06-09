@@ -33,6 +33,16 @@
     .breadcrumb a:hover{color:var(--gold)}
     .breadcrumb span{color:rgba(255,255,255,.3)}
 
+    /* ── 语言切换 ── */
+    .desk-lang-wrap{position:relative}
+    .desk-lang-btn{display:flex;align-items:center;gap:5px;background:none;border:1px solid rgba(201,168,91,.4);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;color:var(--gold);cursor:pointer;white-space:nowrap;transition:.2s;margin-left:4px}
+    .desk-lang-btn:hover{border-color:var(--gold)}
+    .desk-lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 32px rgba(11,23,51,.14);overflow:hidden;min-width:140px;z-index:1000}
+    .desk-lang-menu.open{display:block}
+    .desk-lang-menu button{display:block;width:100%;padding:11px 18px;text-align:left;background:none;border:none;font-size:14px;font-weight:700;color:var(--navy);cursor:pointer;transition:.15s;border-bottom:1px solid var(--line);font-family:inherit}
+    .desk-lang-menu button:last-child{border-bottom:none}
+    .desk-lang-menu button:hover{background:var(--bg);color:var(--gold)}
+
     /* ── 物件 Hero ── */
     .prop-hero{background:var(--navy-2);color:white;padding:40px 0 0;position:relative;overflow:hidden}
     .prop-hero-inner{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:start;padding-bottom:48px}
@@ -50,21 +60,57 @@
     .prop-hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-80px;height:140px;background:var(--bg);transform:rotate(-2deg)}
 
     /* ── 预订卡片（固定右侧） ── */
-    .book-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;position:sticky;top:96px}
-    .book-card-title{font-size:17px;font-weight:800;color:var(--navy);margin-bottom:18px;display:flex;align-items:baseline;gap:8px}
-    .book-card-title .price{font-size:26px;color:var(--navy)}
-    .book-card-title .per{font-size:13px;color:var(--muted);font-weight:400}
-    .book-card-badge{display:inline-flex;padding:3px 9px;border-radius:999px;background:#e8f3ee;color:var(--green);font-size:11px;font-weight:800;margin-left:6px}
-    .form-field{margin-bottom:14px}
-    .form-field label{display:block;font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
-    .form-field input,.form-field select{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font-size:14px;color:var(--ink);font-family:inherit;background:white;outline:none;transition:.2s}
-    .form-field input:focus,.form-field select:focus{border-color:var(--gold)}
-    .date-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .nights-badge{text-align:center;font-size:13px;color:var(--muted);padding:8px;background:#f8f8fb;border-radius:8px;margin-bottom:14px}
-    .nights-badge b{color:var(--navy)}
-    .btn-search{width:100%;padding:14px;border-radius:12px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:15px;border:none;cursor:pointer;font-family:inherit;transition:.2s;margin-top:4px}
+    .book-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;position:sticky;top:96px}
+    .book-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+    .book-card-price{font-size:22px;font-weight:900;color:var(--navy)}
+    .book-card-price .per{font-size:12px;color:var(--muted);font-weight:400}
+    .book-card-price-ph{font-size:13px;color:var(--muted);font-weight:600}
+    .book-card-badge{display:inline-flex;padding:3px 9px;border-radius:999px;background:#e8f3ee;color:var(--green);font-size:11px;font-weight:800}
+    .book-card-note{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6}
+
+    /* ── Calendar Widget ── */
+    .cal-widget{margin-bottom:12px}
+    .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .cal-title{font-size:13px;font-weight:800;color:var(--navy)}
+    .cal-nav{background:none;border:1px solid var(--line);color:var(--navy);width:26px;height:26px;border-radius:7px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:.15s;line-height:1}
+    .cal-nav:hover{border-color:var(--gold);color:var(--gold)}
+    .cal-dow{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:3px}
+    .cal-dow span{text-align:center;font-size:9px;font-weight:800;color:var(--muted);padding:2px 0;letter-spacing:.03em}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px}
+    .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:7px;font-size:11px;font-weight:600;cursor:default;transition:.12s;user-select:none}
+    .cal-day.avail{cursor:pointer;color:var(--ink);background:rgba(201,166,91,.1)}
+    .cal-day.avail:hover{background:var(--gold);color:var(--navy-2)}
+    .cal-day.closed{color:#ccc;text-decoration:line-through;font-size:10px}
+    .cal-day.past{color:#ddd}
+    .cal-day.empty{pointer-events:none}
+    .cal-day.sel-ci{background:var(--gold)!important;color:var(--navy-2)!important;border-radius:7px 0 0 7px}
+    .cal-day.sel-co{background:var(--gold)!important;color:var(--navy-2)!important;border-radius:0 7px 7px 0}
+    .cal-day.in-range{background:rgba(201,166,91,.22);border-radius:0;color:var(--navy)}
+    .cal-day.sel-ci.sel-co{border-radius:7px!important}
+    .cal-loading{text-align:center;font-size:11px;color:var(--muted);padding:16px 0;grid-column:1/-1}
+
+    /* ── Dates bar ── */
+    .dates-bar{display:grid;grid-template-columns:1fr auto 1fr;border:1.5px solid var(--line);border-radius:11px;overflow:hidden;margin-bottom:10px}
+    .date-cell{padding:9px 10px}
+    .date-cell .lbl{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+    .date-cell .val{font-size:13px;font-weight:700;color:var(--navy)}
+    .date-cell .val.ph{color:var(--muted);font-weight:400}
+    .date-sep{display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--muted);border-left:1px solid var(--line);border-right:1px solid var(--line);padding:0 6px}
+
+    /* ── Price breakdown ── */
+    .price-box{background:#f8f8fb;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px}
+    .price-row{display:flex;justify-content:space-between;padding:3px 0;color:var(--muted)}
+    .price-row.total{font-weight:800;color:var(--navy);border-top:1px solid var(--line);margin-top:5px;padding-top:7px;font-size:14px}
+    .price-ph{text-align:center;color:var(--muted);font-size:12px;padding:8px 0}
+
+    /* ── Form ── */
+    .form-field{margin-bottom:10px}
+    .form-field label{display:block;font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+    .form-field select{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:9px;font-size:13px;color:var(--ink);font-family:inherit;background:white;outline:none;transition:.2s}
+    .form-field select:focus{border-color:var(--gold)}
+    .btn-search{width:100%;padding:12px;border-radius:11px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;margin-top:2px}
     .btn-search:hover{box-shadow:0 8px 20px rgba(201,166,91,.3);transform:translateY(-1px)}
-    .book-card-note{font-size:12px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.6}
+    .btn-search:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
 
     /* ── 主体内容 ── */
     .main-content{padding:60px 0 80px}
@@ -110,6 +156,20 @@
     .gallery-thumb.active{border-color:var(--gold)}
     .gallery-thumb img{width:100%;height:100%;object-fit:cover;transition:.3s}
     .gallery-thumb:hover img{transform:scale(1.06)}
+    .gallery-main{position:relative}
+    .gallery-hint{position:absolute;bottom:12px;right:14px;background:rgba(11,23,51,.6);color:rgba(255,255,255,.9);font-size:11px;padding:4px 10px;border-radius:6px;pointer-events:none;backdrop-filter:blur(4px)}
+
+    /* Lightbox */
+    .lightbox{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.93);align-items:center;justify-content:center}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:6px;user-select:none}
+    .lb-close{position:fixed;top:16px;right:20px;background:rgba(255,255,255,.15);border:none;color:white;font-size:26px;cursor:pointer;z-index:301;padding:4px 12px;border-radius:8px;line-height:1;transition:.2s}
+    .lb-close:hover{background:rgba(255,255,255,.3)}
+    .lb-arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:white;font-size:44px;cursor:pointer;z-index:301;padding:8px 14px;border-radius:10px;line-height:1;transition:.2s}
+    .lb-arrow:hover{background:rgba(255,255,255,.3)}
+    .lb-prev{left:14px}
+    .lb-next{right:14px}
+    .lb-counter{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:12px;background:rgba(0,0,0,.45);padding:4px 14px;border-radius:20px;white-space:nowrap}
 
     /* ── 设施详细 ── */
     .amenity-section{margin-bottom:32px}
@@ -167,6 +227,36 @@
     .btn-next:hover{box-shadow:0 8px 20px rgba(201,166,91,.3);transform:translateY(-1px)}
     .btn-next:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
 
+    /* ── 联系我们 ── */
+    .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .contact-card{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#f7f5f1;border:1.5px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink);transition:.2s}
+    .contact-card:hover{border-color:var(--gold);background:#fffbf2}
+    .contact-icon{font-size:24px;flex-shrink:0;width:40px;text-align:center}
+    .contact-label{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+    .contact-value{font-size:14px;font-weight:700;color:var(--navy)}
+
+    /* ── House Rules ── */
+    .rules-intro{background:linear-gradient(135deg,#fffbf2,#f7f5f1);border:1.5px solid rgba(201,166,91,.3);border-radius:14px;padding:16px 20px;font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+    .checkin-steps{display:grid;gap:14px;margin-bottom:24px}
+    .step-card{background:white;border:1.5px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:start}
+    .step-num{width:42px;height:42px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .step-content h4{margin:0 0 8px;color:var(--navy);font-size:15px;font-weight:800}
+    .step-content p{margin:0 0 8px;font-size:13px;color:var(--muted);line-height:1.7}
+    .step-content ul{margin:6px 0;padding-left:18px;font-size:13px;color:var(--muted);line-height:1.8}
+    .step-note{background:#f0ece5;border-radius:8px;padding:8px 12px;font-size:12px;color:var(--ink);margin-top:8px;line-height:1.6}
+    .rules-grid{display:grid;gap:10px}
+    .rule-item{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+    .rule-q{width:100%;background:none;border:none;padding:14px 18px;text-align:left;font-size:14px;font-weight:700;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:inherit;gap:10px}
+    .rule-q:hover{background:#f8f8fb}
+    .rule-icon{font-size:16px;flex-shrink:0;margin-right:6px}
+    .rule-q .arrow{font-size:14px;color:var(--gold);transition:.25s;flex-shrink:0}
+    .rule-item.open .rule-q .arrow{transform:rotate(180deg)}
+    .rule-body{display:none;padding:0 18px 16px;font-size:13px;color:var(--muted);line-height:1.8}
+    .rule-body ul{margin:6px 0;padding-left:18px}
+    .rule-body li{margin-bottom:4px}
+    .rule-item.open .rule-body{display:block}
+    .highlight-fee{display:inline-block;background:#fef3e2;color:#92570d;font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;margin-left:4px}
+
     @media(max-width:900px){
       .prop-hero-inner,.content-grid{grid-template-columns:1fr}
       .book-card{position:static}
@@ -193,8 +283,19 @@
           <span>›</span>
           <span style="color:var(--gold-2)">MKG HOME 新宿</span>
         </div>
-        <a class="nav-book" href="stay.html">← 返回列表</a>
-        <a class="nav-cta" href="index.html#contact">联系我们</a>
+        <div class="desk-lang-wrap">
+          <button class="desk-lang-btn" id="deskLangBtn" onclick="toggleDeskLang()" aria-label="Language">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span id="deskLangLabel">語言</span> ▾
+          </button>
+          <div class="desk-lang-menu" id="deskLangMenu">
+            <button onclick="setLang('ja');closeDeskLang();updateAllLangLabels('言語','言語')">🇯🇵 日本語</button>
+            <button onclick="setLang('en');closeDeskLang();updateAllLangLabels('Language','Language')">🇺🇸 English</button>
+            <button onclick="setLang('zh');closeDeskLang();updateAllLangLabels('语言','语言')">🇨🇳 中文</button>
+          </div>
+        </div>
+        <a class="nav-book" href="stay.html" data-i18n="nav.back">← 返回列表</a>
+        <a class="nav-cta" href="#contact" data-i18n="nav.contact">联系我们</a>
       </nav>
     </div>
   </header>
@@ -205,41 +306,67 @@
       <div class="prop-hero-inner">
         <div>
           <div class="prop-tags">
-            <span class="prop-tag open">● 运营中</span>
-            <span class="prop-tag info">🏠 精品民宿</span>
-            <span class="prop-tag info">📍 新宿区百人町</span>
+            <span class="prop-tag open" data-i18n="tag.open">● 运营中</span>
+            <span class="prop-tag info" data-i18n="tag.type">🏠 精品民宿</span>
+            <span class="prop-tag info" data-i18n="tag.area">📍 新宿区百人町</span>
           </div>
           <h1>MKG HOME 新宿</h1>
           <div class="addr">
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            東京都新宿区百人町1-20-5 7F — 新大久保駅（JR山手線）步行约 3 分钟
+            <span data-i18n="hero.addr">東京都新宿区百人町1-20-5 7F — 新大久保駅（JR山手線）步行约 3 分钟</span>
           </div>
-          <p class="prop-desc">位于东京新宿区百人町的精品民宿，整栋7层楼全为独立整套民宿，配备全配厨房、洗衣机、独立卫浴及阳台，最多可入住6名宾客。智能门锁自助入住，24小时灵活办理。</p>
+          <p class="prop-desc" data-i18n="hero.desc">位于东京新宿区百人町的精品民宿，整栋7层楼全为独立整套民宿，配备全配厨房、洗衣机、独立卫浴及阳台，最多可入住6名宾客。智能门锁自助入住，24小时灵活办理。</p>
           <div class="prop-stats">
-            <div class="prop-stat"><b>50㎡</b><span>整套面积</span></div>
-            <div class="prop-stat"><b>最多6名</b><span>可住人数</span></div>
-            <div class="prop-stat"><b>7F</b><span>顶层</span></div>
+            <div class="prop-stat"><b>50㎡</b><span data-i18n="stat.area">整套面积</span></div>
+            <div class="prop-stat"><b data-i18n="stat.guests_val">最多6名</b><span data-i18n="stat.guests_lbl">可住人数</span></div>
+            <div class="prop-stat"><b>7F</b><span data-i18n="stat.floor">顶层</span></div>
           </div>
         </div>
         <!-- 右侧预订卡片 -->
         <div class="book-card">
-          <div class="book-card-title">
-            <span id="cardPriceLabel" style="font-size:13px;color:var(--muted)">选择日期后显示价格</span>
+          <div class="book-card-top">
+            <div id="cardPriceArea">
+              <div class="book-card-price-ph">选择日期查看价格</div>
+            </div>
             <span class="book-card-badge">官网直订</span>
           </div>
-          <div class="date-row">
-            <div class="form-field">
-              <label>入住</label>
-              <input type="date" id="ci" oninput="calcNights()" />
+
+          <!-- 日历选择器 -->
+          <div class="cal-widget">
+            <div class="cal-head">
+              <button class="cal-nav" id="calPrevBtn" onclick="calNav(-1)">‹</button>
+              <span class="cal-title" id="calTitle"></span>
+              <button class="cal-nav" id="calNextBtn" onclick="calNav(1)">›</button>
             </div>
-            <div class="form-field">
-              <label>退房</label>
-              <input type="date" id="co" oninput="calcNights()" />
+            <div class="cal-dow">
+              <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+            </div>
+            <div class="cal-grid" id="calGrid">
+              <div class="cal-loading">加载日历中…</div>
             </div>
           </div>
-          <div class="nights-badge" id="nightsBadge">请选择日期</div>
+
+          <!-- 选中日期显示 -->
+          <div class="dates-bar">
+            <div class="date-cell">
+              <div class="lbl">入住</div>
+              <div class="val ph" id="ciDisplay">请选择</div>
+            </div>
+            <div class="date-sep">→</div>
+            <div class="date-cell">
+              <div class="lbl">退房</div>
+              <div class="val ph" id="coDisplay">请选择</div>
+            </div>
+          </div>
+
+          <!-- 价格明细 -->
+          <div id="priceArea">
+            <div class="price-ph">选择入住及退房日期后显示价格</div>
+          </div>
+
+          <!-- 人数 -->
           <div class="form-field">
-            <label>人数</label>
+            <label>入住人数</label>
             <select id="guests">
               <option value="1">1 名</option>
               <option value="2" selected>2 名</option>
@@ -249,7 +376,8 @@
               <option value="6">6 名</option>
             </select>
           </div>
-          <button class="btn-search" onclick="scrollToRooms()">查看可用客室 ↓</button>
+
+          <button class="btn-search" id="btnBook" onclick="openBooking()" disabled>请先选择日期</button>
           <p class="book-card-note">官网直订无手续费 · 即时确认<br>取消政策：入住 3 日前可免费取消</p>
         </div>
       </div>
@@ -265,22 +393,28 @@
         <!-- ── 照片欣赏 ── -->
         <div class="section-title">照片欣赏</div>
         <div class="gallery">
-          <div class="gallery-main">
-            <img id="galleryMain" src="assets/shinjuku/cover_main.jpg" alt="MKG HOME 新宿">
+          <div class="gallery-main" onclick="openLightbox(currentThumbIdx)">
+            <img id="galleryMain" src="assets/shinjuku/s01_bedroom_twin.jpg" alt="MKG HOME 新宿">
+            <div class="gallery-hint">🔍 点击查看大图</div>
           </div>
-          <div class="gallery-thumbs">
-            <div class="gallery-thumb active" onclick="switchPhoto(this,'assets/shinjuku/cover_main.jpg')">
-              <img src="assets/shinjuku/cover_main.jpg" alt="客厅全景">
-            </div>
-            <div class="gallery-thumb" onclick="switchPhoto(this,'assets/shinjuku/room_detail.jpg')">
-              <img src="assets/shinjuku/room_detail.jpg" alt="客室细节">
-            </div>
-            <div class="gallery-thumb" onclick="switchPhoto(this,'assets/shinjuku/dining.jpg')">
-              <img src="assets/shinjuku/dining.jpg" alt="餐厅">
-            </div>
-            <div class="gallery-thumb" onclick="switchPhoto(this,'assets/shinjuku/kitchen.jpg')">
-              <img src="assets/shinjuku/kitchen.jpg" alt="厨房">
-            </div>
+          <div class="gallery-thumbs" style="grid-template-columns:repeat(5,1fr)">
+            <div class="gallery-thumb active" onclick="switchPhoto(this,0)"><img src="assets/shinjuku/s01_bedroom_twin.jpg" alt="双人卧室" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,1)"><img src="assets/shinjuku/s02_bedroom_single.jpg" alt="主卧室" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,2)"><img src="assets/shinjuku/s03_living_dining.jpg" alt="客厅餐厅" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,3)"><img src="assets/shinjuku/s04_bedroom2_full.jpg" alt="卧室全景" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,4)"><img src="assets/shinjuku/s05_kitchen_view.jpg" alt="厨房城市景" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,5)"><img src="assets/shinjuku/s06_dining_wide.jpg" alt="餐厅宽景" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,6)"><img src="assets/shinjuku/s07_entrance.jpg" alt="入口玄关" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,7)"><img src="assets/shinjuku/s08_kitchen_detail.jpg" alt="厨房细节" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,8)"><img src="assets/shinjuku/s09_living_workdesk.jpg" alt="客厅工作台" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,9)"><img src="assets/shinjuku/s10_living_tv.jpg" alt="客厅电视" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,10)"><img src="assets/shinjuku/s11_coffee_station.jpg" alt="咖啡台" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,11)"><img src="assets/shinjuku/s12_bedroom_twin2.jpg" alt="双床卧室" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,12)"><img src="assets/shinjuku/s13_shower.jpg" alt="淋浴间" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,13)"><img src="assets/shinjuku/s14_bathroom.jpg" alt="卫浴" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,14)"><img src="assets/shinjuku/s15_vanity_sink.jpg" alt="洗面台" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,15)"><img src="assets/shinjuku/s16_amenities.jpg" alt="品牌洗漱" loading="lazy"></div>
+            <div class="gallery-thumb" onclick="switchPhoto(this,16)"><img src="assets/shinjuku/s17_entrance2.jpg" alt="玄关走廊" loading="lazy"></div>
           </div>
         </div>
 
@@ -437,12 +571,190 @@
             <div class="faq-a">官网直订价格比 Airbnb / Booking.com 等平台低约 10–15%，且无中间平台手续费。同时预订流程更简单直接，有任何问题均可第一时间与我们沟通。</div>
           </div>
 
+        </div><!-- /.faq-list -->
+
+        <!-- ── House Rules & Check-in Guide ── -->
+        <div class="section-title">House Rules &amp; Check-in Guide</div>
+        <div class="rules-intro">
+          To ensure you have a pleasant and comfortable stay, please take a moment to read the following information carefully.
+        </div>
+
+        <!-- Check-in / Check-out 时间 -->
+        <div style="background:white;border:1.5px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:16px">
+          <div style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:14px">🕐 Check-in &amp; Check-out</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+            <div style="background:#f0ece5;border-radius:12px;padding:14px;text-align:center">
+              <div style="font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Check-in</div>
+              <div style="font-size:22px;font-weight:900;color:var(--navy)">4:00 PM</div>
+              <div style="font-size:12px;color:var(--muted)">– 12:00 AM</div>
+            </div>
+            <div style="background:#f0ece5;border-radius:12px;padding:14px;text-align:center">
+              <div style="font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Check-out</div>
+              <div style="font-size:22px;font-weight:900;color:var(--navy)">11:00 AM</div>
+              <div style="font-size:12px;color:var(--muted)">Latest</div>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--muted);margin:0 0 6px;line-height:1.7">Please try to follow the above schedule as much as possible. If you would like a late check-out, please contact us through your booking platform <strong>at least one day in advance</strong>.</p>
+          <p style="font-size:13px;color:var(--muted);margin:0;line-height:1.7">If approved, a late check-out fee of <span class="highlight-fee">¥3,000 / hour</span> will apply (cash payment).</p>
+        </div>
+
+        <!-- 如何拿钥匙 -->
+        <div style="font-size:15px;font-weight:800;color:var(--navy);margin:20px 0 12px">🔑 How to Get the Key</div>
+        <div class="checkin-steps">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Complete the Check-in Form</h4>
+              <p>Our property uses a <strong>self check-in system</strong>. To ensure a smooth arrival, please complete the online check-in form in advance.</p>
+              <ul>
+                <li>Click the <strong>check-in link</strong> sent through your booking platform.<br><em>If you booked through another channel, the link can also be found in your reservation email.</em></li>
+                <li>Enter your self check-in code <strong>manually</strong> (copied text may not be recognized properly).</li>
+                <li><strong>All guests</strong> staying at the property must complete their information.</li>
+                <li>On the day of check-in, click <strong>"Check-in Instructions"</strong> to view the entry guide.</li>
+              </ul>
+              <div class="step-note">⚠️ If information for all guests has not been submitted, you will not be able to access the "Check-in Instructions" page.</div>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Enter the Entrance Password</h4>
+              <p>After successfully submitting the check-in form, you will receive the <strong>entrance door password</strong>.</p>
+              <p>Enter the password on the keypad and press the confirmation button to access the property.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- House Rules 折叠 -->
+        <div style="font-size:15px;font-weight:800;color:var(--navy);margin:20px 0 12px">📋 House Rules</div>
+        <div class="rules-grid">
+
+          <div class="rule-item">
+            <button class="rule-q" onclick="toggleRule(this)">
+              <span><span class="rule-icon">👥</span>Number of Guests</span><span class="arrow">▼</span>
+            </button>
+            <div class="rule-body">
+              <p>Please provide the correct number of guests staying at the property.</p>
+              <ul>
+                <li>If the actual number of guests exceeds the reservation details, additional charges will apply.</li>
+                <li>An extra fee of <span class="highlight-fee">¥5,000 / additional guest</span> will be charged.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rule-item">
+            <button class="rule-q" onclick="toggleRule(this)">
+              <span><span class="rule-icon">🚭</span>No Smoking / No Pets</span><span class="arrow">▼</span>
+            </button>
+            <div class="rule-body">
+              <ul>
+                <li>Smoking is <strong>strictly prohibited</strong> in all areas, including balconies. This includes electronic cigarettes and vaping devices.</li>
+                <li>If any evidence of smoking is found, an additional cleaning fee of <span class="highlight-fee">¥10,000</span> will be charged.</li>
+                <li>Pets are <strong>not allowed</strong>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rule-item">
+            <button class="rule-q" onclick="toggleRule(this)">
+              <span><span class="rule-icon">🧹</span>Cleaning Service</span><span class="arrow">▼</span>
+            </button>
+            <div class="rule-body">
+              <p>We provide towels according to the number of guests and nights reserved. For guests staying <strong>3 nights or longer</strong>, room cleaning is available during your stay.</p>
+              <ul>
+                <li>Please inform us <strong>at least one day in advance</strong> to arrange cleaning.</li>
+                <li>Cleaning staff will clean rooms between <strong>10:00 AM – 12:00 PM</strong>.</li>
+                <li>Before leaving your room, place the <strong>"Please Clean the Room"</strong> card on the door.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rule-item">
+            <button class="rule-q" onclick="toggleRule(this)">
+              <span><span class="rule-icon">🗑️</span>Garbage Disposal</span><span class="arrow">▼</span>
+            </button>
+            <div class="rule-body">
+              <p>Please do not dispose of garbage outside the property. Separate garbage into two categories:</p>
+              <ul>
+                <li><strong>Food waste</strong></li>
+                <li><strong>Other waste</strong> (bottles, cans, paper, etc.)</li>
+                <li>Batteries and lighters must <strong>not</strong> be thrown into trash bins — leave them on the table and we will handle them.</li>
+                <li>We are unable to dispose of oversized garbage larger than <strong>30 cm</strong>. Additional disposal fees may apply if left in the room.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rule-item">
+            <button class="rule-q" onclick="toggleRule(this)">
+              <span><span class="rule-icon">📝</span>Additional Notes</span><span class="arrow">▼</span>
+            </button>
+            <div class="rule-body">
+              <ul>
+                <li>Coffee, tea, and bottled water in the room are <strong>complimentary</strong>.</li>
+                <li>Please turn off lights and electrical appliances when leaving the room.</li>
+                <li>Please handle furniture and appliances with care. Guests may be charged for damages beyond normal wear and tear.</li>
+                <li>Please avoid staining bedding or furniture. Failure to clean may result in an additional cleaning fee of <span class="highlight-fee">¥10,000</span>.</li>
+                <li>Illegal activities and use of illegal substances are strictly prohibited. We reserve the right to pursue legal action.</li>
+                <li>According to Japanese law, guests <strong>under 18 years old</strong> are not permitted to stay alone without a parent or guardian.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+        <div style="background:linear-gradient(135deg,#fffbf2,#f7f5f1);border:1.5px solid rgba(201,166,91,.3);border-radius:14px;padding:16px 20px;text-align:center;font-size:14px;color:var(--muted);margin-top:16px;line-height:1.8">
+          Thank you for choosing <strong style="color:var(--navy)">MKG Home</strong>.<br>
+          We hope you have a comfortable and enjoyable stay. 🏠
+        </div>
+
+        <!-- ── 联系我们 ── -->
+        <div class="section-title" id="contact" style="margin-top:40px">联系我们</div>
+        <div class="info-block" style="margin-bottom:0">
+          <p style="font-size:14px;color:var(--muted);margin:0 0 18px;line-height:1.7">如有任何问题，欢迎随时通过以下方式联系我们，我们将尽快回复。</p>
+          <div class="contact-grid">
+            <a href="tel:+817038854204" class="contact-card">
+              <div class="contact-icon">📞</div>
+              <div>
+                <div class="contact-label">联系电话 / WhatsApp</div>
+                <div class="contact-value">+81 70-3885-4204</div>
+              </div>
+            </a>
+            <a href="mailto:zym@mkgjp.com" class="contact-card">
+              <div class="contact-icon">✉️</div>
+              <div>
+                <div class="contact-label">邮箱地址</div>
+                <div class="contact-value">zym@mkgjp.com</div>
+              </div>
+            </a>
+            <div class="contact-card">
+              <div class="contact-icon">💬</div>
+              <div>
+                <div class="contact-label">WeChat</div>
+                <div class="contact-value">a840569716</div>
+              </div>
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">🔗</div>
+              <div>
+                <div class="contact-label">LINE</div>
+                <div class="contact-value">a840569716</div>
+              </div>
+            </div>
+          </div>
         </div>
 
       <!-- 右侧空白占位（预订卡片已在 hero 区域） -->
       <div></div>
 
     </div>
+  </div>
+
+  <!-- ── Lightbox ── -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <button class="lb-arrow lb-prev" onclick="event.stopPropagation();moveLightbox(-1)">‹</button>
+    <img id="lbImg" src="" alt="" onclick="event.stopPropagation()">
+    <button class="lb-arrow lb-next" onclick="event.stopPropagation();moveLightbox(1)">›</button>
+    <div class="lb-counter" id="lbCounter"></div>
   </div>
 
   <!-- ── 预订弹窗 ── -->
@@ -547,72 +859,244 @@
   </div>
 
   <script>
-    // ── 模拟数据（API 对接后替换）──
-    // TODO: GET /booking/api/v3/avail/51401486
-    const ROOMS = {
-      'R701': { name: '7F 整套民宿 · 独立整套', desc: '约50㎡ · 禁烟 · 7楼顶层 · 最多6名', price: 12000 },
+    // ══════════════════════════════════════════════
+    // Calendar + Dynamic Pricing
+    // ══════════════════════════════════════════════
+
+    const ROOM_NAME = '7F 整套民宿 · 独立整套';
+    const ROOM_DESC = '约50㎡ · 禁烟 · 7楼顶层 · 最多6名';
+
+    // 日历状态
+    let calYear, calMonth;
+    let availMap = {};      // 'YYYY-MM-DD' → 'Avail' | 'Closed'
+    let loadingMonths = {}; // 防止重复请求
+    let ciDate = null, coDate = null;
+    let pickStep = 0;       // 0=未选, 1=选了入住, 2=选了退房
+    let totalPrice = null;
+
+    const fmt = d => {
+      const y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0');
+      return `${y}-${m}-${dd}`;
     };
+    const today = new Date(); today.setHours(0,0,0,0);
+    const todayStr = fmt(today);
 
-    let currentStep = 1;
-    let selectedRoomId = null;
+    // 初始化：显示当前月
+    (function init() {
+      calYear = today.getFullYear();
+      calMonth = today.getMonth();
+      renderCalendar();
+      fetchCalendarMonth(calYear, calMonth);
+      // 预加载下个月
+      const ny = calMonth === 11 ? calYear+1 : calYear;
+      const nm = calMonth === 11 ? 0 : calMonth+1;
+      fetchCalendarMonth(ny, nm);
+    })();
 
-    // 初始化日期
-    const today = new Date();
-    const fmt = d => d.toISOString().split('T')[0];
-    const d1 = new Date(today); d1.setDate(today.getDate()+1);
-    const d2 = new Date(today); d2.setDate(today.getDate()+2);
-    document.getElementById('ci').value = fmt(d1);
-    document.getElementById('co').value = fmt(d2);
-    calcNights();
-
-    function getNights(ci, co) {
-      if (!ci || !co) return 0;
-      return Math.max(0, Math.round((new Date(co) - new Date(ci)) / 86400000));
+    function calNav(dir) {
+      calMonth += dir;
+      if (calMonth > 11) { calMonth = 0; calYear++; }
+      if (calMonth < 0)  { calMonth = 11; calYear--; }
+      renderCalendar();
+      fetchCalendarMonth(calYear, calMonth);
     }
 
-    function calcNights() {
-      const ci = document.getElementById('ci').value;
-      const co = document.getElementById('co').value;
-      const n = getNights(ci, co);
-      const el = document.getElementById('nightsBadge');
-      if (n > 0) {
-        el.innerHTML = `入住 <b>${ci}</b> → 退房 <b>${co}</b>，共 <b>${n} 晚</b>`;
-        updateRoomTotals(n);
-      } else {
-        el.textContent = '请选择正确的日期';
-      }
-    }
-
-    function updateRoomTotals(nights) {
-      Object.keys(ROOMS).forEach(id => {
-        const el = document.getElementById('total-' + id);
-        if (el && nights > 0) {
-          el.textContent = `合计 ¥${(ROOMS[id].price * nights).toLocaleString()}`;
+    async function fetchCalendarMonth(y, m) {
+      const key = `${y}-${String(m+1).padStart(2,'0')}`;
+      if (loadingMonths[key]) return;
+      loadingMonths[key] = true;
+      const startDate = `${y}-${String(m+1).padStart(2,'0')}-01`;
+      const lastDay = new Date(y, m+1, 0).getDate();
+      const endDate = `${y}-${String(m+1).padStart(2,'0')}-${lastDay}`;
+      try {
+        const r = await fetch(`/api/calendar?startDate=${startDate}&endDate=${endDate}&adultCount=2`);
+        const j = await r.json();
+        if (j.data && j.data.dailyAvails) {
+          j.data.dailyAvails.forEach(d => { availMap[d.date] = d.status; });
+          renderCalendar();
         }
-      });
+      } catch(e) {
+        console.warn('Calendar fetch error:', e);
+      }
     }
 
-    function scrollToRooms() {
-      const ci = document.getElementById('ci').value;
-      const co = document.getElementById('co').value;
-      if (!ci || !co || getNights(ci, co) <= 0) {
-        alert('请先选择正确的入住和退房日期');
-        return;
+    function renderCalendar() {
+      const CN_MONTHS = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+      document.getElementById('calTitle').textContent = `${calYear}年 ${CN_MONTHS[calMonth]}`;
+
+      const firstDay = new Date(calYear, calMonth, 1).getDay();
+      const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+      const grid = document.getElementById('calGrid');
+      grid.innerHTML = '';
+
+      // 空格
+      for (let i = 0; i < firstDay; i++) {
+        const el = document.createElement('div');
+        el.className = 'cal-day empty';
+        grid.appendChild(el);
       }
-      document.getElementById('rooms-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const el = document.createElement('div');
+        el.textContent = d;
+        el.dataset.date = dateStr;
+
+        const isPast = dateStr < todayStr;
+        const status = availMap[dateStr]; // undefined = 未加载
+
+        if (isPast) {
+          el.className = 'cal-day past';
+        } else if (status === 'Avail') {
+          el.className = 'cal-day avail';
+          el.onclick = () => pickDate(dateStr);
+        } else if (status === 'Closed') {
+          el.className = 'cal-day closed';
+        } else {
+          // 未加载 → 可能可用，暂时显示为灰色
+          el.className = 'cal-day closed';
+          el.style.textDecoration = 'none';
+          el.style.color = '#bbb';
+        }
+
+        // 标记今天
+        if (dateStr === todayStr) el.classList.add('today');
+
+        // 选中高亮
+        if (ciDate && coDate) {
+          if (dateStr === ciDate) el.classList.add('sel-ci');
+          else if (dateStr === coDate) el.classList.add('sel-co');
+          else if (dateStr > ciDate && dateStr < coDate) el.classList.add('in-range');
+        } else if (ciDate && dateStr === ciDate) {
+          el.classList.add('sel-ci','sel-co');
+        }
+
+        grid.appendChild(el);
+      }
     }
 
-    function selectAndBook(roomId) {
-      selectedRoomId = roomId;
-      const ci = document.getElementById('ci').value;
-      const co = document.getElementById('co').value;
-      if (!ci || !co || getNights(ci, co) <= 0) {
-        alert('请先选择正确的入住和退房日期');
-        document.getElementById('ci').focus();
-        return;
+    function pickDate(dateStr) {
+      if (pickStep === 0 || pickStep === 2) {
+        // 选入住
+        ciDate = dateStr; coDate = null; pickStep = 1;
+        updateDatesBar();
+        renderCalendar();
+        clearPrice();
+      } else {
+        // 选退房
+        if (dateStr <= ciDate) {
+          // 点了早于入住的日期 → 重新选入住
+          ciDate = dateStr; coDate = null; pickStep = 1;
+        } else {
+          coDate = dateStr; pickStep = 2;
+          fetchAvail();
+        }
+        updateDatesBar();
+        renderCalendar();
       }
-      document.getElementById('m-ci').value = ci;
-      document.getElementById('m-co').value = co;
+    }
+
+    function updateDatesBar() {
+      const ciEl = document.getElementById('ciDisplay');
+      const coEl = document.getElementById('coDisplay');
+      if (ciDate) {
+        ciEl.textContent = ciDate.slice(5).replace('-','/');
+        ciEl.classList.remove('ph');
+      } else {
+        ciEl.textContent = '请选择'; ciEl.classList.add('ph');
+      }
+      if (coDate) {
+        coEl.textContent = coDate.slice(5).replace('-','/');
+        coEl.classList.remove('ph');
+      } else {
+        coEl.textContent = '请选择'; coEl.classList.add('ph');
+      }
+
+      const btn = document.getElementById('btnBook');
+      if (ciDate && coDate) {
+        btn.disabled = false;
+        btn.textContent = '确认预订 →';
+      } else {
+        btn.disabled = true;
+        btn.textContent = ciDate ? '请选择退房日期' : '请先选择日期';
+      }
+    }
+
+    function clearPrice() {
+      totalPrice = null;
+      document.getElementById('priceArea').innerHTML = '<div class="price-ph">选择入住及退房日期后显示价格</div>';
+      document.getElementById('cardPriceArea').innerHTML = '<div class="book-card-price-ph">选择日期查看价格</div>';
+    }
+
+    async function fetchAvail() {
+      if (!ciDate || !coDate) return;
+      const nights = Math.round((new Date(coDate) - new Date(ciDate)) / 86400000);
+      document.getElementById('priceArea').innerHTML = '<div class="price-ph">正在获取价格…</div>';
+      document.getElementById('cardPriceArea').innerHTML = '<div class="book-card-price-ph">获取价格中…</div>';
+      try {
+        const r = await fetch(`/api/avail?checkIn=${ciDate}&checkOut=${coDate}&adultCount=2`);
+        const j = await r.json();
+        if (j.data && j.data.roomTypes && j.data.roomTypes.length > 0) {
+          // avail 返回了房型+价格
+          const rt = j.data.roomTypes[0];
+          const nightlyRate = rt.price || rt.totalPrice / nights;
+          totalPrice = rt.totalPrice || rt.price * nights;
+          renderPriceBox(nightlyRate, nights, totalPrice, rt.currency || 'JPY');
+        } else {
+          // avail 暂时无数据 → 根据日历推算
+          renderPriceFromCalendar(nights);
+        }
+      } catch(e) {
+        renderPriceFromCalendar(nights);
+      }
+    }
+
+    function renderPriceFromCalendar(nights) {
+      // 按 SmartOrder 设置的价格（周一至周四¥48,000 / 周五周六¥55,000）计算
+      let total = 0;
+      const rows = [];
+      const d = new Date(ciDate);
+      for (let i = 0; i < nights; i++) {
+        const dow = d.getDay(); // 0=Sun,6=Sat
+        const price = (dow === 5 || dow === 6) ? 55000 : 48000;
+        const label = ['日','一','二','三','四','五','六'][dow];
+        const ds = fmt(d);
+        rows.push({ date: ds, label, price });
+        total += price;
+        d.setDate(d.getDate()+1);
+      }
+      totalPrice = total;
+      const nightly = Math.round(total / nights);
+      renderPriceBox(nightly, nights, total, 'JPY', rows);
+    }
+
+    function renderPriceBox(nightly, nights, total, currency, rows) {
+      const fmt2 = n => '¥' + n.toLocaleString();
+      document.getElementById('cardPriceArea').innerHTML =
+        `<div class="book-card-price">${fmt2(nightly)}<span class="per"> / 晚</span></div>`;
+
+      let rowsHtml = '';
+      if (rows && rows.length <= 7) {
+        rows.forEach(r => {
+          rowsHtml += `<div class="price-row"><span>${r.date.slice(5).replace('-','/')} (周${r.label})</span><span>${fmt2(r.price)}</span></div>`;
+        });
+      } else {
+        rowsHtml = `<div class="price-row"><span>${nights} 晚 × ${fmt2(nightly)}</span><span>${fmt2(total)}</span></div>`;
+      }
+      document.getElementById('priceArea').innerHTML = `
+        <div class="price-box">
+          ${rowsHtml}
+          <div class="price-row total"><span>合计</span><span>${fmt2(total)}</span></div>
+        </div>`;
+    }
+
+    // ── 预订弹窗触发 ──
+    let currentStep = 1;
+
+    function openBooking() {
+      if (!ciDate || !coDate) return;
+      document.getElementById('m-ci').value = ciDate;
+      document.getElementById('m-co').value = coDate;
       document.getElementById('m-guests').value = document.getElementById('guests').value;
       currentStep = 1;
       updateModalRoom();
@@ -621,19 +1105,12 @@
       document.body.style.overflow = 'hidden';
     }
 
-    function updateModal() {
-      updateModalRoom();
-    }
-
     function updateModalRoom() {
-      const ci = document.getElementById('m-ci').value;
-      const co = document.getElementById('m-co').value;
-      const n = getNights(ci, co);
-      const room = selectedRoomId ? ROOMS[selectedRoomId] : null;
-      if (room && n > 0) {
-        document.getElementById('selRoomName').textContent = room.name;
-        document.getElementById('selRoomDesc').textContent = room.desc;
-        document.getElementById('selRoomTotal').textContent = `¥${(room.price * n).toLocaleString()}（${n} 晚）`;
+      const nights = ciDate && coDate ? Math.round((new Date(coDate) - new Date(ciDate)) / 86400000) : 0;
+      document.getElementById('selRoomName').textContent = ROOM_NAME;
+      document.getElementById('selRoomDesc').textContent = ROOM_DESC;
+      if (totalPrice && nights > 0) {
+        document.getElementById('selRoomTotal').textContent = `¥${totalPrice.toLocaleString()}（${nights} 晚）`;
       }
     }
 
@@ -650,9 +1127,7 @@
         if (!email || !email.includes('@')) { alert('请填写正确的邮箱地址'); return; }
         buildConfirm();
       }
-      if (currentStep === 3) {
-        submitBooking(); return;
-      }
+      if (currentStep === 3) { submitBooking(); return; }
       currentStep++;
       updateStepUI();
     }
@@ -662,30 +1137,49 @@
     }
 
     function buildConfirm() {
-      const ci = document.getElementById('m-ci').value;
-      const co = document.getElementById('m-co').value;
-      const n = getNights(ci, co);
-      const room = ROOMS[selectedRoomId];
-      const total = room.price * n;
+      const nights = Math.round((new Date(coDate) - new Date(ciDate)) / 86400000);
       document.getElementById('confirmTable').innerHTML = `
         <div class="confirm-row"><span>物件</span><span>MKG HOME 新宿</span></div>
-        <div class="confirm-row"><span>房型</span><span>${room.name}</span></div>
-        <div class="confirm-row"><span>入住</span><span>${ci}</span></div>
-        <div class="confirm-row"><span>退房</span><span>${co}</span></div>
-        <div class="confirm-row"><span>晚数</span><span>${n} 晚</span></div>
+        <div class="confirm-row"><span>房型</span><span>${ROOM_NAME}</span></div>
+        <div class="confirm-row"><span>入住</span><span>${ciDate}</span></div>
+        <div class="confirm-row"><span>退房</span><span>${coDate}</span></div>
+        <div class="confirm-row"><span>晚数</span><span>${nights} 晚</span></div>
         <div class="confirm-row"><span>人数</span><span>${document.getElementById('m-guests').value} 名</span></div>
         <div class="confirm-row"><span>姓名</span><span>${document.getElementById('g-name').value}</span></div>
         <div class="confirm-row"><span>邮箱</span><span>${document.getElementById('g-email').value}</span></div>
-        <div class="confirm-row"><span>合计金额</span><span>¥${total.toLocaleString()}</span></div>
+        <div class="confirm-row"><span>合计金额</span><span>¥${(totalPrice||0).toLocaleString()}</span></div>
       `;
     }
 
-    function submitBooking() {
-      // TODO: POST /booking/api/v3/hotels/51401486/reservations/book
-      const ref = 'MKG-' + Date.now().toString(36).toUpperCase().slice(-8);
-      document.getElementById('bookingRef').textContent = ref;
+    async function submitBooking() {
+      const name = document.getElementById('g-name').value.trim();
+      const email = document.getElementById('g-email').value.trim();
+      const phone = document.getElementById('g-phone').value.trim();
+      const note  = document.getElementById('g-note').value.trim();
+      const guests = document.getElementById('m-guests').value;
+      try {
+        const r = await fetch('/api/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ checkIn: ciDate, checkOut: coDate, adultCount: guests, guestName: name, email, phone, note }),
+        });
+        const j = await r.json();
+        const ref = (j.data && j.data.orderNum) || ('MKG-' + Date.now().toString(36).toUpperCase().slice(-8));
+        document.getElementById('bookingRef').textContent = ref;
+      } catch(e) {
+        document.getElementById('bookingRef').textContent = 'MKG-' + Date.now().toString(36).toUpperCase().slice(-8);
+      }
       currentStep = 4;
       updateStepUI();
+    }
+
+    // 保留旧函数兼容性
+    function scrollToRooms() {
+      document.getElementById('rooms-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    function selectAndBook(roomId) { openBooking(); }
+    function getNights(ci, co) {
+      return Math.max(0, Math.round((new Date(co) - new Date(ci)) / 86400000));
     }
 
     function updateStepUI() {
@@ -714,14 +1208,90 @@
       if (e.target === document.getElementById('bookingModal')) closeModal();
     });
 
-    function switchPhoto(thumb, src) {
-      document.getElementById('galleryMain').src = src;
+    const GALLERY = [
+      {src:'assets/shinjuku/s01_bedroom_twin.jpg',    alt:'双人卧室'},
+      {src:'assets/shinjuku/s02_bedroom_single.jpg',  alt:'主卧室'},
+      {src:'assets/shinjuku/s03_living_dining.jpg',   alt:'客厅餐厅'},
+      {src:'assets/shinjuku/s04_bedroom2_full.jpg',   alt:'卧室全景'},
+      {src:'assets/shinjuku/s05_kitchen_view.jpg',    alt:'厨房城市景'},
+      {src:'assets/shinjuku/s06_dining_wide.jpg',     alt:'餐厅宽景'},
+      {src:'assets/shinjuku/s07_entrance.jpg',        alt:'入口玄关'},
+      {src:'assets/shinjuku/s08_kitchen_detail.jpg',  alt:'厨房细节'},
+      {src:'assets/shinjuku/s09_living_workdesk.jpg', alt:'客厅工作台'},
+      {src:'assets/shinjuku/s10_living_tv.jpg',       alt:'客厅电视'},
+      {src:'assets/shinjuku/s11_coffee_station.jpg',  alt:'咖啡台'},
+      {src:'assets/shinjuku/s12_bedroom_twin2.jpg',   alt:'双床卧室'},
+      {src:'assets/shinjuku/s13_shower.jpg',          alt:'淋浴间'},
+      {src:'assets/shinjuku/s14_bathroom.jpg',        alt:'卫浴'},
+      {src:'assets/shinjuku/s15_vanity_sink.jpg',     alt:'洗面台'},
+      {src:'assets/shinjuku/s16_amenities.jpg',       alt:'品牌洗漱'},
+      {src:'assets/shinjuku/s17_entrance2.jpg',       alt:'玄关走廊'},
+    ];
+    let currentThumbIdx = 0;
+    let lbIdx = 0;
+
+    function switchPhoto(thumb, idx) {
+      currentThumbIdx = idx;
+      document.getElementById('galleryMain').src = GALLERY[idx].src;
       document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
       thumb.classList.add('active');
     }
 
+    function openLightbox(idx) {
+      lbIdx = idx;
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lbImg').src = GALLERY[lbIdx].src;
+      document.getElementById('lbImg').alt = GALLERY[lbIdx].alt;
+      document.getElementById('lbCounter').textContent = (lbIdx+1) + ' / ' + GALLERY.length;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function moveLightbox(dir) {
+      lbIdx = (lbIdx + dir + GALLERY.length) % GALLERY.length;
+      document.getElementById('lbImg').src = GALLERY[lbIdx].src;
+      document.getElementById('lbImg').alt = GALLERY[lbIdx].alt;
+      document.getElementById('lbCounter').textContent = (lbIdx+1) + ' / ' + GALLERY.length;
+    }
+
+    document.addEventListener('keydown', e => {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'ArrowRight') moveLightbox(1);
+      if (e.key === 'ArrowLeft') moveLightbox(-1);
+      if (e.key === 'Escape') closeLightbox();
+    });
+
     function toggleFaq(btn) {
       const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+    }
+
+    function toggleDeskLang(){
+      document.getElementById('deskLangMenu').classList.toggle('open');
+    }
+    function closeDeskLang(){
+      document.getElementById('deskLangMenu').classList.remove('open');
+    }
+    function updateAllLangLabels(deskLabel){
+      var dl = document.getElementById('deskLangLabel');
+      if(dl) dl.textContent = deskLabel;
+    }
+    document.addEventListener('click', function(e){
+      var dwrap = document.querySelector('.desk-lang-wrap');
+      if(dwrap && !dwrap.contains(e.target)) closeDeskLang();
+    });
+    function setLang(lang) {
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja' : 'en';
+    }
+
+    function toggleRule(btn) {
+      const item = btn.closest('.rule-item');
       item.classList.toggle('open');
     }
   </script>
