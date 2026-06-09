@@ -1095,14 +1095,12 @@
 
     function openBooking() {
       if (!ciDate || !coDate) return;
-      document.getElementById('m-ci').value = ciDate;
-      document.getElementById('m-co').value = coDate;
-      document.getElementById('m-guests').value = document.getElementById('guests').value;
-      currentStep = 1;
-      updateModalRoom();
-      updateStepUI();
-      document.getElementById('bookingModal').classList.add('open');
-      document.body.style.overflow = 'hidden';
+      const guests = document.getElementById('guests').value || '2';
+      const url = new URL('https://booking-mkghomeshinjuku.smartorder.ai');
+      url.searchParams.set('checkIn', ciDate);
+      url.searchParams.set('checkOut', coDate);
+      url.searchParams.set('adults', guests);
+      window.open(url.toString(), '_blank');
     }
 
     function updateModalRoom() {
