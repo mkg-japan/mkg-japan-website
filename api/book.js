@@ -13,14 +13,15 @@ let _tokenExpiry = 0;
 
 async function getToken() {
   if (_cachedToken && Date.now() < _tokenExpiry) return _cachedToken;
+  const params = new URLSearchParams({
+    grant_type: 'client_credentials',
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+  });
   const r = await fetch(TOKEN_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      grant_type: 'client_credentials',
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-    }),
+    body: params.toString(),
   });
   const j = await r.json();
   _cachedToken = j.access_token;
@@ -28,7 +29,7 @@ async function getToken() {
   return _cachedToken;
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -66,4 +67,4 @@ export default async function handler(req, res) {
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
-}
+};

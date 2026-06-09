@@ -13,14 +13,15 @@ let _tokenExpiry = 0;
 
 async function getToken() {
   if (_cachedToken && Date.now() < _tokenExpiry) return _cachedToken;
+  const params = new URLSearchParams({
+    grant_type: 'client_credentials',
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+  });
   const r = await fetch(TOKEN_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      grant_type: 'client_credentials',
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-    }),
+    body: params.toString(),
   });
   const j = await r.json();
   _cachedToken = j.access_token;
@@ -28,19 +29,19 @@ async function getToken() {
   return _cachedToken;
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') { res.status(200).end(); return; }
 
-  const { startDate, endDate, adultCount = '1' } = req.query;
+  const { startDate, endDate, adultCount = '2' } = req.query;
   if (!startDate || !endDate) {
     return res.status(400).json({ error: 'startDate and endDate required' });
   }
 
   try {
     const token = await getToken();
-    const params = new URLSearchParams({ startDate, endDate, roomTypeId: ROOM_TYPE_ID, adultCount });
-    const r = await fetch(`${BASE_URL}/booking/api/v3/calendar/${HOTEL_ID}?${params}`, {
+    const qs = new URLSearchParams({ startDate, endDate, roomTypeId: ROOM_TYPE_ID, adultCount });
+    const r = await fetch(`${BASE_URL}/booking/api/v3/calendar/${HOTEL_ID}?${qs}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await r.json();
@@ -48,4 +49,4 @@ export default async function handler(req, res) {
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
-}
+};
