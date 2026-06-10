@@ -188,44 +188,20 @@
     .faq-a{display:none;padding:0 20px 16px;color:var(--muted);font-size:14px;line-height:1.75}
     .faq-item.open .faq-a{display:block}
 
-    /* ── 预订弹窗 ── */
-    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(11,23,51,.6);z-index:100;backdrop-filter:blur(4px);padding:20px;overflow-y:auto}
-    .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center}
-    .modal{background:white;border-radius:var(--radius);width:min(640px,100%);margin:auto;overflow:hidden;box-shadow:var(--shadow)}
-    .modal-header{background:var(--navy);color:white;padding:22px 26px;display:flex;align-items:center;justify-content:space-between}
-    .modal-header h3{margin:0;font-size:18px}
-    .modal-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:24px;cursor:pointer;padding:0;line-height:1}
-    .modal-close:hover{color:white}
-    .modal-body{padding:26px}
-    .steps{display:flex;margin-bottom:24px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
-    .step{flex:1;padding:11px;text-align:center;font-size:12px;font-weight:700;color:var(--muted);background:white;border-right:1px solid var(--line);transition:.2s}
-    .step:last-child{border-right:none}
-    .step.active{background:var(--gold);color:var(--navy-2)}
-    .step.done{background:#e8f3ee;color:var(--green)}
-    .mform-field{margin-bottom:14px}
-    .mform-field label{display:block;font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
-    .mform-field input,.mform-field select{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font-size:14px;color:var(--ink);font-family:inherit;background:white;outline:none;transition:.2s}
-    .mform-field input:focus,.mform-field select:focus{border-color:var(--gold)}
-    .mform-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .notice-box{background:#f8f8fb;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--muted);margin-top:14px;line-height:1.7}
-    .notice-box b{color:var(--ink);display:block;margin-bottom:4px}
-    .confirm-table{background:#f8f8fb;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px}
-    .confirm-row{display:flex;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--line);font-size:14px}
-    .confirm-row:last-child{border-bottom:none;font-weight:800;font-size:15px;color:var(--navy);background:#f0ece5}
-    .confirm-row span:first-child{color:var(--muted)}
-    .success-box{text-align:center;padding:16px 0}
-    .success-icon{width:60px;height:60px;border-radius:50%;background:#e8f3ee;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:26px}
-    .success-box h3{color:var(--navy);margin:0 0 8px;font-size:22px}
-    .success-box p{color:var(--muted);margin:0 0 20px;font-size:14px}
-    .booking-ref{background:#f8f8fb;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center;margin-bottom:16px}
-    .booking-ref small{color:var(--muted);font-size:12px;display:block;margin-bottom:4px}
-    .booking-ref b{font-size:20px;color:var(--navy);letter-spacing:.1em}
-    .modal-footer{display:flex;justify-content:space-between;gap:12px;margin-top:20px}
-    .btn-prev{padding:12px 22px;border-radius:10px;border:1.5px solid var(--line);background:white;color:var(--ink);font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s}
-    .btn-prev:hover{border-color:var(--gold)}
-    .btn-next{padding:12px 26px;border-radius:10px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s}
-    .btn-next:hover{box-shadow:0 8px 20px rgba(201,166,91,.3);transform:translateY(-1px)}
-    .btn-next:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+    /* ── 预订弹窗（iframe模式） ── */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(11,23,51,.7);z-index:100;backdrop-filter:blur(6px);padding:16px}
+    .modal-overlay.open{display:flex;align-items:center;justify-content:center}
+    .modal{background:white;border-radius:var(--radius);width:min(960px,100%);height:min(820px,calc(100vh - 32px));margin:auto;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .modal-header{background:var(--navy);color:white;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+    .modal-header h3{margin:0;font-size:16px;font-weight:800;letter-spacing:.02em}
+    .modal-header-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:2px}
+    .modal-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:26px;cursor:pointer;padding:0;line-height:1;transition:.15s}
+    .modal-close:hover{color:white;transform:scale(1.1)}
+    .modal-body{flex:1;overflow:hidden;position:relative}
+    .booking-iframe{width:100%;height:100%;border:none;display:block}
+    .iframe-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;gap:14px;font-size:14px;color:var(--muted)}
+    .iframe-spinner{width:36px;height:36px;border:3px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
 
     /* ── 联系我们 ── */
     .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
@@ -757,103 +733,28 @@
     <div class="lb-counter" id="lbCounter"></div>
   </div>
 
-  <!-- ── 预订弹窗 ── -->
+  <!-- ── 预订弹窗（iframe模式） ── -->
   <div class="modal-overlay" id="bookingModal">
     <div class="modal">
       <div class="modal-header">
-        <h3 id="modalTitle">预订 MKG HOME 新宿</h3>
+        <div>
+          <h3>MKG HOME 新宿 · 官网直订</h3>
+          <div class="modal-header-sub">官网价格比 OTA 低 10–15%，无手续费</div>
+        </div>
         <button class="modal-close" onclick="closeModal()">×</button>
       </div>
       <div class="modal-body">
-        <div class="steps">
-          <div class="step active" id="tab1">① 确认选择</div>
-          <div class="step" id="tab2">② 填写信息</div>
-          <div class="step" id="tab3">③ 确认预订</div>
-          <div class="step" id="tab4">✓ 完成</div>
+        <div class="iframe-loading" id="iframeLoading">
+          <div class="iframe-spinner"></div>
+          <span>正在加载预订页面…</span>
         </div>
-
-        <!-- 步骤1：确认日期 & 房型 -->
-        <div id="s1">
-          <div class="mform-2col" style="margin-bottom:14px">
-            <div class="mform-field">
-              <label>入住日期</label>
-              <input type="date" id="m-ci" oninput="updateModal()" />
-            </div>
-            <div class="mform-field">
-              <label>退房日期</label>
-              <input type="date" id="m-co" oninput="updateModal()" />
-            </div>
-          </div>
-          <div class="mform-field" style="margin-bottom:18px">
-            <label>入住人数</label>
-            <select id="m-guests">
-              <option value="1">1 名</option>
-              <option value="2" selected>2 名</option>
-              <option value="3">3 名</option>
-              <option value="4">4 名</option>
-              <option value="5">5 名</option>
-              <option value="6">6 名</option>
-            </select>
-          </div>
-          <div style="font-size:13px;color:var(--muted);margin-bottom:10px;font-weight:700">已选房型：</div>
-          <div id="selectedRoomDisplay" style="background:#fffbf2;border:2px solid var(--gold);border-radius:14px;padding:16px">
-            <div id="selRoomName" style="font-weight:800;color:var(--navy);font-size:16px;margin-bottom:4px"></div>
-            <div id="selRoomDesc" style="color:var(--muted);font-size:13px;margin-bottom:8px"></div>
-            <div id="selRoomTotal" style="font-size:18px;font-weight:900;color:var(--navy)"></div>
-          </div>
-        </div>
-
-        <!-- 步骤2：填写信息 -->
-        <div id="s2" style="display:none">
-          <div class="mform-2col">
-            <div class="mform-field">
-              <label>姓名（拼音 / 英文）</label>
-              <input type="text" id="g-name" placeholder="ZHANG SAN" />
-            </div>
-            <div class="mform-field">
-              <label>联系电话</label>
-              <input type="tel" id="g-phone" placeholder="+81 90-0000-0000" />
-            </div>
-          </div>
-          <div class="mform-field">
-            <label>电子邮箱</label>
-            <input type="email" id="g-email" placeholder="example@email.com" />
-          </div>
-          <div class="mform-field">
-            <label>特殊要求（选填）</label>
-            <input type="text" id="g-note" placeholder="如：早到行李寄存、高楼层偏好等" />
-          </div>
-          <div class="notice-box">
-            <b>入住须知</b>
-            Check-in: 15:00 以后 &nbsp;|&nbsp; Check-out: 11:00 以前<br>
-            取消政策：入住前 3 日前可免费取消，之后收取首晚房费。
-          </div>
-        </div>
-
-        <!-- 步骤3：确认 -->
-        <div id="s3" style="display:none">
-          <div class="confirm-table" id="confirmTable"></div>
-          <div class="notice-box">点击"确认预订"即视为同意上述取消政策。确认邮件将自动发送至您的邮箱。</div>
-        </div>
-
-        <!-- 步骤4：完成 -->
-        <div id="s4" style="display:none">
-          <div class="success-box">
-            <div class="success-icon">✓</div>
-            <h3>预订成功！</h3>
-            <p>确认邮件已发送至您的邮箱，请注意查收。</p>
-            <div class="booking-ref">
-              <small>预订编号</small>
-              <b id="bookingRef">—</b>
-            </div>
-            <p style="font-size:12px;color:var(--muted)">如需修改或取消，请联系 dq@mkgjp.com 或致电 03-6279-2482</p>
-          </div>
-        </div>
-
-        <div class="modal-footer" id="mFooter">
-          <button class="btn-prev" id="btnPrev" onclick="prevStep()" style="visibility:hidden">← 上一步</button>
-          <button class="btn-next" id="btnNext" onclick="nextStep()">下一步 →</button>
-        </div>
+        <iframe
+          id="bookingFrame"
+          class="booking-iframe"
+          src=""
+          onload="document.getElementById('iframeLoading').style.display='none'"
+          allow="payment"
+        ></iframe>
       </div>
     </div>
   </div>
@@ -1100,106 +1001,27 @@
       url.searchParams.set('checkIn', ciDate);
       url.searchParams.set('checkOut', coDate);
       url.searchParams.set('adults', guests);
-      window.open(url.toString(), '_blank');
-    }
-
-    function updateModalRoom() {
-      const nights = ciDate && coDate ? Math.round((new Date(coDate) - new Date(ciDate)) / 86400000) : 0;
-      document.getElementById('selRoomName').textContent = ROOM_NAME;
-      document.getElementById('selRoomDesc').textContent = ROOM_DESC;
-      if (totalPrice && nights > 0) {
-        document.getElementById('selRoomTotal').textContent = `¥${totalPrice.toLocaleString()}（${nights} 晚）`;
-      }
+      const frame = document.getElementById('bookingFrame');
+      const loading = document.getElementById('iframeLoading');
+      loading.style.display = 'flex';
+      frame.src = url.toString();
+      document.getElementById('bookingModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
       document.getElementById('bookingModal').classList.remove('open');
       document.body.style.overflow = '';
+      // 清空 iframe，停止加载
+      document.getElementById('bookingFrame').src = '';
     }
 
-    function nextStep() {
-      if (currentStep === 2) {
-        const name = document.getElementById('g-name').value.trim();
-        const email = document.getElementById('g-email').value.trim();
-        if (!name) { alert('请填写姓名'); return; }
-        if (!email || !email.includes('@')) { alert('请填写正确的邮箱地址'); return; }
-        buildConfirm();
-      }
-      if (currentStep === 3) { submitBooking(); return; }
-      currentStep++;
-      updateStepUI();
-    }
-
-    function prevStep() {
-      if (currentStep > 1) { currentStep--; updateStepUI(); }
-    }
-
-    function buildConfirm() {
-      const nights = Math.round((new Date(coDate) - new Date(ciDate)) / 86400000);
-      document.getElementById('confirmTable').innerHTML = `
-        <div class="confirm-row"><span>物件</span><span>MKG HOME 新宿</span></div>
-        <div class="confirm-row"><span>房型</span><span>${ROOM_NAME}</span></div>
-        <div class="confirm-row"><span>入住</span><span>${ciDate}</span></div>
-        <div class="confirm-row"><span>退房</span><span>${coDate}</span></div>
-        <div class="confirm-row"><span>晚数</span><span>${nights} 晚</span></div>
-        <div class="confirm-row"><span>人数</span><span>${document.getElementById('m-guests').value} 名</span></div>
-        <div class="confirm-row"><span>姓名</span><span>${document.getElementById('g-name').value}</span></div>
-        <div class="confirm-row"><span>邮箱</span><span>${document.getElementById('g-email').value}</span></div>
-        <div class="confirm-row"><span>合计金额</span><span>¥${(totalPrice||0).toLocaleString()}</span></div>
-      `;
-    }
-
-    async function submitBooking() {
-      const name = document.getElementById('g-name').value.trim();
-      const email = document.getElementById('g-email').value.trim();
-      const phone = document.getElementById('g-phone').value.trim();
-      const note  = document.getElementById('g-note').value.trim();
-      const guests = document.getElementById('m-guests').value;
-      try {
-        const r = await fetch('/api/book', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ checkIn: ciDate, checkOut: coDate, adultCount: guests, guestName: name, email, phone, note }),
-        });
-        const j = await r.json();
-        const ref = (j.data && j.data.orderNum) || ('MKG-' + Date.now().toString(36).toUpperCase().slice(-8));
-        document.getElementById('bookingRef').textContent = ref;
-      } catch(e) {
-        document.getElementById('bookingRef').textContent = 'MKG-' + Date.now().toString(36).toUpperCase().slice(-8);
-      }
-      currentStep = 4;
-      updateStepUI();
-    }
-
-    // 保留旧函数兼容性
     function scrollToRooms() {
       document.getElementById('rooms-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     function selectAndBook(roomId) { openBooking(); }
     function getNights(ci, co) {
       return Math.max(0, Math.round((new Date(co) - new Date(ci)) / 86400000));
-    }
-
-    function updateStepUI() {
-      for (let i = 1; i <= 4; i++) {
-        const panel = document.getElementById('s' + i);
-        const tab = document.getElementById('tab' + i);
-        if (panel) panel.style.display = i === currentStep ? 'block' : 'none';
-        if (tab) {
-          tab.classList.toggle('active', i === currentStep);
-          tab.classList.toggle('done', i < currentStep);
-        }
-      }
-      const prev = document.getElementById('btnPrev');
-      const next = document.getElementById('btnNext');
-      const footer = document.getElementById('mFooter');
-      if (currentStep === 4) {
-        footer.style.display = 'none';
-      } else {
-        footer.style.display = 'flex';
-        prev.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
-        next.textContent = currentStep === 3 ? '确认预订 ✓' : '下一步 →';
-      }
     }
 
     document.getElementById('bookingModal').addEventListener('click', e => {
