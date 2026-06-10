@@ -4,7 +4,7 @@
 const HOTEL_ID      = process.env.SMARTORDER_HOTEL_ID      || '51401486';
 const ROOM_TYPE_ID  = process.env.SMARTORDER_ROOM_TYPE_ID  || '905007308';
 const CLIENT_ID     = process.env.SMARTORDER_CLIENT_ID     || '1513859491169472512';
-const CLIENT_SECRET = process.env.SMARTORDER_CLIENT_SECRET;
+const CLIENT_SECRET = process.env.SMARTORDER_CLIENT_SECRET || 'UJKaBl2TYGngV8DQMSCv2Gx6UZtYYcYh';
 const TOKEN_URL     = 'https://idp.smartorder.ai/realms/smartorder-booking-api/protocol/openid-connect/token';
 const BASE_URL      = 'https://api-open-booking.smartorder.ai';
 
