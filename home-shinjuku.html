@@ -1004,9 +1004,13 @@
 
         const isPast = dateStr < todayStr;
         const status = availMap[dateStr]; // undefined = 未加载
+        // 已选入住且正在选退房时，不足2晚的日期不可选
+        const minStay = 2;
+        const isTooSoon = pickStep === 1 && ciDate && dateStr > ciDate &&
+          Math.round((new Date(dateStr) - new Date(ciDate)) / 86400000) < minStay;
 
-        if (isPast) {
-          el.className = 'cal-day past';
+        if (isPast || isTooSoon) {
+          el.className = isPast ? 'cal-day past' : 'cal-day closed';
         } else if (status === 'Avail') {
           el.className = 'cal-day avail';
           el.onclick = () => pickDate(dateStr);
@@ -1043,9 +1047,13 @@
         clearPrice();
       } else {
         // 选退房
+        const nights = Math.round((new Date(dateStr) - new Date(ciDate)) / 86400000);
         if (dateStr <= ciDate) {
           // 点了早于入住的日期 → 重新选入住
           ciDate = dateStr; coDate = null; pickStep = 1;
+        } else if (nights < 2) {
+          // 不足2晚，忽略
+          return;
         } else {
           coDate = dateStr; pickStep = 2;
           fetchAvail();
