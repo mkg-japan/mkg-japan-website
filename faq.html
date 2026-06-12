@@ -27,14 +27,31 @@
     .links{display:flex;align-items:center;gap:16px;font-size:13px;color:rgba(255,255,255,.88);font-weight:650;white-space:nowrap}
     .links a:hover{color:var(--gold)}
     .nav-cta{padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:white!important}
-    .lang-sw{display:flex;gap:3px;margin-left:8px}
-    .lang-sw button{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.82);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer;transition:.2s}
-    .lang-sw button.active,.lang-sw button:hover{background:var(--gold);border-color:var(--gold);color:var(--navy-2)}
+    /* 桌面端语言下拉 */
+    .desk-lang-wrap{position:relative}
+    .desk-lang-btn{display:flex;align-items:center;gap:5px;background:none;border:1px solid rgba(201,168,91,.4);color:rgba(255,255,255,.82);border-radius:8px;padding:6px 10px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.2s;margin-left:4px}
+    .desk-lang-btn:hover{background:var(--bg);border-color:var(--gold);color:var(--gold)}
+    .desk-lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.12);overflow:hidden;min-width:140px;z-index:1000}
+    .desk-lang-menu.open{display:block}
+    .desk-lang-menu button{display:block;width:100%;padding:11px 18px;text-align:left;background:none;border:none;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;transition:.15s;border-bottom:1px solid var(--line)}
+    .desk-lang-menu button:last-child{border-bottom:none}
+    .desk-lang-menu button:hover{background:var(--bg);color:var(--gold)}
+    @media(max-width:960px){.desk-lang-wrap{display:none}}
+    /* 手机端语言下拉 */
+    .mobile-lang-wrap{display:none;position:relative}
+    @media(max-width:960px){.mobile-lang-wrap{display:block;margin-left:auto}}
+    .mobile-lang-btn{display:flex;align-items:center;gap:5px;background:none;border:1px solid rgba(17,35,74,.25);color:rgba(255,255,255,.82);border-radius:8px;padding:6px 10px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.2s}
+    .mobile-lang-btn:hover{background:var(--bg);border-color:var(--gold)}
+    .mobile-lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.1);overflow:hidden;min-width:130px;z-index:1000}
+    .mobile-lang-menu.open{display:block}
+    .mobile-lang-menu button{display:block;width:100%;padding:11px 16px;text-align:left;background:none;border:none;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;transition:.15s;border-bottom:1px solid var(--line)}
+    .mobile-lang-menu button:last-child{border-bottom:none}
+    .mobile-lang-menu button:hover{background:var(--bg);color:var(--gold)}
     .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
     .hamburger span{display:block;width:22px;height:2px;background:rgba(255,255,255,.85);border-radius:2px}
-    .mobile-menu{display:none;flex-direction:column;background:rgba(11,23,51,.98);padding:16px 20px 24px;gap:4px;border-bottom:1px solid rgba(255,255,255,.08)}
-    .mobile-menu.open{display:flex}
-    .mobile-menu a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:rgba(255,255,255,.88);font-weight:600}
+    .mobile-drawer{display:none;flex-direction:column;background:rgba(11,23,51,.98);padding:16px 20px 24px;gap:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .mobile-drawer.open{display:flex}
+    .mobile-drawer a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:rgba(255,255,255,.88);font-weight:600}
     @media(max-width:768px){.links{display:none}.hamburger{display:flex}}
 
     /* Page hero */
@@ -110,24 +127,36 @@
       <a href="index.html#development"><span data-zh>项目一览</span><span data-ja>プロジェクト</span><span data-en>Projects</span></a>
       <a href="faq.html" style="color:var(--gold)">FAQ</a>
       <a class="nav-cta" href="index.html#contact"><span data-zh>联系我们</span><span data-ja>お問い合わせ</span><span data-en>Contact</span></a>
-      <div class="lang-sw">
-        <button onclick="setLang('ja')" id="btn-ja">日本語</button>
-        <button onclick="setLang('en')" id="btn-en">EN</button>
-        <button onclick="setLang('zh')" id="btn-zh">中文</button>
+      <div class="desk-lang-wrap">
+        <button class="desk-lang-btn" id="deskLangBtn" onclick="toggleDeskLang()" aria-label="Language">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="deskLangLabel">語言</span> ▾
+        </button>
+        <div class="desk-lang-menu" id="deskLangMenu">
+          <button onclick="setLang('ja');closeDeskLang();updateLangLabels('言語')">🇯🇵 日本語</button>
+          <button onclick="setLang('en');closeDeskLang();updateLangLabels('Language')">🇺🇸 English</button>
+          <button onclick="setLang('zh');closeDeskLang();updateLangLabels('语言')">🇨🇳 中文</button>
+        </div>
       </div>
     </nav>
-    <button class="hamburger" onclick="document.getElementById('mm').classList.toggle('open')">
+    <div class="mobile-lang-wrap">
+      <button class="mobile-lang-btn" id="langBtn" onclick="toggleLangMenu()" aria-label="Language">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="langLabel">語言</span> ▾
+      </button>
+      <div class="mobile-lang-menu" id="langMenu">
+        <button onclick="setLang('ja');closeLangMenu();updateLangLabels('言語')">🇯🇵 日本語</button>
+        <button onclick="setLang('en');closeLangMenu();updateLangLabels('Language')">🇺🇸 English</button>
+        <button onclick="setLang('zh');closeLangMenu();updateLangLabels('语言')">🇨🇳 中文</button>
+      </div>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mm').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
-  <nav class="mobile-menu" id="mm">
+  <nav class="mobile-drawer" id="mm">
     <a href="index.html"><span data-zh>← 集团官网</span><span data-ja>← 公式サイトへ</span><span data-en>← Main Site</span></a>
     <a href="index.html#contact"><span data-zh>联系我们</span><span data-ja>お問い合わせ</span><span data-en>Contact</span></a>
-    <div class="lang-sw" style="margin:8px 0 0">
-      <button onclick="setLang('ja')" id="mbtn-ja">日本語</button>
-      <button onclick="setLang('en')" id="mbtn-en">EN</button>
-      <button onclick="setLang('zh')" id="mbtn-zh">中文</button>
-    </div>
   </nav>
 </header>
 
@@ -564,16 +593,42 @@
 
 <script>
   function toggle(btn){btn.closest('.faq-item').classList.toggle('open')}
+
   function setLang(l){
     document.body.className='lang-'+l;
-    ['zh','en','ja'].forEach(x=>{
-      ['btn-','mbtn-'].forEach(p=>{
-        const el=document.getElementById(p+x);
-        if(el) el.classList.toggle('active',x===l);
-      });
-    });
+    sessionStorage.setItem('mkgjp_lang', l);
+    document.documentElement.lang = l==='ja'?'ja':l==='en'?'en':'zh';
   }
-  setLang('ja');
+  function updateLangLabels(label){
+    var dl=document.getElementById('deskLangLabel');
+    var ml=document.getElementById('langLabel');
+    if(dl) dl.textContent=label;
+    if(ml) ml.textContent=label;
+  }
+  function toggleDeskLang(){
+    document.getElementById('deskLangMenu').classList.toggle('open');
+    document.getElementById('langMenu').classList.remove('open');
+  }
+  function closeDeskLang(){document.getElementById('deskLangMenu').classList.remove('open')}
+  function toggleLangMenu(){
+    document.getElementById('langMenu').classList.toggle('open');
+    document.getElementById('deskLangMenu').classList.remove('open');
+  }
+  function closeLangMenu(){document.getElementById('langMenu').classList.remove('open')}
+  document.addEventListener('click',function(e){
+    var mw=document.querySelector('.mobile-lang-wrap');
+    var dw=document.querySelector('.desk-lang-wrap');
+    if(mw&&!mw.contains(e.target)) closeLangMenu();
+    if(dw&&!dw.contains(e.target)) closeDeskLang();
+  });
+
+  // 读取主页sessionStorage里的语言，没有则默认日文
+  (function(){
+    var saved=sessionStorage.getItem('mkgjp_lang')||'ja';
+    setLang(saved);
+    var labels={'zh':'语言','ja':'言語','en':'Language'};
+    updateLangLabels(labels[saved]||'言語');
+  })();
 </script>
 </body>
 </html>
