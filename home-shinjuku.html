@@ -1021,9 +1021,12 @@
         // 退房日超过首个Closed夜 → 不可选
         const isBlockedByGap = pickStep === 1 && checkoutCutoff && dateStr > checkoutCutoff;
 
+        // 退房模式下：第一个Closed夜（checkoutCutoff）当天早上可退房，应显示为可选
+        const isCheckoutOnClosed = pickStep === 1 && checkoutCutoff && dateStr === checkoutCutoff && !isTooSoon;
+
         if (isPast || isTooSoon || isBlockedByGap) {
           el.className = isPast ? 'cal-day past' : 'cal-day closed';
-        } else if (status === 'Avail') {
+        } else if (isCheckoutOnClosed || status === 'Avail') {
           el.className = 'cal-day avail';
           el.onclick = () => pickDate(dateStr);
         } else if (status === 'Closed') {
