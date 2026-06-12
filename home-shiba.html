@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MKG HOME SHIBA | 港区芝 · 东京铁塔近旁 | MKG Japan</title>
+  <meta name="description" content="MKG HOME SHIBA，港区芝，6间精品客室，东京铁塔步行可达。整栋楼设计风格统一，配备全套生活设施。">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#11234a;--navy-2:#0b1733;--gold:#c9a65b;--gold-l:rgba(201,166,91,.12);
+      --ink:#1a2340;--muted:#6b7a99;--line:#e8eaf0;--card:#fff;--bg:#f8f7f4;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Helvetica Neue',Arial,'Hiragino Sans','Noto Sans JP',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+
+    .topbar{background:var(--navy-2);color:#fff;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:100}
+    .tb-brand{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px}
+    .tb-brand span{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+    .tb-nav{display:flex;gap:12px;align-items:center}
+    .tb-back{font-size:12px;font-weight:700;color:rgba(255,255,255,.7);padding:6px 14px;border:1px solid rgba(255,255,255,.2);border-radius:999px;transition:.15s}
+    .tb-back:hover{background:rgba(255,255,255,.1);color:#fff}
+    .tb-book{background:var(--gold);color:var(--navy-2);font-size:12px;font-weight:800;padding:7px 18px;border-radius:999px;border:none;cursor:pointer;transition:.15s;display:inline-block}
+    .tb-book:hover{opacity:.88}
+
+    .hero{position:relative;height:480px;overflow:hidden;background:var(--navy-2)}
+    .hero-img{width:100%;height:100%;object-fit:cover;opacity:.82}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(11,23,51,.88) 40%,rgba(11,23,51,.3))}
+    .hero-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 56px;max-width:640px}
+    .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,166,91,.18);border:1px solid rgba(201,166,91,.4);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.08em;padding:4px 12px;border-radius:999px;margin-bottom:18px;width:fit-content}
+    .hero-tag span{width:7px;height:7px;border-radius:50%;background:#4caf50}
+    .hero h1{font-size:clamp(28px,4vw,42px);font-weight:900;color:#fff;letter-spacing:.02em;line-height:1.15;margin-bottom:12px}
+    .hero-sub{font-size:14px;color:rgba(255,255,255,.75);margin-bottom:24px}
+    .hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+    .hero-stat{text-align:center}
+    .hero-stat b{display:block;font-size:22px;font-weight:900;color:var(--gold)}
+    .hero-stat span{font-size:11px;color:rgba(255,255,255,.6);letter-spacing:.04em}
+    .hero-gallery{position:absolute;right:0;top:0;bottom:0;width:38%;display:grid;grid-template-rows:1fr 1fr;gap:3px}
+    .hero-gallery img{width:100%;height:100%;object-fit:cover}
+
+    .gallery-strip{display:flex;gap:6px;padding:12px 0;overflow-x:auto;scrollbar-width:none}
+    .gallery-strip::-webkit-scrollbar{display:none}
+    .gallery-strip img{height:160px;width:220px;flex-shrink:0;object-fit:cover;border-radius:10px;cursor:pointer;transition:.2s}
+    .gallery-strip img:hover{transform:scale(1.02)}
+
+    .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+    .section{padding:56px 0}
+    .section-title{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+    .section h2{font-size:clamp(22px,3vw,30px);font-weight:900;color:var(--navy);margin-bottom:20px}
+
+    .rooms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:32px}
+    .room-card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(11,23,51,.08);transition:.2s}
+    .room-card:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(11,23,51,.12)}
+    .room-img{height:200px;overflow:hidden}
+    .room-img img{width:100%;height:100%;object-fit:cover;transition:.4s}
+    .room-card:hover .room-img img{transform:scale(1.05)}
+    .room-body{padding:20px}
+    .room-body h3{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:6px}
+    .room-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:12px}
+    .room-floor{display:inline-block;background:var(--gold-l);color:var(--gold);font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px;margin-bottom:8px;letter-spacing:.04em}
+
+    .amenity-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:24px}
+    .amenity-item{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:12px;padding:12px 16px;font-size:13px;font-weight:600;color:var(--ink)}
+    .amenity-item span.ico{font-size:18px;flex-shrink:0}
+
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:24px}
+    .info-card{background:var(--card);border-radius:14px;padding:20px;border-left:4px solid var(--gold)}
+    .info-card h4{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:6px}
+    .info-card p{font-size:13px;color:var(--muted);line-height:1.7}
+
+    .cta-bar{background:var(--navy-2);padding:40px 24px;text-align:center}
+    .cta-bar h2{font-size:24px;font-weight:900;color:#fff;margin-bottom:8px}
+    .cta-bar p{color:rgba(255,255,255,.65);font-size:14px;margin-bottom:24px}
+    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn-gold{background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;padding:13px 32px;border-radius:999px;display:inline-block;transition:.15s}
+    .btn-gold:hover{opacity:.88;transform:translateY(-1px)}
+    .btn-outline{background:transparent;color:#fff;font-weight:700;font-size:14px;padding:12px 28px;border-radius:999px;border:1px solid rgba(255,255,255,.3);display:inline-block;transition:.15s}
+    .btn-outline:hover{background:rgba(255,255,255,.08)}
+
+    .map-wrap{border-radius:18px;overflow:hidden;height:340px;margin-top:24px}
+    .map-wrap iframe{width:100%;height:100%;border:none}
+
+    footer{background:var(--navy-2);color:rgba(255,255,255,.5);text-align:center;padding:20px;font-size:12px}
+    footer a{color:rgba(255,255,255,.5)}
+    footer a:hover{color:#fff}
+
+    @media(max-width:768px){
+      .hero-body{padding:0 24px;max-width:100%}
+      .hero-gallery{display:none}
+      .hero{height:360px}
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="tb-brand"><span></span>MKG HOSPITALITY</div>
+  <div class="tb-nav">
+    <a class="tb-back" href="stay.html#guesthouses">← 返回列表</a>
+    <a class="tb-back" href="index.html">集团官网</a>
+    <a class="tb-book" href="https://www.airbnb.com" target="_blank" rel="noopener">在 Airbnb 预订</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <img class="hero-img" src="assets/shiba/cover_main.jpg" alt="MKG HOME SHIBA">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <div class="hero-tag"><span></span> 运营中 · Operational</div>
+    <h1>MKG HOME<br>SHIBA</h1>
+    <p class="hero-sub">港区芝 · 东京铁塔步行可达 · 6间精品客室</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><b>6</b><span>间客室</span></div>
+      <div class="hero-stat"><b>港区芝</b><span>Location</span></div>
+      <div class="hero-stat"><b>🗼</b><span>东京铁塔近旁</span></div>
+    </div>
+  </div>
+  <div class="hero-gallery">
+    <img src="assets/shiba/p_room_large.jpg" alt="">
+    <img src="assets/shiba/p_dining.jpg" alt="">
+  </div>
+</section>
+
+<div class="wrap" style="padding-top:20px">
+  <div class="gallery-strip">
+    <img src="assets/shiba/cover_main.jpg" alt="外观">
+    <img src="assets/shiba/p_room_overview.jpg" alt="客室">
+    <img src="assets/shiba/p_room_large.jpg" alt="大床房">
+    <img src="assets/shiba/p_dining.jpg" alt="餐厅">
+    <img src="assets/shiba/p_bath.jpg" alt="卫浴">
+    <img src="assets/shiba/shiba_101.jpg" alt="101室">
+    <img src="assets/shiba/shiba_201.jpg" alt="201室">
+    <img src="assets/shiba/shiba_301.jpg" alt="301室">
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-title">Room Types</div>
+    <h2>客室介绍</h2>
+    <p style="color:var(--muted);font-size:14px;margin-bottom:8px">全楼 6 间独立客室，每间配备独立卫浴、厨房设施及独立入口。</p>
+    <div class="rooms-grid">
+
+      <div class="room-card">
+        <div class="room-img"><img src="assets/shiba/shiba_101.jpg" alt="101室"></div>
+        <div class="room-body">
+          <span class="room-floor">1F</span>
+          <h3>101 室</h3>
+          <div class="room-meta"><span>👥 1～2名</span><span>🛏 双床</span></div>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-img"><img src="assets/shiba/shiba_102.jpg" alt="102室"></div>
+        <div class="room-body">
+          <span class="room-floor">1F</span>
+          <h3>102 室</h3>
+          <div class="room-meta"><span>👥 1～2名</span><span>🛏 大床</span></div>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-img"><img src="assets/shiba/shiba_201.jpg" alt="201室"></div>
+        <div class="room-body">
+          <span class="room-floor">2F</span>
+          <h3>201 室</h3>
+          <div class="room-meta"><span>👥 1～2名</span><span>🛏 双床</span></div>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-img"><img src="assets/shiba/shiba_202.jpg" alt="202室"></div>
+        <div class="room-body">
+          <span class="room-floor">2F</span>
+          <h3>202 室</h3>
+          <div class="room-meta"><span>👥 1～2名</span><span>🛏 大床</span></div>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-img"><img src="assets/shiba/shiba_301.jpg" alt="301室"></div>
+        <div class="room-body">
+          <span class="room-floor">3F</span>
+          <h3>301 室</h3>
+          <div class="room-meta"><span>👥 1～2名</span><span>🛏 大床</span></div>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-img"><img src="assets/shiba/shiba_401.jpg" alt="401室"></div>
+        <div class="room-body">
+          <span class="room-floor">4F</span>
+          <h3>401 室</h3>
+          <div class="room-meta"><span>👥 1～2名</span><span>🛏 大床</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fff;padding:40px 0">
+  <div class="wrap">
+    <div class="section-title">Amenities</div>
+    <h2>设施一览</h2>
+    <div class="amenity-grid">
+      <div class="amenity-item"><span class="ico">🔑</span>智能门锁自助入住</div>
+      <div class="amenity-item"><span class="ico">📶</span>全室免费Wi-Fi</div>
+      <div class="amenity-item"><span class="ico">🍳</span>独立厨房设施</div>
+      <div class="amenity-item"><span class="ico">🛁</span>独立卫浴</div>
+      <div class="amenity-item"><span class="ico">❄️</span>空调 / 暖气</div>
+      <div class="amenity-item"><span class="ico">📺</span>智能电视</div>
+      <div class="amenity-item"><span class="ico">🧺</span>洗衣设施</div>
+      <div class="amenity-item"><span class="ico">🗼</span>东京铁塔步行可达</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-title">Info</div>
+    <h2>入住须知</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>入住 / 退房</h4>
+        <p>入住：15:00 起<br>退房：11:00 前</p>
+      </div>
+      <div class="info-card">
+        <h4>自助入住</h4>
+        <p>智能门锁，24小时灵活办理<br>无需前台，手机接收门锁密码</p>
+      </div>
+      <div class="info-card">
+        <h4>预订方式</h4>
+        <p>通过 Airbnb 平台预订<br>点击页面"在 Airbnb 预订"按钮</p>
+      </div>
+      <div class="info-card">
+        <h4>交通</h4>
+        <p>最近车站：三田站 / 芝公园站<br>东京铁塔步行约 8 分钟</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fff;padding:40px 0">
+  <div class="wrap">
+    <div class="section-title">Location</div>
+    <h2>民宿位置</h2>
+    <p style="color:var(--muted);font-size:14px;margin-bottom:4px">东京都港区芝 · 最近车站：三田站 / 芝公园站</p>
+    <div class="map-wrap">
+      <iframe src="https://maps.google.com/maps?q=東京都港区芝&output=embed&hl=zh-CN&z=16" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<div class="cta-bar">
+  <h2>预订 MKG HOME SHIBA</h2>
+  <p>港区芝 · 东京铁塔近旁 · 6间独立精品客室</p>
+  <div class="cta-btns">
+    <a class="btn-gold" href="https://www.airbnb.com" target="_blank" rel="noopener">在 Airbnb 预订</a>
+    <a class="btn-outline" href="stay.html#guesthouses">← 返回住宿列表</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 株式会社MKG Japan · <a href="index.html">官网首页</a> · <a href="faq.html">常见问题</a> · <a href="index.html#contact">联系我们</a></p>
+</footer>
+
+</body>
+</html>
