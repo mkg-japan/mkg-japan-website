@@ -996,6 +996,17 @@
         grid.appendChild(el);
       }
 
+      // 选退房时：找到入住后第一个Closed夜，该日之后的退房不可选
+      let checkoutCutoff = null; // 可退房的最后一天（含）
+      if (pickStep === 1 && ciDate) {
+        let scan = new Date(ciDate);
+        for (let i = 1; i <= 90; i++) {
+          scan.setDate(scan.getDate() + 1);
+          const ds = scan.toISOString().slice(0,10);
+          if (availMap[ds] === 'Closed') { checkoutCutoff = ds; break; }
+        }
+      }
+
       for (let d = 1; d <= daysInMonth; d++) {
         const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
         const el = document.createElement('div');
@@ -1003,13 +1014,14 @@
         el.dataset.date = dateStr;
 
         const isPast = dateStr < todayStr;
-        const status = availMap[dateStr]; // undefined = 未加载
-        // 已选入住且正在选退房时，不足2晚的日期不可选
+        const status = availMap[dateStr];
         const minStay = 2;
         const isTooSoon = pickStep === 1 && ciDate && dateStr > ciDate &&
           Math.round((new Date(dateStr) - new Date(ciDate)) / 86400000) < minStay;
+        // 退房日超过首个Closed夜 → 不可选
+        const isBlockedByGap = pickStep === 1 && checkoutCutoff && dateStr > checkoutCutoff;
 
-        if (isPast || isTooSoon) {
+        if (isPast || isTooSoon || isBlockedByGap) {
           el.className = isPast ? 'cal-day past' : 'cal-day closed';
         } else if (status === 'Avail') {
           el.className = 'cal-day avail';
@@ -1017,7 +1029,6 @@
         } else if (status === 'Closed') {
           el.className = 'cal-day closed';
         } else {
-          // 未加载或API未就绪 → 默认可点击
           el.className = 'cal-day avail';
           el.onclick = () => pickDate(dateStr);
         }
@@ -1049,14 +1060,26 @@
         // 选退房
         const nights = Math.round((new Date(dateStr) - new Date(ciDate)) / 86400000);
         if (dateStr <= ciDate) {
-          // 点了早于入住的日期 → 重新选入住
           ciDate = dateStr; coDate = null; pickStep = 1;
         } else if (nights < 2) {
-          // 不足2晚，忽略
           return;
         } else {
-          coDate = dateStr; pickStep = 2;
-          fetchAvail();
+          // 检查 [ciDate, dateStr) 范围内是否有 Closed 夜
+          let hasGap = false;
+          let scan = new Date(ciDate);
+          const limit = new Date(dateStr);
+          while (scan < limit) {
+            const ds = scan.toISOString().slice(0,10);
+            if (availMap[ds] === 'Closed') { hasGap = true; break; }
+            scan.setDate(scan.getDate() + 1);
+          }
+          if (hasGap) {
+            // 范围内有不可用日期 → 重置为以该日作为新入住
+            ciDate = dateStr; coDate = null; pickStep = 1;
+          } else {
+            coDate = dateStr; pickStep = 2;
+            fetchAvail();
+          }
         }
         updateDatesBar();
         renderCalendar();
