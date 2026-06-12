@@ -93,7 +93,24 @@
     .links a{opacity:1}
     .links a:hover{color:var(--gold)}
     .nav-cta{padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:white!important}
-    .nav-book{padding:11px 16px;border-radius:999px;background:var(--gold);color:var(--navy-2)!important;font-weight:800;box-shadow:0 10px 24px rgba(201,166,91,.25)}
+    .nav-book{padding:11px 16px;border-radius:999px;background:var(--gold);color:var(--navy-2)!important;font-weight:800;box-shadow:0 10px 24px rgba(201,166,91,.25);cursor:pointer;border:none;font-family:inherit;font-size:inherit;letter-spacing:inherit}
+    /* ── Stay 下拉菜单 ───────────────────────── */
+    .stay-dd-wrap{position:relative;display:inline-flex}
+    .stay-dropdown{display:none;position:absolute;top:calc(100% + 10px);right:0;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 40px rgba(11,23,51,.15);min-width:220px;z-index:1000;padding:12px 0}
+    .stay-dropdown.open{display:block}
+    .stay-dd-hd{display:block;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:4px 16px 5px}
+    .stay-dd-item{display:block;font-size:13px;font-weight:700;padding:9px 16px;white-space:nowrap;transition:.15s}
+    .stay-dd-item.on{color:var(--gold);cursor:pointer}
+    .stay-dd-item.on:hover{background:rgba(201,166,91,.08);color:var(--navy)}
+    .stay-dd-item.off{color:#ccc;cursor:default;font-weight:500}
+    .stay-dd-divider{height:1px;background:var(--line);margin:8px 0}
+    /* Mobile drawer stay section */
+    .drawer-stay-btn{width:calc(100% - 32px);margin:10px 16px 0;background:var(--gold);color:var(--navy-2)!important;border-radius:999px;font-size:14px;font-weight:800;padding:13px 24px;cursor:pointer;border:none;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px}
+    .drawer-stay-list{display:none;background:#fffdf7;border-top:1px solid var(--line)}
+    .drawer-stay-list.open{display:block}
+    .drawer-stay-hd{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:10px 24px 4px;display:block}
+    a.drawer-stay-item{display:block;padding:11px 24px;font-size:14px;font-weight:700;color:var(--gold);border-bottom:1px solid var(--line)}
+    span.drawer-stay-item{display:block;padding:11px 24px;font-size:13px;color:#bbb;border-bottom:1px solid var(--line)}
     .lang-sw{display:flex;gap:3px;margin-left:8px}
     .lang-sw button{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.82);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer;transition:.2s;letter-spacing:.04em}
     .lang-sw button:hover,.lang-sw button.active{background:var(--gold);border-color:var(--gold);color:var(--navy-2)}
@@ -503,7 +520,20 @@
         <a href="#portfolio" data-i18n="nav.projects">项目一览</a>
         <a href="#development" data-i18n="nav.stay">旅宿预订</a>
         <a href="faq.html" data-i18n="nav.faq">FAQ</a>
-        <a class="nav-book" href="stay.html" data-i18n="nav.book">预订旅宿 · MKG Stay</a>
+        <div class="stay-dd-wrap" id="navStayWrap">
+          <button class="nav-book" onclick="toggleStayDd('nav')"><span data-i18n="nav.book">预订旅宿 · MKG Stay</span> ▾</button>
+          <div class="stay-dropdown" id="navStayDd">
+            <span class="stay-dd-hd" data-i18n="dd.operating">运营中</span>
+            <a class="stay-dd-item on" href="home-shinjuku.html">MKG HOME 新宿</a>
+            <a class="stay-dd-item on" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener">MKG Hotel Asakusa</a>
+            <a class="stay-dd-item on" href="https://www.airbnb.com" target="_blank" rel="noopener">MKG HOME SHIBA</a>
+            <div class="stay-dd-divider"></div>
+            <span class="stay-dd-hd" data-i18n="dd.building">建设中</span>
+            <span class="stay-dd-item off">MKG HOTEL OKACHIMACHI</span>
+            <span class="stay-dd-item off">MKG HOTEL RYUSEN</span>
+            <span class="stay-dd-item off">MKG HOTEL KITAUENO</span>
+          </div>
+        </div>
         <a class="nav-cta" href="#contact" data-i18n="nav.contact">联系我们</a>
         <div class="desk-lang-wrap">
           <button class="desk-lang-btn" id="deskLangBtn" onclick="toggleDeskLang()" aria-label="Language">
@@ -538,7 +568,17 @@
     <a href="#portfolio" onclick="closeDrawer()" data-i18n="nav.projects">项目一览</a>
     <a href="#development" onclick="closeDrawer()" data-i18n="nav.stay">旅宿预订</a>
     <a href="faq.html" onclick="closeDrawer()" data-i18n="nav.faq">FAQ</a>
-    <a class="drawer-book" href="stay.html" data-i18n="nav.book">预订旅宿 · MKG Stay</a>
+    <button class="drawer-stay-btn" onclick="toggleDrawerStay()"><span data-i18n="nav.book">预订旅宿 · MKG Stay</span> ▾</button>
+    <div class="drawer-stay-list" id="drawerStayList">
+      <span class="drawer-stay-hd" data-i18n="dd.operating">运营中</span>
+      <a class="drawer-stay-item" href="home-shinjuku.html" onclick="closeDrawer()">MKG HOME 新宿</a>
+      <a class="drawer-stay-item" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener">MKG Hotel Asakusa</a>
+      <a class="drawer-stay-item" href="https://www.airbnb.com" target="_blank" rel="noopener">MKG HOME SHIBA</a>
+      <span class="drawer-stay-hd" data-i18n="dd.building">建设中</span>
+      <span class="drawer-stay-item">MKG HOTEL OKACHIMACHI</span>
+      <span class="drawer-stay-item">MKG HOTEL RYUSEN</span>
+      <span class="drawer-stay-item">MKG HOTEL KITAUENO</span>
+    </div>
     <a class="drawer-cta" href="#contact" onclick="closeDrawer()" data-i18n="nav.contact">联系我们</a>
 
   </nav>
@@ -552,7 +592,20 @@
             <span data-i18n="hero.desc">株式会社 MKG Japan 专注于东京不动产投资、酒店开发、民宿运营与资产管理，为投资人及合作伙伴提供从资产筛选、开发建设到运营管理的一站式解决方案。</span>
           </p>
           <div class="hero-actions">
-            <a class="btn primary" href="stay.html" data-i18n="nav.book">预订旅宿 · MKG Stay</a>
+            <div class="stay-dd-wrap" id="heroStayWrap">
+              <button class="btn primary" onclick="toggleStayDd('hero')"><span data-i18n="nav.book">预订旅宿 · MKG Stay</span> ▾</button>
+              <div class="stay-dropdown" id="heroStayDd">
+                <span class="stay-dd-hd" data-i18n="dd.operating">运营中</span>
+                <a class="stay-dd-item on" href="home-shinjuku.html">MKG HOME 新宿</a>
+                <a class="stay-dd-item on" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener">MKG Hotel Asakusa</a>
+                <a class="stay-dd-item on" href="https://www.airbnb.com" target="_blank" rel="noopener">MKG HOME SHIBA</a>
+                <div class="stay-dd-divider"></div>
+                <span class="stay-dd-hd" data-i18n="dd.building">建设中</span>
+                <span class="stay-dd-item off">MKG HOTEL OKACHIMACHI</span>
+                <span class="stay-dd-item off">MKG HOTEL RYUSEN</span>
+                <span class="stay-dd-item off">MKG HOTEL KITAUENO</span>
+              </div>
+            </div>
             <a class="btn ghost" href="#services" data-i18n="hero.btn2">查看业务范围</a>
           </div>
         </div>
@@ -1105,12 +1158,35 @@ function updateAllLangLabels(deskLabel, mobileLabel){
   if(dl) dl.textContent = deskLabel;
   if(ml) ml.textContent = mobileLabel;
 }
+// Stay 下拉菜单
+function toggleStayDd(id){
+  var dd=document.getElementById(id+'StayDd');
+  var other=document.getElementById(id==='nav'?'heroStayDd':'navStayDd');
+  dd.classList.toggle('open');
+  if(other) other.classList.remove('open');
+  closeDeskLang();
+}
+function closeAllStayDd(){
+  ['navStayDd','heroStayDd'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.classList.remove('open');
+  });
+}
+function toggleDrawerStay(){
+  document.getElementById('drawerStayList').classList.toggle('open');
+}
+
 // 点击外部关闭所有语言菜单
 document.addEventListener('click', function(e){
   var mwrap = document.querySelector('.mobile-lang-wrap');
   var dwrap = document.querySelector('.desk-lang-wrap');
   if(mwrap && !mwrap.contains(e.target)) closeLangMenu();
   if(dwrap && !dwrap.contains(e.target)) closeDeskLang();
+  // 关闭 Stay 下拉
+  var navW=document.getElementById('navStayWrap');
+  var heroW=document.getElementById('heroStayWrap');
+  if(navW && !navW.contains(e.target)) document.getElementById('navStayDd').classList.remove('open');
+  if(heroW && !heroW.contains(e.target)) document.getElementById('heroStayDd').classList.remove('open');
 });
 
 function toggleDrawer(){
@@ -1132,7 +1208,7 @@ window.addEventListener('scroll',function(){closeDrawer();},{ passive:true });
 const I18N = {
   zh: {
     'nav.about':'关于我们','nav.services':'事业内容','nav.projects':'项目一览',
-    'nav.stay':'旅宿预订','nav.contact':'联系我们','nav.book':'预订旅宿 · MKG Stay',
+    'nav.stay':'旅宿预订','nav.contact':'联系我们','nav.book':'预订旅宿 · MKG Stay','dd.operating':'运营中','dd.building':'建设中',
     'hero.title':'深耕日本不动产与酒店资产管理',
     'hero.desc':'株式会社 MKG Japan 专注于东京不动产投资、酒店开发、民宿运营与资产管理，为投资人及合作伙伴提供从资产筛选、开发建设到运营管理的一站式解决方案。',
     'hero.btn2':'查看业务范围','hero.map':'东京项目布局概览',
@@ -1204,7 +1280,7 @@ const I18N = {
   },
   ja: {
     'nav.about':'会社概要','nav.services':'事業内容','nav.projects':'プロジェクト',
-    'nav.stay':'旅宿一覧','nav.contact':'お問い合わせ','nav.book':'旅宿を予約 · MKG Stay','nav.faq':'FAQ',
+    'nav.stay':'旅宿一覧','nav.contact':'お問い合わせ','nav.book':'旅宿を予約 · MKG Stay','nav.faq':'FAQ','dd.operating':'運営中','dd.building':'建設中',
     'hero.title':'日本の不動産・<br>ホテル資産管理<br>スペシャリスト',
     'hero.desc':'株式会社MKG Japanは、東京における不動産投資・ホテル開発・民宿運営・資産管理を専門とし、投資家・パートナーに対して物件選定から開発・運営管理まで一貫したソリューションを提供します。',
     'hero.btn2':'事業内容を見る','hero.map':'東京プロジェクト概要',
@@ -1275,7 +1351,7 @@ const I18N = {
   },
   en: {
     'nav.about':'About Us','nav.services':'Services','nav.projects':'Projects',
-    'nav.stay':'Properties','nav.contact':'Contact','nav.book':'Book a Stay · MKG Stay',
+    'nav.stay':'Properties','nav.contact':'Contact','nav.book':'Book a Stay · MKG Stay','dd.operating':'Operational','dd.building':'Under Construction',
     'hero.title':'Tokyo Real Estate Development & Hotel Asset Management',
     'hero.desc':'MKG Japan specializes in real estate investment, hotel development, guesthouse operations, and asset management in Tokyo — providing end-to-end solutions from asset selection and development to operations management for investors and partners.',
     'hero.btn2':'Our Services','hero.map':'Tokyo Project Overview',
