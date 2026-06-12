@@ -1193,12 +1193,8 @@
       url.searchParams.set('checkIn', ciDate);
       url.searchParams.set('checkOut', coDate);
       url.searchParams.set('adults', guests);
-      const frame = document.getElementById('bookingFrame');
-      const loading = document.getElementById('iframeLoading');
-      loading.style.display = 'flex';
-      frame.src = url.toString();
-      document.getElementById('bookingModal').classList.add('open');
-      document.body.style.overflow = 'hidden';
+      // 临时直链模式：等SmartOrder修复CSP后改回 frame.src = url.toString()
+      window.open(url.toString(), '_blank');
     }
 
     function closeModal() {
