@@ -99,7 +99,7 @@
     .lang-sw button{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.82);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer;transition:.2s;letter-spacing:.04em}
     .lang-sw button:hover,.lang-sw button.active{background:var(--gold);border-color:var(--gold);color:var(--navy-2)}
     .hero{
-      position:relative;min-height:760px;color:#fff;overflow:hidden;background:var(--navy-2);
+      position:relative;min-height:600px;color:#fff;overflow:hidden;background:var(--navy-2);
     }
     .hero::before{
       content:"";position:absolute;inset:0;
@@ -111,7 +111,7 @@
       content:"";position:absolute;left:-10%;right:-10%;bottom:-130px;height:220px;
       background:var(--bg);transform:rotate(-3deg);
     }
-    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;min-height:760px;padding:86px 0 130px}
+    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;min-height:600px;padding:56px 0 90px}
     .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 13px;border:1px solid rgba(232,212,154,.45);border-radius:999px;color:var(--gold-2);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.06)}
     .eyebrow::before{content:"";width:8px;height:8px;border-radius:999px;background:var(--gold)}
     h1{margin:24px 0 20px;font-size:clamp(42px,6vw,62px);line-height:1.04;letter-spacing:-.04em}
@@ -510,7 +510,7 @@
         <a href="#services" data-i18n="nav.services">事业内容</a>
         <a href="#portfolio" data-i18n="nav.projects">项目一览</a>
         <a href="#development" data-i18n="nav.stay">旅宿预订</a>
-        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="#faq-preview" data-i18n="nav.faq">FAQ</a>
         <a class="nav-book" href="stay.html" data-i18n="nav.book">预订旅宿 · MKG Stay</a>
         <a class="nav-cta" href="#contact" data-i18n="nav.contact">联系我们</a>
         <div class="desk-lang-wrap">
@@ -545,7 +545,7 @@
     <a href="#services" onclick="closeDrawer()" data-i18n="nav.services">事业内容</a>
     <a href="#portfolio" onclick="closeDrawer()" data-i18n="nav.projects">项目一览</a>
     <a href="#development" onclick="closeDrawer()" data-i18n="nav.stay">旅宿预订</a>
-    <a href="faq.html" onclick="closeDrawer()" data-i18n="nav.faq">FAQ</a>
+    <a href="#faq-preview" onclick="closeDrawer()" data-i18n="nav.faq">FAQ</a>
     <a class="drawer-book" href="stay.html" data-i18n="nav.book">预订旅宿 · MKG Stay</a>
     <a class="drawer-cta" href="#contact" onclick="closeDrawer()" data-i18n="nav.contact">联系我们</a>
 
@@ -555,7 +555,6 @@
     <section class="hero" id="top">
       <div class="wrap hero-grid">
         <div>
-          <span class="eyebrow">MKG Japan Official Website</span>
           <h1 data-i18n="hero.title">深耕日本不动产与酒店资产管理</h1>
           <p>
             <span data-i18n="hero.desc">株式会社 MKG Japan 专注于东京不动产投资、酒店开发、民宿运营与资产管理，为投资人及合作伙伴提供从资产筛选、开发建设到运营管理的一站式解决方案。</span>
@@ -773,8 +772,8 @@
             <div class="thumb-strip">
               <figure><img loading="lazy" src="assets/shiba/p_room_overview.jpg" alt="客室①"></figure>
               <figure><img loading="lazy" src="assets/shiba/p_room_large.jpg" alt="客室②"></figure>
-              <figure><img loading="lazy" src="assets/shiba/p_dining.jpg" alt="ダイニング"></figure>
-              <figure><img loading="lazy" src="assets/shiba/p_bath.jpg" alt="バスルーム"></figure>
+              <figure><img loading="lazy" src="assets/shiba.jpg" alt="客室③"></figure>
+              <figure><img loading="lazy" src="assets/shiba_room1.jpg" alt="客室④"></figure>
             </div>
             <div class="body">
               <p class="proj-name">MKG HOME SHIBA</p>
@@ -958,9 +957,6 @@
           <div style="font-size:14px;color:var(--muted);line-height:1.7" data-i18n="faq.a4">不需要。我们提供全委托运营管理服务，涵盖人员聘用培训管理、OTA预订、定价策略、设施维护及收支管理等。</div>
         </div>
 
-      </div>
-      <div style="text-align:center">
-        <a href="faq.html" style="display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:999px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;transition:.2s" data-i18n="faq.more">查看全部问题 & 专业术语解释 →</a>
       </div>
     </div>
   </section>
