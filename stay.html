@@ -22,12 +22,20 @@
     .topbar{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.2) blur(12px);background:rgba(11,23,51,.94);border-bottom:1px solid rgba(255,255,255,.08)}
     .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
     .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--gold);letter-spacing:.02em}
-    .brand img{width:64px;height:auto}
+    .brand img{width:120px;height:auto}
     .brand small{display:block;font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
     .links{display:flex;align-items:center;gap:16px;font-size:13px;color:rgba(255,255,255,.88);font-weight:650;white-space:nowrap}
     .links a:hover{color:var(--gold)}
     .nav-book{padding:11px 16px;border-radius:999px;background:var(--gold);color:var(--navy-2)!important;font-weight:800;box-shadow:0 10px 24px rgba(201,166,91,.25)}
     .nav-cta{padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:white!important}
+    .desk-lang-wrap{position:relative}
+    .desk-lang-btn{display:flex;align-items:center;gap:5px;background:none;border:1px solid rgba(201,168,91,.4);color:var(--gold-2);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.2s}
+    .desk-lang-btn:hover{background:rgba(255,255,255,.08)}
+    .desk-lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #e7eaf0;border-radius:10px;box-shadow:0 8px 24px rgba(11,23,51,.12);overflow:hidden;min-width:140px;z-index:1000}
+    .desk-lang-menu.open{display:block}
+    .desk-lang-menu button{display:block;width:100%;padding:11px 18px;text-align:left;background:none;border:none;border-bottom:1px solid #e7eaf0;font-size:13px;cursor:pointer;transition:.15s}
+    .desk-lang-menu button:last-child{border-bottom:none}
+    .desk-lang-menu button:hover{background:#f7f5f1;color:#c9a65b}
 
     /* ── Hero ── */
     .stay-hero{background:var(--navy-2);color:white;padding:80px 0 60px;text-align:center;position:relative;overflow:hidden}
@@ -132,11 +140,22 @@
         <span>MKG Japan<small>Real Estate & Hospitality Assets</small></span>
       </a>
       <nav class="links">
-        <a href="index.html#about">关于我们</a>
-        <a href="index.html#services">事业内容</a>
-        <a href="index.html#portfolio">项目一览</a>
-        <a class="nav-book" href="stay.html">MKG Stay</a>
-        <a class="nav-cta" href="index.html#contact">联系我们</a>
+        <a href="index.html#about" data-i18n="nav.about">关于我们</a>
+        <a href="index.html#services" data-i18n="nav.services">事业内容</a>
+        <a href="index.html#portfolio" data-i18n="nav.projects">项目一览</a>
+        <a class="nav-book" href="stay.html" data-i18n="nav.stay">MKG Stay</a>
+        <a class="nav-cta" href="index.html#contact" data-i18n="nav.contact">联系我们</a>
+        <div class="desk-lang-wrap">
+          <button class="desk-lang-btn" id="deskLangBtn" onclick="toggleDeskLang()" aria-label="Language">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span id="deskLangLabel">语言</span> ▾
+          </button>
+          <div class="desk-lang-menu" id="deskLangMenu">
+            <button onclick="setLang('zh');closeDeskLang()">🇨🇳 中文</button>
+            <button onclick="setLang('en');closeDeskLang()">🇺🇸 English</button>
+            <button onclick="setLang('ja');closeDeskLang()">🇯🇵 日本語</button>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
@@ -280,7 +299,7 @@
             <h3>MKG HOTEL Asakusa</h3>
             <div class="prop-addr">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              東京都台東区駒形
+              <span data-i18n="addr.asakusa">台东区驹形</span>
             </div>
             <div class="prop-meta">
               <span>🛏 <b>9</b> 间客室</span>
@@ -317,7 +336,7 @@
             <h3>MKG HOTEL OKACHIMACHI</h3>
             <div class="prop-addr">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              東京都台東区台東3丁目
+              <span data-i18n="addr.okachi">台东区台东3丁目</span>
             </div>
             <div class="prop-meta">
               <span>🏗 建设阶段进行中</span>
@@ -337,7 +356,7 @@
             <h3>MKG HOTEL RYUSEN</h3>
             <div class="prop-addr">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              東京都台東区龍泉
+              <span data-i18n="addr.ryusen">台东区龙泉</span>
             </div>
             <div class="prop-meta">
               <span>🏗 建设阶段进行中</span>
@@ -357,7 +376,7 @@
             <h3>北上野酒店（仮称）</h3>
             <div class="prop-addr">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              東京都台東区北上野
+              <span data-i18n="addr.kitaueno">台东区北上野</span>
             </div>
             <div class="prop-meta">
               <span>🏗 建设阶段进行中</span>
@@ -389,7 +408,7 @@
             <h3>MKG HOME 新宿</h3>
             <div class="prop-addr">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              東京都新宿区大久保
+              <span data-i18n="addr.shinjuku">新宿区大久保</span>
             </div>
             <div class="prop-meta">
               <span>🛏 <b>7</b> 间客室</span>
@@ -415,7 +434,7 @@
             <h3>MKG HOME SHIBA</h3>
             <div class="prop-addr">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              東京都港区芝（東京タワー近く）
+              <span data-i18n="addr.shiba">港区芝（东京铁塔近旁）</span>
             </div>
             <div class="prop-meta">
               <span>🛏 <b>6</b> 间客室</span>
@@ -441,6 +460,50 @@
   </footer>
 
   <script>
+    const T = {
+      zh: {
+        'nav.about':'关于我们','nav.services':'事业内容','nav.projects':'项目一览',
+        'nav.stay':'MKG Stay','nav.contact':'联系我们',
+        'addr.asakusa':'台东区驹形','addr.okachi':'台东区台东3丁目',
+        'addr.ryusen':'台东区龙泉','addr.kitaueno':'台东区北上野',
+        'addr.shinjuku':'新宿区大久保','addr.shiba':'港区芝（东京铁塔近旁）',
+      },
+      en: {
+        'nav.about':'About','nav.services':'Services','nav.projects':'Portfolio',
+        'nav.stay':'MKG Stay','nav.contact':'Contact',
+        'addr.asakusa':'Komagata, Taito-ku','addr.okachi':'Taito 3-chome, Taito-ku',
+        'addr.ryusen':'Ryusen, Taito-ku','addr.kitaueno':'Kitaueno, Taito-ku',
+        'addr.shinjuku':'Okubo, Shinjuku-ku','addr.shiba':'Shiba, Minato-ku (near Tokyo Tower)',
+      },
+      ja: {
+        'nav.about':'私たちについて','nav.services':'事業内容','nav.projects':'プロジェクト',
+        'nav.stay':'MKG Stay','nav.contact':'お問い合わせ',
+        'addr.asakusa':'台東区駒形','addr.okachi':'台東区台東3丁目',
+        'addr.ryusen':'台東区龍泉','addr.kitaueno':'台東区北上野',
+        'addr.shinjuku':'新宿区大久保','addr.shiba':'港区芝（東京タワー近く）',
+      }
+    };
+    let currentLang = 'zh';
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja' : 'en';
+      const dict = T[lang] || T.zh;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (dict[key]) el.textContent = dict[key];
+      });
+      document.getElementById('deskLangLabel').textContent = lang === 'zh' ? '语言' : lang === 'ja' ? '言語' : 'Language';
+    }
+    function toggleDeskLang() {
+      document.getElementById('deskLangMenu').classList.toggle('open');
+    }
+    function closeDeskLang() {
+      document.getElementById('deskLangMenu').classList.remove('open');
+    }
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.desk-lang-wrap')) closeDeskLang();
+    });
+
     function switchTab(name) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
