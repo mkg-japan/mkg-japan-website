@@ -22,7 +22,7 @@
     .topbar{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.2) blur(12px);background:rgba(11,23,51,.94);border-bottom:1px solid rgba(255,255,255,.08)}
     .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
     .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--gold);letter-spacing:.02em}
-    .brand img{width:120px;height:auto}
+    .brand img{height:52px;width:auto}
     .brand small{display:block;font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
     .links{display:flex;align-items:center;gap:16px;font-size:13px;color:rgba(255,255,255,.88);font-weight:650;white-space:nowrap}
     .links a:hover{color:var(--gold)}
@@ -140,20 +140,16 @@
         <span>MKG Japan<small>Real Estate & Hospitality Assets</small></span>
       </a>
       <nav class="links">
-        <a href="index.html#about" data-i18n="nav.about">关于我们</a>
-        <a href="index.html#services" data-i18n="nav.services">事业内容</a>
-        <a href="index.html#portfolio" data-i18n="nav.projects">项目一览</a>
-        <a class="nav-book" href="stay.html" data-i18n="nav.stay">MKG Stay</a>
-        <a class="nav-cta" href="index.html#contact" data-i18n="nav.contact">联系我们</a>
+        <a class="nav-cta" href="index.html" data-i18n="nav.home">← 集团官网</a>
         <div class="desk-lang-wrap">
           <button class="desk-lang-btn" id="deskLangBtn" onclick="toggleDeskLang()" aria-label="Language">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            <span id="deskLangLabel">语言</span> ▾
+            <span id="deskLangLabel">言語</span> ▾
           </button>
           <div class="desk-lang-menu" id="deskLangMenu">
-            <button onclick="setLang('zh');closeDeskLang()">🇨🇳 中文</button>
-            <button onclick="setLang('en');closeDeskLang()">🇺🇸 English</button>
             <button onclick="setLang('ja');closeDeskLang()">🇯🇵 日本語</button>
+            <button onclick="setLang('en');closeDeskLang()">🇺🇸 English</button>
+            <button onclick="setLang('zh');closeDeskLang()">🇨🇳 中文</button>
           </div>
         </div>
       </nav>
@@ -462,28 +458,25 @@
   <script>
     const T = {
       zh: {
-        'nav.about':'关于我们','nav.services':'事业内容','nav.projects':'项目一览',
-        'nav.stay':'MKG Stay','nav.contact':'联系我们',
+        'nav.home':'← 集团官网',
         'addr.asakusa':'台东区驹形','addr.okachi':'台东区台东3丁目',
         'addr.ryusen':'台东区龙泉','addr.kitaueno':'台东区北上野',
         'addr.shinjuku':'新宿区大久保','addr.shiba':'港区芝（东京铁塔近旁）',
       },
       en: {
-        'nav.about':'About','nav.services':'Services','nav.projects':'Portfolio',
-        'nav.stay':'MKG Stay','nav.contact':'Contact',
+        'nav.home':'← Main Site',
         'addr.asakusa':'Komagata, Taito-ku','addr.okachi':'Taito 3-chome, Taito-ku',
         'addr.ryusen':'Ryusen, Taito-ku','addr.kitaueno':'Kitaueno, Taito-ku',
         'addr.shinjuku':'Okubo, Shinjuku-ku','addr.shiba':'Shiba, Minato-ku (near Tokyo Tower)',
       },
       ja: {
-        'nav.about':'私たちについて','nav.services':'事業内容','nav.projects':'プロジェクト',
-        'nav.stay':'MKG Stay','nav.contact':'お問い合わせ',
+        'nav.home':'← 公式サイト',
         'addr.asakusa':'台東区駒形','addr.okachi':'台東区台東3丁目',
         'addr.ryusen':'台東区龍泉','addr.kitaueno':'台東区北上野',
         'addr.shinjuku':'新宿区大久保','addr.shiba':'港区芝（東京タワー近く）',
       }
     };
-    let currentLang = 'zh';
+    let currentLang = 'ja';
     function setLang(lang) {
       currentLang = lang;
       document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja' : 'en';
@@ -510,6 +503,9 @@
       document.getElementById('tab-' + name).classList.add('active');
       document.getElementById('panel-' + name).classList.add('active');
     }
+
+    // 默认日语
+    setLang('ja');
 
     // Support URL hash navigation: stay.html#hotels
     (function() {
