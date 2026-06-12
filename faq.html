@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ & 不动产术语 | MKG Japan</title>
+  <meta name="description" content="MKG Japan 常见问题解答与日本不动产专业术语手册，涵盖交易流程、税务、建筑规划、收益评估等。" />
+  <style>
+    :root{
+      --navy:#11234a;--navy-2:#0b1733;--gold:#c9a65b;--gold-2:#e8d49a;
+      --ink:#182033;--muted:#667085;--line:#e7eaf0;--bg:#f7f5f1;--card:#fff;
+      --radius:22px;--radius-sm:14px;--shadow:0 6px 28px rgba(11,23,51,.09);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","Noto Sans JP","PingFang SC","Hiragino Sans","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .wrap{width:min(960px,calc(100% - 40px));margin:0 auto}
+
+    /* Nav */
+    .topbar{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.2) blur(12px);background:rgba(11,23,51,.94);border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--gold)}
+    .brand img{height:52px;width:auto}
+    .brand small{display:block;font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+    .links{display:flex;align-items:center;gap:16px;font-size:13px;color:rgba(255,255,255,.88);font-weight:650;white-space:nowrap}
+    .links a:hover{color:var(--gold)}
+    .nav-cta{padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:white!important}
+    .lang-sw{display:flex;gap:3px;margin-left:8px}
+    .lang-sw button{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.82);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer;transition:.2s}
+    .lang-sw button.active,.lang-sw button:hover{background:var(--gold);border-color:var(--gold);color:var(--navy-2)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
+    .hamburger span{display:block;width:22px;height:2px;background:rgba(255,255,255,.85);border-radius:2px}
+    .mobile-menu{display:none;flex-direction:column;background:rgba(11,23,51,.98);padding:16px 20px 24px;gap:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:rgba(255,255,255,.88);font-weight:600}
+    @media(max-width:768px){.links{display:none}.hamburger{display:flex}}
+
+    /* Page hero */
+    .page-hero{background:var(--navy-2);padding:64px 0 50px;color:#fff}
+    .kicker{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-2);margin-bottom:12px}
+    .page-hero h1{margin:0 0 12px;font-size:clamp(28px,5vw,48px);line-height:1.1;letter-spacing:-.03em}
+    .page-hero p{color:rgba(255,255,255,.7);font-size:16px;max-width:600px;margin:0}
+
+    /* Content */
+    .content{padding:52px 0 80px}
+    .divider{height:1px;background:var(--line);margin:52px 0}
+
+    /* Category label */
+    .cat-label{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:var(--gold-2);font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:999px;margin-bottom:20px}
+
+    /* FAQ accordion */
+    .faq-category{margin-bottom:44px}
+    .faq-item{background:var(--card);border-radius:var(--radius-sm);box-shadow:var(--shadow);margin-bottom:8px;overflow:hidden}
+    .faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:18px 22px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;font-size:15px;font-weight:700;color:var(--navy);line-height:1.4;font-family:inherit}
+    .faq-q:hover{background:rgba(17,35,74,.04)}
+    .faq-icon{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--navy);transition:.2s;margin-top:2px}
+    .faq-item.open .faq-icon{background:var(--gold);color:var(--navy-2);transform:rotate(45deg)}
+    .faq-a{display:none;padding:4px 22px 18px;font-size:14px;color:var(--muted);line-height:1.8;border-top:1px solid var(--line)}
+    .faq-item.open .faq-a{display:block}
+    .faq-a p{margin:12px 0 0}
+    .faq-a ul{margin:10px 0 0;padding-left:20px}
+    .faq-a li{margin-bottom:5px}
+    .faq-a strong{color:var(--navy)}
+
+    /* Tax table */
+    .tax-table{width:100%;border-collapse:collapse;font-size:13px;margin:14px 0 8px}
+    .tax-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-weight:700}
+    .tax-table td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+    .tax-table tr:last-child td{border-bottom:none}
+    .tax-table tr:nth-child(even) td{background:rgba(17,35,74,.03)}
+    .tax-note{font-size:12px;color:var(--muted);margin:6px 0 0}
+
+    /* Glossary */
+    .glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:10px}
+    .gterm{background:var(--card);border-radius:var(--radius-sm);box-shadow:var(--shadow);padding:16px 20px}
+    .gterm-name{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:2px}
+    .gterm-jp{font-size:11.5px;color:var(--gold);font-weight:700;margin-bottom:8px;letter-spacing:.03em}
+    .gterm-def{font-size:13px;color:var(--muted);line-height:1.75}
+
+    /* i18n */
+    [data-zh],[data-ja],[data-en]{display:none}
+    body.lang-zh [data-zh]{display:contents}
+    body.lang-ja [data-ja]{display:contents}
+    body.lang-en [data-en]{display:contents}
+    [data-b-zh],[data-b-ja],[data-b-en]{display:none}
+    body.lang-zh [data-b-zh]{display:block}
+    body.lang-ja [data-b-ja]{display:block}
+    body.lang-en [data-b-en]{display:block}
+    [data-t-zh],[data-t-ja],[data-t-en]{display:none}
+    body.lang-zh [data-t-zh]{display:table}
+    body.lang-ja [data-t-ja]{display:table}
+    body.lang-en [data-t-en]{display:table}
+
+    @media(max-width:640px){.glossary-grid{grid-template-columns:1fr}.page-hero{padding:48px 0 36px}.tax-table{font-size:12px}.tax-table th,.tax-table td{padding:7px 8px}}
+  </style>
+</head>
+<body class="lang-ja">
+
+<header class="topbar">
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="MKG Japan">
+      <span>MKG Japan<small>Real Estate & Hospitality</small></span>
+    </a>
+    <nav class="links">
+      <a href="index.html#about"><span data-zh>关于我们</span><span data-ja>会社概要</span><span data-en>About</span></a>
+      <a href="index.html#services"><span data-zh>事业内容</span><span data-ja>事業内容</span><span data-en>Services</span></a>
+      <a href="index.html#development"><span data-zh>项目一览</span><span data-ja>プロジェクト</span><span data-en>Projects</span></a>
+      <a href="faq.html" style="color:var(--gold)">FAQ</a>
+      <a class="nav-cta" href="index.html#contact"><span data-zh>联系我们</span><span data-ja>お問い合わせ</span><span data-en>Contact</span></a>
+      <div class="lang-sw">
+        <button onclick="setLang('ja')" id="btn-ja">日本語</button>
+        <button onclick="setLang('en')" id="btn-en">EN</button>
+        <button onclick="setLang('zh')" id="btn-zh">中文</button>
+      </div>
+    </nav>
+    <button class="hamburger" onclick="document.getElementById('mm').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mm">
+    <a href="index.html"><span data-zh>← 集团官网</span><span data-ja>← 公式サイトへ</span><span data-en>← Main Site</span></a>
+    <a href="index.html#contact"><span data-zh>联系我们</span><span data-ja>お問い合わせ</span><span data-en>Contact</span></a>
+    <div class="lang-sw" style="margin:8px 0 0">
+      <button onclick="setLang('ja')" id="mbtn-ja">日本語</button>
+      <button onclick="setLang('en')" id="mbtn-en">EN</button>
+      <button onclick="setLang('zh')" id="mbtn-zh">中文</button>
+    </div>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <div class="kicker"><span data-zh>常见问题 & 专业术语</span><span data-ja>よくある質問 ＆ 専門用語集</span><span data-en>FAQ & Glossary</span></div>
+    <h1><span data-zh>MKG Japan — 常见问题解答 & 不动产术语手册</span><span data-ja>MKG Japan — よくある質問 & 不動産用語集</span><span data-en>MKG Japan — FAQ & Real Estate Glossary</span></h1>
+    <p><span data-zh>供投资者 / 合作方参考使用，涵盖公司服务、投资流程、税费、运营管理及专业术语。</span><span data-ja>投資家・パートナー向け。サービス概要・投資プロセス・税務・運営管理・専門用語を網羅。</span><span data-en>For investors and partners. Covers services, investment process, taxes, operations management, and key terms.</span></p>
+  </div>
+</div>
+
+<main class="content">
+  <div class="wrap">
+
+    <!-- ══ FAQ ══ -->
+    <div class="cat-label"><span data-zh>第一部分 · 常见问题解答</span><span data-ja>第一部 · よくある質問</span><span data-en>Part 1 · Frequently Asked Questions</span></div>
+
+    <!-- 关于公司 -->
+    <div class="faq-category">
+      <p style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin:0 0 14px"><span data-zh>关于公司与服务</span><span data-ja>会社・サービスについて</span><span data-en>About the Company & Services</span></p>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>MKG Japan 主要做什么业务？</span><span data-ja>MKG Japan の主な事業は何ですか？</span><span data-en>What does MKG Japan do?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>我们专注于东京核心区域的不动产投资分析、酒店 / 民宿开发建造，以及运营管理委托，为投资者提供从选地、开发到开业运营的全链条服务。</span><span data-ja>東京都心エリアの不動産投資分析・ホテル／民泊開発建設・運営管理受託を専門としています。土地選定から開発・開業運営まで、投資家に対してワンストップサービスを提供しています。</span><span data-en>We specialize in real estate investment analysis, hotel/short-term rental development, and operations management in central Tokyo, providing investors with end-to-end services from site selection through to hotel operations.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>你们持有哪些资质？</span><span data-ja>どのような資格・登録を有していますか？</span><span data-en>What licenses and registrations does MKG Japan hold?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>持有日本<strong>宅地建物取引业许可</strong>（不动产买卖 / 中介）及<strong>住宅宿泊管理业者注册</strong>（国土交通大臣登录），可依法开展全部相关业务。</span><span data-ja><strong>宅地建物取引業許可</strong>（不動産売買・仲介）および<strong>住宅宿泊管理業者登録</strong>（国土交通大臣登録）を取得しており、すべての関連業務を合法的に行えます。</span><span data-en>We hold a <strong>Real Estate Broker License</strong> (宅地建物取引業許可) and are registered as a <strong>Housing Accommodation Management Business</strong> (住宅宿泊管理業者, Ministry of Land, Infrastructure, Transport and Tourism), enabling us to conduct all related activities legally.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>主要聚焦哪些区域？</span><span data-ja>主にどのエリアを対象としていますか？</span><span data-en>Which areas do you focus on?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>以东京核心区域为主，包括台东区、港区、新宿区等高成长潜力地带，重点关注具备长期增值潜力及旅游资源优势的地块。</span><span data-ja>東京都心エリア（台東区・港区・新宿区等）を中心に、長期的な価値向上ポテンシャルと観光資源の優位性を持つ立地を重点的にターゲットにしています。</span><span data-en>We focus primarily on central Tokyo, including Taito, Minato, and Shinjuku wards, with an emphasis on locations with long-term appreciation potential and strong tourism fundamentals.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>是否提供中文服务？</span><span data-ja>中国語でのサービスは提供していますか？</span><span data-en>Do you offer services in Chinese?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>是的，我们团队提供<strong>中文、日文及英文</strong>服务，全程沟通无障碍。</span><span data-ja>はい。当社チームは<strong>中国語・日本語・英語</strong>でのサービスを提供しており、全プロセスを円滑にサポートします。</span><span data-en>Yes, our team provides services in <strong>Chinese, Japanese, and English</strong> for seamless communication throughout the entire process.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 关于投资 -->
+    <div class="faq-category">
+      <p style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin:0 0 14px"><span data-zh>关于不动产投资</span><span data-ja>不動産投資について</span><span data-en>About Real Estate Investment</span></p>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>外国人（非日本居民）可以在日本购买不动产吗？</span><span data-ja>外国人（非居住者）は日本で不動産を購入できますか？</span><span data-en>Can foreigners (non-residents) buy real estate in Japan?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>可以。日本对外国人购置不动产<strong>无特别限制</strong>，外国个人或法人均可自由购入土地及建筑物。我们可协助处理相关手续及法律流程。</span><span data-ja>はい。日本は外国人の不動産取得に<strong>特別な制限を設けておらず</strong>、外国人個人・法人ともに自由に土地・建物を購入できます。関連手続き・法的プロセスのサポートも行っています。</span><span data-en>Yes. Japan places <strong>no special restrictions</strong> on foreign real estate ownership. Both foreign individuals and corporations can freely purchase land and buildings. We can assist with all related procedures and legal processes.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>投资规模大概需要多少？</span><span data-ja>投資規模はどのくらい必要ですか？</span><span data-en>What is the typical investment size?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>土地＋建造一体的酒店开发项目，总投资通常在<strong>数亿日元规模</strong>（含土地取得、建筑工程及开业准备费用）。具体因地块位置与方案不同差异较大，欢迎联系我们进行初步测算。</span><span data-ja>土地取得＋建設一体型ホテル開発プロジェクトの場合、総投資額は通常<strong>数億円規模</strong>（土地取得・建設工事・開業準備費用を含む）です。立地や計画内容により大きく異なりますので、まずはお問い合わせください。</span><span data-en>For integrated land acquisition and hotel development projects, total investment is typically in the <strong>hundreds of millions of yen</strong> (including land, construction, and pre-opening costs). It varies widely by location and project scope — please contact us for a preliminary estimate.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>购买日本不动产时，需要亲自到日本吗？</span><span data-ja>不動産購入の際、日本に来る必要はありますか？</span><span data-en>Do I need to be physically present in Japan to purchase property?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>原则上不需要全程在日。签约等关键环节可通过<strong>授权代理人（委任状）</strong>办理，但建议在购入前实地考察目标物件。</span><span data-ja>必ずしも全工程を日本国内で行う必要はありません。契約等の重要な場面は<strong>代理人（委任状）</strong>を通じて対応可能ですが、購入前の現地視察はお勧めします。</span><span data-en>You do not need to be present throughout the entire process. Key steps such as contract signing can be handled through an <strong>authorized representative (power of attorney)</strong>, though an on-site inspection before purchase is recommended.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>如何判断一块土地是否适合开发酒店？</span><span data-ja>土地がホテル開発に適しているかどうか、どう判断しますか？</span><span data-en>How do you determine if a site is suitable for hotel development?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>主要考察因素包括：<strong>用途地域</strong>（是否允许旅馆用途）、<strong>容积率 / 建蔽率</strong>（决定可建规模）、周边交通与旅游资源，以及当地旅游需求数据。我们可提供专业的可行性测算。</span><span data-ja>主な評価要素：<strong>用途地域</strong>（旅館用途が認められるか）、<strong>容積率／建蔽率</strong>（建設規模の決定要因）、周辺の交通・観光資源、地域の観光需要データ。専門的なフィージビリティ試算も対応しています。</span><span data-en>Key evaluation factors include: <strong>zoning</strong> (whether hotel use is permitted), <strong>FAR/BCR</strong> (determining build scale), proximity to transportation and tourism resources, and local tourism demand data. We provide professional feasibility assessments.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 税费 -->
+    <div class="faq-category">
+      <p style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin:0 0 14px"><span data-zh>关于税费与成本</span><span data-ja>税務・コストについて</span><span data-en>About Taxes & Costs</span></p>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>购买不动产时需要缴纳哪些税费？</span><span data-ja>不動産購入時の税金・費用はどのようなものがありますか？</span><span data-en>What taxes and costs apply when purchasing real estate?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p data-b-zh>购入时附带费用合计约为成交总价的 <strong>7～10%</strong>，主要项目如下：</p>
+          <p data-b-ja>購入時の付帯費用は成約価格の<strong>7〜10%</strong>が目安です：</p>
+          <p data-b-en>Acquisition costs typically total <strong>7–10%</strong> of the purchase price, covering the following:</p>
+          <table class="tax-table" data-t-zh>
+            <thead><tr><th>税费项目</th><th>税率 / 金额（参考）</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td><strong>不動産取得税</strong><br>（不动产取得税）</td><td>固定资产评估额 × 3%<br>（土地 / 住宅用建筑物）</td><td>取得后约 3～6 个月由都道府县征收，一次性缴纳</td></tr>
+              <tr><td><strong>登録免許税</strong><br>（登记许可税）</td><td>所有权保存登记：评估额 × 0.4%<br>所有权移转登记：评估额 × 1.5%～2%</td><td>向法务局申请不动产登记时缴纳</td></tr>
+              <tr><td><strong>印紙税</strong><br>（印花税）</td><td>合同金额对应定额<br>例：1億円合同约 6 万円</td><td>签订不动产买卖合同时贴付印花</td></tr>
+              <tr><td><strong>仲介手数料</strong><br>（中介佣金）</td><td>成交价 × 3% ＋ 6 万円 ＋ 消费税<br>（法定上限）</td><td>支付给宅建业者，买卖双方各自支付</td></tr>
+              <tr><td><strong>司法書士報酬</strong><br>（司法书士费）</td><td>约 10～20 万円<br>（视案件复杂度）</td><td>登记手续代理费，通常在过户当日支付</td></tr>
+              <tr><td><strong>消費税</strong><br>（消费税）</td><td>建筑物部分 × 10%<br>（土地不征消费税）</td><td>法人出售时征收；个人出售通常免征</td></tr>
+            </tbody>
+          </table>
+          <table class="tax-table" data-t-ja>
+            <thead><tr><th>税・費用項目</th><th>税率 / 金額（参考）</th><th>説明</th></tr></thead>
+            <tbody>
+              <tr><td><strong>不動産取得税</strong></td><td>固定資産評価額 × 3%</td><td>取得後3〜6ヶ月で都道府県から徴収、一度のみ</td></tr>
+              <tr><td><strong>登録免許税</strong></td><td>保存登記：評価額 × 0.4%<br>移転登記：評価額 × 1.5〜2%</td><td>法務局への不動産登記申請時に納付</td></tr>
+              <tr><td><strong>印紙税</strong></td><td>契約金額に応じた定額<br>例：1億円契約 約6万円</td><td>売買契約書に印紙を貼付して納付</td></tr>
+              <tr><td><strong>仲介手数料</strong></td><td>成約価格 × 3% ＋ 6万円 ＋ 消費税</td><td>宅建業者へ支払い（売買双方それぞれ）</td></tr>
+              <tr><td><strong>司法書士報酬</strong></td><td>約10〜20万円</td><td>登記手続き代理費用、引き渡し当日支払い</td></tr>
+              <tr><td><strong>消費税</strong></td><td>建物部分 × 10%（土地は非課税）</td><td>法人売却時に課税、個人売却は通常非課税</td></tr>
+            </tbody>
+          </table>
+          <table class="tax-table" data-t-en>
+            <thead><tr><th>Tax / Cost Item</th><th>Rate / Amount (reference)</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Real Estate Acquisition Tax</strong></td><td>Assessed value × 3% (land/residential)</td><td>Levied by prefecture ~3–6 months after acquisition; one-time</td></tr>
+              <tr><td><strong>Registration License Tax</strong></td><td>Preservation: 0.4% / Transfer: 1.5–2%</td><td>Paid when filing for registration at the Legal Affairs Bureau</td></tr>
+              <tr><td><strong>Stamp Tax</strong></td><td>Fixed scale per contract amount<br>e.g. ¥100M contract ≈ ¥60,000</td><td>Stamps affixed to the purchase contract</td></tr>
+              <tr><td><strong>Brokerage Fee</strong></td><td>3% of price + ¥60,000 + consumption tax</td><td>Paid to the licensed broker by each party</td></tr>
+              <tr><td><strong>Judicial Scrivener Fee</strong></td><td>~¥100,000–¥200,000</td><td>Registration handling fee, paid on settlement day</td></tr>
+              <tr><td><strong>Consumption Tax</strong></td><td>10% on building portion (land exempt)</td><td>Applies to corporate sales; individual sales usually exempt</td></tr>
+            </tbody>
+          </table>
+          <p class="tax-note"><span data-zh>※ 上表为参考数值，实际金额以交易条件及当时税率为准。</span><span data-ja>※ 上記は参考数値です。実際の金額は取引条件・適用税率によります。</span><span data-en>※ Figures are for reference only. Actual amounts depend on transaction terms and applicable tax rates.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>持有期间每年需要缴哪些税？</span><span data-ja>保有期間中、毎年どのような税金がかかりますか？</span><span data-en>What taxes apply annually during the holding period?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>主要为<strong>固定資産税</strong>（约评估额 × 1.4%）＋ <strong>都市計画税</strong>（约评估额 × 0.3%），每年 1～4 次缴纳。若以法人持有，还须按实际收益缴纳<strong>法人税</strong>；个人持有则按不动产所得缴纳<strong>所得税</strong>。</span><span data-ja>主に<strong>固定資産税</strong>（評価額 × 約1.4%）＋<strong>都市計画税</strong>（評価額 × 約0.3%）を年1〜4回に分けて納付します。法人保有の場合は収益に対して<strong>法人税</strong>、個人保有の場合は<strong>所得税（不動産所得）</strong>も課税されます。</span><span data-en>Primarily <strong>Fixed Asset Tax</strong> (~1.4% of assessed value) + <strong>City Planning Tax</strong> (~0.3% of assessed value), paid in 1–4 installments per year. Corporate owners also pay <strong>corporate income tax</strong> on profits; individual owners pay <strong>income tax on rental income</strong>.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>出售时需要缴税吗？</span><span data-ja>売却時に税金はかかりますか？</span><span data-en>Are there taxes when selling the property?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>需要缴纳<strong>譲渡所得税</strong>（转让所得税）。持有 5 年以内（短期）税率约 <strong>39%</strong>，持有 5 年以上（长期）约 <strong>20%</strong>。持有年限对税负影响显著，一般建议长期持有。</span><span data-ja><strong>譲渡所得税</strong>が課されます。保有5年以内（短期）は約<strong>39%</strong>、5年超（長期）は約<strong>20%</strong>。保有期間が税負担に大きく影響するため、長期保有を推奨します。</span><span data-en><strong>Capital Gains Tax</strong> applies. Short-term holding (≤5 years) rate is ~<strong>39%</strong>; long-term (>5 years) is ~<strong>20%</strong>. Holding period has a major impact on tax burden, and long-term holding is generally advised.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>以个人名义还是公司名义购买比较好？</span><span data-ja>個人名義と法人名義、どちらが有利ですか？</span><span data-en>Is it better to buy in personal or corporate name?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>各有优劣：<strong>法人持有</strong>便于税务规划、费用抵扣，且转让时税率相对稳定；<strong>个人持有</strong>手续相对简单。建议结合持有期限、资产规模和后续规划综合评估，欢迎咨询我们的专业团队。</span><span data-ja>一長一短あります。<strong>法人保有</strong>は税務計画・費用控除が柔軟で、譲渡税率も安定している点が有利。<strong>個人保有</strong>は手続きが比較的シンプル。保有期間・資産規模・将来計画を踏まえた総合的な判断が必要です。お気軽にご相談ください。</span><span data-en>Both have trade-offs. <strong>Corporate ownership</strong> offers more flexibility for tax planning and expense deductions, with more predictable transfer tax rates. <strong>Personal ownership</strong> involves simpler procedures. The best choice depends on holding period, asset scale, and future plans — please consult our team.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 开发运营 -->
+    <div class="faq-category">
+      <p style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin:0 0 14px"><span data-zh>关于开发与运营</span><span data-ja>開発・運営について</span><span data-en>About Development & Operations</span></p>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>从取得土地 / 二手整栋物业到酒店开业大概需要多久？</span><span data-ja>土地・中古一棟物件の取得から開業まで、どのくらいかかりますか？</span><span data-en>How long does it take from land acquisition to hotel opening?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh><strong>（1）买地新建</strong>：从土地取得到开业约需 <strong>1.5～2 年</strong>，包括规划设计＋建筑审批（约 6～8 个月）、施工（约 12～15 个月）及开业准备。实际进度视项目规模与审批情况而定。</span><span data-ja><strong>（1）新築</strong>：土地取得から開業まで約<strong>1.5〜2年</strong>。設計・建築確認（約6〜8ヶ月）＋施工（約12〜15ヶ月）＋開業準備が含まれます。規模・審査状況による。</span><span data-en><strong>(1) New build</strong>: ~<strong>1.5–2 years</strong> from land acquisition to opening. Includes design + building permit (~6–8 months), construction (~12–15 months), and pre-opening preparation. Actual timeline depends on project scale and permitting.</span></p>
+          <p><span data-zh><strong>（2）二手整栋改造</strong>：从物件取得到开业约需 <strong>8～12 个月</strong>，包括设计规划、申请审批、施工、许可申请到开业准备。实际进度需视项目规模和审批情况而定。</span><span data-ja><strong>（2）中古一棟リノベ</strong>：取得から開業まで約<strong>8〜12ヶ月</strong>。設計・審査申請・施工・許可申請・開業準備を含みます。規模・審査状況による。</span><span data-en><strong>(2) Existing building renovation</strong>: ~<strong>8–12 months</strong> from acquisition to opening. Includes design, permits, construction, licensing, and pre-opening. Depends on project scale and approval timeline.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>投资者需要亲自管理日常运营吗？</span><span data-ja>投資家が日常運営を直接管理する必要はありますか？</span><span data-en>Do investors need to manage day-to-day operations themselves?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>不需要。我们提供<strong>全委托运营管理服务</strong>，涵盖人员招聘 — 培训 — 日常管理，OTA 预订管理、定价策略、硬件设施设备维护、财务管理等，投资者无需介入日常事务。</span><span data-ja>不要です。<strong>全委託運営管理サービス</strong>を提供しており、スタッフ採用・育成・日常管理、OTA予約管理・価格戦略・設備保守・財務管理などを包括的にカバー。投資家が日常業務に関与する必要はありません。</span><span data-en>No. We offer <strong>full-delegation management</strong> covering staff recruitment, training, and daily management; OTA booking management and pricing strategy; facility maintenance; and financial reporting. Investors do not need to be involved in day-to-day operations.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>运营管理费用大概是多少？</span><span data-ja>運営管理費はどのくらいですか？</span><span data-en>How much are the management fees?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>管理费通常按<strong>利润的一定比例</strong>收取，具体比例视物件规模与服务内容而定。详细方案请联系我们获取报价。</span><span data-ja>管理費は通常<strong>収益の一定割合</strong>で設定されており、物件規模・サービス内容によって異なります。詳細はお問い合わせください。</span><span data-en>Management fees are typically structured as a <strong>percentage of revenue</strong>, varying by property scale and scope of services. Please contact us for a tailored proposal.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 合作流程 -->
+    <div class="faq-category">
+      <p style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin:0 0 14px"><span data-zh>关于合作流程</span><span data-ja>ご相談・協業プロセスについて</span><span data-en>About the Consultation Process</span></p>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>如何开始合作咨询？</span><span data-ja>どのようにご相談を始めれば良いですか？</span><span data-en>How do I get started with a consultation?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>请通过网站<a href="index.html#contact" style="color:var(--gold);font-weight:700">联系表单</a>提交基本需求，我们会在 <strong>1～2 个工作日</strong>内与您联系，安排初步咨询。<strong>初次咨询免费</strong>。</span><span data-ja>当社ウェブサイトの<a href="index.html#contact" style="color:var(--gold);font-weight:700">お問い合わせフォーム</a>からご要件をご送付ください。<strong>1〜2営業日以内</strong>にご連絡し、初回相談の日程を調整します。<strong>初回相談は無料</strong>です。</span><span data-en>Please submit your basic requirements via our website <a href="index.html#contact" style="color:var(--gold);font-weight:700">contact form</a>. We will reach out within <strong>1–2 business days</strong> to schedule an initial consultation. <strong>Initial consultations are free of charge.</strong></span></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span><span data-zh>初步咨询需要准备哪些信息？</span><span data-ja>初回相談に向けて、どのような情報を準備すると良いですか？</span><span data-en>What information should I prepare for the initial consultation?</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p><span data-zh>建议提前考虑：</span><span data-ja>事前にご検討いただくと相談がスムーズです：</span><span data-en>Consider preparing the following in advance:</span></p>
+          <ul>
+            <li><span data-zh>预算范围</span><span data-ja>ご予算の目安</span><span data-en>Budget range</span></li>
+            <li><span data-zh>希望投资的区域 / 类型（开发型 / 现成物件）</span><span data-ja>ご希望のエリア・投資タイプ（開発型／既存物件）</span><span data-en>Preferred area and investment type (development / existing property)</span></li>
+            <li><span data-zh>持有方式（个人 / 法人）</span><span data-ja>保有形態（個人／法人）</span><span data-en>Ownership structure (personal / corporate)</span></li>
+            <li><span data-zh>计划持有年限。信息越具体，我们能提供越有针对性的方案。</span><span data-ja>計画保有年数。情報が具体的なほど、より的確な提案が可能です。</span><span data-en>Intended holding period. The more specific your information, the more targeted our recommendations.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ GLOSSARY ══ -->
+    <div class="divider"></div>
+
+    <div style="margin-bottom:28px">
+      <div class="cat-label"><span data-zh>第二部分 · 日本不动产专有名词解释</span><span data-ja>第二部 · 不動産専門用語集</span><span data-en>Part 2 · Real Estate Glossary</span></div>
+      <p style="font-size:14px;color:var(--muted);margin:12px 0 0"><span data-zh>以下术语涵盖交易流程、法律制度、税务、建筑规划及收益评估等常见专有名词，供参考查阅。</span><span data-ja>取引プロセス・法的制度・税務・建築計画・収益評価など、よく使われる専門用語をまとめました。</span><span data-en>Key terms across transaction process, legal framework, taxes, planning regulations, and yield analysis.</span></p>
+    </div>
+
+    <div class="glossary-grid">
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>宅地建物取引业 / 宅建业</span><span data-ja>宅地建物取引業（宅建業）</span><span data-en>Real Estate Brokerage License</span></div>
+        <div class="gterm-jp">宅地建物取引業 / Takuchi tatemono torihiki-gyō</div>
+        <div class="gterm-def"><span data-zh>日本不动产买卖与中介的营业执照制度。凡从事不动产买卖、代理、中介业务的公司须取得都道府县知事或国土交通大臣颁发的许可。</span><span data-ja>不動産売買・代理・仲介業を営むための免許制度。都道府県知事または国土交通大臣の許可が必要。</span><span data-en>Japan's licensing system for real estate sales, agency, and brokerage. Companies must obtain a license from the prefectural governor or Minister of Land, Infrastructure, Transport and Tourism.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>宅地建物取引士 / 宅建士</span><span data-ja>宅地建物取引士（宅建士）</span><span data-en>Licensed Real Estate Agent</span></div>
+        <div class="gterm-jp">宅地建物取引士 / Takuchi tatemono torihiki-shi</div>
+        <div class="gterm-def"><span data-zh>国家资格。签订合同前须由宅建士向买方进行"重要事项说明"，是日本不动产交易的法定环节。</span><span data-ja>国家資格者。契約前に買主へ「重要事項説明」を行うことが法律で義務付けられている。</span><span data-en>A national qualification. Required to deliver the "Important Matters Explanation" to buyers before contract signing — a legally mandated step in all Japanese real estate transactions.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>重要事项说明书</span><span data-ja>重要事項説明書（重説）</span><span data-en>Important Matters Explanation Document</span></div>
+        <div class="gterm-jp">重要事項説明書 / Jūyō jikō setsumei-sho</div>
+        <div class="gterm-def"><span data-zh>合同签订前，宅建士向买方书面说明物件现状、法律限制、费用等关键信息的文件，简称"重説"。</span><span data-ja>契約前に宅建士が買主へ書面で物件状況・法的制限・費用等を説明する文書。略称「重説」。</span><span data-en>A document delivered by the licensed agent before contract signing, detailing the property's condition, legal restrictions, and costs. Abbreviated "Jūsetsu."</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>买卖合同</span><span data-ja>売買契約書</span><span data-en>Sales & Purchase Agreement</span></div>
+        <div class="gterm-jp">売買契約書 / Baibai keiyaku-sho</div>
+        <div class="gterm-def"><span data-zh>买卖双方签订的正式合同，明确价格、支付方式、交付日期、违约责任等条款。</span><span data-ja>売買当事者間で締結する正式契約書。価格・支払方法・引き渡し日・違約責任等を規定。</span><span data-en>The formal contract between buyer and seller specifying price, payment terms, delivery date, and remedies for default.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>定金</span><span data-ja>手付金</span><span data-en>Earnest Money Deposit</span></div>
+        <div class="gterm-jp">手付金 / Tetsukekin</div>
+        <div class="gterm-def"><span data-zh>合同签订时买方向卖方支付的预付款，通常为成交价的 5～10%。若买方毁约，定金没收；卖方毁约则须双倍返还。</span><span data-ja>契約締結時に買主が売主へ支払う前払金。通常は成約価格の5〜10%。買主が契約を解除した場合は没収、売主が解除した場合は倍額返還。</span><span data-en>A deposit paid by the buyer at contract signing, typically 5–10% of the purchase price. Forfeited if the buyer defaults; returned at double if the seller defaults.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>不动产登记</span><span data-ja>登記</span><span data-en>Property Registration</span></div>
+        <div class="gterm-jp">登記 / Tōki</div>
+        <div class="gterm-def"><span data-zh>在法务局登记不动产所有权及抵押权等权利关系。日本不动产登记为公示制度，任何人均可查阅。</span><span data-ja>法務局に不動産の所有権・抵当権等を登録する手続き。日本の不動産登記は公示制度であり、誰でも閲覧可能。</span><span data-en>Filing of property ownership, mortgages, and other rights at the Legal Affairs Bureau. Japan's registration system is public — anyone can access records.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>固定资产评估额</span><span data-ja>固定資産評価額</span><span data-en>Assessed Value</span></div>
+        <div class="gterm-jp">固定資産評価額 / Kotei shisan hyōka-gaku</div>
+        <div class="gterm-def"><span data-zh>由市区町村评定的不动产价值，通常约为市场成交价的 <strong>60～70%</strong>。是计算固定资产税、都市计划税、登录免许税、不动产取得税等多项税目的基准。</span><span data-ja>市区町村が評定する不動産の公的価値。時価の約<strong>60〜70%</strong>が目安。固定資産税・都市計画税・登録免許税・不動産取得税等の課税基準となる。</span><span data-en>The official valuation of a property set by the municipality, typically ~<strong>60–70% of market value</strong>. Used as the basis for calculating fixed asset tax, city planning tax, registration tax, and acquisition tax.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>路线价</span><span data-ja>路線価</span><span data-en>Road Value (Rosen-ka)</span></div>
+        <div class="gterm-jp">路線価 / Rosen-ka</div>
+        <div class="gterm-def"><span data-zh>国税厅每年发布的道路沿线土地单价，主要用于计算相続税与赠与税，通常约为公示地价的 <strong>80%</strong>。</span><span data-ja>国税庁が毎年発表する道路沿線の土地単価。相続税・贈与税の計算に使用。公示地価の約<strong>80%</strong>が目安。</span><span data-en>Annual per-square-meter land values along roads published by the National Tax Agency. Used for inheritance and gift tax calculations. Typically ~<strong>80% of the official land price</strong>.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>公示地价</span><span data-ja>公示地価</span><span data-en>Official Land Price</span></div>
+        <div class="gterm-jp">公示地価 / Kōji chika</div>
+        <div class="gterm-def"><span data-zh>国土交通省每年 1 月 1 日评定并公布的标准地价，是土地价格的重要参考指标。</span><span data-ja>国土交通省が毎年1月1日時点で評定・公表する標準地の価格。土地価格の重要な参考指標。</span><span data-en>Standard land prices assessed and published annually (as of January 1) by the Ministry of Land, Infrastructure, Transport and Tourism. A key benchmark for land values.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>容积率</span><span data-ja>容積率</span><span data-en>Floor Area Ratio (FAR)</span></div>
+        <div class="gterm-jp">容積率 / Yōseki-ritsu</div>
+        <div class="gterm-def"><span data-zh>建筑物总楼板面积与地块面积之比，由用途地域规定上限。容积率越高，可建造楼层越多，土地开发价值越高。</span><span data-ja>建物の延床面積と敷地面積の比率上限。用途地域で規定。容積率が高いほど高層建築が可能で、土地の開発価値が上がる。</span><span data-en>The maximum ratio of total floor area to land area, defined by zoning. Higher FAR means more buildable space and greater development value per land unit.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>建筑覆盖率</span><span data-ja>建蔽率</span><span data-en>Building Coverage Ratio (BCR)</span></div>
+        <div class="gterm-jp">建蔽率 / Kenpei-ritsu</div>
+        <div class="gterm-def"><span data-zh>建筑物水平投影面积（建筑占地）与地块面积之比，限制建筑在地块上的覆盖范围。</span><span data-ja>建物の建築面積（投影面積）と敷地面積の比率上限。建物の敷地内占有範囲を制限する。</span><span data-en>The maximum ratio of building footprint (horizontal projection) to land area. Controls the proportion of the lot that can be covered by the building.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>用途区域</span><span data-ja>用途地域</span><span data-en>Zoning / Land Use District</span></div>
+        <div class="gterm-jp">用途地域 / Yōto chiki</div>
+        <div class="gterm-def"><span data-zh>城市规划法将土地划分为 13 种用途区域（住宅 / 商业 / 工业等），决定该地块可建造的建筑类型与规模上限。</span><span data-ja>都市計画法による13種類の土地用途分類（住宅・商業・工業等）。建築できる建物の種類・規模の上限を決定する。</span><span data-en>13 land use categories under Japan's City Planning Act (residential, commercial, industrial, etc.) determining what can be built on each parcel and at what scale.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>建筑确认申请</span><span data-ja>建築確認申請</span><span data-en>Building Permit Application</span></div>
+        <div class="gterm-jp">建築確認申請 / Kenchiku kakunin shinsei</div>
+        <div class="gterm-def"><span data-zh>开工前向确认检查机构提交设计方案，确认符合建筑基准法等法规。取得"確認済証"后方可开工。</span><span data-ja>着工前に確認検査機関へ設計図書を提出し、建築基準法等への適合を確認する手続き。「確認済証」取得後に着工可能。</span><span data-en>Pre-construction submission of design documents to a building inspection agency confirming compliance with the Building Standards Act. A "Confirmation Certificate" must be obtained before construction begins.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>空地（裸地）</span><span data-ja>更地</span><span data-en>Cleared Land (Sarachi)</span></div>
+        <div class="gterm-jp">更地 / Sarachi</div>
+        <div class="gterm-def"><span data-zh>地上无建筑物、可直接开发的土地。通常比带有旧建筑的土地（古家付き土地）价格更高，开发限制更少。</span><span data-ja>地上に建物のない、直接開発可能な土地。旧建物付き土地より価格が高く、開発制約が少ない。</span><span data-en>Land with no existing structures, ready for immediate development. Typically priced higher than land with existing buildings and subject to fewer development constraints.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>附旧建筑土地</span><span data-ja>古家付き土地</span><span data-en>Land with Existing Structure</span></div>
+        <div class="gterm-jp">古家付き土地 / Furuka-tsuki tochi</div>
+        <div class="gterm-def"><span data-zh>地上有老旧建筑的土地，通常以"土地价格"出售，买方承担拆除费用。实际价值取决于拆除成本与建设方案。</span><span data-ja>老朽建物が建っている土地。通常「土地値」として販売され、解体費用は買主負担。実際の価値は解体費と建設計画による。</span><span data-en>Land sold with an old structure in place, typically priced as land value only. The buyer bears demolition costs. Actual value depends on demolition costs and planned development.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>区分所有</span><span data-ja>区分所有</span><span data-en>Sectional Ownership</span></div>
+        <div class="gterm-jp">区分所有 / Kubun shoyū</div>
+        <div class="gterm-def"><span data-zh>共用一栋建筑中单独拥有某一专有部分（如一个房间）的形式，对应《区分所有法》，常见于公寓（マンション）。</span><span data-ja>一棟の建物内の一部（専有部分）を単独所有する形態。区分所有法が適用される。マンションに多い。</span><span data-en>Ownership of a specific unit (exclusive portion) within a shared building, governed by the Sectional Ownership Act. Common in condominiums (mansion).</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>整栋购入</span><span data-ja>一棟買い</span><span data-en>Whole-Building Purchase</span></div>
+        <div class="gterm-jp">一棟買い / Ittō-gai</div>
+        <div class="gterm-def"><span data-zh>购买整栋建筑（含土地），是酒店投资的常见形式，可完全掌控物业运营策略，无需与其他区分所有者协调。</span><span data-ja>建物全体（土地含む）を購入する形態。ホテル投資に多い。運営戦略を完全にコントロールでき、他の区分所有者との調整不要。</span><span data-en>Purchase of an entire building including the land. Common in hotel investment. Provides full control over operational strategy with no need to coordinate with other unit owners.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>毛利率（表面利回り）</span><span data-ja>表面利回り</span><span data-en>Gross Yield</span></div>
+        <div class="gterm-jp">表面利回り / Hyōmen rimawari</div>
+        <div class="gterm-def"><span data-zh>年租金收入 ÷ 购入总价 × 100%。未扣除运营费用，是市场上最常用的简易收益指标，实际到手收益需参考实质利回り。</span><span data-ja>年間賃料収入 ÷ 取得価格 × 100%。運営費用未控除の簡易指標。実際の手取り収益は実質利回りで確認が必要。</span><span data-en>Annual rental income ÷ purchase price × 100%. Does not deduct operating costs. A simplified metric widely used for comparison; actual net return must be checked against net yield.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>净利率（实质利回り）</span><span data-ja>実質利回り</span><span data-en>Net Yield</span></div>
+        <div class="gterm-jp">実質利回り / Jisshitsu rimawari</div>
+        <div class="gterm-def"><span data-zh>（年租金收入 − 年运营费用）÷（购入总价 ＋ 购入附带费用）× 100%。扣除管理费、税金、维修费等，更接近真实收益。</span><span data-ja>（年間賃料収入 − 年間運営費用）÷（取得価格＋付帯費用）× 100%。管理費・税金・修繕費等控除後の実態に近い収益率。</span><span data-en>(Annual income − Annual operating costs) ÷ (purchase price + acquisition costs) × 100%. After deducting management fees, taxes, and maintenance, this reflects actual investment return.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>资本化率（Cap Rate）</span><span data-ja>キャップレート（Cap Rate）</span><span data-en>Capitalization Rate (Cap Rate)</span></div>
+        <div class="gterm-jp">Cap Rate / キャップレート</div>
+        <div class="gterm-def"><span data-zh>净营业收益（NOI）÷ 物业价值，是商业不动产估值的核心指标。Cap Rate 越低，代表市场对该资产定价越高（风险溢价越低）。</span><span data-ja>NOI（純営業収益）÷ 不動産価値。商業不動産評価の核心指標。Cap Rateが低いほど市場評価が高い（リスクプレミアムが低い）ことを示す。</span><span data-en>Net Operating Income (NOI) ÷ Property Value. The core metric for commercial real estate valuation. A lower cap rate indicates higher market pricing (lower risk premium).</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>尽职调查（DD）</span><span data-ja>デューデリジェンス（DD）</span><span data-en>Due Diligence (DD)</span></div>
+        <div class="gterm-jp">デューデリジェンス / Due diligence</div>
+        <div class="gterm-def"><span data-zh>购入前对目标物件进行全面调查，涵盖法律权利、建筑状况、土壤污染、财务收益等，是大型交易必经环节。</span><span data-ja>購入前に対象物件の法的権利・建築状況・土壌汚染・財務収益等を包括的に調査するプロセス。大型取引では必須。</span><span data-en>Comprehensive pre-acquisition investigation covering legal title, building condition, soil contamination, financial performance, etc. A mandatory step in major transactions.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>抵押权</span><span data-ja>抵当権</span><span data-en>Mortgage (Collateral Right)</span></div>
+        <div class="gterm-jp">抵当権 / Teitō-ken</div>
+        <div class="gterm-def"><span data-zh>债权人（通常为银行）对不动产设定的担保权利。购入时须确认物件是否存在抵押权，交割时一般要求卖方消除抵押。</span><span data-ja>債権者（通常は銀行）が不動産に設定する担保権。購入時は抵当権の存在を確認し、引き渡し時に売主が抹消するのが通例。</span><span data-en>A security interest set on a property by a creditor (typically a bank). Buyers must confirm whether a mortgage exists; sellers are typically required to clear it before settlement.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>民泊新法</span><span data-ja>住宅宿泊事業法（民泊新法）</span><span data-en>Minpaku Act (Short-term Rental Law)</span></div>
+        <div class="gterm-jp">住宅宿泊事業法 / Jūtaku shukuhaku jigyō-hō</div>
+        <div class="gterm-def"><span data-zh>2018 年施行，规范民宿（Airbnb 等）合法运营的法律。每年营业日数上限 <strong>180 天</strong>，须向都道府县提交届出。</span><span data-ja>2018年施行。民泊（Airbnb等）の合法運営を規制する法律。年間営業日数の上限は<strong>180日</strong>。都道府県への届出が必要。</span><span data-en>Enacted in 2018, regulating short-term rental (Airbnb-style) operations. Maximum <strong>180 operating days/year</strong>. Requires notification to the prefectural government.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>旅馆业法</span><span data-ja>旅館業法</span><span data-en>Ryokan Business Act</span></div>
+        <div class="gterm-jp">旅館業法 / Ryokan gyōhō</div>
+        <div class="gterm-def"><span data-zh>规范酒店、旅馆、民宿等住宿设施运营的法律。取得旅馆业许可（营业许可）后<strong>运营天数不受 180 天限制</strong>，是精品酒店的常见经营方式。</span><span data-ja>ホテル・旅館・民宿等の宿泊施設運営を規制する法律。旅館業許可取得後は<strong>180日制限なし</strong>で営業可能。精品ホテルに多い経営形態。</span><span data-en>Law governing hotel, inn, and guesthouse operations. With a Ryokan Business License, there is <strong>no 180-day restriction</strong> on operating days — the common framework for boutique hotels.</span></div>
+      </div>
+
+      <div class="gterm">
+        <div class="gterm-name"><span data-zh>合同不符责任</span><span data-ja>契約不適合責任</span><span data-en>Contractual Non-conformity Liability</span></div>
+        <div class="gterm-jp">契約不適合責任 / Keiyaku futekigō sekinin</div>
+        <div class="gterm-def"><span data-zh>前称"瑕疵担保责任"，2020 年民法修订后改称。卖方须对物件与合同约定不符之处承担责任，买方可要求修复、减价或解约。</span><span data-ja>旧「瑕疵担保責任」。2020年民法改正後の名称。物件が契約内容と異なる場合、売主が責任を負い、買主は修補・代金減額・解約を請求できる。</span><span data-en>Formerly "warranty against defects," renamed in the 2020 Civil Code revision. Sellers are liable when the property does not conform to the contract; buyers may claim repair, price reduction, or rescission.</span></div>
+      </div>
+
+    </div><!-- /glossary-grid -->
+
+    <div style="margin-top:52px;padding-top:32px;border-top:1px solid var(--line);text-align:center">
+      <p style="font-size:14px;color:var(--muted);margin:0 0 20px"><span data-zh>有更多问题？欢迎与我们直接联系。</span><span data-ja>他にご質問がありましたら、お気軽にお問い合わせください。</span><span data-en>Have more questions? We're happy to help directly.</span></p>
+      <a href="index.html#contact" style="display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:999px;background:var(--navy);color:#fff;font-size:14px;font-weight:800">
+        <span data-zh>联系我们 →</span><span data-ja>お問い合わせ →</span><span data-en>Contact Us →</span>
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<footer style="background:var(--navy-2);color:rgba(255,255,255,.55);font-size:13px;padding:28px 0">
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <span>© 2025 株式会社 MKG Japan. All rights reserved.</span>
+    <a href="index.html" style="color:var(--gold);font-weight:700"><span data-zh>← 返回集团官网</span><span data-ja>← 公式サイトへ戻る</span><span data-en>← Back to Main Site</span></a>
+  </div>
+</footer>
+
+<script>
+  function toggle(btn){btn.closest('.faq-item').classList.toggle('open')}
+  function setLang(l){
+    document.body.className='lang-'+l;
+    ['zh','en','ja'].forEach(x=>{
+      ['btn-','mbtn-'].forEach(p=>{
+        const el=document.getElementById(p+x);
+        if(el) el.classList.toggle('active',x===l);
+      });
+    });
+  }
+  setLang('ja');
+</script>
+</body>
+</html>

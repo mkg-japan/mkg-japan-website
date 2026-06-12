@@ -45,8 +45,7 @@
     "areaServed": "Tokyo, Japan",
     "parentOrganization": {
       "@type": "Organization",
-      "name": "MKG Group",
-      "url": "https://www.mkg.com.sg/"
+      "name": "MKG Group"
     }
   }
   </script>
@@ -123,7 +122,7 @@
     .btn.ghost{border-color:rgba(255,255,255,.28);color:white;background:rgba(255,255,255,.06)}
     .btn.ghost:hover{background:rgba(255,255,255,.12)}
     .hero-card{
-      align-self:end;justify-self:end;width:min(430px,100%);
+      align-self:center;justify-self:end;width:min(430px,100%);
       padding:24px;border-radius:var(--radius);background:rgba(255,255,255,.12);
       border:1px solid rgba(255,255,255,.18);box-shadow:var(--shadow);backdrop-filter:blur(12px)
     }
@@ -482,15 +481,8 @@
       <span style="width:7px;height:7px;border-radius:50%;background:var(--gold);display:inline-block"></span>
       MKG Group
     </span>
-    <!-- 中：地区站点切换 -->
+    <!-- 中：地区 -->
     <span style="display:flex;align-items:center;gap:6px;font-size:12.5px">
-      <a href="https://www.mkg.com.sg/zh/" target="_blank" rel="noopener"
-         style="color:rgba(17,35,74,.45);text-decoration:none;padding:4px 12px;border-radius:999px;border:1px solid rgba(17,35,74,.15);transition:.15s"
-         onmouseover="this.style.borderColor='rgba(201,166,91,.6)';this.style.color='#c9a65b'"
-         onmouseout="this.style.borderColor='rgba(17,35,74,.15)';this.style.color='rgba(17,35,74,.45)'">
-        🇸🇬 Singapore
-      </a>
-      <span style="color:rgba(17,35,74,.25);font-size:11px">▸</span>
       <span style="color:var(--navy-2);font-weight:700;padding:4px 12px;border-radius:999px;background:rgba(201,166,91,.15);border:1px solid rgba(201,166,91,.5)">
         🇯🇵 Japan
       </span>
@@ -510,7 +502,7 @@
         <a href="#services" data-i18n="nav.services">事业内容</a>
         <a href="#portfolio" data-i18n="nav.projects">项目一览</a>
         <a href="#development" data-i18n="nav.stay">旅宿预订</a>
-        <a href="#faq-preview" data-i18n="nav.faq">FAQ</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
         <a class="nav-book" href="stay.html" data-i18n="nav.book">预订旅宿 · MKG Stay</a>
         <a class="nav-cta" href="#contact" data-i18n="nav.contact">联系我们</a>
         <div class="desk-lang-wrap">
@@ -545,7 +537,7 @@
     <a href="#services" onclick="closeDrawer()" data-i18n="nav.services">事业内容</a>
     <a href="#portfolio" onclick="closeDrawer()" data-i18n="nav.projects">项目一览</a>
     <a href="#development" onclick="closeDrawer()" data-i18n="nav.stay">旅宿预订</a>
-    <a href="#faq-preview" onclick="closeDrawer()" data-i18n="nav.faq">FAQ</a>
+    <a href="faq.html" onclick="closeDrawer()" data-i18n="nav.faq">FAQ</a>
     <a class="drawer-book" href="stay.html" data-i18n="nav.book">预订旅宿 · MKG Stay</a>
     <a class="drawer-cta" href="#contact" onclick="closeDrawer()" data-i18n="nav.contact">联系我们</a>
 
@@ -1013,13 +1005,7 @@
       <footer>
         <span>© 2026 MKG Japan. All rights reserved.</span>
         <span style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-          <span>MKG Japan は</span>
-          <a href="https://www.mkg.com.sg/zh/" target="_blank" rel="noopener"
-             style="color:var(--gold);text-decoration:none;font-weight:600;transition:.15s"
-             onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
-            MKG Group（新加坡）
-          </a>
-          <span data-i18n="footer.sub2">旗下日本法人</span>
+          <span data-i18n="footer.sub">MKG Japan は MKG Group 傘下の日本法人です</span>
         </span>
       </footer>
     </div>
@@ -1195,7 +1181,7 @@ const I18N = {
     'form.name':'您的姓名','form.email':'电子邮箱','form.topic':'咨询类型',
     'form.opt1':'不动产投资','form.opt2':'酒店/民宿预订咨询','form.opt3':'酒店/民宿运营管理',
     'form.opt4':'开发建造项目合作','form.placeholder':'请简单描述您的需求','form.submit':'提交咨询',
-    'footer.sub':'MKG Japan 是 MKG Group（新加坡）旗下日本法人','footer.sub2':'旗下日本法人',
+    'footer.sub':'MKG Japan 是 MKG Group 旗下日本法人',
     'legend.yellow':'二手整栋物业','legend.green':'运营中酒店/民宿','legend.red':'建造/规划中',
     'nav.faq':'FAQ',
     'faq.title':'常见问题','faq.desc':'关于投资流程、税费成本与运营管理的高频问题',
@@ -1267,7 +1253,7 @@ const I18N = {
     'form.name':'お名前','form.email':'メールアドレス','form.topic':'お問い合わせ内容',
     'form.opt1':'不動産投資','form.opt2':'ホテル・民宿予約に関するお問い合わせ','form.opt3':'ホテル・民宿運営管理',
     'form.opt4':'開発建設プロジェクトの協業','form.placeholder':'お問い合わせ内容を簡単にご記入ください','form.submit':'送信する',
-    'footer.sub':'MKG Japan は MKG Group（シンガポール）傘下の日本法人です','footer.sub2':'傘下の日本法人',
+    'footer.sub':'MKG Japan は MKG Group 傘下の日本法人です',
     'legend.yellow':'中古一棟物件','legend.green':'運営中ホテル・民宿','legend.red':'建設・計画中',
     'faq.title':'よくある質問','faq.desc':'投資フロー・税費用・運営管理に関するよくあるご質問',
     'faq.q1':'外国人は日本で不動産を購入できますか？','faq.a1':'はい。日本は外国人の不動産取得に特別な制限を設けておらず、外国人個人・法人ともに自由に購入できます。',
@@ -1338,7 +1324,7 @@ const I18N = {
     'form.name':'Your Name','form.email':'Email Address','form.topic':'Inquiry Type',
     'form.opt1':'Real Estate Investment','form.opt2':'Hotel / Guesthouse Booking Inquiry','form.opt3':'Hotel / Guesthouse Operations',
     'form.opt4':'Development & Construction Partnership','form.placeholder':'Please briefly describe your inquiry','form.submit':'Submit Inquiry',
-    'footer.sub':'MKG Japan is a subsidiary of MKG Group (Singapore)','footer.sub2':'subsidiary in Japan',
+    'footer.sub':'MKG Japan is the Japan arm of MKG Group.',
     'legend.yellow':'Existing Whole-Building','legend.green':'Operating Hotels/Guesthouses','legend.red':'Under Construction/Planning',
     'faq.title':'FAQ','faq.desc':'Common questions about investment process, taxes, and property management',
     'faq.q1':'Can foreigners buy real estate in Japan?','faq.a1':'Yes. Japan places no special restrictions on foreign ownership. Both foreign individuals and corporations can freely purchase land and buildings.',
