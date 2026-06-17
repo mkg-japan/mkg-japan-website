@@ -1305,9 +1305,10 @@
         });
         const data = await res.json();
         document.getElementById('mformLoading').style.display = 'none';
-        // 临时调试：显示完整响应
+        // 临时调试：显示完整 data.data
         document.getElementById('mformStep1').style.display = '';
-        showErr('【调试】API响应：' + JSON.stringify(data, null, 2));
+        const inner = data.data || data;
+        showErr('【调试-完整内容】\n' + JSON.stringify(inner, null, 2));
       } catch(e) {
         document.getElementById('mformLoading').style.display = 'none';
         document.getElementById('mformStep1').style.display = '';
