@@ -1274,46 +1274,104 @@
       const lastName  = document.getElementById('mf-last').value.trim();
       const email     = document.getElementById('mf-email').value.trim();
       const phone     = document.getElementById('mf-phone').value.trim();
-      const errEl = document.getElementById('mf-error');
 
       if (!firstName || !lastName) { showErr('请填写姓名'); return; }
       if (!email || !email.includes('@')) { showErr('请填写有效的电子邮箱'); return; }
 
-      errEl.style.display = 'none';
+      document.getElementById('mf-error').style.display = 'none';
       document.getElementById('mformStep1').style.display = 'none';
       document.getElementById('mformLoading').style.display = 'flex';
 
       try {
         const guests = document.getElementById('guests').value || '2';
-        const res = await fetch('/api/book', {
+        const res = await fetch('/api/create-checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            checkIn: ciDate,
-            checkOut: coDate,
-            adultCount: Number(guests),
-            childCount: 0,
+            checkIn:     ciDate,
+            checkOut:    coDate,
+            adultCount:  Number(guests),
+            childCount:  0,
             firstName,
             lastName,
             email,
             phone,
-            roomId: _bookRoomId || '905007308',
-            rateId: _bookRateId || '',
-            totalAmount: totalPrice || 0,
-            currencyCode: 'JPY',
+            roomId:      _bookRoomId || '905007308',
+            rateId:      _bookRateId || '',
+            totalAmount: totalPrice  || 0,
           }),
         });
         const data = await res.json();
-        document.getElementById('mformLoading').style.display = 'none';
-        // 临时调试：显示完整 data.data
-        document.getElementById('mformStep1').style.display = '';
-        const inner = data.data || data;
-        showErr('【调试-完整内容】\n' + JSON.stringify(inner, null, 2));
+        if (data.url) {
+          window.location.href = data.url;  // → Stripe 付款页
+        } else {
+          document.getElementById('mformLoading').style.display = 'none';
+          document.getElementById('mformStep1').style.display = '';
+          showErr(data.error || '无法创建付款页，请稍后重试');
+        }
       } catch(e) {
         document.getElementById('mformLoading').style.display = 'none';
         document.getElementById('mformStep1').style.display = '';
         showErr('网络错误，请检查连接后重试');
       }
+    }
+
+    // ── 付款成功后从 URL 参数读取并完成预订 ──
+    async function handleBookingReturn() {
+      const params = new URLSearchParams(window.location.search);
+      const status = params.get('booking');
+      const sid    = params.get('sid');
+      if (!status) return;
+
+      // 清理 URL
+      history.replaceState({}, '', window.location.pathname);
+
+      if (status === 'cancelled') {
+        // 打开弹窗提示
+        openBookingModal();
+        showErr('付款已取消，您可以重新填写信息并预订。');
+        return;
+      }
+
+      if (status === 'success' && sid) {
+        // 打开弹窗显示 loading
+        document.getElementById('bookingModal').classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('mformStep1').style.display = 'none';
+        document.getElementById('mformLoading').style.display = 'flex';
+
+        try {
+          const r = await fetch(`/api/verify-and-book?sid=${sid}`);
+          const d = await r.json();
+          document.getElementById('mformLoading').style.display = 'none';
+          if (d.success) {
+            document.getElementById('mfs-email-note').textContent = `确认邮件将发送至 ${d.email}`;
+            document.getElementById('mfs-res-id').textContent     = `预订编号：${d.reservationId}`;
+            const nights = getNights(d.checkIn, d.checkOut);
+            document.getElementById('mfs-confirm-summary').innerHTML =
+              `<div>入住<strong>${d.checkIn}</strong></div><div>退房<strong>${d.checkOut}</strong></div>` +
+              `<div>晚数<strong>${nights} 晚</strong></div>` +
+              `<div class="sum-total">合计：${fmt3(d.totalAmount)}</div>`;
+            document.getElementById('mformSuccess').style.display = '';
+          } else {
+            document.getElementById('mformStep1').style.display = '';
+            showErr('预订确认失败，请联系我们：info@mkgjp.com');
+          }
+        } catch(e) {
+          document.getElementById('mformLoading').style.display = 'none';
+          document.getElementById('mformStep1').style.display = '';
+          showErr('网络错误，请联系我们：info@mkgjp.com');
+        }
+      }
+    }
+
+    function openBookingModal() {
+      document.getElementById('mformStep1').style.display = '';
+      document.getElementById('mformLoading').style.display = 'none';
+      document.getElementById('mformSuccess').style.display = 'none';
+      document.getElementById('mf-error').style.display = 'none';
+      document.getElementById('bookingModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
 
     function showErr(msg) {
@@ -1344,6 +1402,9 @@
     document.getElementById('bookingModal').addEventListener('click', e => {
       if (e.target === document.getElementById('bookingModal')) closeModal();
     });
+
+    // 付款完成后返回页面时自动处理
+    handleBookingReturn();
 
     const GALLERY = [
       {src:'assets/shinjuku/s01_bedroom_twin.jpg',    alt:'双人卧室'},
