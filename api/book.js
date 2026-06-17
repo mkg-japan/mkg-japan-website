@@ -54,7 +54,7 @@ module.exports = async function handler(req, res) {
       rateId: rateId || '',
       totalAmount: Number(totalAmount) || 0,
       currencyCode: currencyCode || 'JPY',
-      paymentType: 'PayAtHotel',
+      paymentType: 'Prepay',
       customer: {
         firstName,
         lastName: lastName || '',
