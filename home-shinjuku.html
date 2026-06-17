@@ -1121,6 +1121,8 @@
       document.getElementById('cardPriceArea').innerHTML = '<div class="book-card-price-ph">选择日期查看价格</div>';
     }
 
+    let _bookRoomId = null, _bookRateId = null;
+
     async function fetchAvail() {
       if (!ciDate || !coDate) return;
       const nights = Math.round((new Date(coDate) - new Date(ciDate)) / 86400000);
@@ -1129,14 +1131,19 @@
       try {
         const r = await fetch(`/api/avail?checkIn=${ciDate}&checkOut=${coDate}&adultCount=2`);
         const j = await r.json();
-        if (j.data && j.data.roomTypes && j.data.roomTypes.length > 0) {
-          // avail 返回了房型+价格
-          const rt = j.data.roomTypes[0];
-          const nightlyRate = rt.price || rt.totalPrice / nights;
-          totalPrice = rt.totalPrice || rt.price * nights;
-          renderPriceBox(nightlyRate, nights, totalPrice, rt.currency || 'JPY');
+        if (j.data && j.data.roomRates && j.data.roomRates.length > 0) {
+          const rr = j.data.roomRates[0];
+          _bookRoomId = rr.roomId;
+          _bookRateId = rr.rateId;
+          totalPrice = rr.totalAmount;
+          const nightly = rr.averageDailyAmount;
+          const rows = (rr.dailyRates || []).map(dr => {
+            const d2 = new Date(dr.date);
+            const label = ['日','一','二','三','四','五','六'][d2.getDay()];
+            return { date: dr.date, label, price: dr.amount };
+          });
+          renderPriceBox(nightly, nights, totalPrice, rr.currencyCode || 'JPY', rows);
         } else {
-          // avail 暂时无数据 → 根据日历推算
           renderPriceFromCalendar(nights);
         }
       } catch(e) {
@@ -1189,11 +1196,12 @@
     function openBooking() {
       if (!ciDate || !coDate) return;
       const guests = document.getElementById('guests').value || '2';
-      const url = new URL('https://booking-mkghomeshinjuku.smartorder.ai');
+      const roomId = _bookRoomId || '905007308';
+      const url = new URL(`https://booking-mkghomeshinjuku.smartorder.ai/room/${roomId}`);
       url.searchParams.set('checkIn', ciDate);
       url.searchParams.set('checkOut', coDate);
       url.searchParams.set('adults', guests);
-      // 临时直链模式：等SmartOrder修复CSP后改回 frame.src = url.toString()
+      url.searchParams.set('children', '0');
       window.open(url.toString(), '_blank');
     }
 

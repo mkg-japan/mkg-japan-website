@@ -1,293 +1,603 @@
-<!DOCTYPE html>
-<html lang="ja">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MKG HOTEL Asakusa | 浅草精品酒店 | MKG Japan</title>
-  <meta name="description" content="MKG HOTEL Asakusa，台东区驹形，9间精品客室，Booking.com评分9.2，步行可达浅草寺。">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MKG HOTEL Asakusa | 台东区驹形 · 精品设计酒店</title>
+  <meta name="description" content="MKG HOTEL Asakusa，台东区驹形，9间精品客室，Booking.com评分9.2，步行5分钟到浅草寺。">
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --navy:#11234a;--navy-2:#0b1733;--gold:#c9a65b;--gold-l:rgba(201,166,91,.12);
-      --ink:#1a2340;--muted:#6b7a99;--line:#e8eaf0;--card:#fff;--bg:#f8f7f4;
-      --green:#2E8B57;--red:#c0392b;
+      --navy:#11234a;--navy-2:#0b1733;--gold:#c9a65b;--gold-2:#e8d49a;
+      --ink:#182033;--muted:#667085;--line:#e7eaf0;--bg:#f7f5f1;--card:#ffffff;
+      --green:#16866a;--red:#bd3b35;--shadow:0 24px 70px rgba(11,23,51,.16);--radius:22px;
     }
-    html{scroll-behavior:smooth}
-    body{font-family:'Helvetica Neue',Arial,'Hiragino Sans','Noto Sans JP',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%}
+    .wrap{width:min(1040px,calc(100% - 40px));margin:0 auto}
 
-    /* ── Nav ── */
-    .topbar{background:var(--navy-2);color:#fff;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:100}
-    .tb-brand{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px}
-    .tb-brand span{width:6px;height:6px;border-radius:50%;background:var(--gold)}
-    .tb-nav{display:flex;gap:16px;align-items:center}
-    .tb-back{font-size:12px;font-weight:700;color:rgba(255,255,255,.7);padding:6px 14px;border:1px solid rgba(255,255,255,.2);border-radius:999px;transition:.15s}
-    .tb-back:hover{background:rgba(255,255,255,.1);color:#fff}
-    .tb-book{background:var(--gold);color:var(--navy-2);font-size:12px;font-weight:800;padding:7px 18px;border-radius:999px;border:none;cursor:pointer;transition:.15s}
-    .tb-book:hover{opacity:.88}
+    .topbar{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.2) blur(12px);background:rgba(11,23,51,.94);border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--gold);letter-spacing:.02em}
+    .brand img{height:52px;width:auto}
+    .brand small{display:block;font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+    .links{display:flex;align-items:center;gap:16px;font-size:13px;color:rgba(255,255,255,.88);font-weight:650;white-space:nowrap}
+    .links a:hover{color:var(--gold)}
+    .nav-book{padding:11px 16px;border-radius:999px;background:var(--gold);color:var(--navy-2)!important;font-weight:800}
+    .nav-cta{padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:white!important}
+    .breadcrumb{font-size:13px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:6px}
+    .breadcrumb a{color:rgba(255,255,255,.55)}
+    .breadcrumb a:hover{color:var(--gold)}
+    .breadcrumb span{color:rgba(255,255,255,.3)}
 
-    /* ── Hero ── */
-    .hero{position:relative;height:480px;overflow:hidden;background:var(--navy-2)}
-    .hero-img{width:100%;height:100%;object-fit:cover;opacity:.82}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(11,23,51,.88) 40%,rgba(11,23,51,.3))}
-    .hero-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 56px;max-width:640px}
-    .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,166,91,.18);border:1px solid rgba(201,166,91,.4);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.08em;padding:4px 12px;border-radius:999px;margin-bottom:18px;width:fit-content}
-    .hero-tag span{width:7px;height:7px;border-radius:50%;background:#4caf50}
-    .hero h1{font-size:clamp(28px,4vw,42px);font-weight:900;color:#fff;letter-spacing:.02em;line-height:1.15;margin-bottom:12px}
-    .hero-sub{font-size:14px;color:rgba(255,255,255,.75);margin-bottom:24px}
-    .hero-stats{display:flex;gap:24px;flex-wrap:wrap}
-    .hero-stat{text-align:center}
-    .hero-stat b{display:block;font-size:22px;font-weight:900;color:var(--gold)}
-    .hero-stat span{font-size:11px;color:rgba(255,255,255,.6);letter-spacing:.04em}
-    .hero-gallery{position:absolute;right:0;top:0;bottom:0;width:38%;display:grid;grid-template-rows:1fr 1fr;gap:3px}
-    .hero-gallery img{width:100%;height:100%;object-fit:cover}
+    .desk-lang-wrap{position:relative}
+    .desk-lang-btn{display:flex;align-items:center;gap:5px;background:none;border:1px solid rgba(201,168,91,.4);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;color:var(--gold);cursor:pointer;white-space:nowrap;transition:.2s;margin-left:4px}
+    .desk-lang-btn:hover{border-color:var(--gold)}
+    .desk-lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 32px rgba(11,23,51,.14);overflow:hidden;min-width:140px;z-index:1000}
+    .desk-lang-menu.open{display:block}
+    .desk-lang-menu button{display:block;width:100%;padding:11px 18px;text-align:left;background:none;border:none;font-size:14px;font-weight:700;color:var(--navy);cursor:pointer;transition:.15s;border-bottom:1px solid var(--line);font-family:inherit}
+    .desk-lang-menu button:last-child{border-bottom:none}
+    .desk-lang-menu button:hover{background:var(--bg);color:var(--gold)}
 
-    /* ── Gallery strip ── */
-    .gallery-strip{display:flex;gap:6px;padding:12px 0;overflow-x:auto;scrollbar-width:none}
-    .gallery-strip::-webkit-scrollbar{display:none}
-    .gallery-strip img{height:160px;width:220px;flex-shrink:0;object-fit:cover;border-radius:10px;cursor:pointer;transition:.2s}
-    .gallery-strip img:hover{transform:scale(1.02)}
+    .prop-hero{background:var(--navy-2);color:white;padding:40px 0 0;position:relative;overflow:hidden}
+    .prop-hero-inner{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start;padding-bottom:48px}
+    .prop-hero h1{font-size:clamp(28px,4vw,44px);line-height:1.1;letter-spacing:-.03em;margin:16px 0 12px}
+    .prop-hero .addr{color:rgba(255,255,255,.65);font-size:14px;display:flex;align-items:center;gap:5px;margin-bottom:20px}
+    .prop-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+    .prop-tag{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700}
+    .prop-tag.open{background:rgba(22,134,106,.25);color:#5de8c0;border:1px solid rgba(22,134,106,.4)}
+    .prop-tag.info{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15)}
+    .prop-desc{color:rgba(255,255,255,.75);font-size:15px;max-width:560px;line-height:1.75}
+    .prop-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+    .prop-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px;text-align:center}
+    .prop-stat b{display:block;font-size:24px;color:var(--gold-2);font-weight:900;line-height:1}
+    .prop-stat span{display:block;font-size:12px;color:rgba(255,255,255,.6);margin-top:6px}
+    .prop-hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-80px;height:140px;background:var(--bg);transform:rotate(-2deg)}
 
-    /* ── Section ── */
-    .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-    .section{padding:56px 0}
-    .section-title{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-    .section h2{font-size:clamp(22px,3vw,30px);font-weight:900;color:var(--navy);margin-bottom:20px}
+    .book-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;position:sticky;top:96px}
+    .book-card-top{margin-bottom:16px}
+    .book-card-rating{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+    .rating-score{font-size:32px;font-weight:900;color:var(--navy);line-height:1}
+    .rating-label{font-size:12px;color:var(--muted)}
+    .rating-stars{color:#f59e0b;font-size:16px}
+    .book-card-price{font-size:22px;font-weight:900;color:var(--navy);margin-bottom:4px}
+    .book-card-price .per{font-size:12px;color:var(--muted);font-weight:400}
+    .book-card-badge{display:inline-flex;padding:3px 9px;border-radius:999px;background:#e8f3ee;color:var(--green);font-size:11px;font-weight:800;margin-left:8px}
+    .book-card-divider{height:1px;background:var(--line);margin:16px 0}
+    .btn-book-main{display:block;width:100%;padding:14px;border-radius:12px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:15px;border:none;cursor:pointer;font-family:inherit;transition:.2s;text-align:center;text-decoration:none}
+    .btn-book-main:hover{box-shadow:0 8px 20px rgba(201,166,91,.3);transform:translateY(-1px)}
+    .book-card-note{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6}
+    .book-card-info{font-size:12px;color:var(--muted);line-height:1.8;margin-top:12px}
+    .book-card-info b{color:var(--ink)}
 
-    /* ── Rooms ── */
-    .rooms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-top:32px}
-    .room-card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(11,23,51,.08);transition:.2s}
-    .room-card:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(11,23,51,.12)}
-    .room-img{height:200px;overflow:hidden}
-    .room-img img{width:100%;height:100%;object-fit:cover;transition:.4s}
-    .room-card:hover .room-img img{transform:scale(1.05)}
-    .room-body{padding:20px}
-    .room-body h3{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:6px}
-    .room-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:12px}
-    .room-price{font-size:20px;font-weight:900;color:var(--gold)}
-    .room-price span{font-size:12px;font-weight:400;color:var(--muted)}
-    .room-badge{display:inline-block;background:var(--gold-l);color:var(--gold);font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px;margin-left:8px;letter-spacing:.04em}
+    .main-content{padding:60px 0 80px}
+    .content-grid{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start}
 
-    /* ── Amenities ── */
-    .amenity-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:24px}
-    .amenity-item{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:12px;padding:12px 16px;font-size:13px;font-weight:600;color:var(--ink)}
-    .amenity-item span.ico{font-size:18px;flex-shrink:0}
+    .section-title{font-size:20px;font-weight:800;color:var(--navy);margin:0 0 20px;display:flex;align-items:center;gap:10px}
+    .section-title::after{content:"";flex:1;height:1px;background:var(--line)}
 
-    /* ── Info cards ── */
-    .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:24px}
-    .info-card{background:var(--card);border-radius:14px;padding:20px;border-left:4px solid var(--gold)}
-    .info-card h4{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:6px}
-    .info-card p{font-size:13px;color:var(--muted);line-height:1.7}
+    .gallery{margin-bottom:40px}
+    .gallery-main{width:100%;height:340px;border-radius:16px;overflow:hidden;margin-bottom:8px;cursor:pointer;position:relative}
+    .gallery-main img{width:100%;height:100%;object-fit:cover;transition:.4s}
+    .gallery-main img:hover{transform:scale(1.02)}
+    .gallery-hint{position:absolute;bottom:12px;right:14px;background:rgba(11,23,51,.6);color:rgba(255,255,255,.9);font-size:11px;padding:4px 10px;border-radius:6px;pointer-events:none;backdrop-filter:blur(4px)}
+    .gallery-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .gallery-thumb{height:80px;border-radius:10px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:.2s}
+    .gallery-thumb.active{border-color:var(--gold)}
+    .gallery-thumb img{width:100%;height:100%;object-fit:cover;transition:.3s}
+    .gallery-thumb:hover img{transform:scale(1.06)}
 
-    /* ── CTA ── */
-    .cta-bar{background:var(--navy-2);padding:40px 24px;text-align:center}
-    .cta-bar h2{font-size:24px;font-weight:900;color:#fff;margin-bottom:8px}
-    .cta-bar p{color:rgba(255,255,255,.65);font-size:14px;margin-bottom:24px}
-    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-    .btn-gold{background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;padding:13px 32px;border-radius:999px;border:none;cursor:pointer;transition:.15s}
-    .btn-gold:hover{opacity:.88;transform:translateY(-1px)}
-    .btn-outline{background:transparent;color:#fff;font-weight:700;font-size:14px;padding:12px 28px;border-radius:999px;border:1px solid rgba(255,255,255,.3);cursor:pointer;transition:.15s}
-    .btn-outline:hover{background:rgba(255,255,255,.08)}
+    .room-list{display:grid;gap:24px;margin-bottom:40px}
+    .room-section{background:white;border:2px solid var(--line);border-radius:18px;overflow:hidden;transition:.2s}
+    .room-section:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(201,166,91,.12)}
+    .room-section-header{display:flex;justify-content:space-between;align-items:flex-start;padding:18px 20px 0;gap:12px}
+    .room-section-header h4{margin:0 0 8px;color:var(--navy);font-size:17px;font-weight:800}
+    .room-amenities{display:flex;gap:6px;flex-wrap:wrap}
+    .amenity{padding:3px 9px;background:#f0ece5;border-radius:999px;font-size:11px;color:var(--ink);font-weight:600}
+    .room-price-block{text-align:right;white-space:nowrap;flex-shrink:0}
+    .room-price-block b{display:block;font-size:22px;font-weight:900;color:var(--navy)}
+    .room-price-block small{color:var(--muted);font-size:12px}
+    .room-gallery-wrap{padding:12px 12px 0}
+    .room-gallery-main{width:100%;height:280px;border-radius:12px;overflow:hidden;cursor:pointer;position:relative}
+    .room-gallery-main img{width:100%;height:100%;object-fit:cover;transition:.4s}
+    .room-gallery-main:hover img{transform:scale(1.02)}
+    .room-gallery-strip{display:flex;gap:6px;overflow-x:auto;margin-top:7px;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+    .room-gallery-strip::-webkit-scrollbar{height:3px}
+    .room-gallery-strip::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+    .room-gallery-thumb{flex:0 0 80px;height:58px;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:.2s}
+    .room-gallery-thumb.active{border-color:var(--gold)}
+    .room-gallery-thumb img{width:100%;height:100%;object-fit:cover;transition:.3s}
+    .room-gallery-thumb:hover img{transform:scale(1.06)}
+    .room-section-body{padding:14px 20px 20px}
+    .room-section-body p{margin:0 0 10px;color:var(--muted);font-size:13px}
+    .btn-book-room{display:inline-block;padding:9px 20px;border-radius:10px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:13px;text-decoration:none;transition:.2s}
+    .btn-book-room:hover{box-shadow:0 6px 16px rgba(201,166,91,.3);transform:translateY(-1px)}
 
-    /* ── Map ── */
-    .map-wrap{border-radius:18px;overflow:hidden;height:340px;margin-top:24px}
-    .map-wrap iframe{width:100%;height:100%;border:none}
+    .info-block{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+    .info-block h3{margin:0 0 16px;color:var(--navy);font-size:16px;font-weight:800}
+    .info-row{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+    .info-row:last-child{border-bottom:none}
+    .info-row .lbl{color:var(--muted);min-width:90px;flex:0 0 auto}
+    .info-row .val{color:var(--ink);font-weight:600}
 
-    /* ── Footer ── */
-    footer{background:var(--navy-2);color:rgba(255,255,255,.5);text-align:center;padding:20px;font-size:12px}
-    footer a{color:rgba(255,255,255,.5)}
-    footer a:hover{color:#fff}
+    .amenity-section{margin-bottom:32px}
+    .amenity-category{margin-bottom:16px}
+    .amenity-category h4{font-size:13px;font-weight:800;color:var(--navy);margin:0 0 8px;letter-spacing:.04em}
+    .amenity-tags{display:flex;flex-wrap:wrap;gap:6px}
+    .amenity-tag{padding:5px 11px;background:#f0ece5;border-radius:999px;font-size:12px;color:var(--ink);font-weight:600}
 
-    /* ── Lang ── */
-    .lang-hidden{display:none}
+    .faq-list{margin-bottom:40px}
+    .faq-item{background:white;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+    .faq-q{width:100%;background:none;border:none;padding:16px 20px;text-align:left;font-size:14px;font-weight:700;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:inherit}
+    .faq-q:hover{background:#f8f8fb}
+    .faq-q .arrow{font-size:16px;color:var(--gold);transition:.25s;flex-shrink:0}
+    .faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+    .faq-a{display:none;padding:0 20px 16px;color:var(--muted);font-size:14px;line-height:1.75}
+    .faq-item.open .faq-a{display:block}
 
-    @media(max-width:768px){
-      .hero-body{padding:0 24px;max-width:100%}
-      .hero-gallery{display:none}
-      .hero{height:360px}
+    .lightbox{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.93);align-items:center;justify-content:center}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:6px}
+    .lb-close{position:fixed;top:16px;right:20px;background:rgba(255,255,255,.15);border:none;color:white;font-size:26px;cursor:pointer;z-index:301;padding:4px 12px;border-radius:8px;line-height:1}
+    .lb-arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:white;font-size:44px;cursor:pointer;z-index:301;padding:8px 14px;border-radius:10px;line-height:1}
+    .lb-prev{left:14px}.lb-next{right:14px}
+    .lb-counter{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:12px;background:rgba(0,0,0,.45);padding:4px 14px;border-radius:20px}
+
+    [data-lang]{display:none}
+    body.lang-zh [data-lang="zh"],body.lang-en [data-lang="en"],body.lang-ja [data-lang="ja"]{display:block}
+    span[data-lang]{display:none}
+    body.lang-zh span[data-lang="zh"],body.lang-en span[data-lang="en"],body.lang-ja span[data-lang="ja"]{display:inline}
+
+    footer{background:var(--navy-2);color:rgba(255,255,255,.45);text-align:center;padding:28px 20px;font-size:13px}
+    footer a{color:rgba(255,255,255,.45)}
+    footer a:hover{color:var(--gold)}
+
+    @media(max-width:900px){
+      .prop-hero-inner,.content-grid{grid-template-columns:1fr}
+      .book-card{position:static}
+      .room-gallery-main{height:220px}
     }
   </style>
 </head>
-<body>
+<body class="lang-zh">
 
-<!-- Nav -->
-<nav class="topbar">
-  <div class="tb-brand"><span></span>MKG HOSPITALITY</div>
-  <div class="tb-nav">
-    <a class="tb-back" href="stay.html#hotels">← 返回列表</a>
-    <a class="tb-back" href="index.html">集团官网</a>
-    <a class="tb-book" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener">立即预订</a>
+<header class="topbar">
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="MKG Japan" onerror="this.style.display='none'">
+      <span>MKG Japan<small>Real Estate & Hospitality</small></span>
+    </a>
+    <nav class="links">
+      <div class="breadcrumb">
+        <a href="stay.html">MKG Stay</a>
+        <span>›</span>
+        <span style="color:var(--gold-2)">MKG HOTEL Asakusa</span>
+      </div>
+      <div class="desk-lang-wrap">
+        <button class="desk-lang-btn" id="deskLangBtn" onclick="toggleDeskLang()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="langLabel">語言</span> ▾
+        </button>
+        <div class="desk-lang-menu" id="deskLangMenu">
+          <button onclick="setLang('zh');closeLang()">🇨🇳 中文</button>
+          <button onclick="setLang('ja');closeLang()">🇯🇵 日本語</button>
+          <button onclick="setLang('en');closeLang()">🇺🇸 English</button>
+        </div>
+      </div>
+      <a class="nav-cta" href="index.html"><span data-lang="zh">← 集团官网</span><span data-lang="ja">← 公式サイト</span><span data-lang="en">← Main Site</span></a>
+      <a class="nav-book" href="stay.html#hotels"><span data-lang="zh">← 返回列表</span><span data-lang="ja">← 一覧に戻る</span><span data-lang="en">← Back</span></a>
+    </nav>
   </div>
-</nav>
+</header>
 
 <!-- Hero -->
-<section class="hero">
-  <img class="hero-img" src="assets/r502_a.jpg" alt="MKG HOTEL Asakusa">
-  <div class="hero-overlay"></div>
-  <div class="hero-body">
-    <div class="hero-tag"><span></span> 运营中 · Operational</div>
-    <h1>MKG HOTEL<br>Asakusa</h1>
-    <p class="hero-sub">台东区驹形 · 浅草寺步行 5 分钟 · 精品设计酒店</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><b>9</b><span>间客室</span></div>
-      <div class="hero-stat"><b>9.2</b><span>Booking评分</span></div>
-      <div class="hero-stat"><b>5min</b><span>至浅草寺</span></div>
+<section class="prop-hero">
+  <div class="wrap">
+    <div class="prop-hero-inner">
+      <div>
+        <div class="prop-tags">
+          <span class="prop-tag open">● <span data-lang="zh">运营中</span><span data-lang="ja">営業中</span><span data-lang="en">Operational</span></span>
+          <span class="prop-tag info">🏨 <span data-lang="zh">精品酒店</span><span data-lang="ja">ブティックホテル</span><span data-lang="en">Boutique Hotel</span></span>
+          <span class="prop-tag info">📍 <span data-lang="zh">台东区驹形</span><span data-lang="ja">台東区駒形</span><span data-lang="en">Komagata, Taito-ku</span></span>
+        </div>
+        <h1>MKG HOTEL Asakusa</h1>
+        <div class="addr">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-lang="zh">東京都台東区駒形 — 浅草駅 / 蔵前駅 步行约 5 分钟</span>
+          <span data-lang="ja">東京都台東区駒形 — 浅草駅・蔵前駅 徒歩約5分</span>
+          <span data-lang="en">Komagata, Taito-ku, Tokyo — 5 min walk from Asakusa / Kuramae Station</span>
+        </div>
+        <p class="prop-desc">
+          <span data-lang="zh">位于东京台东区驹形的精品设计酒店，毗邻浅草寺。共 9 间风格各异的精品客室，融合现代设计与日式美学，提供 24 小时前台服务及行李寄存。Booking.com 评分 9.2，深受国际旅客好评。</span>
+          <span data-lang="ja">東京台東区駒形に位置する精品デザインホテル。浅草寺へ徒歩圏内。全9室、モダンデザインと和の美学を融合。24時間フロントサービス・手荷物預かり対応。Booking.com評価9.2。</span>
+          <span data-lang="en">A boutique design hotel in Komagata, Taito-ku, within walking distance of Sensoji Temple. 9 uniquely designed rooms blending modern aesthetics with Japanese elements. 24-hour front desk, luggage storage. Booking.com score 9.2.</span>
+        </p>
+        <div class="prop-stats">
+          <div class="prop-stat"><b>9</b><span data-lang="zh">间客室</span><span data-lang="ja">客室数</span><span data-lang="en">Rooms</span></div>
+          <div class="prop-stat"><b>9.2</b><span>Booking.com</span></div>
+          <div class="prop-stat"><b>5 min</b><span data-lang="zh">至浅草寺</span><span data-lang="ja">浅草寺まで</span><span data-lang="en">To Sensoji</span></div>
+        </div>
+      </div>
+
+      <!-- 右侧预订卡片 -->
+      <div class="book-card">
+        <div class="book-card-top">
+          <div class="book-card-rating">
+            <div class="rating-score">9.2</div>
+            <div>
+              <div class="rating-stars">★★★★★</div>
+              <div class="rating-label">Booking.com <span data-lang="zh">评分</span><span data-lang="ja">評価</span><span data-lang="en">Score</span></div>
+            </div>
+          </div>
+          <div class="book-card-price">¥18,000 <span class="per">/ <span data-lang="zh">晚起</span><span data-lang="ja">泊〜</span><span data-lang="en">night</span></span><span class="book-card-badge">Official</span></div>
+        </div>
+        <div class="book-card-divider"></div>
+        <a class="btn-book-main" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener">
+          <span data-lang="zh">在 Booking.com 预订</span>
+          <span data-lang="ja">Booking.comで予約</span>
+          <span data-lang="en">Book on Booking.com</span>
+        </a>
+        <p class="book-card-note">
+          <span data-lang="zh">即时确认 · 支持多种支付方式<br>取消政策以 Booking.com 页面为准</span>
+          <span data-lang="ja">即時確認・多様な支払方法対応<br>キャンセルポリシーはBooking.comページ参照</span>
+          <span data-lang="en">Instant confirmation · Multiple payment methods<br>Cancellation policy as shown on Booking.com</span>
+        </p>
+        <div class="book-card-info">
+          <div><b data-lang="zh">入住</b><b data-lang="ja">チェックイン</b><b data-lang="en">Check-in</b>：16:00〜</div>
+          <div><b data-lang="zh">退房</b><b data-lang="ja">チェックアウト</b><b data-lang="en">Check-out</b>：〜11:00</div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="hero-gallery">
-    <img src="assets/asakusa/g1.jpg" alt="">
-    <img src="assets/asakusa/g2.jpg" alt="">
   </div>
 </section>
 
-<!-- Gallery -->
-<div class="wrap" style="padding-top:20px">
-  <div class="gallery-strip">
-    <img src="assets/r502_a.jpg" alt="外观">
-    <img src="assets/asakusa/room_superior.jpg" alt="高级套房">
-    <img src="assets/asakusa/room_deluxe.jpg" alt="豪华套房">
-    <img src="assets/asakusa/room_deluxe_s.jpg" alt="豪华小型套房">
-    <img src="assets/asakusa/room_triple.jpg" alt="舒适3人间">
-    <img src="assets/asakusa/g3.jpg" alt="">
-    <img src="assets/asakusa/g4.jpg" alt="">
+<!-- 主体内容 -->
+<div class="main-content">
+  <div class="wrap">
+    <div class="content-grid">
+
+      <!-- 左侧 -->
+      <div>
+
+        <!-- 画廊 -->
+        <div class="gallery">
+          <div class="gallery-main" id="galleryMain" onclick="lbOpen(allImgs,0)">
+            <img id="mainImg" src="assets/r502_a.jpg" alt="MKG HOTEL Asakusa">
+            <div class="gallery-hint">🔍 点击放大</div>
+          </div>
+          <div class="gallery-thumbs">
+            <div class="gallery-thumb active" onclick="switchImg(0)"><img src="assets/r502_a.jpg" alt=""></div>
+            <div class="gallery-thumb" onclick="switchImg(1)"><img src="assets/asakusa/room_superior.jpg" alt=""></div>
+            <div class="gallery-thumb" onclick="switchImg(2)"><img src="assets/asakusa/room_deluxe.jpg" alt=""></div>
+            <div class="gallery-thumb" onclick="switchImg(3)"><img src="assets/asakusa/room_triple.jpg" alt=""></div>
+          </div>
+        </div>
+
+        <!-- 客室 -->
+        <h2 class="section-title"><span data-lang="zh">客室类型</span><span data-lang="ja">客室タイプ</span><span data-lang="en">Room Types</span></h2>
+        <div class="room-list">
+
+          <!-- 高级套房 -->
+          <div class="room-section">
+            <div class="room-section-header">
+              <div>
+                <h4><span data-lang="zh">高级套房</span><span data-lang="ja">スーペリアスイート</span><span data-lang="en">Superior Suite</span></h4>
+                <div class="room-amenities">
+                  <span class="amenity">👥 1〜2名</span><span class="amenity">🛏 <span data-lang="zh">大床/双床</span><span data-lang="ja">ダブル/ツイン</span><span data-lang="en">Double/Twin</span></span><span class="amenity">🛁 <span data-lang="zh">独立卫浴</span><span data-lang="ja">独立バス</span><span data-lang="en">Private Bath</span></span>
+                </div>
+              </div>
+              <div class="room-price-block"><b>¥22,000</b><small>/ <span data-lang="zh">晚起</span><span data-lang="ja">泊〜</span><span data-lang="en">night</span></small></div>
+            </div>
+            <div class="room-gallery-wrap">
+              <div class="room-gallery-main" onclick="lbOpen(roomImgs.superior, rmIdx.superior)">
+                <img id="rm-superior-main" src="assets/asakusa/superior/667273812.jpg" alt="高级套房">
+                <div class="gallery-hint">🔍 18张 · 点击放大</div>
+              </div>
+              <div class="room-gallery-strip" id="rm-superior-strip">
+                <div class="room-gallery-thumb active" onclick="switchRoomImg('superior',0)"><img src="assets/asakusa/superior/667273812.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',1)"><img src="assets/asakusa/superior/667273793.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',2)"><img src="assets/asakusa/superior/667273811.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',3)"><img src="assets/asakusa/superior/667273822.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',4)"><img src="assets/asakusa/superior/667273814.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',5)"><img src="assets/asakusa/superior/667273799.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',6)"><img src="assets/asakusa/superior/667273807.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',7)"><img src="assets/asakusa/superior/667273804.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',8)"><img src="assets/asakusa/superior/667273821.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',9)"><img src="assets/asakusa/superior/667273816.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',10)"><img src="assets/asakusa/superior/667273801.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',11)"><img src="assets/asakusa/superior/667273819.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',12)"><img src="assets/asakusa/superior/667273808.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',13)"><img src="assets/asakusa/superior/667582244.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',14)"><img src="assets/asakusa/superior/667273806.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',15)"><img src="assets/asakusa/superior/667273803.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',16)"><img src="assets/asakusa/superior/667273792.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('superior',17)"><img src="assets/asakusa/superior/667585024.jpg" alt=""></div>
+              </div>
+            </div>
+            <div class="room-section-body">
+              <p><span data-lang="zh">宽敞舒适，融合现代设计与和风元素，大床或双床可选。独立卫浴，配备全套洗漱用品。</span><span data-lang="ja">広々とした客室、モダンデザインと和の要素を融合。ダブルまたはツインベッド選択可。独立したバスルーム完備。</span><span data-lang="en">Spacious room blending modern design with Japanese elements. Double or twin bed. Private bathroom with full amenities.</span></p>
+              <a href="https://www.booking.com/hotel/jp/mkg-asakusa.ja.html" target="_blank" rel="noopener" class="btn-book-room"><span data-lang="zh">在 Booking.com 预订</span><span data-lang="ja">Booking.comで予約</span><span data-lang="en">Book on Booking.com</span></a>
+            </div>
+          </div>
+
+          <!-- 豪华套房 -->
+          <div class="room-section">
+            <div class="room-section-header">
+              <div>
+                <h4><span data-lang="zh">豪华套房</span><span data-lang="ja">デラックススイート</span><span data-lang="en">Deluxe Suite</span></h4>
+                <div class="room-amenities">
+                  <span class="amenity">👥 1〜2名</span><span class="amenity">🛏 <span data-lang="zh">大床</span><span data-lang="ja">ダブル</span><span data-lang="en">Double</span></span><span class="amenity">🛁 <span data-lang="zh">独立卫浴</span><span data-lang="ja">独立バス</span><span data-lang="en">Private Bath</span></span>
+                </div>
+              </div>
+              <div class="room-price-block"><b>¥28,000</b><small>/ <span data-lang="zh">晚起</span><span data-lang="ja">泊〜</span><span data-lang="en">night</span></small></div>
+            </div>
+            <div class="room-gallery-wrap">
+              <div class="room-gallery-main" onclick="lbOpen(roomImgs.deluxe, rmIdx.deluxe)">
+                <img id="rm-deluxe-main" src="assets/asakusa/deluxe/667274556.jpg" alt="豪华套房">
+                <div class="gallery-hint">🔍 18张 · 点击放大</div>
+              </div>
+              <div class="room-gallery-strip" id="rm-deluxe-strip">
+                <div class="room-gallery-thumb active" onclick="switchRoomImg('deluxe',0)"><img src="assets/asakusa/deluxe/667274556.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',1)"><img src="assets/asakusa/deluxe/667274577.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',2)"><img src="assets/asakusa/deluxe/667274572.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',3)"><img src="assets/asakusa/deluxe/667274555.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',4)"><img src="assets/asakusa/deluxe/667274557.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',5)"><img src="assets/asakusa/deluxe/667274551.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',6)"><img src="assets/asakusa/deluxe/667274554.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',7)"><img src="assets/asakusa/deluxe/667274571.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',8)"><img src="assets/asakusa/deluxe/667274573.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',9)"><img src="assets/asakusa/deluxe/667585028.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',10)"><img src="assets/asakusa/deluxe/667585048.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',11)"><img src="assets/asakusa/deluxe/667585053.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',12)"><img src="assets/asakusa/deluxe/667274574.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',13)"><img src="assets/asakusa/deluxe/667582244.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',14)"><img src="assets/asakusa/deluxe/667585030.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',15)"><img src="assets/asakusa/deluxe/667274570.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',16)"><img src="assets/asakusa/deluxe/667585029.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe',17)"><img src="assets/asakusa/deluxe/667585024.jpg" alt=""></div>
+              </div>
+            </div>
+            <div class="room-section-body">
+              <p><span data-lang="zh">面积更大，大床设计，独立会客区，适合商务及休闲出行。享有更宽敞的空间与精致陈设。</span><span data-lang="ja">より広い客室、ダブルベッド、独立した座席エリア付き。ビジネス・レジャー両対応。</span><span data-lang="en">Larger room with double bed and separate seating area. Ideal for business or leisure travel.</span></p>
+              <a href="https://www.booking.com/hotel/jp/mkg-asakusa.ja.html" target="_blank" rel="noopener" class="btn-book-room"><span data-lang="zh">在 Booking.com 预订</span><span data-lang="ja">Booking.comで予約</span><span data-lang="en">Book on Booking.com</span></a>
+            </div>
+          </div>
+
+          <!-- 豪华小型套房 -->
+          <div class="room-section">
+            <div class="room-section-header">
+              <div>
+                <h4><span data-lang="zh">豪华小型套房</span><span data-lang="ja">デラックスコンパクトスイート</span><span data-lang="en">Deluxe Compact Suite</span></h4>
+                <div class="room-amenities">
+                  <span class="amenity">👥 1〜2名</span><span class="amenity">🛏 <span data-lang="zh">双床</span><span data-lang="ja">ツイン</span><span data-lang="en">Twin</span></span><span class="amenity">🛁 <span data-lang="zh">独立卫浴</span><span data-lang="ja">独立バス</span><span data-lang="en">Private Bath</span></span>
+                </div>
+              </div>
+              <div class="room-price-block"><b>¥18,000</b><small>/ <span data-lang="zh">晚起</span><span data-lang="ja">泊〜</span><span data-lang="en">night</span></small></div>
+            </div>
+            <div class="room-gallery-wrap">
+              <div class="room-gallery-main" onclick="lbOpen(roomImgs['deluxe-s'], rmIdx['deluxe-s'])">
+                <img id="rm-deluxe-s-main" src="assets/asakusa/deluxe-s/667592817.jpg" alt="豪华小型套房">
+                <div class="gallery-hint">🔍 18张 · 点击放大</div>
+              </div>
+              <div class="room-gallery-strip" id="rm-deluxe-s-strip">
+                <div class="room-gallery-thumb active" onclick="switchRoomImg('deluxe-s',0)"><img src="assets/asakusa/deluxe-s/667592817.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',1)"><img src="assets/asakusa/deluxe-s/667592818.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',2)"><img src="assets/asakusa/deluxe-s/667592813.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',3)"><img src="assets/asakusa/deluxe-s/667591397.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',4)"><img src="assets/asakusa/deluxe-s/674605061.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',5)"><img src="assets/asakusa/deluxe-s/667592820.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',6)"><img src="assets/asakusa/deluxe-s/667592815.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',7)"><img src="assets/asakusa/deluxe-s/667585028.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',8)"><img src="assets/asakusa/deluxe-s/667585030.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',9)"><img src="assets/asakusa/deluxe-s/667585048.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',10)"><img src="assets/asakusa/deluxe-s/667585053.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',11)"><img src="assets/asakusa/deluxe-s/667585068.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',12)"><img src="assets/asakusa/deluxe-s/667585076.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',13)"><img src="assets/asakusa/deluxe-s/667585077.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',14)"><img src="assets/asakusa/deluxe-s/667585082.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',15)"><img src="assets/asakusa/deluxe-s/667585055.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',16)"><img src="assets/asakusa/deluxe-s/667585024.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('deluxe-s',17)"><img src="assets/asakusa/deluxe-s/667582244.jpg" alt=""></div>
+              </div>
+            </div>
+            <div class="room-section-body">
+              <p><span data-lang="zh">精致紧凑，双床设计，适合两人出行，性价比优选。同享酒店全部设施服务。</span><span data-lang="ja">コンパクトながら上質、ツインベッド。カップル・友人旅行に最適。ホテルの全サービスを利用可能。</span><span data-lang="en">Compact yet refined twin bed room. Great value for couples or friends. Full hotel amenities included.</span></p>
+              <a href="https://www.booking.com/hotel/jp/mkg-asakusa.ja.html" target="_blank" rel="noopener" class="btn-book-room"><span data-lang="zh">在 Booking.com 预订</span><span data-lang="ja">Booking.comで予約</span><span data-lang="en">Book on Booking.com</span></a>
+            </div>
+          </div>
+
+          <!-- 舒适3人间 -->
+          <div class="room-section">
+            <div class="room-section-header">
+              <div>
+                <h4><span data-lang="zh">舒适3人间</span><span data-lang="ja">トリプルルーム</span><span data-lang="en">Comfortable Triple</span></h4>
+                <div class="room-amenities">
+                  <span class="amenity">👥 <span data-lang="zh">最多3名</span><span data-lang="ja">最大3名</span><span data-lang="en">Up to 3</span></span><span class="amenity">🛏 <span data-lang="zh">三床</span><span data-lang="ja">3ベッド</span><span data-lang="en">3 Beds</span></span><span class="amenity">🛁 <span data-lang="zh">独立卫浴</span><span data-lang="ja">独立バス</span><span data-lang="en">Private Bath</span></span>
+                </div>
+              </div>
+              <div class="room-price-block"><b>¥24,000</b><small>/ <span data-lang="zh">晚起</span><span data-lang="ja">泊〜</span><span data-lang="en">night</span></small></div>
+            </div>
+            <div class="room-gallery-wrap">
+              <div class="room-gallery-main" onclick="lbOpen(roomImgs.triple, rmIdx.triple)">
+                <img id="rm-triple-main" src="assets/asakusa/triple/667583036.jpg" alt="舒适3人间">
+                <div class="gallery-hint">🔍 18张 · 点击放大</div>
+              </div>
+              <div class="room-gallery-strip" id="rm-triple-strip">
+                <div class="room-gallery-thumb active" onclick="switchRoomImg('triple',0)"><img src="assets/asakusa/triple/667583036.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',1)"><img src="assets/asakusa/triple/666.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',2)"><img src="assets/asakusa/triple/667583007.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',3)"><img src="assets/asakusa/triple/667582249.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',4)"><img src="assets/asakusa/triple/667582967.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',5)"><img src="assets/asakusa/triple/667582970.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',6)"><img src="assets/asakusa/triple/667582236.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',7)"><img src="assets/asakusa/triple/667582237.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',8)"><img src="assets/asakusa/triple/667583041.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',9)"><img src="assets/asakusa/triple/667583009.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',10)"><img src="assets/asakusa/triple/667582242.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',11)"><img src="assets/asakusa/triple/667583035.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',12)"><img src="assets/asakusa/triple/667582251.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',13)"><img src="assets/asakusa/triple/667582971.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',14)"><img src="assets/asakusa/triple/667582244.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',15)"><img src="assets/asakusa/triple/667582240.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',16)"><img src="assets/asakusa/triple/667582243.jpg" alt=""></div>
+                <div class="room-gallery-thumb" onclick="switchRoomImg('triple',17)"><img src="assets/asakusa/triple/667582233.jpg" alt=""></div>
+              </div>
+            </div>
+            <div class="room-section-body">
+              <p><span data-lang="zh">三床设计，适合家庭或三人小组出行，宽敞舒适。充足储物空间，适合携带行李较多的旅行者。</span><span data-lang="ja">3ベッド設計。ファミリーや3人グループに最適な広々とした客室。収納スペースも充実。</span><span data-lang="en">Three beds, perfect for families or groups of three. Spacious with ample storage for luggage.</span></p>
+              <a href="https://www.booking.com/hotel/jp/mkg-asakusa.ja.html" target="_blank" rel="noopener" class="btn-book-room"><span data-lang="zh">在 Booking.com 预订</span><span data-lang="ja">Booking.comで予約</span><span data-lang="en">Book on Booking.com</span></a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 设施 -->
+        <h2 class="section-title"><span data-lang="zh">酒店设施</span><span data-lang="ja">施設・設備</span><span data-lang="en">Amenities</span></h2>
+        <div class="amenity-section">
+          <div class="amenity-category">
+            <h4>🏨 <span data-lang="zh">酒店服务</span><span data-lang="ja">ホテルサービス</span><span data-lang="en">Hotel Services</span></h4>
+            <div class="amenity-tags">
+              <span class="amenity-tag">🛎 <span data-lang="zh">24小时前台</span><span data-lang="ja">24時間フロント</span><span data-lang="en">24h Front Desk</span></span>
+              <span class="amenity-tag">🧳 <span data-lang="zh">行李寄存</span><span data-lang="ja">手荷物預かり</span><span data-lang="en">Luggage Storage</span></span>
+              <span class="amenity-tag">📦 <span data-lang="zh">行李邮寄（YAMATO）</span><span data-lang="ja">宅配便（ヤマト）</span><span data-lang="en">Parcel Service (YAMATO)</span></span>
+              <span class="amenity-tag">🌐 <span data-lang="zh">多语言服务</span><span data-lang="ja">多言語対応</span><span data-lang="en">Multilingual Staff</span></span>
+            </div>
+          </div>
+          <div class="amenity-category">
+            <h4>🛏 <span data-lang="zh">客室设施</span><span data-lang="ja">客室設備</span><span data-lang="en">In-Room</span></h4>
+            <div class="amenity-tags">
+              <span class="amenity-tag">📶 Wi-Fi</span>
+              <span class="amenity-tag">🔑 <span data-lang="zh">智能门锁</span><span data-lang="ja">スマートロック</span><span data-lang="en">Smart Lock</span></span>
+              <span class="amenity-tag">❄️ <span data-lang="zh">空调/暖气</span><span data-lang="ja">エアコン</span><span data-lang="en">A/C & Heating</span></span>
+              <span class="amenity-tag">📺 <span data-lang="zh">智能电视</span><span data-lang="ja">スマートTV</span><span data-lang="en">Smart TV</span></span>
+              <span class="amenity-tag">🚿 <span data-lang="zh">独立卫浴</span><span data-lang="ja">独立バスルーム</span><span data-lang="en">Private Bathroom</span></span>
+            </div>
+          </div>
+          <div class="amenity-category">
+            <h4>🚗 <span data-lang="zh">周边设施</span><span data-lang="ja">周辺施設</span><span data-lang="en">Nearby</span></h4>
+            <div class="amenity-tags">
+              <span class="amenity-tag">🅿️ <span data-lang="zh">Times驒形停车场（隔壁）</span><span data-lang="ja">Timesパーキング駒形（隣接）</span><span data-lang="en">Times Parking Komagata (adjacent)</span></span>
+              <span class="amenity-tag">⛩ <span data-lang="zh">浅草寺 步行5分</span><span data-lang="ja">浅草寺 徒歩5分</span><span data-lang="en">Sensoji 5 min walk</span></span>
+              <span class="amenity-tag">🚉 <span data-lang="zh">浅草站 步行5分</span><span data-lang="ja">浅草駅 徒歩5分</span><span data-lang="en">Asakusa Stn 5 min</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <h2 class="section-title">FAQ</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+              <span data-lang="zh">可以提供行李寄存服务吗？</span><span data-lang="ja">荷物預かりサービスはありますか？</span><span data-lang="en">Do you offer luggage storage?</span>
+              <span class="arrow">▾</span>
+            </button>
+            <div class="faq-a"><span data-lang="zh">酒店配有专门行李房，可以为您免费提供入住前及退房后的行李寄存服务。</span><span data-lang="ja">専用の荷物保管室があり、チェックイン前・チェックアウト後の無料荷物預かりに対応しています。</span><span data-lang="en">We have a dedicated luggage room offering free storage before check-in and after check-out.</span></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+              <span data-lang="zh">周边有停车场吗？</span><span data-lang="ja">近くに駐車場はありますか？</span><span data-lang="en">Is there parking nearby?</span>
+              <span class="arrow">▾</span>
+            </button>
+            <div class="faq-a"><span data-lang="zh">酒店无自带停车场，但一墙之隔是 Times 駒形２丁目第4停车场，可自行前往停放。</span><span data-lang="ja">ホテル専用駐車場はありませんが、隣接してTimesパーキング駒形2丁目第4があります。</span><span data-lang="en">No on-site parking, but Times Parking Komagata 2-chome #4 is directly adjacent.</span></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+              <span data-lang="zh">可以提供行李邮寄服务吗？</span><span data-lang="ja">宅配便サービスはありますか？</span><span data-lang="en">Do you offer parcel delivery?</span>
+              <span class="arrow">▾</span>
+            </button>
+            <div class="faq-a"><span data-lang="zh">酒店与 YAMATO（宅急便）长期合作，可为您提供行李邮寄服务，具体价格请与前台工作人员沟通。</span><span data-lang="ja">ヤマト運輸と提携しており、宅配便サービスをご利用いただけます。詳細はフロントにお問い合わせください。</span><span data-lang="en">We partner with YAMATO for parcel delivery. Please inquire at the front desk for details.</span></div>
+          </div>
+        </div>
+
+        <!-- 地图 -->
+        <h2 class="section-title"><span data-lang="zh">位置</span><span data-lang="ja">アクセス</span><span data-lang="en">Location</span></h2>
+        <div class="info-block" style="padding:0;overflow:hidden;margin-bottom:0">
+          <iframe src="https://maps.google.com/maps?q=東京都台東区駒形&output=embed&hl=zh-CN&z=16" style="width:100%;height:340px;border:none;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+      </div>
+
+      <!-- 右侧固定 -->
+      <div>
+        <div class="info-block">
+          <h3><span data-lang="zh">酒店信息</span><span data-lang="ja">ホテル情報</span><span data-lang="en">Hotel Info</span></h3>
+          <div class="info-row"><div class="lbl"><span data-lang="zh">地址</span><span data-lang="ja">住所</span><span data-lang="en">Address</span></div><div class="val">東京都台東区駒形</div></div>
+          <div class="info-row"><div class="lbl"><span data-lang="zh">客室数</span><span data-lang="ja">客室数</span><span data-lang="en">Rooms</span></div><div class="val">9</div></div>
+          <div class="info-row"><div class="lbl"><span data-lang="zh">入住</span><span data-lang="ja">チェックイン</span><span data-lang="en">Check-in</span></div><div class="val">16:00〜</div></div>
+          <div class="info-row"><div class="lbl"><span data-lang="zh">退房</span><span data-lang="ja">チェックアウト</span><span data-lang="en">Check-out</span></div><div class="val">〜11:00</div></div>
+          <div class="info-row"><div class="lbl"><span data-lang="zh">最近车站</span><span data-lang="ja">最寄駅</span><span data-lang="en">Nearest Stn</span></div><div class="val"><span data-lang="zh">浅草站 / 蔵前站 步行5分</span><span data-lang="ja">浅草駅・蔵前駅 徒歩5分</span><span data-lang="en">Asakusa / Kuramae 5 min</span></div></div>
+          <div class="info-row"><div class="lbl">Booking.com</div><div class="val">⭐ 9.2 / 10</div></div>
+        </div>
+
+        <div style="margin-top:16px">
+          <a class="btn-book-main" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener" style="display:block;width:100%;padding:14px;border-radius:12px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:15px;text-align:center">
+            <span data-lang="zh">在 Booking.com 预订</span><span data-lang="ja">Booking.comで予約</span><span data-lang="en">Book on Booking.com</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
-<!-- Rooms -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-title">Room Types</div>
-    <h2>客室类型</h2>
-    <div class="rooms-grid">
-
-      <div class="room-card">
-        <div class="room-img"><img src="assets/asakusa/room_superior.jpg" alt="高级套房"></div>
-        <div class="room-body">
-          <h3>高级套房 <span class="lang-hidden">Superior Suite</span></h3>
-          <div class="room-meta">
-            <span>👥 1～2名</span>
-            <span>🛏 大床/双床</span>
-            <span>📐 约25㎡</span>
-          </div>
-          <div class="room-price">¥22,000 <span>/ 晚起</span></div>
-        </div>
-      </div>
-
-      <div class="room-card">
-        <div class="room-img"><img src="assets/asakusa/room_deluxe.jpg" alt="豪华套房"></div>
-        <div class="room-body">
-          <h3>豪华套房 <span class="lang-hidden">Deluxe Suite</span></h3>
-          <div class="room-meta">
-            <span>👥 1～2名</span>
-            <span>🛏 大床</span>
-            <span>📐 约30㎡</span>
-          </div>
-          <div class="room-price">¥28,000 <span>/ 晚起</span></div>
-        </div>
-      </div>
-
-      <div class="room-card">
-        <div class="room-img"><img src="assets/asakusa/room_deluxe_s.jpg" alt="豪华小型套房"></div>
-        <div class="room-body">
-          <h3>豪华小型套房</h3>
-          <div class="room-meta">
-            <span>👥 1～2名</span>
-            <span>🛏 双床</span>
-            <span>📐 约20㎡</span>
-          </div>
-          <div class="room-price">¥18,000 <span>/ 晚起</span></div>
-        </div>
-      </div>
-
-      <div class="room-card">
-        <div class="room-img"><img src="assets/asakusa/room_triple.jpg" alt="舒适3人间"></div>
-        <div class="room-body">
-          <h3>舒适3人间</h3>
-          <div class="room-meta">
-            <span>👥 最多3名</span>
-            <span>🛏 三床</span>
-            <span>📐 约22㎡</span>
-          </div>
-          <div class="room-price">¥24,000 <span>/ 晚起</span></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Amenities -->
-<section class="section" style="background:#fff;padding:40px 0">
-  <div class="wrap">
-    <div class="section-title">Amenities</div>
-    <h2>酒店设施</h2>
-    <div class="amenity-grid">
-      <div class="amenity-item"><span class="ico">🛎</span>24小时前台</div>
-      <div class="amenity-item"><span class="ico">🧳</span>行李寄存</div>
-      <div class="amenity-item"><span class="ico">📦</span>行李邮寄（YAMATO合作）</div>
-      <div class="amenity-item"><span class="ico">🅿️</span>周边停车场（Times驒形）</div>
-      <div class="amenity-item"><span class="ico">📶</span>全室免费Wi-Fi</div>
-      <div class="amenity-item"><span class="ico">🔑</span>智能门锁</div>
-      <div class="amenity-item"><span class="ico">🌐</span>多语言服务</div>
-      <div class="amenity-item"><span class="ico">🚿</span>独立卫浴</div>
-      <div class="amenity-item"><span class="ico">❄️</span>空调 / 暖气</div>
-      <div class="amenity-item"><span class="ico">📺</span>智能电视</div>
-    </div>
-  </div>
-</section>
-
-<!-- Info -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-title">Info</div>
-    <h2>入住须知</h2>
-    <div class="info-grid">
-      <div class="info-card">
-        <h4>入住 / 退房</h4>
-        <p>入住：16:00 起<br>退房：11:00 前</p>
-      </div>
-      <div class="info-card">
-        <h4>取消政策</h4>
-        <p>入住 2 日前可免费取消<br>详情以 Booking.com 页面为准</p>
-      </div>
-      <div class="info-card">
-        <h4>停车</h4>
-        <p>酒店无自带停车场<br>一墙之隔有 Times 駒形２丁目第4停车场</p>
-      </div>
-      <div class="info-card">
-        <h4>行李服务</h4>
-        <p>行李寄存免费提供<br>YAMATO 配送服务可咨询前台</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Map -->
-<section class="section" style="background:#fff;padding:40px 0">
-  <div class="wrap">
-    <div class="section-title">Location</div>
-    <h2>酒店位置</h2>
-    <p style="color:var(--muted);font-size:14px;margin-bottom:4px">东京都台东区驹形 · 最近车站：浅草站（步行约 5 分钟）</p>
-    <div class="map-wrap">
-      <iframe src="https://maps.google.com/maps?q=東京都台東区駒形&output=embed&hl=zh-CN&z=16" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<div class="cta-bar">
-  <h2>准备好入住了吗？</h2>
-  <p>Booking.com 评分 9.2 · 台东区驹形 · 浅草寺步行 5 分钟</p>
-  <div class="cta-btns">
-    <a class="btn-gold" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener">在 Booking.com 预订</a>
-    <a class="btn-outline" href="stay.html#hotels">← 返回住宿列表</a>
-  </div>
+<!-- Lightbox -->
+<div class="lightbox" id="lb">
+  <button class="lb-close" onclick="lbClose()">✕</button>
+  <button class="lb-arrow lb-prev" onclick="lbNav(-1)">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-arrow lb-next" onclick="lbNav(1)">›</button>
+  <div class="lb-counter" id="lbCounter"></div>
 </div>
 
 <footer>
-  <p>© 2026 株式会社MKG Japan · <a href="index.html">官网首页</a> · <a href="faq.html">常见问题</a> · <a href="index.html#contact">联系我们</a></p>
+  <p>© 2026 株式会社MKG Japan · <a href="index.html"><span data-lang="zh">官网首页</span><span data-lang="ja">公式サイト</span><span data-lang="en">Home</span></a> · <a href="faq.html">FAQ</a> · <a href="index.html#contact"><span data-lang="zh">联系我们</span><span data-lang="ja">お問い合わせ</span><span data-lang="en">Contact</span></a></p>
 </footer>
 
+<script>
+  const allImgs = [
+    'assets/r502_a.jpg','assets/asakusa/superior/667273792.jpg',
+    'assets/asakusa/deluxe/667274551.jpg','assets/asakusa/deluxe-s/667582244.jpg',
+    'assets/asakusa/triple/666.jpg'
+  ];
+  const roomImgs = {
+    superior: ['assets/asakusa/superior/667273812.jpg','assets/asakusa/superior/667273793.jpg','assets/asakusa/superior/667273811.jpg','assets/asakusa/superior/667273822.jpg','assets/asakusa/superior/667273814.jpg','assets/asakusa/superior/667273799.jpg','assets/asakusa/superior/667273807.jpg','assets/asakusa/superior/667273804.jpg','assets/asakusa/superior/667273821.jpg','assets/asakusa/superior/667273816.jpg','assets/asakusa/superior/667273801.jpg','assets/asakusa/superior/667273819.jpg','assets/asakusa/superior/667273808.jpg','assets/asakusa/superior/667582244.jpg','assets/asakusa/superior/667273806.jpg','assets/asakusa/superior/667273803.jpg','assets/asakusa/superior/667273792.jpg','assets/asakusa/superior/667585024.jpg'],
+    deluxe: ['assets/asakusa/deluxe/667274556.jpg','assets/asakusa/deluxe/667274577.jpg','assets/asakusa/deluxe/667274572.jpg','assets/asakusa/deluxe/667274555.jpg','assets/asakusa/deluxe/667274557.jpg','assets/asakusa/deluxe/667274551.jpg','assets/asakusa/deluxe/667274554.jpg','assets/asakusa/deluxe/667274571.jpg','assets/asakusa/deluxe/667274573.jpg','assets/asakusa/deluxe/667585028.jpg','assets/asakusa/deluxe/667585048.jpg','assets/asakusa/deluxe/667585053.jpg','assets/asakusa/deluxe/667274574.jpg','assets/asakusa/deluxe/667582244.jpg','assets/asakusa/deluxe/667585030.jpg','assets/asakusa/deluxe/667274570.jpg','assets/asakusa/deluxe/667585029.jpg','assets/asakusa/deluxe/667585024.jpg'],
+    'deluxe-s': ['assets/asakusa/deluxe-s/667592817.jpg','assets/asakusa/deluxe-s/667592818.jpg','assets/asakusa/deluxe-s/667592813.jpg','assets/asakusa/deluxe-s/667591397.jpg','assets/asakusa/deluxe-s/674605061.jpg','assets/asakusa/deluxe-s/667592820.jpg','assets/asakusa/deluxe-s/667592815.jpg','assets/asakusa/deluxe-s/667585028.jpg','assets/asakusa/deluxe-s/667585030.jpg','assets/asakusa/deluxe-s/667585048.jpg','assets/asakusa/deluxe-s/667585053.jpg','assets/asakusa/deluxe-s/667585068.jpg','assets/asakusa/deluxe-s/667585076.jpg','assets/asakusa/deluxe-s/667585077.jpg','assets/asakusa/deluxe-s/667585082.jpg','assets/asakusa/deluxe-s/667585055.jpg','assets/asakusa/deluxe-s/667585024.jpg','assets/asakusa/deluxe-s/667582244.jpg'],
+    triple: ['assets/asakusa/triple/667583036.jpg','assets/asakusa/triple/666.jpg','assets/asakusa/triple/667583007.jpg','assets/asakusa/triple/667582249.jpg','assets/asakusa/triple/667582967.jpg','assets/asakusa/triple/667582970.jpg','assets/asakusa/triple/667582236.jpg','assets/asakusa/triple/667582237.jpg','assets/asakusa/triple/667583041.jpg','assets/asakusa/triple/667583009.jpg','assets/asakusa/triple/667582242.jpg','assets/asakusa/triple/667583035.jpg','assets/asakusa/triple/667582251.jpg','assets/asakusa/triple/667582971.jpg','assets/asakusa/triple/667582244.jpg','assets/asakusa/triple/667582240.jpg','assets/asakusa/triple/667582243.jpg','assets/asakusa/triple/667582233.jpg']
+  };
+  const rmIdx = {superior:0, deluxe:0, 'deluxe-s':0, triple:0};
+  let lbImgs=allImgs, lbIdx=0;
+
+  function switchImg(i){
+    document.getElementById('mainImg').src=allImgs[i];
+    document.querySelectorAll('.gallery-thumbs .gallery-thumb').forEach((t,j)=>t.classList.toggle('active',i===j));
+  }
+  function switchRoomImg(room, i){
+    rmIdx[room]=i;
+    document.getElementById('rm-'+room+'-main').src=roomImgs[room][i];
+    document.querySelectorAll('#rm-'+room+'-strip .room-gallery-thumb').forEach((t,j)=>t.classList.toggle('active',i===j));
+  }
+  function lbOpen(imgs,i){lbImgs=imgs;lbIdx=i;document.getElementById('lbImg').src=imgs[i];document.getElementById('lbCounter').textContent=(i+1)+' / '+imgs.length;document.getElementById('lb').classList.add('open')}
+  function lbClose(){document.getElementById('lb').classList.remove('open')}
+  function lbNav(d){lbIdx=(lbIdx+d+lbImgs.length)%lbImgs.length;document.getElementById('lbImg').src=lbImgs[lbIdx];document.getElementById('lbCounter').textContent=(lbIdx+1)+' / '+lbImgs.length}
+  document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)lbClose()});
+
+  function setLang(l){
+    document.body.className='lang-'+l;
+    sessionStorage.setItem('mkgjp_lang',l);
+    var labels={zh:'語言',ja:'言語',en:'Language'};
+    document.getElementById('langLabel').textContent=labels[l];
+  }
+  function toggleDeskLang(){document.getElementById('deskLangMenu').classList.toggle('open')}
+  function closeLang(){document.getElementById('deskLangMenu').classList.remove('open')}
+  document.addEventListener('click',function(e){if(!e.target.closest('.desk-lang-wrap'))closeLang()});
+
+  (function(){
+    var l=sessionStorage.getItem('mkgjp_lang')||'zh';
+    setLang(l);
+  })();
+</script>
 </body>
 </html>

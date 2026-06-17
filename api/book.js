@@ -36,8 +36,8 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') { res.status(200).end(); return; }
   if (req.method !== 'POST') { return res.status(405).json({ error: 'Method not allowed' }); }
 
-  const { checkIn, checkOut, adultCount, guestName, email, phone, note } = req.body || {};
-  if (!checkIn || !checkOut || !guestName || !email) {
+  const { checkIn, checkOut, adultCount, childCount, firstName, lastName, email, phone, note, roomId, rateId, totalAmount, currencyCode } = req.body || {};
+  if (!checkIn || !checkOut || !firstName || !email) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
@@ -45,13 +45,22 @@ module.exports = async function handler(req, res) {
     const token = await getToken();
     const payload = {
       hotelId: HOTEL_ID,
-      roomTypeId: ROOM_TYPE_ID,
       checkIn,
       checkOut,
       adultCount: Number(adultCount) || 2,
-      guestName,
-      email,
-      phone: phone || '',
+      childCount: Number(childCount) || 0,
+      roomCount: 1,
+      roomId: roomId || ROOM_TYPE_ID,
+      rateId: rateId || '',
+      totalAmount: Number(totalAmount) || 0,
+      currencyCode: currencyCode || 'JPY',
+      paymentType: 'PayAtHotel',
+      customer: {
+        firstName,
+        lastName: lastName || '',
+        email,
+        phone: phone || '',
+      },
       note: note || '',
     };
     const r = await fetch(`${BASE_URL}/booking/api/v3/hotels/${HOTEL_ID}/reservations/book`, {
