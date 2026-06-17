@@ -188,19 +188,37 @@
     .faq-a{display:none;padding:0 20px 16px;color:var(--muted);font-size:14px;line-height:1.75}
     .faq-item.open .faq-a{display:block}
 
-    /* ── 预订弹窗（iframe模式） ── */
+    /* ── 预订弹窗 ── */
     .modal-overlay{display:none;position:fixed;inset:0;background:rgba(11,23,51,.7);z-index:100;backdrop-filter:blur(6px);padding:16px}
     .modal-overlay.open{display:flex;align-items:center;justify-content:center}
-    .modal{background:white;border-radius:var(--radius);width:min(960px,100%);height:min(820px,calc(100vh - 32px));margin:auto;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .modal{background:white;border-radius:var(--radius);width:min(560px,100%);max-height:calc(100vh - 32px);margin:auto;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
     .modal-header{background:var(--navy);color:white;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
     .modal-header h3{margin:0;font-size:16px;font-weight:800;letter-spacing:.02em}
     .modal-header-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:2px}
     .modal-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:26px;cursor:pointer;padding:0;line-height:1;transition:.15s}
     .modal-close:hover{color:white;transform:scale(1.1)}
-    .modal-body{flex:1;overflow:hidden;position:relative}
-    .booking-iframe{width:100%;height:100%;border:none;display:block}
-    .iframe-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;gap:14px;font-size:14px;color:var(--muted)}
-    .iframe-spinner{width:36px;height:36px;border:3px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+    .modal-body{flex:1;overflow-y:auto;padding:24px}
+    .mform-summary{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#f7f5f1;border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:13px;color:var(--muted)}
+    .mform-summary strong{display:block;font-size:15px;color:var(--navy);font-weight:800;margin-top:2px}
+    .mform-summary .sum-total{grid-column:1/-1;border-top:1px solid var(--line);padding-top:10px;margin-top:4px;font-size:14px;font-weight:700;color:var(--navy)}
+    .mform-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .mform-field{margin-bottom:14px}
+    .mform-label{display:block;font-size:12px;font-weight:800;color:var(--navy);margin-bottom:5px;letter-spacing:.03em}
+    .mform-label .req{color:#bd3b35}
+    .mform-input{width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:10px;font-size:14px;font-family:inherit;color:var(--ink);box-sizing:border-box;transition:.2s;outline:none}
+    .mform-input:focus{border-color:var(--gold)}
+    .mform-error{background:#fff0f0;border:1px solid #f4c0c0;border-radius:9px;padding:10px 14px;font-size:13px;color:#9b2020;margin-bottom:14px}
+    .mform-submit{width:100%;padding:13px;border-radius:11px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:15px;border:none;cursor:pointer;font-family:inherit;transition:.2s;margin-top:4px}
+    .mform-submit:hover{background:#b8924a}
+    .mform-submit:disabled{opacity:.5;cursor:not-allowed}
+    .mform-note{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;margin-bottom:0}
+    .mform-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 0;gap:14px;font-size:14px;color:var(--muted)}
+    .mform-spinner{width:36px;height:36px;border:3px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+    .mform-success{text-align:center;padding:32px 16px}
+    .mform-success .ok-icon{width:64px;height:64px;border-radius:50%;background:var(--green);color:white;font-size:32px;line-height:64px;margin:0 auto 16px}
+    .mform-success h3{color:var(--navy);font-size:20px;margin:0 0 8px}
+    .mform-success p{color:var(--muted);font-size:13px;margin:0 0 20px}
+    .mform-success .res-id{background:#f7f5f1;border-radius:10px;padding:10px 16px;font-size:13px;color:var(--navy);font-weight:700;margin-bottom:20px}
     @keyframes spin{to{transform:rotate(360deg)}}
 
     /* ── 联系我们 ── */
@@ -892,7 +910,7 @@
     <div class="lb-counter" id="lbCounter"></div>
   </div>
 
-  <!-- ── 预订弹窗（iframe模式） ── -->
+  <!-- ── 预订弹窗 ── -->
   <div class="modal-overlay" id="bookingModal">
     <div class="modal">
       <div class="modal-header">
@@ -903,17 +921,55 @@
         <button class="modal-close" onclick="closeModal()">×</button>
       </div>
       <div class="modal-body">
-        <div class="iframe-loading" id="iframeLoading">
-          <div class="iframe-spinner"></div>
-          <span>正在加载预订页面…</span>
+
+        <!-- Step 1: 填写信息 -->
+        <div id="mformStep1">
+          <div class="mform-summary">
+            <div>入住<strong id="mfs-ci">—</strong></div>
+            <div>退房<strong id="mfs-co">—</strong></div>
+            <div>晚数<strong id="mfs-nights">—</strong> 晚</div>
+            <div>人数<strong id="mfs-guests">—</strong> 人</div>
+            <div class="sum-total">合计金额：<span id="mfs-total">—</span></div>
+          </div>
+          <div class="mform-2col">
+            <div class="mform-field">
+              <label class="mform-label">姓氏 <span class="req">*</span></label>
+              <input class="mform-input" id="mf-last" type="text" placeholder="山田 / Wang">
+            </div>
+            <div class="mform-field">
+              <label class="mform-label">名字 <span class="req">*</span></label>
+              <input class="mform-input" id="mf-first" type="text" placeholder="太郎 / Wei">
+            </div>
+          </div>
+          <div class="mform-field">
+            <label class="mform-label">电子邮箱 <span class="req">*</span></label>
+            <input class="mform-input" id="mf-email" type="email" placeholder="example@email.com">
+          </div>
+          <div class="mform-field">
+            <label class="mform-label">联系电话</label>
+            <input class="mform-input" id="mf-phone" type="tel" placeholder="+81 90-0000-0000">
+          </div>
+          <div id="mf-error" class="mform-error" style="display:none"></div>
+          <button class="mform-submit" id="mf-btn" onclick="submitBooking()">确认预订 · 在线支付</button>
+          <p class="mform-note">Stripe 加密支付 · 即时确认 · 入住 3 日前可免费取消</p>
         </div>
-        <iframe
-          id="bookingFrame"
-          class="booking-iframe"
-          src=""
-          onload="document.getElementById('iframeLoading').style.display='none'"
-          allow="payment"
-        ></iframe>
+
+        <!-- Step 2: 处理中 -->
+        <div id="mformLoading" class="mform-loading" style="display:none">
+          <div class="mform-spinner"></div>
+          <span>正在处理预订，请稍候…</span>
+        </div>
+
+        <!-- Step 3: 成功 -->
+        <div id="mformSuccess" class="mform-success" style="display:none">
+          <div class="ok-icon">✓</div>
+          <h3>预订成功！</h3>
+          <p id="mfs-email-note"></p>
+          <div class="res-id" id="mfs-res-id"></div>
+          <div class="mform-summary" id="mfs-confirm-summary" style="text-align:left"></div>
+          <button class="mform-submit" style="margin-top:20px" onclick="closeModal()">关闭</button>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1190,26 +1246,94 @@
         </div>`;
     }
 
-    // ── 预订弹窗触发 ──
-    let currentStep = 1;
+    // ── 预订弹窗 ──
+    const fmt3 = n => '¥' + Number(n).toLocaleString('ja-JP');
 
     function openBooking() {
       if (!ciDate || !coDate) return;
+      const nights = getNights(ciDate, coDate);
       const guests = document.getElementById('guests').value || '2';
-      const roomId = _bookRoomId || '905007308';
-      const url = new URL(`https://booking-mkghomeshinjuku.smartorder.ai/room/${roomId}`);
-      url.searchParams.set('checkIn', ciDate);
-      url.searchParams.set('checkOut', coDate);
-      url.searchParams.set('adults', guests);
-      url.searchParams.set('children', '0');
-      window.open(url.toString(), '_blank');
+      document.getElementById('mfs-ci').textContent = ciDate;
+      document.getElementById('mfs-co').textContent = coDate;
+      document.getElementById('mfs-nights').textContent = nights;
+      document.getElementById('mfs-guests').textContent = guests;
+      document.getElementById('mfs-total').textContent = totalPrice ? fmt3(totalPrice) : '—';
+      // 重置到表单步骤
+      document.getElementById('mformStep1').style.display = '';
+      document.getElementById('mformLoading').style.display = 'none';
+      document.getElementById('mformSuccess').style.display = 'none';
+      document.getElementById('mf-error').style.display = 'none';
+      document.getElementById('mf-btn').disabled = false;
+      document.getElementById('mf-btn').textContent = '确认预订 · 在线支付';
+      document.getElementById('bookingModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    async function submitBooking() {
+      const firstName = document.getElementById('mf-first').value.trim();
+      const lastName  = document.getElementById('mf-last').value.trim();
+      const email     = document.getElementById('mf-email').value.trim();
+      const phone     = document.getElementById('mf-phone').value.trim();
+      const errEl = document.getElementById('mf-error');
+
+      if (!firstName || !lastName) { showErr('请填写姓名'); return; }
+      if (!email || !email.includes('@')) { showErr('请填写有效的电子邮箱'); return; }
+
+      errEl.style.display = 'none';
+      document.getElementById('mformStep1').style.display = 'none';
+      document.getElementById('mformLoading').style.display = 'flex';
+
+      try {
+        const guests = document.getElementById('guests').value || '2';
+        const res = await fetch('/api/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            checkIn: ciDate,
+            checkOut: coDate,
+            adultCount: Number(guests),
+            childCount: 0,
+            firstName,
+            lastName,
+            email,
+            phone,
+            roomId: _bookRoomId || '905007308',
+            rateId: _bookRateId || '',
+            totalAmount: totalPrice || 0,
+            currencyCode: 'JPY',
+          }),
+        });
+        const data = await res.json();
+        document.getElementById('mformLoading').style.display = 'none';
+        if (res.ok && !data.error) {
+          const resId = data.reservationId || data.id || data.bookingId || JSON.stringify(data).slice(0,60);
+          document.getElementById('mfs-email-note').textContent = `确认邮件将发送至 ${email}`;
+          document.getElementById('mfs-res-id').textContent = `预订编号：${resId}`;
+          document.getElementById('mfs-confirm-summary').innerHTML =
+            `<div>入住<strong>${ciDate}</strong></div><div>退房<strong>${coDate}</strong></div>` +
+            `<div>晚数<strong>${getNights(ciDate,coDate)} 晚</strong></div><div>人数<strong>${guests} 人</strong></div>` +
+            `<div class="sum-total">合计：${totalPrice ? fmt3(totalPrice) : '—'}</div>`;
+          document.getElementById('mformSuccess').style.display = '';
+        } else {
+          document.getElementById('mformStep1').style.display = '';
+          showErr(data.error || data.message || '预订失败，请稍后重试');
+        }
+      } catch(e) {
+        document.getElementById('mformLoading').style.display = 'none';
+        document.getElementById('mformStep1').style.display = '';
+        showErr('网络错误，请检查连接后重试');
+      }
+    }
+
+    function showErr(msg) {
+      const el = document.getElementById('mf-error');
+      el.textContent = msg;
+      el.style.display = 'block';
     }
 
     function closeModal() {
       document.getElementById('bookingModal').classList.remove('open');
       document.body.style.overflow = '';
-      // 清空 iframe，停止加载
-      document.getElementById('bookingFrame').src = '';
     }
 
     function scrollToRooms() {
