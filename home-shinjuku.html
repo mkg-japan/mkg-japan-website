@@ -1305,19 +1305,9 @@
         });
         const data = await res.json();
         document.getElementById('mformLoading').style.display = 'none';
-        if (res.ok && !data.error) {
-          const resId = data.reservationId || data.id || data.bookingId || JSON.stringify(data).slice(0,60);
-          document.getElementById('mfs-email-note').textContent = `确认邮件将发送至 ${email}`;
-          document.getElementById('mfs-res-id').textContent = `预订编号：${resId}`;
-          document.getElementById('mfs-confirm-summary').innerHTML =
-            `<div>入住<strong>${ciDate}</strong></div><div>退房<strong>${coDate}</strong></div>` +
-            `<div>晚数<strong>${getNights(ciDate,coDate)} 晚</strong></div><div>人数<strong>${guests} 人</strong></div>` +
-            `<div class="sum-total">合计：${totalPrice ? fmt3(totalPrice) : '—'}</div>`;
-          document.getElementById('mformSuccess').style.display = '';
-        } else {
-          document.getElementById('mformStep1').style.display = '';
-          showErr(data.error || data.message || '预订失败，请稍后重试');
-        }
+        // 临时调试：显示完整响应
+        document.getElementById('mformStep1').style.display = '';
+        showErr('【调试】API响应：' + JSON.stringify(data, null, 2));
       } catch(e) {
         document.getElementById('mformLoading').style.display = 'none';
         document.getElementById('mformStep1').style.display = '';
