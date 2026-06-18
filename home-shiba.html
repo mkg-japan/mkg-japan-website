@@ -95,6 +95,14 @@
     .room-tag{background:var(--bg);color:var(--ink);font-size:12px;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid var(--line)}
     .room-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .room-capacity{font-size:13px;color:var(--muted);font-weight:600}
+    .room-area{font-size:13px;color:var(--muted);font-weight:600}
+    .room-floorplan-wrap{border-top:1px solid var(--line);padding:14px 16px;background:rgba(247,245,241,.6);display:flex;align-items:flex-start;gap:20px}
+    .room-floorplan-img{height:160px;width:auto;max-width:320px;object-fit:contain;border-radius:10px;border:1px solid var(--line);cursor:pointer;transition:.2s}
+    .room-floorplan-img:hover{box-shadow:0 6px 18px rgba(11,23,51,.12)}
+    .room-floorplan-info{display:flex;flex-direction:column;gap:8px}
+    .room-floorplan-label{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+    .room-floorplan-area{font-size:28px;font-weight:900;color:var(--navy);line-height:1}
+    .room-floorplan-area small{font-size:14px;font-weight:600;color:var(--muted)}
     .btn-book-room{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:13px;padding:11px 22px;border-radius:999px;transition:.15s;border:none;cursor:pointer}
     .btn-book-room:hover{opacity:.88;transform:translateY(-1px)}
 
@@ -418,6 +426,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 2 人</span><span data-lang="en">1 – 2 guests</span><span data-lang="ja">1〜2名</span></span>
+          <span class="room-area">📐 22 ㎡</span>
           <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
         </div>
       </div>
@@ -434,6 +443,14 @@
         <img src="assets/shiba/r101/01.jpg" alt="" loading="lazy" onclick="openLb('r101',8)">
       </div>
     </div>
+  <div class="room-floorplan-wrap">
+    <img class="room-floorplan-img" src="assets/shiba/floorplan-101.jpg" alt="101室戸型図" onclick="openLb('fp101',0)">
+    <div class="room-floorplan-info">
+      <div class="room-floorplan-label"><span data-lang="zh">户型图</span><span data-lang="en">Floor Plan</span><span data-lang="ja">間取り図</span></div>
+      <div class="room-floorplan-area">22 <small>㎡</small></div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-lang="zh">1楼 · 标准双人间 · 1〜2名</span><span data-lang="en">1F · Standard Double · 1–2 guests</span><span data-lang="ja">1F · スタンダードダブル · 1〜2名</span></div>
+    </div>
+  </div>
   </div>
 
   <!-- ── 102室 ── -->
@@ -462,6 +479,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 5 人</span><span data-lang="en">1 – 5 guests</span><span data-lang="ja">1〜5名</span></span>
+          <span class="room-area">📐 36 ㎡</span>
           <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
         </div>
       </div>
@@ -477,6 +495,14 @@
         <img src="assets/shiba/r102/02.jpg" alt="" loading="lazy" onclick="openLb('r102',7)">
       </div>
     </div>
+  <div class="room-floorplan-wrap">
+    <img class="room-floorplan-img" src="assets/shiba/floorplan-102.jpg" alt="102室戸型図" onclick="openLb('fp102',0)">
+    <div class="room-floorplan-info">
+      <div class="room-floorplan-label"><span data-lang="zh">户型图</span><span data-lang="en">Floor Plan</span><span data-lang="ja">間取り図</span></div>
+      <div class="room-floorplan-area">36 <small>㎡</small></div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-lang="zh">1楼 · 豪华大床房 · 1〜5名</span><span data-lang="en">1F · Deluxe Queen · 1–5 guests</span><span data-lang="ja">1F · デラックスクイーン · 1〜5名</span></div>
+    </div>
+  </div>
   </div>
 
   <!-- ── 201室 ── -->
@@ -505,6 +531,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 3 人</span><span data-lang="en">1 – 3 guests</span><span data-lang="ja">1〜3名</span></span>
+          <span class="room-area">📐 23 ㎡</span>
           <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
         </div>
       </div>
@@ -520,6 +547,14 @@
         <img src="assets/shiba/r201/25.jpg" alt="" loading="lazy" onclick="openLb('r201',7)">
       </div>
     </div>
+  <div class="room-floorplan-wrap">
+    <img class="room-floorplan-img" src="assets/shiba/floorplan-201.jpg" alt="201室戸型図" onclick="openLb('fp201',0)">
+    <div class="room-floorplan-info">
+      <div class="room-floorplan-label"><span data-lang="zh">户型图</span><span data-lang="en">Floor Plan</span><span data-lang="ja">間取り図</span></div>
+      <div class="room-floorplan-area">23 <small>㎡</small></div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-lang="zh">2楼 · 优质大床房 · 1〜3名</span><span data-lang="en">2F · Superior Double · 1–3 guests</span><span data-lang="ja">2F · スーペリアダブル · 1〜3名</span></div>
+    </div>
+  </div>
   </div>
 
   <!-- ── 202室 ── -->
@@ -531,7 +566,7 @@
       </div>
       <div class="room-info">
         <div>
-          <div class="room-type-label"><span data-lang="zh">宽敞套房</span><span data-lang="en">Spacious Suite</span><span data-lang="ja">スペシャルスイート</span></div>
+          <div class="room-type-label"><span data-lang="zh">大床套间</span><span data-lang="en">Superior Suite</span><span data-lang="ja">スーペリアスイート</span></div>
           <h3>202 <span data-lang="zh">室 · <em style="font-style:normal;color:var(--gold)">広間</em></span><span data-lang="en">· <em style="font-style:normal;color:var(--gold)">Hiroma</em></span><span data-lang="ja">号室 · <em style="font-style:normal;color:var(--gold)">広間</em></span></h3>
           <p class="room-desc">
             <span data-lang="zh">2楼宽敞大空间套房，内设沙发区+双人大床+大型TV，独立卫生间，全套厨房，适合家庭或多人住宿，空间宽裕。</span>
@@ -548,6 +583,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 3 人</span><span data-lang="en">1 – 3 guests</span><span data-lang="ja">1〜3名</span></span>
+          <span class="room-area">📐 25 ㎡</span>
           <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
         </div>
       </div>
@@ -563,6 +599,14 @@
         <img src="assets/shiba/r202/01.jpg" alt="" loading="lazy" onclick="openLb('r202',7)">
       </div>
     </div>
+  <div class="room-floorplan-wrap">
+    <img class="room-floorplan-img" src="assets/shiba/floorplan-202.jpg" alt="202室戸型図" onclick="openLb('fp202',0)">
+    <div class="room-floorplan-info">
+      <div class="room-floorplan-label"><span data-lang="zh">户型图</span><span data-lang="en">Floor Plan</span><span data-lang="ja">間取り図</span></div>
+      <div class="room-floorplan-area">25 <small>㎡</small></div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-lang="zh">2楼 · 大床套间 · 1〜3名</span><span data-lang="en">2F · Superior Suite · 1–3 guests</span><span data-lang="ja">2F · スーペリアスイート · 1〜3名</span></div>
+    </div>
+  </div>
   </div>
 
   <!-- ── 301室 ── -->
@@ -591,6 +635,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 4 人</span><span data-lang="en">1 – 4 guests</span><span data-lang="ja">1〜4名</span></span>
+          <span class="room-area">📐 37 ㎡</span>
           <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
         </div>
       </div>
@@ -605,6 +650,14 @@
         <img src="assets/shiba/r301/25.jpg" alt="" loading="lazy" onclick="openLb('r301',6)">
       </div>
     </div>
+  <div class="room-floorplan-wrap">
+    <img class="room-floorplan-img" src="assets/shiba/floorplan-301.jpg" alt="301室戸型図" onclick="openLb('fp301',0)">
+    <div class="room-floorplan-info">
+      <div class="room-floorplan-label"><span data-lang="zh">户型图</span><span data-lang="en">Floor Plan</span><span data-lang="ja">間取り図</span></div>
+      <div class="room-floorplan-area">37 <small>㎡</small></div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-lang="zh">3楼 · 两居套房 · 1〜4名</span><span data-lang="en">3F · 2-Room Suite · 1–4 guests</span><span data-lang="ja">3F · 2ルームスイート · 1〜4名</span></div>
+    </div>
+  </div>
   </div>
 
   <!-- ── 401室 ── -->
@@ -633,6 +686,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 2 人</span><span data-lang="en">1 – 2 guests</span><span data-lang="ja">1〜2名</span></span>
+          <span class="room-area">📐 28 ㎡</span>
           <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
         </div>
       </div>
@@ -647,6 +701,14 @@
         <img src="assets/shiba/r401/02.jpg" alt="" loading="lazy" onclick="openLb('r401',6)">
       </div>
     </div>
+  <div class="room-floorplan-wrap">
+    <img class="room-floorplan-img" src="assets/shiba/floorplan-401.jpg" alt="401室戸型図" onclick="openLb('fp401',0)">
+    <div class="room-floorplan-info">
+      <div class="room-floorplan-label"><span data-lang="zh">户型图</span><span data-lang="en">Floor Plan</span><span data-lang="ja">間取り図</span></div>
+      <div class="room-floorplan-area">28 <small>㎡</small></div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-lang="zh">4楼 · 顶层豪华套房 · 1〜2名</span><span data-lang="en">4F · Penthouse Suite · 1–2 guests</span><span data-lang="ja">4F · ペントハウス · 1〜2名</span></div>
+    </div>
+  </div>
   </div>
 
   <!-- ── 设施 ── -->
@@ -1266,7 +1328,13 @@
       'assets/shiba/r401/10.jpg',
       'assets/shiba/r401/15.jpg','assets/shiba/r401/20.jpg','assets/shiba/r401/05.jpg',
       'assets/shiba/r401/08.jpg','assets/shiba/r401/25.jpg','assets/shiba/r401/02.jpg'
-    ]
+    ],
+    fp101: ['assets/shiba/floorplan-101.jpg'],
+    fp102: ['assets/shiba/floorplan-102.jpg'],
+    fp201: ['assets/shiba/floorplan-201.jpg'],
+    fp202: ['assets/shiba/floorplan-202.jpg'],
+    fp301: ['assets/shiba/floorplan-301.jpg'],
+    fp401: ['assets/shiba/floorplan-401.jpg'],
   };
 
   function openLb(roomId, idx){
