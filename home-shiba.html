@@ -1319,10 +1319,18 @@
     if(!grid) return;
     grid.innerHTML = '';
     for(var i=0;i<firstDay;i++){var e=document.createElement('div');e.className='cal-day empty';grid.appendChild(e);}
+    var MIN_NIGHTS = 2;
+    // cutoff: first Closed date after check-in (can't book past it)
     var cutoff = null;
     if(modalPickStep===1 && modalCiDate){
       var sc=new Date(modalCiDate);
       for(var k=1;k<=90;k++){sc.setDate(sc.getDate()+1);var ds=sc.toISOString().slice(0,10);if(modalAvailMap[ds]==='Closed'){cutoff=ds;break;}}
+    }
+    // minCoDate: earliest valid checkout (check-in + MIN_NIGHTS)
+    var minCoDate = null;
+    if(modalPickStep===1 && modalCiDate){
+      var md=new Date(modalCiDate); md.setDate(md.getDate()+MIN_NIGHTS);
+      minCoDate=md.getFullYear()+'-'+String(md.getMonth()+1).padStart(2,'0')+'-'+String(md.getDate()).padStart(2,'0');
     }
     for(var d=1;d<=days;d++){
       var ds2=modalCalYear+'-'+String(modalCalMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
@@ -1331,11 +1339,13 @@
       var past=ds2<todayStr;
       var status=modalAvailMap[ds2];
       var blocked=modalPickStep===1&&cutoff&&ds2>cutoff;
-      var coOnClosed=modalPickStep===1&&cutoff&&ds2===cutoff;
+      var tooClose=modalPickStep===1&&minCoDate&&ds2>modalCiDate&&ds2<minCoDate;
       if(past||blocked){
         el.className=past?'cal-day past':'cal-day closed';
       } else if(status==='Closed'){
         el.className='cal-day closed';
+      } else if(tooClose){
+        el.className='cal-day closed'; // within min-nights window
       } else {
         el.className='cal-day avail';
         (function(x){el.onclick=function(){modalPickDate(x);};})(ds2);
@@ -1355,10 +1365,13 @@
     } else {
       if(ds<=modalCiDate){modalCiDate=ds;modalCoDate=null;modalPickStep=1;}
       else {
-        var gap=false,sc=new Date(modalCiDate),lim=new Date(ds);
-        while(sc<lim){sc.setDate(sc.getDate()+1);var x=sc.toISOString().slice(0,10);if(x<ds&&modalAvailMap[x]==='Closed'){gap=true;break;}}
-        if(gap){modalCiDate=ds;modalCoDate=null;modalPickStep=1;}
-        else{modalCoDate=ds;modalPickStep=2;}
+        if(_nights(modalCiDate,ds)<2){modalCiDate=ds;modalCoDate=null;modalPickStep=1;}
+        else{
+          var gap=false,sc=new Date(modalCiDate),lim=new Date(ds);
+          while(sc<lim){sc.setDate(sc.getDate()+1);var x=sc.toISOString().slice(0,10);if(x<ds&&modalAvailMap[x]==='Closed'){gap=true;break;}}
+          if(gap){modalCiDate=ds;modalCoDate=null;modalPickStep=1;}
+          else{modalCoDate=ds;modalPickStep=2;}
+        }
       }
     }
     updateModalDatesBar();
