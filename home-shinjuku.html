@@ -807,7 +807,7 @@
         modalConfirmBtn: '予約を確定・オンライン決済',
       },
     };
-    function getLang() { return sessionStorage.getItem('lang') || 'zh'; }
+    function getLang() { return sessionStorage.getItem('lang') || 'ja'; }
     function t(key, ...args) {
       const lang = getLang();
       const v = (i18n[lang] || i18n.zh)[key];
@@ -1334,7 +1334,7 @@
       renderCalendar();
     }
     (function(){
-      var saved = sessionStorage.getItem('lang') || 'zh';
+      var saved = sessionStorage.getItem('lang') || 'ja';
       document.body.className = 'lang-' + saved;
       document.documentElement.lang = saved === 'zh' ? 'zh-CN' : saved === 'ja' ? 'ja' : 'en';
     })();
