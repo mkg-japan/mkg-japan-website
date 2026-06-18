@@ -1334,7 +1334,9 @@
       renderCalendar();
     }
     (function(){
-      var saved = sessionStorage.getItem('lang') || 'ja';
+      var urlLang = new URLSearchParams(location.search).get('lang');
+      var saved = urlLang || sessionStorage.getItem('lang') || 'ja';
+      if (urlLang) sessionStorage.setItem('lang', urlLang);
       document.body.className = 'lang-' + saved;
       document.documentElement.lang = saved === 'zh' ? 'zh-CN' : saved === 'ja' ? 'ja' : 'en';
     })();

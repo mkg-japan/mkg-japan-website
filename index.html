@@ -1426,6 +1426,12 @@ function setLang(lang) {
   });
   sessionStorage.setItem('mkgjp_lang', lang);
   document.documentElement.lang = lang === 'ja' ? 'ja' : lang === 'en' ? 'en' : 'zh';
+  // 物业页面链接带上当前语言参数，保证跳转后语言一致
+  document.querySelectorAll('a[href*="home-shinjuku.html"], a[href*="hotel-asakusa.html"], a[href*="home-shiba.html"]').forEach(a => {
+    const u = new URL(a.href, location.origin);
+    u.searchParams.set('lang', lang);
+    a.href = u.pathname + u.search;
+  });
 }
 
 (function(){
