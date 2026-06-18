@@ -824,6 +824,7 @@
     let ciDate = null, coDate = null;
     let pickStep = 0;       // 0=未选, 1=选了入住, 2=选了退房
     let totalPrice = null;
+    const MIN_STAY = 1;     // 最短入住晚数（与PMS设置保持一致）
 
     const fmt = d => {
       const y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0');
@@ -905,7 +906,7 @@
 
         const isPast = dateStr < todayStr;
         const status = availMap[dateStr];
-        const minStay = 1;
+        const minStay = MIN_STAY;
         const isTooSoon = pickStep === 1 && ciDate && dateStr > ciDate &&
           Math.round((new Date(dateStr) - new Date(ciDate)) / 86400000) < minStay;
         // 退房日超过首个Closed夜 → 不可选
@@ -954,7 +955,7 @@
         const nights = Math.round((new Date(dateStr) - new Date(ciDate)) / 86400000);
         if (dateStr <= ciDate) {
           ciDate = dateStr; coDate = null; pickStep = 1;
-        } else if (nights < 2) {
+        } else if (nights < MIN_STAY) {
           return;
         } else {
           // 检查 [ciDate, dateStr) 范围内是否有 Closed 夜
