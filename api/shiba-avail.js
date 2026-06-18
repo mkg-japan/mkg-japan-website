@@ -32,15 +32,15 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') { res.status(200).end(); return; }
 
-  const { checkIn, checkOut, adultCount = '2' } = req.query;
+  const { checkIn, checkOut, adultCount = '2', roomTypeId } = req.query;
   if (!checkIn || !checkOut) {
     return res.status(400).json({ error: 'checkIn and checkOut required' });
   }
 
   try {
     const token = await getToken();
-    // No roomTypeId: return all available rooms
     const qs = new URLSearchParams({ checkIn, checkOut, adultCount });
+    if (roomTypeId) qs.set('roomTypeId', roomTypeId);
     const r = await fetch(`${BASE_URL}/booking/api/v3/avail/${HOTEL_ID}?${qs}`, {
       headers: { Authorization: `Bearer ${token}` },
     });

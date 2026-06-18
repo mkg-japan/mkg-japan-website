@@ -1133,20 +1133,31 @@
     '301': { typeId: '900014425' },
     '401': { typeId: '900014426' },
   };
-  var _roomRates = {};  // populated by fetchRoomRates()
+  // rateId for 単独網站価格 (homezhi1 — direct booking rate plan)
+  var DIRECT_RATE_ID = '1126061550297001';
+  var _liveRateCache = {};  // key: "roomId-ci-co-guests" → { amount, rateId }
 
-  async function fetchRoomRates(){
+  async function fetchLiveRate(roomId, ci, co, guests){
+    var key = roomId+'-'+ci+'-'+co+'-'+(guests||2);
+    if(_liveRateCache[key]) return _liveRateCache[key];
+    var rd = ROOM_DATA[roomId];
+    if(!rd) return null;
     try {
-      var r = await fetch('/api/shiba-prices');
+      var url = '/api/shiba-avail?checkIn='+ci+'&checkOut='+co+'&adultCount='+(guests||2)+'&roomTypeId='+rd.typeId;
+      var r = await fetch(url);
       var j = await r.json();
-      if(j.rates) _roomRates = j.rates;
-    } catch(e){ console.warn('shiba-prices fetch failed', e); }
+      if(!j.data || !j.data.roomRates) return null;
+      // Prefer 単独網站価格, fallback to cheapest
+      var match = j.data.roomRates.find(function(x){ return x.rateId===DIRECT_RATE_ID; });
+      if(!match) match = j.data.roomRates.sort(function(a,b){return a.totalAmount-b.totalAmount;})[0];
+      if(!match) return null;
+      var result = { totalAmount: match.totalAmount, averageDaily: match.averageDailyAmount, rateId: match.rateId, nights: match.nights };
+      _liveRateCache[key] = result;
+      return result;
+    } catch(e){ return null; }
   }
-  fetchRoomRates();
 
-  function getRoomRate(roomId){
-    return _roomRates[roomId] || 0;
-  }
+  function getRoomRate(roomId){ return 0; } // legacy stub, unused
   var modalAvailMap = {};
   var modalCalYear, modalCalMonth;
   var modalCiDate = null, modalCoDate = null, modalPickStep = 0;
@@ -1245,8 +1256,7 @@
     var displayName = lang==='zh' ? zhName : lang==='en' ? enName : jaName;
     var rd = ROOM_DATA[roomId];
     document.getElementById('mfd-room-name').textContent = roomId + '室 · ' + displayName;
-    var rate0 = getRoomRate(roomId);
-    document.getElementById('mfd-room-rate').textContent = rate0 ? '¥' + rate0.toLocaleString() + ' / ' + (lang==='ja'?'泊':lang==='en'?'night':'晚') : '';
+    document.getElementById('mfd-room-rate').textContent = lang==='ja'?'日程を選択して料金を確認':'Select dates to see price';
     // Reset calendar state
     modalAvailMap = {}; modalLoadingMonths = {};
     modalCiDate = null; modalCoDate = null; modalPickStep = 0;
@@ -1365,17 +1375,24 @@
     else{co.textContent='—';co.classList.add('ph');}
     if(modalCiDate&&modalCoDate){
       var n=_nights(modalCiDate,modalCoDate);
-      var rate=getRoomRate(_currentRoomId);
-      var total=rate*n;
       ciDate=modalCiDate; coDate=modalCoDate;
       var lang=getLang();
-      document.getElementById('mfd-price-area').innerHTML=
-        '<div class="price-box"><div class="price-row"><span>¥'+(rate?rate.toLocaleString():'—')+' × '+n+(lang==='ja'?'泊':lang==='en'?' nights':' 晚')+'</span></div>'+
-        '<div class="price-row total"><span>'+(lang==='ja'?'合計':lang==='en'?'Total':'合计')+'</span><span>¥'+(total?total.toLocaleString():'—')+'</span></div></div>';
-      btn.disabled=false;
-      btn.innerHTML='<span data-lang="zh">继续填写信息 →</span><span data-lang="en">Continue →</span><span data-lang="ja">次へ →</span>';
-      document.querySelectorAll('#mfd-btn [data-lang]').forEach(function(el){
-        el.style.display=(el.getAttribute('data-lang')===getLang())?'':'none';
+      var guests=document.getElementById('mfd-guests')?document.getElementById('mfd-guests').value:'2';
+      document.getElementById('mfd-price-area').innerHTML='<div class="price-ph" style="color:var(--muted);font-size:14px">价格查询中…</div>';
+      btn.disabled=true;
+      fetchLiveRate(_currentRoomId,modalCiDate,modalCoDate,guests).then(function(live){
+        if(!live){
+          document.getElementById('mfd-price-area').innerHTML='<div class="price-ph" style="color:var(--red);font-size:13px">该日期暂无报价，请联系我们</div>';
+          return;
+        }
+        document.getElementById('mfd-price-area').innerHTML=
+          '<div class="price-box"><div class="price-row"><span>¥'+live.averageDaily.toLocaleString()+' × '+n+(lang==='ja'?'泊':lang==='en'?' nights':' 晚')+'</span></div>'+
+          '<div class="price-row total"><span>'+(lang==='ja'?'合計':lang==='en'?'Total':'合计')+'</span><span>¥'+live.totalAmount.toLocaleString()+'</span></div></div>';
+        btn.disabled=false;
+        btn.innerHTML='<span data-lang="zh">继续填写信息 →</span><span data-lang="en">Continue →</span><span data-lang="ja">次へ →</span>';
+        document.querySelectorAll('#mfd-btn [data-lang]').forEach(function(el){
+          el.style.display=(el.getAttribute('data-lang')===getLang())?'':'none';
+        });
       });
     } else {
       document.getElementById('mfd-price-area').innerHTML='';
@@ -1390,14 +1407,15 @@
   function confirmModalDates(){
     if(!modalCiDate||!modalCoDate) return;
     var n=_nights(modalCiDate,modalCoDate);
-    var guests=document.getElementById('mfd-guests').value||'2';
+    var guests=document.getElementById('mfd-guests')?document.getElementById('mfd-guests').value:'2';
     var rd=ROOM_DATA[_currentRoomId];
-    var rate=getRoomRate(_currentRoomId);
+    var cacheKey=_currentRoomId+'-'+modalCiDate+'-'+modalCoDate+'-'+guests;
+    var live=_liveRateCache[cacheKey];
     selectedRoom={
       roomId: rd?rd.typeId:'',
-      rateId: '',
+      rateId: live?live.rateId:'',
       roomName: document.getElementById('mfd-room-name').textContent,
-      totalAmount: rate*n,
+      totalAmount: live?live.totalAmount:0,
     };
     ciDate=modalCiDate; coDate=modalCoDate;
     document.getElementById('mfs-ci').textContent=ciDate;
