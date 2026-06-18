@@ -897,24 +897,46 @@
 
       <!-- Step D: 选择日期（从房间卡片进入） -->
       <div id="mformStepDates" style="display:none">
-        <div style="background:#f7f5f1;border-radius:12px;padding:14px 16px;margin-bottom:18px;display:flex;align-items:center;gap:12px">
-          <div style="font-size:28px">🏠</div>
+        <div style="background:#f7f5f1;border-radius:12px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px">
+          <div style="font-size:24px">🏠</div>
           <div>
-            <div style="font-size:13px;color:var(--muted);font-weight:600"><span data-lang="zh">你正在预订</span><span data-lang="en">Booking</span><span data-lang="ja">予約する客室</span></div>
+            <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em"><span data-lang="zh">你正在预订</span><span data-lang="en">Booking</span><span data-lang="ja">予約する客室</span></div>
             <div style="font-size:16px;font-weight:900;color:var(--navy)" id="mfd-room-name">—</div>
+            <div style="font-size:13px;color:var(--gold);font-weight:700" id="mfd-room-rate"></div>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
-          <div class="mform-field">
-            <label class="mform-label"><span data-lang="zh">入住日期</span><span data-lang="en">Check-in</span><span data-lang="ja">チェックイン</span> <span class="req">*</span></label>
-            <input class="mform-input" type="date" id="mfd-ci">
+        <!-- 迷你日历 -->
+        <div class="cal-widget">
+          <div class="cal-head">
+            <button class="cal-nav" onclick="modalCalNav(-1)">‹</button>
+            <span class="cal-title" id="modalCalTitle"></span>
+            <button class="cal-nav" onclick="modalCalNav(1)">›</button>
           </div>
-          <div class="mform-field">
-            <label class="mform-label"><span data-lang="zh">退房日期</span><span data-lang="en">Check-out</span><span data-lang="ja">チェックアウト</span> <span class="req">*</span></label>
-            <input class="mform-input" type="date" id="mfd-co">
+          <div class="cal-dow">
+            <span><span data-lang="zh">日</span><span data-lang="en">Su</span><span data-lang="ja">日</span></span>
+            <span><span data-lang="zh">一</span><span data-lang="en">Mo</span><span data-lang="ja">月</span></span>
+            <span><span data-lang="zh">二</span><span data-lang="en">Tu</span><span data-lang="ja">火</span></span>
+            <span><span data-lang="zh">三</span><span data-lang="en">We</span><span data-lang="ja">水</span></span>
+            <span><span data-lang="zh">四</span><span data-lang="en">Th</span><span data-lang="ja">木</span></span>
+            <span><span data-lang="zh">五</span><span data-lang="en">Fr</span><span data-lang="ja">金</span></span>
+            <span><span data-lang="zh">六</span><span data-lang="en">Sa</span><span data-lang="ja">土</span></span>
+          </div>
+          <div class="cal-grid" id="modalCalGrid"></div>
+        </div>
+        <!-- 已选日期 + 价格 -->
+        <div class="dates-bar" style="margin-top:10px">
+          <div class="date-cell">
+            <div class="lbl"><span data-lang="zh">入住</span><span data-lang="en">Check-in</span><span data-lang="ja">チェックイン</span></div>
+            <div class="val ph" id="mfd-ci-disp">—</div>
+          </div>
+          <div class="date-sep">→</div>
+          <div class="date-cell">
+            <div class="lbl"><span data-lang="zh">退房</span><span data-lang="en">Check-out</span><span data-lang="ja">チェックアウト</span></div>
+            <div class="val ph" id="mfd-co-disp">—</div>
           </div>
         </div>
-        <div class="mform-field" style="margin-bottom:16px">
+        <div id="mfd-price-area" style="margin:8px 0 10px"></div>
+        <div class="mform-field" style="margin-bottom:12px">
           <label class="mform-label"><span data-lang="zh">入住人数</span><span data-lang="en">Guests</span><span data-lang="ja">人数</span></label>
           <select class="mform-input" id="mfd-guests">
             <option value="1">1 名</option>
@@ -925,7 +947,9 @@
           </select>
         </div>
         <div id="mfd-error" class="mform-error" style="display:none"></div>
-        <button class="mform-submit" onclick="searchFromRoomCard()"><span data-lang="zh">查询可用日期 →</span><span data-lang="en">Search Availability →</span><span data-lang="ja">空室を検索 →</span></button>
+        <button class="mform-submit" id="mfd-btn" onclick="confirmModalDates()" disabled>
+          <span data-lang="zh">请先选择日期</span><span data-lang="en">Select dates first</span><span data-lang="ja">日付を選択してください</span>
+        </button>
         <p class="mform-note"><span data-lang="zh">官网直订无手续费 · Stripe 加密支付</span><span data-lang="en">No platform fees · Stripe secure payment</span><span data-lang="ja">手数料無料 · Stripe暗号化決済</span></p>
       </div>
 
@@ -1101,6 +1125,33 @@
   var ciDate = null, coDate = null;
   var totalPrice = null, availRooms = [], selectedRoom = null;
 
+  var ROOM_DATA = {
+    '101': { typeId: '900014422' },
+    '102': { typeId: '900014421' },
+    '201': { typeId: '900014423' },
+    '202': { typeId: '900014424' },
+    '301': { typeId: '900014425' },
+    '401': { typeId: '900014426' },
+  };
+  var _roomRates = {};  // populated by fetchRoomRates()
+
+  async function fetchRoomRates(){
+    try {
+      var r = await fetch('/api/shiba-prices');
+      var j = await r.json();
+      if(j.rates) _roomRates = j.rates;
+    } catch(e){ console.warn('shiba-prices fetch failed', e); }
+  }
+  fetchRoomRates();
+
+  function getRoomRate(roomId){
+    return _roomRates[roomId] || 0;
+  }
+  var modalAvailMap = {};
+  var modalCalYear, modalCalMonth;
+  var modalCiDate = null, modalCoDate = null, modalPickStep = 0;
+  var modalLoadingMonths = {};
+
   function _nights(a,b){ return Math.round((new Date(b)-new Date(a))/86400000); }
 
   // 初始化日期输入框最小值
@@ -1192,22 +1243,22 @@
     _currentRoomId = roomId;
     var lang = getLang();
     var displayName = lang==='zh' ? zhName : lang==='en' ? enName : jaName;
-    var roomNum = roomId + '室';
-    document.getElementById('mfd-room-name').textContent = roomNum + ' · ' + displayName;
-    // 设置日期最小值
+    var rd = ROOM_DATA[roomId];
+    document.getElementById('mfd-room-name').textContent = roomId + '室 · ' + displayName;
+    var rate0 = getRoomRate(roomId);
+    document.getElementById('mfd-room-rate').textContent = rate0 ? '¥' + rate0.toLocaleString() + ' / ' + (lang==='ja'?'泊':lang==='en'?'night':'晚') : '';
+    // Reset calendar state
+    modalAvailMap = {}; modalLoadingMonths = {};
+    modalCiDate = null; modalCoDate = null; modalPickStep = 0;
     var today = new Date();
-    var todayStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
-    var tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate()+1);
-    var tomorrowStr = tomorrow.getFullYear()+'-'+String(tomorrow.getMonth()+1).padStart(2,'0')+'-'+String(tomorrow.getDate()).padStart(2,'0');
-    var ci = document.getElementById('mfd-ci');
-    var co = document.getElementById('mfd-co');
-    ci.min = todayStr; ci.value = '';
-    co.min = tomorrowStr; co.value = '';
-    ci.onchange = function(){
-      var d=new Date(this.value); d.setDate(d.getDate()+1);
-      var mn=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-      co.min=mn; if(co.value&&co.value<=this.value)co.value=mn;
-    };
+    modalCalYear = today.getFullYear(); modalCalMonth = today.getMonth();
+    renderModalCalendar();
+    fetchModalCalendarMonth(roomId, modalCalYear, modalCalMonth);
+    var ny = modalCalMonth===11?modalCalYear+1:modalCalYear;
+    var nm = modalCalMonth===11?0:modalCalMonth+1;
+    fetchModalCalendarMonth(roomId, ny, nm);
+    updateModalDatesBar();
+    document.getElementById('mfd-price-area').innerHTML = '';
     document.getElementById('mfd-error').style.display='none';
     document.getElementById('mformStepDates').style.display='';
     document.getElementById('mformStep0').style.display='none';
@@ -1218,40 +1269,146 @@
     document.body.style.overflow='hidden';
   }
 
-  async function searchFromRoomCard(){
-    var ci = document.getElementById('mfd-ci').value;
-    var co = document.getElementById('mfd-co').value;
-    var guests = document.getElementById('mfd-guests').value || '2';
-    var errEl = document.getElementById('mfd-error');
-    var lang = getLang();
-    if(!ci||!co){
-      errEl.textContent = lang==='zh'?'请选择入住和退房日期':lang==='en'?'Please select check-in and check-out dates':'チェックイン・チェックアウト日を選択してください';
-      errEl.style.display=''; return;
+  function modalCalNav(dir){
+    modalCalMonth += dir;
+    if(modalCalMonth>11){modalCalMonth=0;modalCalYear++;}
+    if(modalCalMonth<0){modalCalMonth=11;modalCalYear--;}
+    renderModalCalendar();
+    fetchModalCalendarMonth(_currentRoomId, modalCalYear, modalCalMonth);
+  }
+
+  async function fetchModalCalendarMonth(roomId, y, m){
+    var key = roomId+'-'+y+'-'+String(m+1).padStart(2,'0');
+    if(modalLoadingMonths[key]) return;
+    modalLoadingMonths[key] = true;
+    var rd = ROOM_DATA[roomId];
+    if(!rd) return;
+    var s = y+'-'+String(m+1).padStart(2,'0')+'-01';
+    var last = new Date(y,m+1,0).getDate();
+    var e = y+'-'+String(m+1).padStart(2,'0')+'-'+String(last).padStart(2,'0');
+    try {
+      var url = '/api/shiba-calendar?startDate='+s+'&endDate='+e+'&adultCount=2&roomTypeId='+rd.typeId;
+      var r = await fetch(url);
+      var j = await r.json();
+      if(j.data && j.data.dailyAvails){
+        j.data.dailyAvails.forEach(function(d){ modalAvailMap[d.date] = d.status; });
+        renderModalCalendar();
+      }
+    } catch(err){ console.warn('modal-calendar error', err); }
+  }
+
+  function renderModalCalendar(){
+    var titleEl = document.getElementById('modalCalTitle');
+    if(!titleEl) return;
+    titleEl.textContent = _t('calMonth')(modalCalYear, modalCalMonth);
+    var firstDay = new Date(modalCalYear, modalCalMonth, 1).getDay();
+    var days = new Date(modalCalYear, modalCalMonth+1, 0).getDate();
+    var today = new Date(); today.setHours(0,0,0,0);
+    var todayStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+    var grid = document.getElementById('modalCalGrid');
+    if(!grid) return;
+    grid.innerHTML = '';
+    for(var i=0;i<firstDay;i++){var e=document.createElement('div');e.className='cal-day empty';grid.appendChild(e);}
+    var cutoff = null;
+    if(modalPickStep===1 && modalCiDate){
+      var sc=new Date(modalCiDate);
+      for(var k=1;k<=90;k++){sc.setDate(sc.getDate()+1);var ds=sc.toISOString().slice(0,10);if(modalAvailMap[ds]==='Closed'){cutoff=ds;break;}}
     }
-    if(co<=ci){
-      errEl.textContent = lang==='zh'?'退房日期须晚于入住日期':lang==='en'?'Check-out must be after check-in':'チェックアウトはチェックインより後の日付を選択してください';
-      errEl.style.display=''; return;
+    for(var d=1;d<=days;d++){
+      var ds2=modalCalYear+'-'+String(modalCalMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+      var el=document.createElement('div');
+      el.textContent=d;
+      var past=ds2<todayStr;
+      var status=modalAvailMap[ds2];
+      var blocked=modalPickStep===1&&cutoff&&ds2>cutoff;
+      var coOnClosed=modalPickStep===1&&cutoff&&ds2===cutoff;
+      if(past||blocked){
+        el.className=past?'cal-day past':'cal-day closed';
+      } else if(status==='Closed'){
+        el.className='cal-day closed';
+      } else {
+        el.className='cal-day avail';
+        (function(x){el.onclick=function(){modalPickDate(x);};})(ds2);
+      }
+      if(modalCiDate&&modalCoDate){
+        if(ds2===modalCiDate)el.classList.add('sel-ci');
+        else if(ds2===modalCoDate)el.classList.add('sel-co');
+        else if(ds2>modalCiDate&&ds2<modalCoDate)el.classList.add('in-range');
+      } else if(modalCiDate&&ds2===modalCiDate){el.classList.add('sel-ci','sel-co');}
+      grid.appendChild(el);
     }
-    ciDate=ci; coDate=co;
-    var n=_nights(ci,co);
-    errEl.style.display='none';
-    document.getElementById('mformStepDates').style.display='none';
-    document.getElementById('mformLoading').style.display='flex';
-    var ok = await fetchAvail(guests);
-    document.getElementById('mformLoading').style.display='none';
-    document.getElementById('mfs0-ci').textContent=ci;
-    document.getElementById('mfs0-co').textContent=co;
-    document.getElementById('mfs0-nights').textContent=n;
-    document.getElementById('mfs0-guests').textContent=guests;
-    document.getElementById('mf0-error').style.display='none';
-    document.getElementById('mformStep0').style.display='';
-    if(!ok){
-      document.getElementById('mf0-error').textContent=_t('noRooms');
-      document.getElementById('mf0-error').style.display='';
-      document.getElementById('roomSelectList').innerHTML='';
+  }
+
+  function modalPickDate(ds){
+    if(modalPickStep===0||modalPickStep===2){
+      modalCiDate=ds; modalCoDate=null; modalPickStep=1;
     } else {
-      renderRoomSelectList();
+      if(ds<=modalCiDate){modalCiDate=ds;modalCoDate=null;modalPickStep=1;}
+      else {
+        var gap=false,sc=new Date(modalCiDate),lim=new Date(ds);
+        while(sc<lim){sc.setDate(sc.getDate()+1);var x=sc.toISOString().slice(0,10);if(x<ds&&modalAvailMap[x]==='Closed'){gap=true;break;}}
+        if(gap){modalCiDate=ds;modalCoDate=null;modalPickStep=1;}
+        else{modalCoDate=ds;modalPickStep=2;}
+      }
     }
+    updateModalDatesBar();
+    renderModalCalendar();
+  }
+
+  function updateModalDatesBar(){
+    var ci=document.getElementById('mfd-ci-disp'),co=document.getElementById('mfd-co-disp');
+    var btn=document.getElementById('mfd-btn');
+    if(!ci) return;
+    if(modalCiDate){ci.textContent=modalCiDate.slice(5).replace('-','/');ci.classList.remove('ph');}
+    else{ci.textContent='—';ci.classList.add('ph');}
+    if(modalCoDate){co.textContent=modalCoDate.slice(5).replace('-','/');co.classList.remove('ph');}
+    else{co.textContent='—';co.classList.add('ph');}
+    if(modalCiDate&&modalCoDate){
+      var n=_nights(modalCiDate,modalCoDate);
+      var rate=getRoomRate(_currentRoomId);
+      var total=rate*n;
+      ciDate=modalCiDate; coDate=modalCoDate;
+      var lang=getLang();
+      document.getElementById('mfd-price-area').innerHTML=
+        '<div class="price-box"><div class="price-row"><span>¥'+(rate?rate.toLocaleString():'—')+' × '+n+(lang==='ja'?'泊':lang==='en'?' nights':' 晚')+'</span></div>'+
+        '<div class="price-row total"><span>'+(lang==='ja'?'合計':lang==='en'?'Total':'合计')+'</span><span>¥'+(total?total.toLocaleString():'—')+'</span></div></div>';
+      btn.disabled=false;
+      btn.innerHTML='<span data-lang="zh">继续填写信息 →</span><span data-lang="en">Continue →</span><span data-lang="ja">次へ →</span>';
+      document.querySelectorAll('#mfd-btn [data-lang]').forEach(function(el){
+        el.style.display=(el.getAttribute('data-lang')===getLang())?'':'none';
+      });
+    } else {
+      document.getElementById('mfd-price-area').innerHTML='';
+      btn.disabled=true;
+      btn.innerHTML='<span data-lang="zh">请先选择日期</span><span data-lang="en">Select dates first</span><span data-lang="ja">日付を選択してください</span>';
+      document.querySelectorAll('#mfd-btn [data-lang]').forEach(function(el){
+        el.style.display=(el.getAttribute('data-lang')===getLang())?'':'none';
+      });
+    }
+  }
+
+  function confirmModalDates(){
+    if(!modalCiDate||!modalCoDate) return;
+    var n=_nights(modalCiDate,modalCoDate);
+    var guests=document.getElementById('mfd-guests').value||'2';
+    var rd=ROOM_DATA[_currentRoomId];
+    var rate=getRoomRate(_currentRoomId);
+    selectedRoom={
+      roomId: rd?rd.typeId:'',
+      rateId: '',
+      roomName: document.getElementById('mfd-room-name').textContent,
+      totalAmount: rate*n,
+    };
+    ciDate=modalCiDate; coDate=modalCoDate;
+    document.getElementById('mfs-ci').textContent=ciDate;
+    document.getElementById('mfs-co').textContent=coDate;
+    document.getElementById('mfs-nights').textContent=n;
+    document.getElementById('mfs-guests').textContent=guests;
+    document.getElementById('mfs-room').textContent=selectedRoom.roomName;
+    document.getElementById('mfs-total').textContent='¥'+Number(selectedRoom.totalAmount).toLocaleString();
+    document.getElementById('mformStepDates').style.display='none';
+    document.getElementById('mformStep1').style.display='';
+    document.getElementById('mf-error').style.display='none';
   }
 
   function renderRoomSelectList(){

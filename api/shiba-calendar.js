@@ -32,15 +32,15 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') { res.status(200).end(); return; }
 
-  const { startDate, endDate, adultCount = '2' } = req.query;
+  const { startDate, endDate, adultCount = '2', roomTypeId } = req.query;
   if (!startDate || !endDate) {
     return res.status(400).json({ error: 'startDate and endDate required' });
   }
 
   try {
     const token = await getToken();
-    // No roomTypeId: query all rooms for the hotel
     const qs = new URLSearchParams({ startDate, endDate, adultCount });
+    if (roomTypeId) qs.set('roomTypeId', roomTypeId);
     const r = await fetch(`${BASE_URL}/booking/api/v3/calendar/${HOTEL_ID}?${qs}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
