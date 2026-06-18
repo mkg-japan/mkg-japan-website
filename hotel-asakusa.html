@@ -155,6 +155,73 @@
     footer a{color:rgba(255,255,255,.45)}
     footer a:hover{color:var(--gold)}
 
+    /* ── Calendar Widget ── */
+    .cal-widget{margin-bottom:12px}
+    .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .cal-title{font-size:13px;font-weight:800;color:var(--navy)}
+    .cal-nav{background:none;border:1px solid var(--line);color:var(--navy);width:26px;height:26px;border-radius:7px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:.15s;line-height:1}
+    .cal-nav:hover{border-color:var(--gold);color:var(--gold)}
+    .cal-dow{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:3px}
+    .cal-dow span{text-align:center;font-size:9px;font-weight:800;color:var(--muted);padding:2px 0;letter-spacing:.03em}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px}
+    .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:7px;font-size:11px;font-weight:600;cursor:default;transition:.12s;user-select:none}
+    .cal-day.avail{cursor:pointer;color:var(--ink);background:rgba(201,166,91,.1)}
+    .cal-day.avail:hover{background:var(--gold);color:var(--navy-2)}
+    .cal-day.closed{color:#ccc;text-decoration:line-through;font-size:10px}
+    .cal-day.past{color:#ddd;text-decoration:line-through;font-size:10px}
+    .cal-day.empty{pointer-events:none}
+    .cal-day.sel-ci{background:var(--gold)!important;color:var(--navy-2)!important;border-radius:7px 0 0 7px}
+    .cal-day.sel-co{background:var(--gold)!important;color:var(--navy-2)!important;border-radius:0 7px 7px 0}
+    .cal-day.in-range{background:rgba(201,166,91,.22);border-radius:0;color:var(--navy)}
+    .cal-day.sel-ci.sel-co{border-radius:7px!important}
+
+    /* ── Dates Bar ── */
+    .dates-bar{display:grid;grid-template-columns:1fr auto 1fr;border:1.5px solid var(--line);border-radius:11px;overflow:hidden;margin-bottom:10px}
+    .date-cell{padding:9px 10px}
+    .date-cell .lbl{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+    .date-cell .val{font-size:13px;font-weight:700;color:var(--navy)}
+    .date-cell .val.ph{color:var(--muted);font-weight:400}
+    .date-sep{display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--muted);border-left:1px solid var(--line);border-right:1px solid var(--line);padding:0 6px}
+
+    /* ── Price Area ── */
+    .price-box{background:#f8f8fb;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px}
+    .price-row{display:flex;justify-content:space-between;padding:3px 0;color:var(--muted)}
+    .price-row.total{font-weight:800;color:var(--navy);border-top:1px solid var(--line);margin-top:5px;padding-top:7px;font-size:14px}
+    .price-ph{text-align:center;color:var(--muted);font-size:12px;padding:8px 0}
+
+    /* ── Booking Modal ── */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(11,23,51,.7);z-index:200;backdrop-filter:blur(6px);padding:16px}
+    .modal-overlay.open{display:flex;align-items:center;justify-content:center}
+    .modal{background:white;border-radius:var(--radius);width:min(560px,100%);max-height:calc(100vh - 32px);margin:auto;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .modal-header{background:var(--navy);color:white;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+    .modal-header h3{margin:0;font-size:16px;font-weight:800}
+    .modal-header-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:2px}
+    .modal-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:26px;cursor:pointer;padding:0;line-height:1;transition:.15s}
+    .modal-close:hover{color:white}
+    .modal-body{flex:1;overflow-y:auto;padding:24px}
+    .mform-summary{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#f7f5f1;border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:var(--muted)}
+    .mform-summary strong{display:block;font-size:15px;color:var(--navy);font-weight:800;margin-top:2px}
+    .mform-summary .sum-total{grid-column:1/-1;border-top:1px solid var(--line);padding-top:10px;margin-top:4px;font-size:14px;font-weight:700;color:var(--navy)}
+    .mform-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .mform-field{margin-bottom:14px}
+    .mform-label{display:block;font-size:12px;font-weight:800;color:var(--navy);margin-bottom:5px}
+    .mform-label .req{color:#bd3b35}
+    .mform-input{width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:10px;font-size:14px;font-family:inherit;color:var(--ink);box-sizing:border-box;transition:.2s;outline:none}
+    .mform-input:focus{border-color:var(--gold)}
+    .mform-error{background:#fff0f0;border:1px solid #f4c0c0;border-radius:9px;padding:10px 14px;font-size:13px;color:#9b2020;margin-bottom:14px}
+    .mform-submit{width:100%;padding:13px;border-radius:11px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:15px;border:none;cursor:pointer;font-family:inherit;transition:.2s;margin-top:4px}
+    .mform-submit:hover{background:#b8924a}
+    .mform-submit:disabled{opacity:.5;cursor:not-allowed}
+    .mform-note{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
+    .mform-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 0;gap:14px;font-size:14px;color:var(--muted)}
+    .mform-spinner{width:36px;height:36px;border:3px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:bspin .8s linear infinite}
+    .mform-success{text-align:center;padding:32px 16px}
+    .mform-success .ok-icon{width:64px;height:64px;border-radius:50%;background:var(--green);color:white;font-size:32px;line-height:64px;margin:0 auto 16px}
+    .mform-success h3{color:var(--navy);font-size:20px;margin:0 0 8px}
+    .mform-success p{color:var(--muted);font-size:13px;margin:0 0 20px}
+    .mform-success .res-id{background:#f7f5f1;border-radius:10px;padding:10px 16px;font-size:13px;color:var(--navy);font-weight:700;margin-bottom:20px}
+    @keyframes bspin{to{transform:rotate(360deg)}}
+
     /* ── Responsive ── */
     @media(max-width:900px){
       .prop-hero-inner{grid-template-columns:1fr}
@@ -302,8 +369,8 @@
           <div class="room-strip-thumb" onclick="switchRoomImg('superior',17)"><img src="assets/asakusa/superior/667585024.jpg" alt=""></div>
         </div>
         <div class="room-body">
-          <div class="room-type-label"><span data-lang="zh">高级套房</span><span data-lang="ja">スーペリアスイート</span><span data-lang="en">Superior Suite</span></div>
-          <h3><span data-lang="zh">高级套房</span><span data-lang="ja">スーペリアスイート</span><span data-lang="en">Superior Suite</span></h3>
+          <div class="room-type-label"><span data-lang="zh">高级家庭间</span><span data-lang="ja">高级ファミリールーム</span><span data-lang="en">Superior Family Room</span></div>
+          <h3><span data-lang="zh">高级家庭间</span><span data-lang="ja">高级ファミリールーム</span><span data-lang="en">Superior Family Room</span></h3>
           <p class="room-desc">
             <span data-lang="zh">宽敞舒适，融合现代设计与和风元素，大床或双床可选。独立卫浴，配备全套洗漱用品。</span>
             <span data-lang="ja">広々とした客室、モダンデザインと和の要素を融合。ダブルまたはツインベッド選択可。独立したバスルーム完備。</span>
@@ -316,11 +383,11 @@
             <span class="room-tag">📶 Wi-Fi</span>
           </div>
           <div class="room-footer">
-            <a class="btn-book-room" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener">
-              <span data-lang="zh">在 Booking.com 预订 →</span>
-              <span data-lang="ja">Booking.comで予約 →</span>
-              <span data-lang="en">Book on Booking.com →</span>
-            </a>
+            <button class="btn-book-room" onclick="openRoomBooking('900014418','高级家庭间','Superior Family Room','高级ファミリールーム')">
+              <span data-lang="zh">直接预订此房间 →</span>
+              <span data-lang="ja">この客室を直予約 →</span>
+              <span data-lang="en">Book This Room Directly →</span>
+            </button>
           </div>
         </div>
       </div>
@@ -366,11 +433,11 @@
             <span class="room-tag">📶 Wi-Fi</span>
           </div>
           <div class="room-footer">
-            <a class="btn-book-room" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener">
-              <span data-lang="zh">在 Booking.com 预订 →</span>
-              <span data-lang="ja">Booking.comで予約 →</span>
-              <span data-lang="en">Book on Booking.com →</span>
-            </a>
+            <button class="btn-book-room" onclick="openRoomBooking('900014420','豪华套房','Deluxe Suite','デラックススイート')">
+              <span data-lang="zh">直接预订此房间 →</span>
+              <span data-lang="ja">この客室を直予約 →</span>
+              <span data-lang="en">Book This Room Directly →</span>
+            </button>
           </div>
         </div>
       </div>
@@ -402,8 +469,8 @@
           <div class="room-strip-thumb" onclick="switchRoomImg('deluxe-s',17)"><img src="assets/asakusa/deluxe-s/667582244.jpg" alt=""></div>
         </div>
         <div class="room-body">
-          <div class="room-type-label"><span data-lang="zh">豪华小型套房</span><span data-lang="ja">デラックスコンパクトスイート</span><span data-lang="en">Deluxe Compact Suite</span></div>
-          <h3><span data-lang="zh">豪华小型套房</span><span data-lang="ja">デラックスコンパクトスイート</span><span data-lang="en">Deluxe Compact Suite</span></h3>
+          <div class="room-type-label"><span data-lang="zh">豪华小型套房</span><span data-lang="ja">デラックスコンパクト</span><span data-lang="en">Deluxe Compact Suite</span></div>
+          <h3><span data-lang="zh">豪华小型套房</span><span data-lang="ja">デラックスコンパクト</span><span data-lang="en">Deluxe Compact Suite</span></h3>
           <p class="room-desc">
             <span data-lang="zh">精致紧凑，双床设计，适合两人出行，性价比优选。同享酒店全部设施服务。</span>
             <span data-lang="ja">コンパクトながら上質、ツインベッド。カップル・友人旅行に最適。ホテルの全サービスを利用可能。</span>
@@ -416,11 +483,11 @@
             <span class="room-tag">📶 Wi-Fi</span>
           </div>
           <div class="room-footer">
-            <a class="btn-book-room" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener">
-              <span data-lang="zh">在 Booking.com 预订 →</span>
-              <span data-lang="ja">Booking.comで予約 →</span>
-              <span data-lang="en">Book on Booking.com →</span>
-            </a>
+            <button class="btn-book-room" onclick="openRoomBooking('900014419','豪华小型套房','Deluxe Compact Suite','デラックスコンパクト')">
+              <span data-lang="zh">直接预订此房间 →</span>
+              <span data-lang="ja">この客室を直予約 →</span>
+              <span data-lang="en">Book This Room Directly →</span>
+            </button>
           </div>
         </div>
       </div>
@@ -452,7 +519,7 @@
           <div class="room-strip-thumb" onclick="switchRoomImg('triple',17)"><img src="assets/asakusa/triple/667582233.jpg" alt=""></div>
         </div>
         <div class="room-body">
-          <div class="room-type-label"><span data-lang="zh">三人间</span><span data-lang="ja">トリプルルーム</span><span data-lang="en">Triple Room</span></div>
+          <div class="room-type-label"><span data-lang="zh">舒适三人间</span><span data-lang="ja">コンフォートトリプル</span><span data-lang="en">Comfortable Triple</span></div>
           <h3><span data-lang="zh">舒适三人间</span><span data-lang="ja">コンフォートトリプル</span><span data-lang="en">Comfortable Triple</span></h3>
           <p class="room-desc">
             <span data-lang="zh">三床设计，适合家庭或三人小组出行，宽敞舒适。充足储物空间，适合携带行李较多的旅行者。</span>
@@ -466,11 +533,11 @@
             <span class="room-tag">📶 Wi-Fi</span>
           </div>
           <div class="room-footer">
-            <a class="btn-book-room" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener">
-              <span data-lang="zh">在 Booking.com 预订 →</span>
-              <span data-lang="ja">Booking.comで予約 →</span>
-              <span data-lang="en">Book on Booking.com →</span>
-            </a>
+            <button class="btn-book-room" onclick="openRoomBooking('900014417','舒适三人间','Comfortable Triple','コンフォートトリプル')">
+              <span data-lang="zh">直接预订此房间 →</span>
+              <span data-lang="ja">この客室を直予約 →</span>
+              <span data-lang="en">Book This Room Directly →</span>
+            </button>
           </div>
         </div>
       </div>
@@ -570,6 +637,135 @@
   </div>
 </section>
 
+<!-- 预订弹窗 -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h3>MKG HOTEL Asakusa · <span data-lang="zh">官网直订</span><span data-lang="en">Direct Booking</span><span data-lang="ja">公式直予約</span></h3>
+        <div class="modal-header-sub"><span data-lang="zh">选择客室并完成预订</span><span data-lang="en">Select a room and complete your booking</span><span data-lang="ja">客室を選択してご予約ください</span></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- Step D: 选择日期（从房间卡片进入） -->
+      <div id="mformStepDates" style="display:none">
+        <div style="background:#f7f5f1;border-radius:12px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px">
+          <div style="font-size:24px">🏨</div>
+          <div>
+            <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em"><span data-lang="zh">你正在预订</span><span data-lang="en">Booking</span><span data-lang="ja">予約する客室</span></div>
+            <div style="font-size:16px;font-weight:900;color:var(--navy)" id="mfd-room-name">—</div>
+            <div style="font-size:13px;color:var(--gold);font-weight:700" id="mfd-room-rate"></div>
+          </div>
+        </div>
+        <!-- 迷你日历 -->
+        <div class="cal-widget">
+          <div class="cal-head">
+            <button class="cal-nav" onclick="modalCalNav(-1)">‹</button>
+            <span class="cal-title" id="modalCalTitle"></span>
+            <button class="cal-nav" onclick="modalCalNav(1)">›</button>
+          </div>
+          <div class="cal-dow">
+            <span><span data-lang="zh">日</span><span data-lang="en">Su</span><span data-lang="ja">日</span></span>
+            <span><span data-lang="zh">一</span><span data-lang="en">Mo</span><span data-lang="ja">月</span></span>
+            <span><span data-lang="zh">二</span><span data-lang="en">Tu</span><span data-lang="ja">火</span></span>
+            <span><span data-lang="zh">三</span><span data-lang="en">We</span><span data-lang="ja">水</span></span>
+            <span><span data-lang="zh">四</span><span data-lang="en">Th</span><span data-lang="ja">木</span></span>
+            <span><span data-lang="zh">五</span><span data-lang="en">Fr</span><span data-lang="ja">金</span></span>
+            <span><span data-lang="zh">六</span><span data-lang="en">Sa</span><span data-lang="ja">土</span></span>
+          </div>
+          <div class="cal-grid" id="modalCalGrid"></div>
+        </div>
+        <!-- 已选日期 + 价格 -->
+        <div class="dates-bar" style="margin-top:10px">
+          <div class="date-cell">
+            <div class="lbl"><span data-lang="zh">入住</span><span data-lang="en">Check-in</span><span data-lang="ja">チェックイン</span></div>
+            <div class="val ph" id="mfd-ci-disp">—</div>
+          </div>
+          <div class="date-sep">→</div>
+          <div class="date-cell">
+            <div class="lbl"><span data-lang="zh">退房</span><span data-lang="en">Check-out</span><span data-lang="ja">チェックアウト</span></div>
+            <div class="val ph" id="mfd-co-disp">—</div>
+          </div>
+        </div>
+        <div id="mfd-price-area" style="margin:8px 0 10px"></div>
+        <div class="mform-field" style="margin-bottom:12px">
+          <label class="mform-label"><span data-lang="zh">入住人数</span><span data-lang="en">Guests</span><span data-lang="ja">人数</span></label>
+          <select class="mform-input" id="mfd-guests">
+            <option value="1">1 名</option>
+            <option value="2" selected>2 名</option>
+            <option value="3">3 名</option>
+            <option value="4">4 名</option>
+            <option value="5">5 名</option>
+          </select>
+        </div>
+        <div id="mfd-error" class="mform-error" style="display:none"></div>
+        <button class="mform-submit" id="mfd-btn" onclick="confirmModalDates()" disabled>
+          <span data-lang="zh">请先选择日期</span><span data-lang="en">Select dates first</span><span data-lang="ja">日付を選択してください</span>
+        </button>
+        <p class="mform-note"><span data-lang="zh">官网直订无手续费 · Stripe 加密支付</span><span data-lang="en">No platform fees · Stripe secure payment</span><span data-lang="ja">手数料無料 · Stripe暗号化決済</span></p>
+      </div>
+
+      <!-- Step 1: 填写信息 -->
+      <div id="mformStep1" style="display:none">
+        <div class="mform-summary">
+          <div><span data-lang="zh">入住</span><span data-lang="en">Check-in</span><span data-lang="ja">チェックイン</span><strong id="mfs-ci">—</strong></div>
+          <div><span data-lang="zh">退房</span><span data-lang="en">Check-out</span><span data-lang="ja">チェックアウト</span><strong id="mfs-co">—</strong></div>
+          <div><span data-lang="zh">晚数</span><span data-lang="en">Nights</span><span data-lang="ja">泊数</span><strong id="mfs-nights">—</strong></div>
+          <div><span data-lang="zh">人数</span><span data-lang="en">Guests</span><span data-lang="ja">人数</span><strong id="mfs-guests">—</strong></div>
+          <div class="sum-total"><span data-lang="zh">客室：</span><span data-lang="en">Room: </span><span data-lang="ja">客室：</span><span id="mfs-room">—</span></div>
+          <div class="sum-total"><span data-lang="zh">合计：</span><span data-lang="en">Total: </span><span data-lang="ja">合計：</span><span id="mfs-total">—</span></div>
+        </div>
+        <button style="background:none;border:none;color:var(--gold);font-size:13px;font-weight:700;cursor:pointer;padding:0 0 14px;font-family:inherit" onclick="goBackToDates()">← <span data-lang="zh">重新选择日期</span><span data-lang="en">Change dates</span><span data-lang="ja">日付を選び直す</span></button>
+        <div class="mform-2col">
+          <div class="mform-field">
+            <label class="mform-label"><span data-lang="zh">姓氏</span><span data-lang="en">Last Name</span><span data-lang="ja">姓</span> <span class="req">*</span></label>
+            <input class="mform-input" id="mf-last" type="text" placeholder="山田 / Wang">
+          </div>
+          <div class="mform-field">
+            <label class="mform-label"><span data-lang="zh">名字</span><span data-lang="en">First Name</span><span data-lang="ja">名</span> <span class="req">*</span></label>
+            <input class="mform-input" id="mf-first" type="text" placeholder="太郎 / Wei">
+          </div>
+        </div>
+        <div class="mform-field">
+          <label class="mform-label"><span data-lang="zh">电子邮箱</span><span data-lang="en">Email</span><span data-lang="ja">メールアドレス</span> <span class="req">*</span></label>
+          <input class="mform-input" id="mf-email" type="email" placeholder="example@email.com">
+        </div>
+        <div class="mform-field">
+          <label class="mform-label"><span data-lang="zh">联系电话</span><span data-lang="en">Phone</span><span data-lang="ja">電話番号</span></label>
+          <input class="mform-input" id="mf-phone" type="tel" placeholder="+81 90-0000-0000">
+        </div>
+        <div id="mf-error" class="mform-error" style="display:none"></div>
+        <button class="mform-submit" id="mf-btn" onclick="submitBooking()"><span data-lang="zh">确认预订 · 在线支付</span><span data-lang="en">Confirm &amp; Pay Online</span><span data-lang="ja">予約を確定・オンライン決済</span></button>
+        <p class="mform-note"><span data-lang="zh">Stripe 加密支付 · 即时确认</span><span data-lang="en">Stripe encrypted payment · Instant confirmation</span><span data-lang="ja">Stripe 暗号化決済・即時確認</span></p>
+      </div>
+
+      <!-- Step 2: loading -->
+      <div id="mformLoading" class="mform-loading" style="display:none">
+        <div class="mform-spinner"></div>
+        <span><span data-lang="zh">正在处理，请稍候…</span><span data-lang="en">Processing, please wait…</span><span data-lang="ja">処理中です…</span></span>
+      </div>
+
+      <!-- Step 3: success -->
+      <div id="mformSuccess" class="mform-success" style="display:none">
+        <div class="ok-icon">✓</div>
+        <h3><span data-lang="zh">预订成功！</span><span data-lang="en">Booking Confirmed!</span><span data-lang="ja">予約完了！</span></h3>
+        <p id="mfs-email-note"></p>
+        <div class="res-id" id="mfs-res-id"></div>
+        <div class="mform-summary" id="mfs-confirm-summary" style="text-align:left"></div>
+        <button class="mform-submit" style="margin-top:20px" onclick="closeModal()"><span data-lang="zh">关闭</span><span data-lang="en">Close</span><span data-lang="ja">閉じる</span></button>
+        <p style="margin-top:16px;font-size:12px;color:var(--muted);line-height:1.6">
+          <span data-lang="zh">如需取消、修改或咨询，请发邮件至 <a href="mailto:zym@mkgjp.com" style="color:var(--gold)">zym@mkgjp.com</a></span>
+          <span data-lang="en">For cancellations or queries, email <a href="mailto:zym@mkgjp.com" style="color:var(--gold)">zym@mkgjp.com</a></span>
+          <span data-lang="ja">キャンセル・変更・お問い合わせは <a href="mailto:zym@mkgjp.com" style="color:var(--gold)">zym@mkgjp.com</a> まで</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- Lightbox -->
 <div class="lightbox" id="lb">
   <button class="lb-close" onclick="lbClose()">✕</button>
@@ -584,6 +780,378 @@
 </footer>
 
 <script>
+  // ── 预订系统 ──
+  var ROOM_DATA = {
+    '900014417': { typeId: '900014417' },
+    '900014418': { typeId: '900014418' },
+    '900014419': { typeId: '900014419' },
+    '900014420': { typeId: '900014420' },
+  };
+
+  var DIRECT_RATE_ID = '1126061550297001';
+  var _liveRateCache = {};
+  var MIN_NIGHTS = 1;
+
+  var _i18n = {
+    zh: {
+      calMonth: function(y,m){ return y+'年 '+(m+1)+'月'; },
+      perNight: '/晚', totalLabel: '合计',
+      pricePhArea: '选择日期后显示价格',
+      priceLoading: '正在获取价格…',
+      nightsX: function(n,p){ return n+'晚 × ¥'+Number(p).toLocaleString(); },
+      btnSelectDate: '请先选择日期', btnSelectCO: '请选择退房日期', btnConfirm: '查看可用客室 →',
+      noRooms: '所选日期暂无空房，请更换日期', errName: '请填写姓名',
+      errEmail: '请填写有效邮箱', errFail: '无法创建付款页，请稍后重试',
+      errNet: '网络错误，请检查连接后重试', errConfirm: '预订确认失败，请联系 zym@mkgjp.com',
+      errCancel: '付款已取消，可重新填写信息预订。',
+      emailNote: function(e){ return '确认邮件将发至 '+e; },
+      resId: function(id){ return '预订编号：'+id; },
+      summaryTotal: function(a){ return '合计：¥'+Number(a).toLocaleString(); },
+    },
+    en: {
+      calMonth: function(y,m){ return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m]+' '+y; },
+      perNight: '/night', totalLabel: 'Total',
+      pricePhArea: 'Select dates to see pricing',
+      priceLoading: 'Fetching price…',
+      nightsX: function(n,p){ return n+' nights × ¥'+Number(p).toLocaleString(); },
+      btnSelectDate: 'Select dates first', btnSelectCO: 'Select check-out date', btnConfirm: 'View Available Rooms →',
+      noRooms: 'No rooms available for selected dates', errName: 'Please enter your name',
+      errEmail: 'Please enter a valid email', errFail: 'Unable to create payment page. Please retry.',
+      errNet: 'Network error. Please check your connection.', errConfirm: 'Booking failed. Please email zym@mkgjp.com',
+      errCancel: 'Payment cancelled. Please try again.',
+      emailNote: function(e){ return 'Confirmation email will be sent to '+e; },
+      resId: function(id){ return 'Booking ID: '+id; },
+      summaryTotal: function(a){ return 'Total: ¥'+Number(a).toLocaleString(); },
+    },
+    ja: {
+      calMonth: function(y,m){ return y+'年'+(m+1)+'月'; },
+      perNight: '/泊', totalLabel: '合計',
+      pricePhArea: '日付を選択すると料金が表示されます',
+      priceLoading: '料金を取得中…',
+      nightsX: function(n,p){ return n+'泊 × ¥'+Number(p).toLocaleString(); },
+      btnSelectDate: '先に日付を選択してください', btnSelectCO: 'チェックアウト日を選択', btnConfirm: '空室を確認 →',
+      noRooms: '選択日程のお部屋がございません。日程を変更するか、お問い合わせください。',
+      errName: 'お名前を入力してください', errEmail: '有効なメールアドレスを入力してください',
+      errFail: '決済ページを作成できませんでした。後ほど再試行してください。',
+      errNet: 'ネットワークエラーです。接続を確認して再試行してください。',
+      errConfirm: '予約確認に失敗しました。zym@mkgjp.com までご連絡ください。',
+      errCancel: 'お支払いがキャンセルされました。再度お試しください。',
+      emailNote: function(e){ return '確認メールを '+e+' に送信しました'; },
+      resId: function(id){ return '予約番号：'+id; },
+      summaryTotal: function(a){ return '合計：¥'+Number(a).toLocaleString(); },
+    },
+  };
+  function _t(key){ var l=getLang(); return (_i18n[l]||_i18n.ja)[key]; }
+
+  var ciDate = null, coDate = null;
+  var selectedRoom = null;
+  var modalAvailMap = {};
+  var modalCalYear, modalCalMonth;
+  var modalCiDate = null, modalCoDate = null, modalPickStep = 0;
+  var modalLoadingMonths = {};
+  var _currentRoomId = null;
+
+  function _nights(a,b){ return Math.round((new Date(b)-new Date(a))/86400000); }
+
+  async function fetchLiveRate(roomId, ci, co, guests){
+    var key = roomId+'-'+ci+'-'+co+'-'+(guests||2);
+    if(_liveRateCache[key]) return _liveRateCache[key];
+    var rd = ROOM_DATA[roomId];
+    if(!rd) return null;
+    try {
+      var url = '/api/asakusa-avail?checkIn='+ci+'&checkOut='+co+'&adultCount='+(guests||2)+'&roomTypeId='+rd.typeId;
+      var r = await fetch(url);
+      var j = await r.json();
+      if(!j.data || !j.data.roomRates) return null;
+      var match = j.data.roomRates.find(function(x){ return x.rateId===DIRECT_RATE_ID; });
+      if(!match) match = j.data.roomRates.sort(function(a,b){return a.totalAmount-b.totalAmount;})[0];
+      if(!match) return null;
+      var result = { totalAmount: match.totalAmount, averageDaily: match.averageDailyAmount, rateId: match.rateId, nights: match.nights };
+      _liveRateCache[key] = result;
+      return result;
+    } catch(e){ return null; }
+  }
+
+  function openRoomBooking(roomId, zhName, enName, jaName){
+    _currentRoomId = roomId;
+    var lang = getLang();
+    var displayName = lang==='zh' ? zhName : lang==='en' ? enName : jaName;
+    document.getElementById('mfd-room-name').textContent = displayName;
+    document.getElementById('mfd-room-rate').textContent = lang==='ja'?'日程を選択して料金を確認':lang==='en'?'Select dates to see price':'选择日期查看价格';
+    modalAvailMap = {}; modalLoadingMonths = {};
+    modalCiDate = null; modalCoDate = null; modalPickStep = 0;
+    var today = new Date();
+    modalCalYear = today.getFullYear(); modalCalMonth = today.getMonth();
+    renderModalCalendar();
+    fetchModalCalendarMonth(roomId, modalCalYear, modalCalMonth);
+    var ny = modalCalMonth===11?modalCalYear+1:modalCalYear;
+    var nm = modalCalMonth===11?0:modalCalMonth+1;
+    fetchModalCalendarMonth(roomId, ny, nm);
+    updateModalDatesBar();
+    document.getElementById('mfd-price-area').innerHTML = '';
+    document.getElementById('mfd-error').style.display='none';
+    document.getElementById('mformStepDates').style.display='';
+    document.getElementById('mformStep1').style.display='none';
+    document.getElementById('mformLoading').style.display='none';
+    document.getElementById('mformSuccess').style.display='none';
+    document.getElementById('bookingModal').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+
+  function modalCalNav(dir){
+    modalCalMonth += dir;
+    if(modalCalMonth>11){modalCalMonth=0;modalCalYear++;}
+    if(modalCalMonth<0){modalCalMonth=11;modalCalYear--;}
+    renderModalCalendar();
+    fetchModalCalendarMonth(_currentRoomId, modalCalYear, modalCalMonth);
+  }
+
+  async function fetchModalCalendarMonth(roomId, y, m){
+    var key = roomId+'-'+y+'-'+String(m+1).padStart(2,'0');
+    if(modalLoadingMonths[key]) return;
+    modalLoadingMonths[key] = true;
+    var rd = ROOM_DATA[roomId];
+    if(!rd) return;
+    var s = y+'-'+String(m+1).padStart(2,'0')+'-01';
+    var last = new Date(y,m+1,0).getDate();
+    var e = y+'-'+String(m+1).padStart(2,'0')+'-'+String(last).padStart(2,'0');
+    try {
+      var url = '/api/asakusa-calendar?startDate='+s+'&endDate='+e+'&adultCount=2&roomTypeId='+rd.typeId;
+      var r = await fetch(url);
+      var j = await r.json();
+      if(j.data && j.data.dailyAvails){
+        j.data.dailyAvails.forEach(function(d){ modalAvailMap[d.date] = d.status; });
+        renderModalCalendar();
+      }
+    } catch(err){ console.warn('modal-calendar error', err); }
+  }
+
+  function renderModalCalendar(){
+    var titleEl = document.getElementById('modalCalTitle');
+    if(!titleEl) return;
+    titleEl.textContent = _t('calMonth')(modalCalYear, modalCalMonth);
+    var firstDay = new Date(modalCalYear, modalCalMonth, 1).getDay();
+    var days = new Date(modalCalYear, modalCalMonth+1, 0).getDate();
+    var today = new Date(); today.setHours(0,0,0,0);
+    var todayStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+    var grid = document.getElementById('modalCalGrid');
+    if(!grid) return;
+    grid.innerHTML = '';
+    for(var i=0;i<firstDay;i++){var e=document.createElement('div');e.className='cal-day empty';grid.appendChild(e);}
+    var cutoff = null;
+    if(modalPickStep===1 && modalCiDate){
+      var sc=new Date(modalCiDate);
+      for(var k=1;k<=90;k++){sc.setDate(sc.getDate()+1);var ds=sc.toISOString().slice(0,10);if(modalAvailMap[ds]==='Closed'){cutoff=ds;break;}}
+    }
+    var minCoDate = null;
+    if(modalPickStep===1 && modalCiDate){
+      var md=new Date(modalCiDate); md.setDate(md.getDate()+MIN_NIGHTS);
+      minCoDate=md.getFullYear()+'-'+String(md.getMonth()+1).padStart(2,'0')+'-'+String(md.getDate()).padStart(2,'0');
+    }
+    for(var d=1;d<=days;d++){
+      var ds2=modalCalYear+'-'+String(modalCalMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+      var el=document.createElement('div');
+      el.textContent=d;
+      var past=ds2<todayStr;
+      var status=modalAvailMap[ds2];
+      var blocked=modalPickStep===1&&cutoff&&ds2>cutoff;
+      var tooClose=modalPickStep===1&&minCoDate&&ds2>modalCiDate&&ds2<minCoDate;
+      if(past||blocked){
+        el.className=past?'cal-day past':'cal-day closed';
+      } else if(status==='Closed'){
+        el.className='cal-day closed';
+      } else if(tooClose){
+        el.className='cal-day closed';
+      } else {
+        el.className='cal-day avail';
+        (function(x){el.onclick=function(){modalPickDate(x);};})(ds2);
+      }
+      if(modalCiDate&&modalCoDate){
+        if(ds2===modalCiDate)el.classList.add('sel-ci');
+        else if(ds2===modalCoDate)el.classList.add('sel-co');
+        else if(ds2>modalCiDate&&ds2<modalCoDate)el.classList.add('in-range');
+      } else if(modalCiDate&&ds2===modalCiDate){el.classList.add('sel-ci','sel-co');}
+      grid.appendChild(el);
+    }
+  }
+
+  function modalPickDate(ds){
+    if(modalPickStep===0||modalPickStep===2){
+      modalCiDate=ds; modalCoDate=null; modalPickStep=1;
+    } else {
+      if(ds<=modalCiDate){modalCiDate=ds;modalCoDate=null;modalPickStep=1;}
+      else {
+        if(_nights(modalCiDate,ds)<MIN_NIGHTS){modalCiDate=ds;modalCoDate=null;modalPickStep=1;}
+        else{
+          var gap=false,sc=new Date(modalCiDate),lim=new Date(ds);
+          while(sc<lim){sc.setDate(sc.getDate()+1);var x=sc.toISOString().slice(0,10);if(x<ds&&modalAvailMap[x]==='Closed'){gap=true;break;}}
+          if(gap){modalCiDate=ds;modalCoDate=null;modalPickStep=1;}
+          else{modalCoDate=ds;modalPickStep=2;}
+        }
+      }
+    }
+    updateModalDatesBar();
+    renderModalCalendar();
+  }
+
+  function updateModalDatesBar(){
+    var ci=document.getElementById('mfd-ci-disp'),co=document.getElementById('mfd-co-disp');
+    var btn=document.getElementById('mfd-btn');
+    if(!ci) return;
+    if(modalCiDate){ci.textContent=modalCiDate.slice(5).replace('-','/');ci.classList.remove('ph');}
+    else{ci.textContent='—';ci.classList.add('ph');}
+    if(modalCoDate){co.textContent=modalCoDate.slice(5).replace('-','/');co.classList.remove('ph');}
+    else{co.textContent='—';co.classList.add('ph');}
+    if(modalCiDate&&modalCoDate){
+      var n=_nights(modalCiDate,modalCoDate);
+      ciDate=modalCiDate; coDate=modalCoDate;
+      var lang=getLang();
+      var guests=document.getElementById('mfd-guests')?document.getElementById('mfd-guests').value:'2';
+      document.getElementById('mfd-price-area').innerHTML='<div class="price-ph" style="color:var(--muted);font-size:14px">'+(lang==='ja'?'料金取得中…':lang==='en'?'Fetching price…':'价格查询中…')+'</div>';
+      btn.disabled=true;
+      fetchLiveRate(_currentRoomId,modalCiDate,modalCoDate,guests).then(function(live){
+        if(!live){
+          document.getElementById('mfd-price-area').innerHTML='<div class="price-ph" style="color:var(--red);font-size:13px">'+(lang==='ja'?'該当日程の料金がありません':lang==='en'?'No rate available, please contact us':'该日期暂无报价，请联系我们')+'</div>';
+          return;
+        }
+        document.getElementById('mfd-price-area').innerHTML=
+          '<div class="price-box"><div class="price-row"><span>¥'+live.averageDaily.toLocaleString()+' × '+n+(lang==='ja'?'泊':lang==='en'?' nights':' 晚')+'</span></div>'+
+          '<div class="price-row total"><span>'+(lang==='ja'?'合計':lang==='en'?'Total':'合计')+'</span><span>¥'+live.totalAmount.toLocaleString()+'</span></div></div>';
+        btn.disabled=false;
+        btn.innerHTML='<span data-lang="zh">继续填写信息 →</span><span data-lang="en">Continue →</span><span data-lang="ja">次へ →</span>';
+        document.querySelectorAll('#mfd-btn [data-lang]').forEach(function(el){
+          el.style.display=(el.getAttribute('data-lang')===getLang())?'':'none';
+        });
+      });
+    } else {
+      document.getElementById('mfd-price-area').innerHTML='';
+      btn.disabled=true;
+      btn.innerHTML='<span data-lang="zh">请先选择日期</span><span data-lang="en">Select dates first</span><span data-lang="ja">日付を選択してください</span>';
+      document.querySelectorAll('#mfd-btn [data-lang]').forEach(function(el){
+        el.style.display=(el.getAttribute('data-lang')===getLang())?'':'none';
+      });
+    }
+  }
+
+  function confirmModalDates(){
+    if(!modalCiDate||!modalCoDate) return;
+    var n=_nights(modalCiDate,modalCoDate);
+    var guests=document.getElementById('mfd-guests')?document.getElementById('mfd-guests').value:'2';
+    var rd=ROOM_DATA[_currentRoomId];
+    var cacheKey=_currentRoomId+'-'+modalCiDate+'-'+modalCoDate+'-'+guests;
+    var live=_liveRateCache[cacheKey];
+    selectedRoom={
+      roomId: rd?rd.typeId:'',
+      rateId: live?live.rateId:'',
+      roomName: document.getElementById('mfd-room-name').textContent,
+      totalAmount: live?live.totalAmount:0,
+    };
+    ciDate=modalCiDate; coDate=modalCoDate;
+    document.getElementById('mfs-ci').textContent=ciDate;
+    document.getElementById('mfs-co').textContent=coDate;
+    document.getElementById('mfs-nights').textContent=n;
+    document.getElementById('mfs-guests').textContent=guests;
+    document.getElementById('mfs-room').textContent=selectedRoom.roomName;
+    document.getElementById('mfs-total').textContent='¥'+Number(selectedRoom.totalAmount).toLocaleString();
+    document.getElementById('mformStepDates').style.display='none';
+    document.getElementById('mformStep1').style.display='';
+    document.getElementById('mf-error').style.display='none';
+  }
+
+  function goBackToDates(){
+    document.getElementById('mformStep1').style.display='none';
+    document.getElementById('mformStepDates').style.display='';
+  }
+
+  async function submitBooking(){
+    var first=document.getElementById('mf-first').value.trim();
+    var last=document.getElementById('mf-last').value.trim();
+    var email=document.getElementById('mf-email').value.trim();
+    var phone=document.getElementById('mf-phone').value.trim();
+    if(!first||!last){showBookingErr(_t('errName'));return;}
+    if(!email||!email.includes('@')){showBookingErr(_t('errEmail'));return;}
+    if(!selectedRoom){showBookingErr('客室を選択してください');return;}
+    document.getElementById('mf-error').style.display='none';
+    document.getElementById('mformStep1').style.display='none';
+    document.getElementById('mformLoading').style.display='flex';
+    try {
+      var guests=document.getElementById('mfd-guests')?document.getElementById('mfd-guests').value:'2';
+      var res=await fetch('/api/asakusa-checkout',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          checkIn:ciDate,checkOut:coDate,adultCount:Number(guests),childCount:0,
+          firstName:first,lastName:last,email:email,phone:phone,
+          roomId:selectedRoom.roomId||'',rateId:selectedRoom.rateId||'',
+          roomName:selectedRoom.roomName||'',
+          totalAmount:selectedRoom.totalAmount||0,
+        }),
+      });
+      var data=await res.json();
+      if(data.url){window.location.href=data.url;}
+      else{document.getElementById('mformLoading').style.display='none';document.getElementById('mformStep1').style.display='';showBookingErr(data.error||_t('errFail'));}
+    } catch(err){
+      document.getElementById('mformLoading').style.display='none';
+      document.getElementById('mformStep1').style.display='';
+      showBookingErr(_t('errNet'));
+    }
+  }
+
+  async function handleBookingReturn(){
+    var params=new URLSearchParams(window.location.search);
+    var status=params.get('booking'),sid=params.get('sid');
+    if(!status)return;
+    history.replaceState({},'',(window.location.pathname));
+    if(status==='cancelled'){
+      document.getElementById('bookingModal').classList.add('open');
+      document.body.style.overflow='hidden';
+      document.getElementById('mformStepDates').style.display='';
+      document.getElementById('mf-error') && (document.getElementById('mf-error').style.display='none');
+      return;
+    }
+    if(status==='success'&&sid){
+      document.getElementById('bookingModal').classList.add('open');
+      document.body.style.overflow='hidden';
+      document.getElementById('mformStepDates').style.display='none';
+      document.getElementById('mformStep1').style.display='none';
+      document.getElementById('mformLoading').style.display='flex';
+      try {
+        var r=await fetch('/api/verify-and-book?sid='+sid);
+        var d=await r.json();
+        document.getElementById('mformLoading').style.display='none';
+        if(d.success){
+          document.getElementById('mfs-email-note').textContent=_t('emailNote')(d.email);
+          document.getElementById('mfs-res-id').textContent=_t('resId')(d.reservationId);
+          document.getElementById('mfs-confirm-summary').innerHTML=
+            '<div><span>Check-in</span><strong>'+d.checkIn+'</strong></div>'+
+            '<div><span>Check-out</span><strong>'+d.checkOut+'</strong></div>'+
+            '<div class="sum-total">'+_t('summaryTotal')(d.totalAmount)+'</div>';
+          document.getElementById('mformSuccess').style.display='';
+        } else {
+          document.getElementById('mformStepDates').style.display='';
+          showBookingErr(_t('errConfirm'));
+        }
+      } catch(e2){
+        document.getElementById('mformLoading').style.display='none';
+        document.getElementById('mformStepDates').style.display='';
+        showBookingErr(_t('errNet'));
+      }
+    }
+  }
+  handleBookingReturn();
+
+  function closeModal(){
+    document.getElementById('bookingModal').classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  function showBookingErr(msg){
+    var el = document.getElementById('mformStep1').style.display!=='none'
+      ? document.getElementById('mf-error')
+      : document.getElementById('mfd-error');
+    el.textContent=msg; el.style.display='';
+  }
+
+  // ── Lightbox ──
   const roomImgs = {
     superior: ['assets/asakusa/superior/667273812.jpg','assets/asakusa/superior/667273793.jpg','assets/asakusa/superior/667273811.jpg','assets/asakusa/superior/667273822.jpg','assets/asakusa/superior/667273814.jpg','assets/asakusa/superior/667273799.jpg','assets/asakusa/superior/667273807.jpg','assets/asakusa/superior/667273804.jpg','assets/asakusa/superior/667273821.jpg','assets/asakusa/superior/667273816.jpg','assets/asakusa/superior/667273801.jpg','assets/asakusa/superior/667273819.jpg','assets/asakusa/superior/667273808.jpg','assets/asakusa/superior/667582244.jpg','assets/asakusa/superior/667273806.jpg','assets/asakusa/superior/667273803.jpg','assets/asakusa/superior/667273792.jpg','assets/asakusa/superior/667585024.jpg'],
     deluxe: ['assets/asakusa/deluxe/667274556.jpg','assets/asakusa/deluxe/667274577.jpg','assets/asakusa/deluxe/667274572.jpg','assets/asakusa/deluxe/667274555.jpg','assets/asakusa/deluxe/667274557.jpg','assets/asakusa/deluxe/667274551.jpg','assets/asakusa/deluxe/667274554.jpg','assets/asakusa/deluxe/667274571.jpg','assets/asakusa/deluxe/667274573.jpg','assets/asakusa/deluxe/667585028.jpg','assets/asakusa/deluxe/667585048.jpg','assets/asakusa/deluxe/667585053.jpg','assets/asakusa/deluxe/667274574.jpg','assets/asakusa/deluxe/667582244.jpg','assets/asakusa/deluxe/667585030.jpg','assets/asakusa/deluxe/667274570.jpg','assets/asakusa/deluxe/667585029.jpg','assets/asakusa/deluxe/667585024.jpg'],
