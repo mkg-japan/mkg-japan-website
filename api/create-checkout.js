@@ -23,8 +23,14 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
+  const amount = Number(totalAmount);
+  if (!amount || amount < 1000) {
+    return res.status(400).json({ error: `Invalid totalAmount: ${totalAmount}` });
+  }
+
   const nights = Math.round((new Date(checkOut) - new Date(checkIn)) / 86400000);
 
+  try {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items: [{
@@ -58,6 +64,8 @@ module.exports = async function handler(req, res) {
       totalAmount: String(totalAmount),
     },
   });
-
   res.status(200).json({ url: session.url });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 };

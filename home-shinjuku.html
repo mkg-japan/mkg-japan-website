@@ -1027,12 +1027,17 @@
           _bookRoomId = rr.roomId;
           _bookRateId = rr.rateId;
           totalPrice = rr.totalAmount;
-          const nightly = rr.averageDailyAmount;
-          const rows = (rr.dailyRates || []).map(dr => {
-            const dow = new Date(dr.date).getDay();
-            return { date: dr.date, dow, price: dr.amount };
-          });
-          renderPriceBox(nightly, nights, totalPrice, rr.currencyCode || 'JPY', rows);
+          // 若 API 返回异常低价（<1000円）则回退本地计算
+          if (!totalPrice || totalPrice < 1000) {
+            renderPriceFromCalendar(nights);
+          } else {
+            const nightly = rr.averageDailyAmount;
+            const rows = (rr.dailyRates || []).map(dr => {
+              const dow = new Date(dr.date).getDay();
+              return { date: dr.date, dow, price: dr.amount };
+            });
+            renderPriceBox(nightly, nights, totalPrice, rr.currencyCode || 'JPY', rows);
+          }
         } else {
           renderPriceFromCalendar(nights);
         }
