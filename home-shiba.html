@@ -44,27 +44,35 @@
     .desk-lang-menu button:hover{background:var(--bg);color:var(--gold)}
 
     /* ── Property Hero ── */
-    .prop-hero{background:var(--navy-2);color:white;padding:48px 0 0;position:relative;overflow:clip}
-    .prop-hero-inner{display:grid;grid-template-columns:1fr 440px;gap:48px;align-items:start;padding-bottom:64px}
-    .prop-hero h1{font-size:clamp(32px,4.5vw,52px);line-height:1.05;letter-spacing:-.03em;margin:16px 0 12px;font-weight:900}
+    .prop-hero{position:relative;color:white;overflow:hidden;min-height:520px;display:flex;flex-direction:column;justify-content:flex-end}
+    .prop-hero-bg{position:absolute;inset:0;z-index:0}
+    .prop-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block}
+    .prop-hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(8,17,40,.88) 0%,rgba(8,17,40,.72) 50%,rgba(8,17,40,.45) 100%)}
+    .prop-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;padding:56px 0 64px}
+    .prop-hero h1{font-size:clamp(32px,4.5vw,54px);line-height:1.05;letter-spacing:-.03em;margin:16px 0 12px;font-weight:900}
     .prop-hero .addr{color:rgba(255,255,255,.65);font-size:14px;display:flex;align-items:center;gap:5px;margin-bottom:20px}
     .prop-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
     .prop-tag{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700}
     .prop-tag.open{background:rgba(22,134,106,.25);color:#5de8c0;border:1px solid rgba(22,134,106,.4)}
     .prop-tag.info{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15)}
-    .prop-desc{color:rgba(255,255,255,.75);font-size:15px;max-width:520px;line-height:1.75;margin-bottom:28px}
-    .prop-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .prop-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px;text-align:center}
+    .prop-desc{color:rgba(255,255,255,.78);font-size:15px;max-width:500px;line-height:1.75;margin-bottom:28px}
+    .prop-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .prop-stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:14px;text-align:center;backdrop-filter:blur(6px)}
     .prop-stat b{display:block;font-size:22px;color:var(--gold-2);font-weight:900;line-height:1}
     .prop-stat span{display:block;font-size:12px;color:rgba(255,255,255,.6);margin-top:6px}
-    .prop-hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-80px;height:140px;background:var(--bg);transform:rotate(-2deg)}
-    .hero-photo{width:100%;height:340px;object-fit:cover;border-radius:20px;box-shadow:0 32px 64px rgba(0,0,0,.3)}
-    .hero-photo-wrap{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,.3)}
-    .hero-photo-wrap img{width:100%;height:340px;object-fit:cover;display:block;filter:brightness(.75)}
-    .hero-photo-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(11,23,51,.52) 0%,rgba(11,23,51,.18) 60%,rgba(0,0,0,.08) 100%);display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:28px}
-    .hero-photo-tagline{color:rgba(255,255,255,.9);font-size:14px;font-weight:600;margin:0 0 14px;line-height:1.6;text-shadow:0 1px 6px rgba(0,0,0,.4)}
-    .btn-hero-book{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;padding:12px 24px;border-radius:999px;border:none;cursor:pointer;transition:.15s;font-family:inherit}
-    .btn-hero-book:hover{opacity:.88;transform:translateY(-1px)}
+    .prop-hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-80px;height:140px;background:var(--bg);transform:rotate(-2deg);z-index:2}
+    /* 右侧预订卡片（玻璃感） */
+    .hero-book-card{background:rgba(15,25,55,.75);backdrop-filter:blur(18px) saturate(1.2);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:28px;position:relative;z-index:1}
+    .hero-book-card-title{font-size:15px;font-weight:800;color:white;margin:0 0 20px;display:flex;align-items:center;justify-content:space-between}
+    .hero-book-card-badge{display:inline-flex;padding:3px 10px;border-radius:999px;background:rgba(201,166,91,.2);color:var(--gold-2);font-size:11px;font-weight:800;border:1px solid rgba(201,166,91,.3)}
+    .hbc-field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+    .hbc-field label{font-size:10px;font-weight:800;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase}
+    .hbc-field input,.hbc-field select{padding:10px 13px;border:1.5px solid rgba(255,255,255,.2);border-radius:10px;font-size:14px;font-family:inherit;color:var(--ink);background:rgba(255,255,255,.95);outline:none;transition:.2s;width:100%;box-sizing:border-box}
+    .hbc-field input:focus,.hbc-field select:focus{border-color:var(--gold)}
+    .hbc-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .btn-hbc-search{width:100%;padding:13px;border-radius:11px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;margin-top:4px}
+    .btn-hbc-search:hover{box-shadow:0 8px 20px rgba(201,166,91,.35);transform:translateY(-1px)}
+    .hbc-note{font-size:11px;color:rgba(255,255,255,.45);text-align:center;margin-top:10px;line-height:1.6}
 
     /* ── Section titles ── */
     .section-title{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;padding-top:52px}
@@ -172,17 +180,6 @@
     .price-row.total{font-weight:800;color:var(--navy);border-top:1px solid var(--line);margin-top:5px;padding-top:7px;font-size:14px}
     .price-ph{text-align:center;color:var(--muted);font-size:12px;padding:8px 0}
 
-    /* ── Booking Search Bar ── */
-    .booking-search-bar{background:var(--navy);padding:20px 0;margin-bottom:0}
-    .bsb-inner{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
-    .bsb-field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:120px}
-    .bsb-field label{font-size:10px;font-weight:800;color:rgba(255,255,255,.6);letter-spacing:.08em;text-transform:uppercase}
-    .bsb-field input,.bsb-field select{padding:10px 13px;border:1.5px solid rgba(255,255,255,.2);border-radius:10px;font-size:14px;font-family:inherit;color:var(--ink);background:white;outline:none;transition:.2s;width:100%;box-sizing:border-box}
-    .bsb-field input:focus,.bsb-field select:focus{border-color:var(--gold)}
-    .btn-bsb-search{padding:11px 24px;border-radius:10px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;white-space:nowrap;flex-shrink:0}
-    .btn-bsb-search:hover{box-shadow:0 8px 20px rgba(201,166,91,.3);transform:translateY(-1px)}
-    .bsb-note{font-size:11px;color:rgba(255,255,255,.45);text-align:center;width:100%;margin-top:4px}
-    @media(max-width:680px){.bsb-inner{flex-direction:column}.btn-bsb-search{width:100%}}
 
     /* ── Booking Form Field ── */
     .b-form-field{margin-bottom:10px}
@@ -262,8 +259,9 @@
 
     /* ── Responsive ── */
     @media(max-width:860px){
-      .prop-hero-inner{grid-template-columns:1fr;padding-bottom:48px}
-      .book-card{position:static;margin-top:24px}
+      .prop-hero{min-height:auto}
+      .prop-hero-inner{grid-template-columns:1fr;padding-bottom:80px}
+      .hero-book-card{margin-top:8px}
       .room-entry-layout{grid-template-columns:1fr;grid-template-rows:260px auto}
       .room-main-photo{height:260px}
       .room-strip img{height:90px;width:130px}
@@ -321,7 +319,12 @@
 
 <!-- ── Property Hero ── -->
 <section class="prop-hero">
+  <!-- 背景图 -->
+  <div class="prop-hero-bg">
+    <img src="assets/shiba/r301/07.jpg" alt="MKG HOME 芝">
+  </div>
   <div class="wrap prop-hero-inner">
+    <!-- 左侧文字 -->
     <div>
       <div class="prop-tags">
         <span class="prop-tag open">✦ <span data-lang="zh">运营中</span><span data-lang="en">Operational</span><span data-lang="ja">営業中</span></span>
@@ -331,9 +334,9 @@
       <h1>MKG HOME 芝</h1>
       <div class="addr">📍 <span data-lang="zh">東京都港区芝 · 東京タワー徒歩圏内</span><span data-lang="en">Shiba, Minato-ku, Tokyo · Near Tokyo Tower</span><span data-lang="ja">東京都港区芝 · 東京タワー徒歩圏内</span></div>
       <p class="prop-desc">
-        <span data-lang="zh">位于东京港区芝，步行即可抵达东京塔，周边汇聚商务办公区、特色餐厅与城市景观，是探索东京与商务出行的理想落脚点。<br><br>房源内设独立设计客房，均配备全功能厨房、独立卫浴及智能门锁，让您在享受酒店便利的同时，也能拥有如家般自在舒适的居住体验。<br><br>无论是商务出差、家庭旅行还是短期旅居，都能在东京核心城区享受便捷、舒适且充满当地生活气息的住宿体验。</span>
-        <span data-lang="en">Nestled in Shiba, Minato-ku, within walking distance of Tokyo Tower and surrounded by business districts, local restaurants, and city views — the perfect base for exploring Tokyo or travelling on business.<br><br>Each room is independently designed with a full kitchen, private bathroom, and smart lock, offering the convenience of a hotel with the ease and comfort of home.<br><br>Whether for a business trip, family holiday, or extended stay, enjoy seamless, comfortable accommodation with a genuine local feel at the heart of Tokyo.</span>
-        <span data-lang="ja">東京港区芝に位置し、東京タワーへも徒歩圏内。周辺にはビジネスオフィス、個性豊かなレストラン、都市の景観が広がり、東京観光とビジネス出張の理想的な拠点です。<br><br>客室はそれぞれ独立したデザインで、全室にフルキッチン・専用バスルーム・スマートロックを完備。ホテルの利便性と、わが家のようなくつろぎを同時にお楽しみいただけます。<br><br>出張・ご家族旅行・短期滞在を問わず、東京の中心部で地元の生活感あふれる、便利で快適な滞在体験をご提供します。</span>
+        <span data-lang="zh">位于东京港区芝，步行即可抵达东京塔。6间独立设计客房，全室配备全功能厨房、独立卫浴及智能门锁，兼具酒店便利与家的舒适。</span>
+        <span data-lang="en">Steps from Tokyo Tower in Minato-ku. 6 individually designed rooms, each with a full kitchen, private bathroom and smart lock — hotel convenience meets home comfort.</span>
+        <span data-lang="ja">東京タワー徒歩圏の港区芝。全6室独立設計で、フルキッチン・専用バスルーム・スマートロック完備。ホテルの利便性と自宅のくつろぎを両立。</span>
       </p>
       <div class="prop-stats">
         <div class="prop-stat"><b>6</b><span><span data-lang="zh">间客室</span><span data-lang="en">Rooms</span><span data-lang="ja">客室</span></span></div>
@@ -341,39 +344,24 @@
         <div class="prop-stat"><b>24H</b><span><span data-lang="zh">自助入住</span><span data-lang="en">Self Check-in</span><span data-lang="ja">セルフチェックイン</span></span></div>
       </div>
     </div>
-    <!-- 右侧房间照片 -->
-    <div class="hero-photo-wrap">
-      <img src="assets/shiba/r301/07.jpg" alt="MKG HOME 芝">
-      <div class="hero-photo-overlay">
-        <p class="hero-photo-tagline">
-          <span data-lang="zh">独立厨卫 · 智能门锁 · 24H 自助入住<br>东京铁塔步行圈 · 官网直订最优价</span>
-          <span data-lang="en">Full kitchen · Smart lock · 24H self check-in<br>Steps from Tokyo Tower · Best price direct</span>
-          <span data-lang="ja">フルキッチン · スマートロック · 24時間セルフチェックイン<br>東京タワー徒歩圏 · 公式直予約最安値</span>
-        </p>
-        <button class="btn-hero-book" onclick="scrollToBooking()">
-          <span data-lang="zh">查询空房 &amp; 预订 →</span>
-          <span data-lang="en">Check Availability →</span>
-          <span data-lang="ja">空室を確認 &amp; 予約 →</span>
-        </button>
+    <!-- 右侧预订卡片 -->
+    <div class="hero-book-card" id="booking-search">
+      <div class="hero-book-card-title">
+        <span><span data-lang="zh">查询空房 &amp; 预订</span><span data-lang="en">Check Availability</span><span data-lang="ja">空室確認 &amp; 予約</span></span>
+        <span class="hero-book-card-badge"><span data-lang="zh">官网直订</span><span data-lang="en">Direct</span><span data-lang="ja">公式直予約</span></span>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── 预订搜索栏 ── -->
-<div class="booking-search-bar" id="booking-search">
-  <div class="wrap">
-    <div class="bsb-inner">
-      <div class="bsb-field">
-        <label><span data-lang="zh">入住日期</span><span data-lang="en">Check-in</span><span data-lang="ja">チェックイン</span></label>
-        <input type="date" id="bsb-ci">
+      <div class="hbc-2col">
+        <div class="hbc-field">
+          <label><span data-lang="zh">入住日期</span><span data-lang="en">Check-in</span><span data-lang="ja">チェックイン</span></label>
+          <input type="date" id="bsb-ci">
+        </div>
+        <div class="hbc-field">
+          <label><span data-lang="zh">退房日期</span><span data-lang="en">Check-out</span><span data-lang="ja">チェックアウト</span></label>
+          <input type="date" id="bsb-co">
+        </div>
       </div>
-      <div class="bsb-field">
-        <label><span data-lang="zh">退房日期</span><span data-lang="en">Check-out</span><span data-lang="ja">チェックアウト</span></label>
-        <input type="date" id="bsb-co">
-      </div>
-      <div class="bsb-field" style="max-width:110px">
-        <label><span data-lang="zh">人数</span><span data-lang="en">Guests</span><span data-lang="ja">人数</span></label>
+      <div class="hbc-field">
+        <label><span data-lang="zh">入住人数</span><span data-lang="en">Guests</span><span data-lang="ja">人数</span></label>
         <select id="bsb-guests">
           <option value="1">1 名</option>
           <option value="2" selected>2 名</option>
@@ -382,19 +370,15 @@
           <option value="5">5 名</option>
         </select>
       </div>
-      <button class="btn-bsb-search" id="bsbBtn" onclick="searchRooms()">
-        <span data-lang="zh">查询空房 →</span>
-        <span data-lang="en">Search Rooms →</span>
+      <button class="btn-hbc-search" id="bsbBtn" onclick="searchRooms()">
+        <span data-lang="zh">查询可用房间 →</span>
+        <span data-lang="en">Search Available Rooms →</span>
         <span data-lang="ja">空室を検索 →</span>
       </button>
-      <div class="bsb-note">
-        <span data-lang="zh">官网直订无手续费 · Stripe 加密支付 · 即时确认</span>
-        <span data-lang="en">No platform fees · Stripe secure payment · Instant confirmation</span>
-        <span data-lang="ja">公式直予約・手数料無料・Stripe暗号化決済・即時確認</span>
-      </div>
+      <p class="hbc-note"><span data-lang="zh">官网直订无手续费 · Stripe 加密支付 · 即时确认</span><span data-lang="en">No platform fees · Stripe secure payment · Instant confirmation</span><span data-lang="ja">手数料無料 · Stripe暗号化 · 即時確認</span></p>
     </div>
   </div>
-</div>
+</section>
 
 <!-- ── Main Content ── -->
 <div class="wrap">
