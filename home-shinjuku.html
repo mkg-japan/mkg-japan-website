@@ -1027,10 +1027,7 @@
           _bookRoomId = rr.roomId;
           _bookRateId = rr.rateId;
           totalPrice = rr.totalAmount;
-          // 若 API 返回异常低价（<1000円）则回退本地计算
-          if (!totalPrice || totalPrice < 1000) {
-            renderPriceFromCalendar(nights);
-          } else {
+          if (totalPrice) {
             const nightly = rr.averageDailyAmount;
             const rows = (rr.dailyRates || []).map(dr => {
               const dow = new Date(dr.date).getDay();

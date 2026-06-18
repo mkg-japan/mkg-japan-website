@@ -24,8 +24,8 @@ module.exports = async function handler(req, res) {
   }
 
   const amount = Number(totalAmount);
-  if (!amount || amount < 1000) {
-    return res.status(400).json({ error: `Invalid totalAmount: ${totalAmount}` });
+  if (!amount || amount < 50) {
+    return res.status(400).json({ error: `Invalid totalAmount: ${totalAmount}（Stripe JPY最低¥50）` });
   }
 
   const nights = Math.round((new Date(checkOut) - new Date(checkIn)) / 86400000);
