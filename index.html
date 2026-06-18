@@ -288,9 +288,12 @@
     .proj-book.bk:hover{box-shadow:0 8px 20px rgba(47,103,169,.28)}
     .proj-book.ab{background:#e44a5b;color:#fff}
     .proj-book.ab:hover{box-shadow:0 8px 20px rgba(228,74,91,.28)}
-    .proj-book-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
-    .proj-detail-lk{font-size:13px;font-weight:700;color:var(--gold);opacity:.85}
+    .proj-book-row{display:flex;flex-direction:column;align-items:stretch;gap:8px;margin-top:16px}
+    .proj-book{width:100%;justify-content:center;padding:11px 16px;font-size:14px}
+    .proj-detail-lk{font-size:12px;font-weight:600;color:var(--gold);opacity:.75;text-align:center;padding:2px 0}
     .proj-detail-lk:hover{opacity:1}
+    .direct-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#9a7020,var(--gold));color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:999px;letter-spacing:.4px;margin-bottom:6px;align-self:flex-start}
+    .hero-exclusive{display:inline-block;background:rgba(201,166,91,.12);border:1px solid rgba(201,166,91,.35);color:var(--gold);font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;margin-top:10px;letter-spacing:.3px}
     /* ── MKG Stay 旅宿专区 ────────────────────────── */
     .stay-section{background:var(--navy-2);padding:94px 0}
     .stay-section .kicker{color:var(--gold)}
@@ -593,6 +596,7 @@
             </div>
             <a class="btn ghost" href="#services" data-i18n="hero.btn2">查看业务范围</a>
           </div>
+          <div class="hero-exclusive" data-i18n="hero.exclusive">✦ 官网直订 · 最低价保证 · 无平台手续费</div>
         </div>
         <aside class="hero-card">
           <h3 data-i18n="hero.map">东京项目布局概览</h3>
@@ -787,7 +791,7 @@
               </div>
               <div class="proj-book-row">
                 <a class="proj-book bk" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener" data-i18n="card.bookbk">立即预订 · Booking.com →</a>
-                <a class="proj-detail-lk" href="stay-asakusa.html" data-i18n="card.allrooms">查看全部房型 →</a>
+                <a class="proj-detail-lk" href="hotel-asakusa.html" data-i18n="card.allrooms">查看全部房型 →</a>
               </div>
             </div>
           </div>
@@ -816,7 +820,7 @@
               </div>
               <div class="proj-book-row">
                 <a class="proj-book ab" href="https://www.airbnb.com" target="_blank" rel="noopener" data-i18n="card.airbnb">Airbnb 立即预订 →</a>
-                <a class="proj-detail-lk" href="stay-shiba.html" data-i18n="card.viewroom">查看客室 →</a>
+                <a class="proj-detail-lk" href="home-shiba.html" data-i18n="card.viewroom">查看客室 →</a>
               </div>
             </div>
           </div>
@@ -843,6 +847,7 @@
                 <span class="proj-tag" data-i18n="tag.shinjuku">新宿・大久保</span>
               </div>
               <div class="proj-book-row">
+                <div class="direct-badge" data-i18n="card.directbadge">✦ 官网最低价</div>
                 <a class="proj-book" href="home-shinjuku.html" data-i18n="card.directbook">官网直订 →</a>
                 <a class="proj-detail-lk" href="home-shinjuku.html" data-i18n="card.viewroom">查看客室 →</a>
               </div>
@@ -1227,7 +1232,7 @@ const I18N = {
     'allproj.kicker':'All Projects','allproj.title':'项目一览',
     'allproj.desc':'运营中旅宿与在建开发项目分区展示，点击卡片查看详情。',
     'allproj.op':'运营中','allproj.build':'建设中/规划中',
-    'card.bookbk':'立即预订 · Booking.com →','card.allrooms':'查看全部房型 →','card.viewroom':'查看客室 →','card.airbnb':'Airbnb 立即预订 →',
+    'card.bookbk':'立即预订 · Booking.com →','card.allrooms':'查看全部房型 →','card.viewroom':'查看客室 →','card.airbnb':'Airbnb 立即预订 →','card.directbook':'官网直订 →','card.directbadge':'✦ 官网最低价','hero.exclusive':'✦ 官网直订 · 最低价保证 · 无平台手续费',
     'panel.hint':'▼ 点击查看详情',
     'ops.asakusa1':'台东区驹形 / 日式现代精品酒店','ops.asakusa2':'客室数：9室',
     'ops.shiba1':'港区芝 / 全6室','ops.shiba2':'东京铁塔附近 / Airbnb 运营中',
@@ -1299,7 +1304,7 @@ const I18N = {
     'allproj.kicker':'All Projects','allproj.title':'プロジェクト一覧',
     'allproj.desc':'運営中旅宿と建設中開発プロジェクトをエリア別に表示します。カードをクリックして詳細をご覧ください。',
     'allproj.op':'運営中','allproj.build':'建設中・計画中',
-    'card.bookbk':'今すぐ予約 · Booking.com →','card.allrooms':'全客室を見る →','card.viewroom':'客室を見る →','card.airbnb':'Airbnb で予約 →',
+    'card.bookbk':'今すぐ予約 · Booking.com →','card.allrooms':'全客室を見る →','card.viewroom':'客室を見る →','card.airbnb':'Airbnb で予約 →','card.directbook':'公式サイト直予約 →','card.directbadge':'✦ 最低価格保証','hero.exclusive':'✦ 公式直予約 · 最低価格保証 · 手数料なし',
     'panel.hint':'▼ クリックして詳細を見る',
     'ops.asakusa1':'台東区駒形 / 和モダン精品ホテル','ops.asakusa2':'客室数：9室',
     'ops.shiba1':'港区芝 / 全6室','ops.shiba2':'東京タワー近接 / Airbnb 運営中',
@@ -1370,7 +1375,7 @@ const I18N = {
     'allproj.kicker':'All Projects','allproj.title':'All Projects',
     'allproj.desc':'Operating properties and development projects listed by category. Click a card to view details.',
     'allproj.op':'Operating','allproj.build':'Under Construction / Planning',
-    'card.bookbk':'Book Now · Booking.com →','card.allrooms':'View All Room Types →','card.viewroom':'View Rooms →','card.airbnb':'Book on Airbnb →',
+    'card.bookbk':'Book Now · Booking.com →','card.allrooms':'View All Room Types →','card.viewroom':'View Rooms →','card.airbnb':'Book on Airbnb →','card.directbook':'Book Direct →','card.directbadge':'✦ Best Rate Guarantee','hero.exclusive':'✦ Book Direct · Best Rate Guarantee · No Platform Fees',
     'panel.hint':'▼ Click to expand',
     'ops.asakusa1':'Taito-ku Komagata / Japanese Modern Boutique','ops.asakusa2':'9 Guest Rooms',
     'ops.shiba1':'Minato-ku Shiba / 6 Rooms','ops.shiba2':'Near Tokyo Tower / Listed on Airbnb',
