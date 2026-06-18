@@ -905,7 +905,7 @@
 
         const isPast = dateStr < todayStr;
         const status = availMap[dateStr];
-        const minStay = 2;
+        const minStay = 1;
         const isTooSoon = pickStep === 1 && ciDate && dateStr > ciDate &&
           Math.round((new Date(dateStr) - new Date(ciDate)) / 86400000) < minStay;
         // 退房日超过首个Closed夜 → 不可选
