@@ -93,9 +93,8 @@
     .room-desc{font-size:14px;color:var(--muted);line-height:1.7;margin:0 0 16px}
     .room-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
     .room-tag{background:var(--bg);color:var(--ink);font-size:12px;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid var(--line)}
-    .room-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .room-capacity{font-size:13px;color:var(--muted);font-weight:600}
-    .room-area{font-size:13px;color:var(--muted);font-weight:600}
+    .room-footer{display:flex;flex-direction:column;align-items:stretch;gap:14px;margin-top:auto}
+    .room-capacity{font-size:13px;color:var(--muted);font-weight:600;text-align:center}
     .room-floorplan-wrap{border-top:1px solid var(--line);padding:14px 16px;background:rgba(247,245,241,.6);display:flex;align-items:flex-start;gap:20px}
     .room-floorplan-img{height:160px;width:auto;max-width:320px;object-fit:contain;border-radius:10px;border:1px solid var(--line);cursor:pointer;transition:.2s}
     .room-floorplan-img:hover{box-shadow:0 6px 18px rgba(11,23,51,.12)}
@@ -103,8 +102,8 @@
     .room-floorplan-label{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
     .room-floorplan-area{font-size:28px;font-weight:900;color:var(--navy);line-height:1}
     .room-floorplan-area small{font-size:14px;font-weight:600;color:var(--muted)}
-    .btn-book-room{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:13px;padding:11px 22px;border-radius:999px;transition:.15s;border:none;cursor:pointer}
-    .btn-book-room:hover{opacity:.88;transform:translateY(-1px)}
+    .btn-book-room{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:15px;padding:14px 28px;border-radius:12px;transition:.15s;border:none;cursor:pointer;width:100%;letter-spacing:.01em}
+    .btn-book-room:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,166,91,.35)}
 
     /* ── Photo Strip ── */
     .room-strip-wrap{border-top:1px solid var(--line);padding:14px 16px;background:rgba(247,245,241,.6)}
@@ -426,8 +425,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 2 人</span><span data-lang="en">1 – 2 guests</span><span data-lang="ja">1〜2名</span></span>
-          <span class="room-area">📐 22 ㎡</span>
-          <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
+          <button class="btn-book-room" onclick="openRoomBooking('101','芝松','Shiba Pine','芝松')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -479,8 +477,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 5 人</span><span data-lang="en">1 – 5 guests</span><span data-lang="ja">1〜5名</span></span>
-          <span class="room-area">📐 36 ㎡</span>
-          <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
+          <button class="btn-book-room" onclick="openRoomBooking('102','橙庭','Tōtei','橙庭')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -531,8 +528,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 3 人</span><span data-lang="en">1 – 3 guests</span><span data-lang="ja">1〜3名</span></span>
-          <span class="room-area">📐 23 ㎡</span>
-          <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
+          <button class="btn-book-room" onclick="openRoomBooking('201','白光','Hakukō','白光')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -583,8 +579,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 3 人</span><span data-lang="en">1 – 3 guests</span><span data-lang="ja">1〜3名</span></span>
-          <span class="room-area">📐 25 ㎡</span>
-          <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
+          <button class="btn-book-room" onclick="openRoomBooking('202','広間','Hiroma','広間')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -635,8 +630,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 4 人</span><span data-lang="en">1 – 4 guests</span><span data-lang="ja">1〜4名</span></span>
-          <span class="room-area">📐 37 ㎡</span>
-          <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
+          <button class="btn-book-room" onclick="openRoomBooking('301','芝庵','Shiba-an','芝庵')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -686,8 +680,7 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 2 人</span><span data-lang="en">1 – 2 guests</span><span data-lang="ja">1〜2名</span></span>
-          <span class="room-area">📐 28 ㎡</span>
-          <button class="btn-book-room" onclick="scrollToBooking()"><span data-lang="zh">选择日期预订 →</span><span data-lang="en">Select Dates &amp; Book →</span><span data-lang="ja">日付を選んで予約 →</span></button>
+          <button class="btn-book-room" onclick="openRoomBooking('401','天望','Tenbō','天望')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -901,6 +894,40 @@
       <button class="modal-close" onclick="closeModal()">×</button>
     </div>
     <div class="modal-body">
+
+      <!-- Step D: 选择日期（从房间卡片进入） -->
+      <div id="mformStepDates" style="display:none">
+        <div style="background:#f7f5f1;border-radius:12px;padding:14px 16px;margin-bottom:18px;display:flex;align-items:center;gap:12px">
+          <div style="font-size:28px">🏠</div>
+          <div>
+            <div style="font-size:13px;color:var(--muted);font-weight:600"><span data-lang="zh">你正在预订</span><span data-lang="en">Booking</span><span data-lang="ja">予約する客室</span></div>
+            <div style="font-size:16px;font-weight:900;color:var(--navy)" id="mfd-room-name">—</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+          <div class="mform-field">
+            <label class="mform-label"><span data-lang="zh">入住日期</span><span data-lang="en">Check-in</span><span data-lang="ja">チェックイン</span> <span class="req">*</span></label>
+            <input class="mform-input" type="date" id="mfd-ci">
+          </div>
+          <div class="mform-field">
+            <label class="mform-label"><span data-lang="zh">退房日期</span><span data-lang="en">Check-out</span><span data-lang="ja">チェックアウト</span> <span class="req">*</span></label>
+            <input class="mform-input" type="date" id="mfd-co">
+          </div>
+        </div>
+        <div class="mform-field" style="margin-bottom:16px">
+          <label class="mform-label"><span data-lang="zh">入住人数</span><span data-lang="en">Guests</span><span data-lang="ja">人数</span></label>
+          <select class="mform-input" id="mfd-guests">
+            <option value="1">1 名</option>
+            <option value="2" selected>2 名</option>
+            <option value="3">3 名</option>
+            <option value="4">4 名</option>
+            <option value="5">5 名</option>
+          </select>
+        </div>
+        <div id="mfd-error" class="mform-error" style="display:none"></div>
+        <button class="mform-submit" onclick="searchFromRoomCard()"><span data-lang="zh">查询可用日期 →</span><span data-lang="en">Search Availability →</span><span data-lang="ja">空室を検索 →</span></button>
+        <p class="mform-note"><span data-lang="zh">官网直订无手续费 · Stripe 加密支付</span><span data-lang="en">No platform fees · Stripe secure payment</span><span data-lang="ja">手数料無料 · Stripe暗号化決済</span></p>
+      </div>
 
       <!-- Step 0: 选择客室 -->
       <div id="mformStep0">
@@ -1157,6 +1184,74 @@
 
   function openBooking(){
     scrollToBooking();
+  }
+
+  var _currentRoomId = null;
+
+  function openRoomBooking(roomId, zhName, enName, jaName){
+    _currentRoomId = roomId;
+    var lang = getLang();
+    var displayName = lang==='zh' ? zhName : lang==='en' ? enName : jaName;
+    var roomNum = roomId + '室';
+    document.getElementById('mfd-room-name').textContent = roomNum + ' · ' + displayName;
+    // 设置日期最小值
+    var today = new Date();
+    var todayStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+    var tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate()+1);
+    var tomorrowStr = tomorrow.getFullYear()+'-'+String(tomorrow.getMonth()+1).padStart(2,'0')+'-'+String(tomorrow.getDate()).padStart(2,'0');
+    var ci = document.getElementById('mfd-ci');
+    var co = document.getElementById('mfd-co');
+    ci.min = todayStr; ci.value = '';
+    co.min = tomorrowStr; co.value = '';
+    ci.onchange = function(){
+      var d=new Date(this.value); d.setDate(d.getDate()+1);
+      var mn=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+      co.min=mn; if(co.value&&co.value<=this.value)co.value=mn;
+    };
+    document.getElementById('mfd-error').style.display='none';
+    document.getElementById('mformStepDates').style.display='';
+    document.getElementById('mformStep0').style.display='none';
+    document.getElementById('mformStep1').style.display='none';
+    document.getElementById('mformLoading').style.display='none';
+    document.getElementById('mformSuccess').style.display='none';
+    document.getElementById('bookingModal').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+
+  async function searchFromRoomCard(){
+    var ci = document.getElementById('mfd-ci').value;
+    var co = document.getElementById('mfd-co').value;
+    var guests = document.getElementById('mfd-guests').value || '2';
+    var errEl = document.getElementById('mfd-error');
+    var lang = getLang();
+    if(!ci||!co){
+      errEl.textContent = lang==='zh'?'请选择入住和退房日期':lang==='en'?'Please select check-in and check-out dates':'チェックイン・チェックアウト日を選択してください';
+      errEl.style.display=''; return;
+    }
+    if(co<=ci){
+      errEl.textContent = lang==='zh'?'退房日期须晚于入住日期':lang==='en'?'Check-out must be after check-in':'チェックアウトはチェックインより後の日付を選択してください';
+      errEl.style.display=''; return;
+    }
+    ciDate=ci; coDate=co;
+    var n=_nights(ci,co);
+    errEl.style.display='none';
+    document.getElementById('mformStepDates').style.display='none';
+    document.getElementById('mformLoading').style.display='flex';
+    var ok = await fetchAvail(guests);
+    document.getElementById('mformLoading').style.display='none';
+    document.getElementById('mfs0-ci').textContent=ci;
+    document.getElementById('mfs0-co').textContent=co;
+    document.getElementById('mfs0-nights').textContent=n;
+    document.getElementById('mfs0-guests').textContent=guests;
+    document.getElementById('mf0-error').style.display='none';
+    document.getElementById('mformStep0').style.display='';
+    if(!ok){
+      document.getElementById('mf0-error').textContent=_t('noRooms');
+      document.getElementById('mf0-error').style.display='';
+      document.getElementById('roomSelectList').innerHTML='';
+    } else {
+      renderRoomSelectList();
+    }
   }
 
   function renderRoomSelectList(){
