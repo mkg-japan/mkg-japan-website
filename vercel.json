@@ -1,1 +1,7 @@
-{}
+{
+  "rewrites": [
+    { "source": "/asakusa",  "destination": "/hotel-asakusa.html"  },
+    { "source": "/shiba",    "destination": "/home-shiba.html"     },
+    { "source": "/shinjuku", "destination": "/home-shinjuku.html"  }
+  ]
+}
