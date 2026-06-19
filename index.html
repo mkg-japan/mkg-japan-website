@@ -263,7 +263,7 @@
     .note{background:#fffaf0;border:1px solid #f0d690;color:#6a4c0c;border-radius:18px;padding:16px;margin-top:18px;font-size:14px}
     .mobile-menu{display:none}
     .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;padding:6px;cursor:pointer;background:none;border:none}
-    .hamburger span{display:block;height:2px;background:var(--navy);border-radius:2px;transition:.25s}
+    .hamburger span{display:block;height:2px;background:rgba(255,255,255,.9);border-radius:2px;transition:.25s}
     .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
     .hamburger.open span:nth-child(2){opacity:0}
     .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
@@ -443,12 +443,20 @@
     }
     .mobile-lang-btn{
       display:flex;align-items:center;gap:5px;
-      background:none;border:1px solid rgba(17,35,74,.25);
+      background:none;border:1px solid rgba(255,255,255,.3);
       border-radius:999px;padding:6px 12px;
-      font-size:13px;font-weight:700;color:var(--navy);
+      font-size:13px;font-weight:700;color:rgba(255,255,255,.9);
       cursor:pointer;white-space:nowrap;transition:.2s;
     }
-    .mobile-lang-btn:hover{background:var(--bg);border-color:var(--gold)}
+    .mobile-lang-btn:hover{background:rgba(255,255,255,.1);border-color:var(--gold)}
+    .mob-book-btn{
+      display:none;align-items:center;
+      background:var(--gold);color:var(--navy-2)!important;
+      border:none;border-radius:999px;padding:7px 14px;
+      font-size:13px;font-weight:800;cursor:pointer;
+      white-space:nowrap;font-family:inherit;
+    }
+    @media(max-width:960px){.mob-book-btn{display:flex}}
     .mobile-lang-menu{
       display:none;position:absolute;top:calc(100% + 6px);right:0;
       background:#fff;border:1px solid var(--line);
@@ -535,6 +543,18 @@
           </div>
         </div>
       </nav>
+      <button class="mob-book-btn" onclick="toggleStayDd('mob')" id="mobBookBtn"><span data-i18n="nav.book">预订旅宿 · MKG Stay</span> ▾</button>
+      <div class="stay-dropdown" id="mobStayDd" style="position:absolute;top:64px;right:56px">
+        <span class="stay-dd-hd" data-i18n="dd.operating">运营中</span>
+        <a class="stay-dd-item on" href="home-shinjuku.html">MKG HOME 新宿</a>
+        <a class="stay-dd-item on" href="hotel-asakusa.html">MKG Hotel Asakusa</a>
+        <a class="stay-dd-item on" href="home-shiba.html">MKG HOME SHIBA</a>
+        <div class="stay-dd-divider"></div>
+        <span class="stay-dd-hd" data-i18n="dd.building">建设中</span>
+        <span class="stay-dd-item off">MKG HOTEL OKACHIMACHI</span>
+        <span class="stay-dd-item off">MKG HOTEL RYUSEN</span>
+        <span class="stay-dd-item off">MKG HOTEL KITAUENO</span>
+      </div>
       <div class="mobile-lang-wrap">
         <button class="mobile-lang-btn" id="langBtn" onclick="toggleLangMenu()" aria-label="Language">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> <span id="langLabel">語言</span> ▾
@@ -1144,13 +1164,13 @@ function updateAllLangLabels(deskLabel, mobileLabel){
 // Stay 下拉菜单
 function toggleStayDd(id){
   var dd=document.getElementById(id+'StayDd');
-  var other=document.getElementById(id==='nav'?'heroStayDd':'navStayDd');
-  dd.classList.toggle('open');
-  if(other) other.classList.remove('open');
+  var isOpen=dd.classList.contains('open');
+  closeAllStayDd();
+  if(!isOpen) dd.classList.add('open');
   closeDeskLang();
 }
 function closeAllStayDd(){
-  ['navStayDd','heroStayDd'].forEach(function(id){
+  ['navStayDd','heroStayDd','mobStayDd'].forEach(function(id){
     var el=document.getElementById(id);
     if(el) el.classList.remove('open');
   });
@@ -1168,8 +1188,11 @@ document.addEventListener('click', function(e){
   // 关闭 Stay 下拉
   var navW=document.getElementById('navStayWrap');
   var heroW=document.getElementById('heroStayWrap');
+  var mobBtnEl=document.getElementById('mobBookBtn');
+  var mobDdEl=document.getElementById('mobStayDd');
   if(navW && !navW.contains(e.target)) document.getElementById('navStayDd').classList.remove('open');
   if(heroW && !heroW.contains(e.target)) document.getElementById('heroStayDd').classList.remove('open');
+  if(mobBtnEl && !mobBtnEl.contains(e.target) && mobDdEl && !mobDdEl.contains(e.target)) mobDdEl.classList.remove('open');
 });
 
 function toggleDrawer(){
