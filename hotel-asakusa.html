@@ -85,8 +85,8 @@
     .room-cards{display:grid;gap:32px}
     .room-card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 24px rgba(11,23,51,.07);border:1px solid var(--line);transition:.2s}
     .room-card:hover{box-shadow:var(--shadow);border-color:rgba(201,166,91,.3)}
-    .room-photo-main{position:relative;height:320px;overflow:hidden;cursor:pointer}
-    .room-photo-main img{width:100%;height:100%;object-fit:cover;transition:.4s}
+    .room-photo-main{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer}
+    .room-photo-main img{width:100%;height:100%;object-fit:cover;object-position:center center;transition:.4s}
     .room-photo-main:hover img{transform:scale(1.03)}
     .photo-count{position:absolute;bottom:12px;right:14px;background:rgba(11,23,51,.65);color:white;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;backdrop-filter:blur(4px)}
     .room-strip{display:flex;gap:6px;padding:8px 20px 0;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
@@ -228,7 +228,7 @@
       .hero-book-card{display:none}
       .amenity-grid{grid-template-columns:1fr}
       .info-faq-grid{grid-template-columns:1fr}
-      .room-photo-main{height:240px}
+      .room-photo-main{aspect-ratio:4/3}
     }
     @media(max-width:600px){
       .prop-stats{grid-template-columns:repeat(3,1fr)}
@@ -247,7 +247,7 @@
       <div class="breadcrumb">
         <a href="index.html">MKG Japan</a>
         <span>›</span>
-        <span style="color:var(--gold-2)">MKG HOTEL Asakusa</span>
+        <span style="color:var(--gold-2)"><span data-lang="zh">MKG HOTEL 浅草</span><span data-lang="ja">MKG HOTEL Asakusa</span><span data-lang="en">MKG HOTEL Asakusa</span></span>
       </div>
       <div class="desk-lang-wrap">
         <button class="desk-lang-btn" id="deskLangBtn" onclick="toggleDeskLang()">
@@ -279,34 +279,27 @@
           <span class="prop-tag info">🏨 <span data-lang="zh">精品酒店</span><span data-lang="ja">ブティックホテル</span><span data-lang="en">Boutique Hotel</span></span>
           <span class="prop-tag info">📍 <span data-lang="zh">台东区驹形</span><span data-lang="ja">台東区駒形</span><span data-lang="en">Komagata, Taito-ku</span></span>
         </div>
-        <h1>MKG HOTEL Asakusa</h1>
+        <h1><span data-lang="zh">MKG HOTEL 浅草</span><span data-lang="ja">MKG HOTEL Asakusa</span><span data-lang="en">MKG HOTEL Asakusa</span></h1>
         <div class="addr">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span data-lang="zh">東京都台東区駒形 — 浅草駅 / 蔵前駅 步行约 5 分钟</span>
+          <span data-lang="zh">东京都台东区驹形 — 浅草站 / 仓前站 步行约 5 分钟</span>
           <span data-lang="ja">東京都台東区駒形 — 浅草駅・蔵前駅 徒歩約5分</span>
           <span data-lang="en">Komagata, Taito-ku, Tokyo — 5 min walk from Asakusa / Kuramae Station</span>
         </div>
         <p class="prop-desc">
-          <span data-lang="zh">位于东京台东区驹形的精品设计酒店，毗邻浅草寺。共 9 间风格各异的精品客室，融合现代设计与日式美学，提供 24 小时前台服务及行李寄存。Booking.com 评分 9.2，深受国际旅客好评。</span>
-          <span data-lang="ja">東京台東区駒形に位置する精品デザインホテル。浅草寺へ徒歩圏内。全9室、モダンデザインと和の美学を融合。24時間フロントサービス・手荷物預かり対応。Booking.com評価9.2。</span>
-          <span data-lang="en">A boutique design hotel in Komagata, Taito-ku, within walking distance of Sensoji Temple. 9 uniquely designed rooms blending modern aesthetics with Japanese elements. 24-hour front desk, luggage storage. Booking.com score 9.2.</span>
+          <span data-lang="zh">位于东京台东区驹形的精品设计酒店。步行可达浅草寺与隅田川，尽享老东京下町风情。共 9 间风格各异的客室，融合现代设计与和式美学，提供 24 小时前台服务及行李寄存，为您打造从容惬意的东京之旅。</span>
+          <span data-lang="ja">東京台東区駒形に位置する精品デザインホテル。浅草寺・隅田川へ徒歩圏内で、下町の情緒を満喫できます。全9室、モダンデザインと和の美学を融合した空間に、24時間フロントサービス・手荷物預かりを完備。</span>
+          <span data-lang="en">A boutique design hotel in Komagata, Taito-ku, Tokyo. Steps from Sensoji Temple and the Sumida River, in the heart of old Tokyo's shitamachi district. 9 uniquely styled rooms blending modern design with Japanese aesthetics. 24-hour front desk and luggage storage available.</span>
         </p>
         <div class="prop-stats">
           <div class="prop-stat"><b>9</b><span data-lang="zh">间客室</span><span data-lang="ja">客室数</span><span data-lang="en">Rooms</span></div>
-          <div class="prop-stat"><b>9.2</b><span>Booking.com</span></div>
+          <div class="prop-stat"><b>24H</b><span data-lang="zh">前台服务</span><span data-lang="ja">フロント</span><span data-lang="en">Front Desk</span></div>
           <div class="prop-stat"><b>5 min</b><span data-lang="zh">至浅草寺</span><span data-lang="ja">浅草寺まで</span><span data-lang="en">To Sensoji</span></div>
         </div>
       </div>
 
       <!-- 右侧预订卡片 -->
       <div class="hero-book-card">
-        <div class="hbc-rating">
-          <div class="hbc-score">9.2</div>
-          <div>
-            <div class="hbc-stars">★★★★★</div>
-            <div class="hbc-label">Booking.com <span data-lang="zh">评分</span><span data-lang="ja">評価</span><span data-lang="en">Score</span></div>
-          </div>
-        </div>
         <div class="hbc-price">
           <span data-lang="zh"><strong>¥18,000</strong> 起 / 晚</span>
           <span data-lang="ja"><strong>¥18,000</strong> 〜 / 泊</span>
@@ -369,21 +362,22 @@
           <div class="room-strip-thumb" onclick="switchRoomImg('superior',17)"><img src="assets/asakusa/superior/667585024.jpg" alt=""></div>
         </div>
         <div class="room-body">
-          <div class="room-type-label"><span data-lang="zh">高级家庭间</span><span data-lang="ja">高级ファミリールーム</span><span data-lang="en">Superior Family Room</span></div>
-          <h3><span data-lang="zh">高级家庭间</span><span data-lang="ja">高级ファミリールーム</span><span data-lang="en">Superior Family Room</span></h3>
+          <div class="room-type-label"><span data-lang="zh">高级家庭间</span><span data-lang="ja">スーペリアファミリールーム</span><span data-lang="en">Superior Family Room</span></div>
+          <h3><span data-lang="zh">高级家庭间</span><span data-lang="ja">スーペリアファミリールーム</span><span data-lang="en">Superior Family Room</span></h3>
           <p class="room-desc">
             <span data-lang="zh">宽敞舒适，融合现代设计与和风元素，大床或双床可选。独立卫浴，配备全套洗漱用品。</span>
             <span data-lang="ja">広々とした客室、モダンデザインと和の要素を融合。ダブルまたはツインベッド選択可。独立したバスルーム完備。</span>
             <span data-lang="en">Spacious room blending modern design with Japanese elements. Double or twin bed. Private bathroom with full amenities.</span>
           </p>
           <div class="room-tags">
-            <span class="room-tag">👥 1〜2<span data-lang="zh">名</span><span data-lang="ja">名</span><span data-lang="en"> guests</span></span>
+            <span class="room-tag">👥 1〜4<span data-lang="zh">名</span><span data-lang="ja">名</span><span data-lang="en"> guests</span></span>
+            <span class="room-tag">👨‍👩‍👧‍👦 <span data-lang="zh">推荐：2成人+2儿童</span><span data-lang="ja">推奨：大人2名＋お子様2名</span><span data-lang="en">Ideal: 2 adults + 2 children</span></span>
             <span class="room-tag">🛏 <span data-lang="zh">大床/双床</span><span data-lang="ja">ダブル/ツイン</span><span data-lang="en">Double/Twin</span></span>
             <span class="room-tag">🛁 <span data-lang="zh">独立卫浴</span><span data-lang="ja">独立バス</span><span data-lang="en">Private Bath</span></span>
             <span class="room-tag">📶 Wi-Fi</span>
           </div>
           <div class="room-footer">
-            <button class="btn-book-room" onclick="openRoomBooking('900014418','高级家庭间','Superior Family Room','高级ファミリールーム')">
+            <button class="btn-book-room" onclick="openRoomBooking('900014418','高级家庭间','Superior Family Room','スーペリアファミリールーム')">
               <span data-lang="zh">直接预订此房间 →</span>
               <span data-lang="ja">この客室を直予約 →</span>
               <span data-lang="en">Book This Room Directly →</span>
@@ -427,7 +421,7 @@
             <span data-lang="en">Larger room with double bed and separate seating area. Ideal for business or leisure travel.</span>
           </p>
           <div class="room-tags">
-            <span class="room-tag">👥 1〜2<span data-lang="zh">名</span><span data-lang="ja">名</span><span data-lang="en"> guests</span></span>
+            <span class="room-tag">👥 1〜4<span data-lang="zh">名</span><span data-lang="ja">名</span><span data-lang="en"> guests</span></span>
             <span class="room-tag">🛏 <span data-lang="zh">大床</span><span data-lang="ja">ダブル</span><span data-lang="en">Double Bed</span></span>
             <span class="room-tag">🛁 <span data-lang="zh">独立卫浴</span><span data-lang="ja">独立バス</span><span data-lang="en">Private Bath</span></span>
             <span class="room-tag">📶 Wi-Fi</span>
@@ -478,6 +472,7 @@
           </p>
           <div class="room-tags">
             <span class="room-tag">👥 1〜2<span data-lang="zh">名</span><span data-lang="ja">名</span><span data-lang="en"> guests</span></span>
+            <span class="room-tag">✦ <span data-lang="zh">推荐最多2位成人</span><span data-lang="ja">大人2名まで推奨</span><span data-lang="en">Max 2 adults recommended</span></span>
             <span class="room-tag">🛏 <span data-lang="zh">双床</span><span data-lang="ja">ツイン</span><span data-lang="en">Twin Beds</span></span>
             <span class="room-tag">🛁 <span data-lang="zh">独立卫浴</span><span data-lang="ja">独立バス</span><span data-lang="en">Private Bath</span></span>
             <span class="room-tag">📶 Wi-Fi</span>
@@ -527,7 +522,8 @@
             <span data-lang="en">Three beds, perfect for families or groups of three. Spacious with ample storage for luggage.</span>
           </p>
           <div class="room-tags">
-            <span class="room-tag">👥 <span data-lang="zh">最多3名</span><span data-lang="ja">最大3名</span><span data-lang="en">Up to 3</span></span>
+            <span class="room-tag">👥 1〜3<span data-lang="zh">名</span><span data-lang="ja">名</span><span data-lang="en"> guests</span></span>
+            <span class="room-tag">✦ <span data-lang="zh">推荐最多2位成人</span><span data-lang="ja">大人2名まで推奨</span><span data-lang="en">Max 2 adults recommended</span></span>
             <span class="room-tag">🛏 <span data-lang="zh">三床</span><span data-lang="ja">3ベッド</span><span data-lang="en">3 Beds</span></span>
             <span class="room-tag">🛁 <span data-lang="zh">独立卫浴</span><span data-lang="ja">独立バス</span><span data-lang="en">Private Bath</span></span>
             <span class="room-tag">📶 Wi-Fi</span>
