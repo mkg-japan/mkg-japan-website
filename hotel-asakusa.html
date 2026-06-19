@@ -235,6 +235,9 @@
     @media(max-width:600px){
       .prop-stats{grid-template-columns:repeat(3,1fr)}
     }
+    @media(max-width:768px){
+      .map-contact-grid{grid-template-columns:1fr!important}
+    }
   </style>
 </head>
 <body class="lang-zh">
@@ -711,13 +714,34 @@
   </div>
 </section>
 
-<!-- 地图 -->
+<!-- 地图 + 联系我们 -->
 <section class="map-section">
   <div class="wrap">
-    <div class="section-label"><span data-lang="zh">位置</span><span data-lang="ja">アクセス</span><span data-lang="en">Location</span></div>
-    <h2 class="section-title" style="margin-bottom:24px"><span data-lang="zh">交通与位置</span><span data-lang="ja">アクセス</span><span data-lang="en">Getting Here</span></h2>
-    <div class="map-wrap">
-      <iframe src="https://maps.google.com/maps?q=東京都台東区駒形&output=embed&hl=zh-CN&z=16" style="width:100%;height:340px;border:none;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="section-label"><span data-lang="zh">位置与联系</span><span data-lang="ja">アクセス・お問い合わせ</span><span data-lang="en">Location &amp; Contact</span></div>
+    <h2 class="section-title" style="margin-bottom:24px"><span data-lang="zh">交通与联系方式</span><span data-lang="ja">アクセス・お問い合わせ</span><span data-lang="en">Getting Here &amp; Contact</span></h2>
+    <div class="map-contact-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:stretch">
+      <div style="border-radius:16px;overflow:hidden;aspect-ratio:1/1">
+        <iframe src="https://maps.google.com/maps?q=東京都台東区駒形&output=embed&hl=zh-CN&z=16" style="width:100%;height:100%;border:none;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="info-block" style="display:flex;flex-direction:column;gap:20px">
+        <div>
+          <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">
+            <span data-lang="zh">联系我们</span><span data-lang="ja">お問い合わせ</span><span data-lang="en">Contact Us</span>
+          </div>
+          <div class="info-row"><div class="lbl"><span data-lang="zh">地址</span><span data-lang="ja">住所</span><span data-lang="en">Address</span></div><div class="val">東京都台東区駒形</div></div>
+          <div class="info-row"><div class="lbl"><span data-lang="zh">电话</span><span data-lang="ja">電話</span><span data-lang="en">Phone</span></div><div class="val"><a href="tel:+81362316373" style="color:inherit;text-decoration:none">03-6231-6373</a></div></div>
+          <div class="info-row"><div class="lbl"><span data-lang="zh">邮箱</span><span data-lang="ja">メール</span><span data-lang="en">Email</span></div><div class="val"><a href="mailto:dq@mkgjp.com" style="color:var(--gold);text-decoration:none">dq@mkgjp.com</a></div></div>
+          <div class="info-row"><div class="lbl"><span data-lang="zh">入住</span><span data-lang="ja">チェックイン</span><span data-lang="en">Check-in</span></div><div class="val">16:00〜</div></div>
+          <div class="info-row"><div class="lbl"><span data-lang="zh">退房</span><span data-lang="ja">チェックアウト</span><span data-lang="en">Check-out</span></div><div class="val">〜11:00</div></div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">
+            <span data-lang="zh">最近车站</span><span data-lang="ja">最寄駅</span><span data-lang="en">Nearest Stations</span>
+          </div>
+          <div class="info-row"><div class="lbl">🚉 <span data-lang="zh">蔵前站</span><span data-lang="ja">蔵前駅</span><span data-lang="en">Kuramae</span></div><div class="val"><span data-lang="zh">步行约5分钟</span><span data-lang="ja">徒歩約5分</span><span data-lang="en">~5 min walk</span></div></div>
+          <div class="info-row"><div class="lbl">🚉 <span data-lang="zh">浅草站</span><span data-lang="ja">浅草駅</span><span data-lang="en">Asakusa</span></div><div class="val"><span data-lang="zh">步行约10分钟</span><span data-lang="ja">徒歩約10分</span><span data-lang="en">~10 min walk</span></div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
