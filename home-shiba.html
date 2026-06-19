@@ -1262,7 +1262,7 @@
       var tooClose=modalPickStep===1&&minCoDate&&ds2>modalCiDate&&ds2<minCoDate;
       if(past||blocked){
         el.className=past?'cal-day past':'cal-day closed';
-      } else if(status==='Closed'){
+      } else if(status==='Closed'&&modalPickStep!==1){
         el.className='cal-day closed';
       } else if(tooClose){
         el.className='cal-day closed'; // within min-nights window
