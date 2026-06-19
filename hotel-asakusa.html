@@ -302,34 +302,37 @@
 
       <!-- 右侧预订卡片 -->
       <div class="hero-book-card">
-        <div class="hbc-price">
-          <span data-lang="zh"><strong>¥18,000</strong> 起 / 晚</span>
-          <span data-lang="ja"><strong>¥18,000</strong> 〜 / 泊</span>
-          <span data-lang="en">From <strong>¥18,000</strong> / night</span>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">
+          <span data-lang="zh">官网直订</span><span data-lang="ja">公式直予約</span><span data-lang="en">Book Direct</span>
         </div>
-        <a class="btn-book-main" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener">
-          <span data-lang="zh">在 Booking.com 预订</span>
-          <span data-lang="ja">Booking.comで予約</span>
-          <span data-lang="en">Book on Booking.com</span>
-        </a>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.5">
+          <span data-lang="zh">最低价保障 · 无平台手续费</span>
+          <span data-lang="ja">最低価格保証・手数料なし</span>
+          <span data-lang="en">Best Rate Guarantee · No Platform Fees</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:20px;line-height:1.6">
+          <span data-lang="zh">即时确认 · Stripe 加密支付</span>
+          <span data-lang="ja">即時確認・Stripe暗号化決済</span>
+          <span data-lang="en">Instant confirmation · Stripe secure payment</span>
+        </div>
+        <button class="btn-book-main" onclick="document.getElementById('rooms').scrollIntoView({behavior:'smooth'})">
+          <span data-lang="zh">选择房间，立即预订 →</span>
+          <span data-lang="ja">客室を選んで予約する →</span>
+          <span data-lang="en">Choose a Room & Book →</span>
+        </button>
         <div class="hbc-divider"></div>
         <div class="hbc-info">
           <div><b data-lang="zh">入住</b><b data-lang="ja">チェックイン</b><b data-lang="en">Check-in</b>：16:00〜</div>
           <div><b data-lang="zh">退房</b><b data-lang="ja">チェックアウト</b><b data-lang="en">Check-out</b>：〜11:00</div>
           <div><b data-lang="zh">前台</b><b data-lang="ja">フロント</b><b data-lang="en">Front Desk</b>：09:00〜22:00</div>
         </div>
-        <p class="hbc-note">
-          <span data-lang="zh">即时确认 · 支持多种支付方式</span>
-          <span data-lang="ja">即時確認・多様な支払方法対応</span>
-          <span data-lang="en">Instant confirmation · Multiple payment methods</span>
-        </p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- 客室 -->
-<section class="rooms-section">
+<section class="rooms-section" id="rooms">
   <div class="wrap">
     <div class="section-label"><span data-lang="zh">客室类型</span><span data-lang="ja">客室タイプ</span><span data-lang="en">Room Types</span></div>
     <h2 class="section-title"><span data-lang="zh">选择您的客室</span><span data-lang="ja">客室を選ぶ</span><span data-lang="en">Choose Your Room</span></h2>
