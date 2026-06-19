@@ -12,7 +12,7 @@
       --green:#16866a;--red:#bd3b35;--shadow:0 24px 70px rgba(11,23,51,.16);--radius:22px;
     }
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;overflow-x:hidden}
+    html,body{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%}
@@ -269,10 +269,13 @@
       .brand span{font-size:13px;white-space:nowrap}
       .breadcrumb{display:none}
       .nav-book{padding:6px 11px;font-size:12px;font-weight:700}
-      .room-card{grid-template-columns:1fr;overflow-x:hidden}
+      .room-card{grid-template-columns:1fr}
       .room-price-block{text-align:left;white-space:normal}
       .gallery-thumbs{grid-template-columns:repeat(4,1fr)!important}
-      .wrap{overflow-x:hidden}
+      .contact-grid{grid-template-columns:1fr}
+      .contact-value{word-break:break-all}
+      *{max-width:100%;box-sizing:border-box}
+      img{max-width:100%;height:auto}
     }
     @media(max-width:480px){
       .prop-stats{grid-template-columns:1fr 1fr}
