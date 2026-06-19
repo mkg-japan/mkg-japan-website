@@ -665,12 +665,12 @@
         </div>
         <div class="license-grid">
           <div class="license">
-            <span class="badge">宅建业许可</span>
-            <div><b>宅地建物取引业许可</b><small><span data-i18n="cred.c1d">持有日本都道府县知事颁发的宅地建物取引业许可，可依法开展不动产买卖及中介业务。</span></small></div>
+            <span class="badge" data-i18n="cred.c1badge">宅建业许可</span>
+            <div><b data-i18n="cred.c1title">宅地建物取引业许可</b><small><span data-i18n="cred.c1d">持有日本都道府县知事颁发的宅地建物取引业许可，可依法开展不动产买卖及中介业务。</span></small></div>
           </div>
           <div class="license">
-            <span class="badge reg">住宅宿泊管理注册</span>
-            <div><b>住宅宿泊管理业者注册</b><small><span data-i18n="cred.c2d">经日本国土交通大臣注册，依法开展民宿委托管理业务，并符合《住宅宿泊事业法》相关规定。</span></small></div>
+            <span class="badge reg" data-i18n="cred.c2badge">住宅宿泊管理注册</span>
+            <div><b data-i18n="cred.c2title">住宅宿泊管理业者注册</b><small><span data-i18n="cred.c2d">经日本国土交通大臣注册，依法开展民宿委托管理业务，并符合《住宅宿泊事业法》相关规定。</span></small></div>
           </div>
           <div class="license">
             <span class="badge" data-i18n="cred.platform">平台认可</span>
@@ -785,13 +785,8 @@
                 <span class="proj-tag" data-i18n="tag.rooms9">全9室</span>
                 <span class="proj-tag" data-i18n="tag.wamodern">和式现代</span>
               </div>
-              <div class="proj-scores">
-                <span class="proj-score bk">Booking.com 9.2</span>
-                <span class="proj-score ab">Airbnb 4.89★</span>
-              </div>
               <div class="proj-book-row">
-                <a class="proj-book bk" href="https://www.booking.com/hotel/jp/mkg-asakusa.html" target="_blank" rel="noopener" data-i18n="card.bookbk">立即预订 · Booking.com →</a>
-                <a class="proj-detail-lk" href="hotel-asakusa.html" data-i18n="card.allrooms">查看全部房型 →</a>
+                <a class="proj-book" href="hotel-asakusa.html" data-i18n="card.directbook">官网直订 →</a>
               </div>
             </div>
           </div>
@@ -815,12 +810,10 @@
               <div class="proj-tags">
                 <span class="proj-tag" data-i18n="tag.minpaku">民宿</span>
                 <span class="proj-tag" data-i18n="tag.rooms6">全6室</span>
-                <span class="proj-tag">Airbnb</span>
                 <span class="proj-tag" data-i18n="tag.tokyotower">东京铁塔附近</span>
               </div>
               <div class="proj-book-row">
-                <a class="proj-book ab" href="https://www.airbnb.com" target="_blank" rel="noopener" data-i18n="card.airbnb">Airbnb 立即预订 →</a>
-                <a class="proj-detail-lk" href="home-shiba.html" data-i18n="card.viewroom">查看客室 →</a>
+                <a class="proj-book" href="home-shiba.html" data-i18n="card.directbook">官网直订 →</a>
               </div>
             </div>
           </div>
@@ -1219,6 +1212,8 @@ const I18N = {
     'svc.s3d':'专注酒店及民宿运营，通过定价管理、平台运营、客户体验管理与日常维护，提升资产收益与长期运营价值。',
     'cred.kicker':'Trust & Credentials','cred.title':'专业资质与市场认可',
     'cred.desc':'持有日本政府颁发的经营许可与注册资质，并获得国际主要住宿平台的品质认证。',
+    'cred.c1badge':'宅建业许可','cred.c1title':'宅地建物取引业许可',
+    'cred.c2badge':'住宅宿泊管理注册','cred.c2title':'住宅宿泊管理业者注册',
     'cred.c1d':'经都道府県知事核发的不动产经营免許，依法从事不动产买卖及仲介业务。',
     'cred.c2d':'经日本国土交通大臣注册，依法开展民宿委托管理业务，并符合《住宅宿泊事业法》相关规定。',
     'cred.platform':'平台认可',
@@ -1291,6 +1286,8 @@ const I18N = {
     'svc.s3d':'ホテル及び民宿の運営に特化し、価格管理・プラットフォーム運営・顧客体験管理・日常メンテナンスを通じて、資産収益と長期的運営価値を向上させます。',
     'cred.kicker':'Trust & Credentials','cred.title':'専門資格と市場認知',
     'cred.desc':'日本政府発行の営業許可・登録資格を保有し、国際的な主要宿泊プラットフォームから品質認定を受けています。',
+    'cred.c1badge':'宅建業免許','cred.c1title':'宅地建物取引業免許',
+    'cred.c2badge':'住宅宿泊管理業者登録','cred.c2title':'住宅宿泊管理業者登録',
     'cred.c1d':'都道府県知事より交付された不動産経営免許に基づき、不動産売買および仲介業務を適法に行います。',
     'cred.c2d':'国土交通大臣の登録を受け、住宅宿泊事業法に基づく民宿委託管理業務を適法に行います。',
     'cred.platform':'プラットフォーム認定',
@@ -1362,6 +1359,8 @@ const I18N = {
     'svc.s3d':'Specializing in hotel and guesthouse management, we enhance asset returns and long-term operational value through revenue management, platform operations, guest experience management, and daily maintenance.',
     'cred.kicker':'Trust & Credentials','cred.title':'Professional Credentials & Recognition',
     'cred.desc':'Holding government-issued operating licenses and registered qualifications, with quality certifications from leading international accommodation platforms.',
+    'cred.c1badge':'Real Estate License','cred.c1title':'Real Estate Brokerage License',
+    'cred.c2badge':'Minpaku Registration','cred.c2title':'Licensed Guesthouse Manager',
     'cred.c1d':'Real estate brokerage license issued by the prefectural governor, authorizing lawful real estate sales and brokerage operations.',
     'cred.c2d':'Registered by the Minister of Land, Infrastructure, Transport and Tourism to conduct licensed guesthouse management under the Minpaku Business Act.',
     'cred.platform':'Platform Recognition',
