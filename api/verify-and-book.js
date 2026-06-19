@@ -1,15 +1,17 @@
 // GET /api/verify-and-book?sid=STRIPE_SESSION_ID
 // 1. Verifies payment with Stripe
 // 2. Creates SmartOrder reservation
-// 3. Deduplicates via PaymentIntent description to prevent double-booking on page refresh
+// 3. Uploads payment record to SmartOrder PMS
+// 4. Deduplicates via PaymentIntent description to prevent double-booking on page refresh
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const HOTEL_ID      = process.env.SMARTORDER_HOTEL_ID      || '51401486';
-const CLIENT_ID     = process.env.SMARTORDER_CLIENT_ID     || '1513859491169472512';
-const CLIENT_SECRET = process.env.SMARTORDER_CLIENT_SECRET || 'UJKaBl2TYGngV8DQMSCv2Gx6UZtYYcYh';
-const TOKEN_URL     = 'https://idp.smartorder.ai/realms/smartorder-booking-api/protocol/openid-connect/token';
-const BASE_URL      = 'https://api-open-booking.smartorder.ai';
+const HOTEL_ID         = process.env.SMARTORDER_HOTEL_ID      || '51401486';
+const CLIENT_ID        = process.env.SMARTORDER_CLIENT_ID     || '1513859491169472512';
+const CLIENT_SECRET    = process.env.SMARTORDER_CLIENT_SECRET || 'UJKaBl2TYGngV8DQMSCv2Gx6UZtYYcYh';
+const PAYMENT_METHOD   = process.env.SMARTORDER_PAYMENT_METHOD || 'Stripe';
+const TOKEN_URL        = 'https://idp.smartorder.ai/realms/smartorder-booking-api/protocol/openid-connect/token';
+const BASE_URL         = 'https://api-open-booking.smartorder.ai';
 
 async function getToken() {
   const params = new URLSearchParams({
@@ -70,7 +72,7 @@ module.exports = async function handler(req, res) {
       adultCount:  Number(meta.adultCount)  || 2,
       childCount:  Number(meta.childCount)  || 0,
       roomCount:   1,
-      roomId:      meta.roomId  || '905007308',
+      roomId:      meta.roomId  || '',
       rateId:      meta.rateId  || '',
       totalAmount: Number(meta.totalAmount) || 0,
       currencyCode: 'JPY',
@@ -94,8 +96,30 @@ module.exports = async function handler(req, res) {
     const bookingData = await br.json();
     const reservationId = bookingData.data?.reservationId || '';
 
-    // 4. Mark PaymentIntent as booked to prevent duplicates
+    // 4. Upload payment record to SmartOrder PMS
     if (reservationId) {
+      const paymentPayload = {
+        paymentTime: new Date(pi.created * 1000).toISOString(),
+        paymentType: 'Charge',
+        paymentMethod: PAYMENT_METHOD,
+        amount: Number(meta.totalAmount) || 0,
+        currencyCode: 'JPY',
+        notes: session.payment_intent,
+      };
+      try {
+        await fetch(`${BASE_URL}/booking/api/v3/hotels/${hotelId}/reservations/${reservationId}/payments`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(paymentPayload),
+        });
+      } catch (payErr) {
+        console.error('Payment upload failed:', payErr.message);
+      }
+
+      // 5. Mark PaymentIntent as booked to prevent duplicates
       await stripe.paymentIntents.update(session.payment_intent, {
         description: `SO:${reservationId}`,
       });
