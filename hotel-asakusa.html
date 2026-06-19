@@ -113,6 +113,7 @@
     .amenity-tag{padding:5px 11px;background:#f0ece5;border-radius:999px;font-size:12px;color:var(--ink);font-weight:600}
     .amenity-section{display:flex;flex-direction:column;gap:20px}
     .amenity-category h4{font-size:13px;font-weight:800;color:var(--navy);margin:0 0 10px}
+    .faq-2col{display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
 
     /* ── Info + FAQ ── */
     .info-faq-section{padding:0 0 64px}
@@ -237,6 +238,7 @@
     }
     @media(max-width:768px){
       .map-contact-grid{grid-template-columns:1fr!important}
+      .faq-2col{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -596,21 +598,13 @@
   </div>
 </section>
 
-<!-- 信息 + FAQ -->
+<!-- FAQ -->
 <section class="info-faq-section">
   <div class="wrap">
-    <div class="info-faq-grid">
-      <div class="info-block">
-        <h3><span data-lang="zh">酒店信息</span><span data-lang="ja">ホテル情報</span><span data-lang="en">Hotel Info</span></h3>
-        <div class="info-row"><div class="lbl"><span data-lang="zh">地址</span><span data-lang="ja">住所</span><span data-lang="en">Address</span></div><div class="val">東京都台東区駒形</div></div>
-        <div class="info-row"><div class="lbl"><span data-lang="zh">客室数</span><span data-lang="ja">客室数</span><span data-lang="en">Rooms</span></div><div class="val">9</div></div>
-        <div class="info-row"><div class="lbl"><span data-lang="zh">入住</span><span data-lang="ja">チェックイン</span><span data-lang="en">Check-in</span></div><div class="val">16:00〜</div></div>
-        <div class="info-row"><div class="lbl"><span data-lang="zh">退房</span><span data-lang="ja">チェックアウト</span><span data-lang="en">Check-out</span></div><div class="val">〜11:00</div></div>
-        <div class="info-row"><div class="lbl"><span data-lang="zh">最近车站</span><span data-lang="ja">最寄駅</span><span data-lang="en">Nearest Stn</span></div><div class="val"><span data-lang="zh">浅草站 / 蔵前站 步行5分</span><span data-lang="ja">浅草駅・蔵前駅 徒歩5分</span><span data-lang="en">Asakusa / Kuramae 5 min</span></div></div>
-      </div>
-      <div>
-        <h3 style="font-size:16px;font-weight:800;color:var(--navy);margin:0 0 16px">FAQ</h3>
-        <div class="faq-list">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title" style="margin-bottom:28px"><span data-lang="zh">常见问题</span><span data-lang="ja">よくあるご質問</span><span data-lang="en">Frequently Asked Questions</span></h2>
+    <div>
+      <div class="faq-list faq-2col">
 
           <div class="faq-item">
             <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
@@ -708,7 +702,6 @@
             </div>
           </div>
 
-        </div>
       </div>
     </div>
   </div>
@@ -729,7 +722,6 @@
             <span data-lang="zh">联系我们</span><span data-lang="ja">お問い合わせ</span><span data-lang="en">Contact Us</span>
           </div>
           <div class="info-row"><div class="lbl"><span data-lang="zh">地址</span><span data-lang="ja">住所</span><span data-lang="en">Address</span></div><div class="val">東京都台東区駒形2-4-9</div></div>
-          <div class="info-row"><div class="lbl">Google</div><div class="val">⭐ 4.9 / 5</div></div>
           <div class="info-row"><div class="lbl"><span data-lang="zh">电话</span><span data-lang="ja">電話</span><span data-lang="en">Phone</span></div><div class="val"><a href="tel:+81362316373" style="color:inherit;text-decoration:none">03-6231-6373</a></div></div>
           <div class="info-row"><div class="lbl"><span data-lang="zh">邮箱</span><span data-lang="ja">メール</span><span data-lang="en">Email</span></div><div class="val"><a href="mailto:dq@mkgjp.com" style="color:var(--gold);text-decoration:none">dq@mkgjp.com</a></div></div>
           <div class="info-row"><div class="lbl"><span data-lang="zh">入住</span><span data-lang="ja">チェックイン</span><span data-lang="en">Check-in</span></div><div class="val">16:00〜</div></div>
