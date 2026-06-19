@@ -62,6 +62,7 @@ module.exports = async function handler(req, res) {
       roomId:      roomId || '905007308',
       rateId:      rateId || '',
       totalAmount: String(totalAmount),
+      hotelId:     '51401486',
     },
   });
   res.status(200).json({ url: session.url });
