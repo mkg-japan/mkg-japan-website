@@ -549,13 +549,6 @@
 
           <div class="faq-item">
             <button class="faq-q" onclick="toggleFaq(this)">
-              <span data-lang="zh">取消预订的政策是怎样的？</span><span data-lang="en">What is the cancellation policy?</span><span data-lang="ja">キャンセルポリシーについて教えてください。</span><span class="arrow">▼</span>
-            </button>
-            <div class="faq-a"><span data-lang="zh">入住前 3 日（72小时）内取消免手续费；之后取消将收取第一晚房费作为违约金。如需取消，请通过预订平台消息功能联系我们。</span><span data-lang="en">Cancellation is free up to 72 hours before check-in. After that, the first night's fee will be charged. Please contact us via the booking platform message to cancel.</span><span data-lang="ja">チェックイン72時間前までは無料でキャンセル可能です。それ以降のキャンセルは初泊分を請求いたします。キャンセルの際は予約プラットフォームのメッセージ機能よりご連絡ください。</span></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">
               <span data-lang="zh">民宿是否有前台？如何办理入住？</span><span data-lang="en">Is there a front desk? How do I check in?</span><span data-lang="ja">フロントはありますか？チェックインはどうすればいいですか？</span><span class="arrow">▼</span>
             </button>
             <div class="faq-a"><span data-lang="zh">本民宿为全程自助入住，无实体前台。系统将于入住前发送智能门锁密码，凭密码自行开锁入住，24 小时均可办理，非常便利。如有任何问题，请随时通过预订平台消息联系我们。</span><span data-lang="en">This property is fully self-service with no physical front desk. A smart lock code will be sent before check-in — simply enter the code to access the apartment any time, 24 hours a day. Please contact us via the booking platform if you have any questions.</span><span data-lang="ja">当施設はフロントなしのセルフチェックインです。チェックイン前にスマートロックの暗証番号をお送りします。その番号で24時間いつでもお入りいただけます。ご不明な点は予約プラットフォームのメッセージよりお問い合わせください。</span></div>
@@ -676,6 +669,11 @@
             <input class="mform-input" id="mf-phone" type="tel" placeholder="+81 90-0000-0000">
           </div>
           <div id="mf-error" class="mform-error" style="display:none"></div>
+          <div style="background:#fff7ed;border:1px solid #f59e0b;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400e;margin-bottom:10px;line-height:1.6">
+            ⚠️ <span data-lang="zh"><b>不可取消提示：</b>本预订为不可取消价格，支付成功后不支持退款，请确认日期无误后再提交。</span>
+            <span data-lang="ja"><b>キャンセル不可のご案内：</b>本予約は取消不可のプランです。お支払い完了後の返金はいたしかねます。日程をご確認の上、ご予約ください。</span>
+            <span data-lang="en"><b>Non-Refundable Notice:</b> This booking is non-refundable. No refunds will be issued after payment. Please confirm your dates before submitting.</span>
+          </div>
           <button class="mform-submit" id="mf-btn" onclick="submitBooking()"><span data-lang="zh">确认预订 · 在线支付</span><span data-lang="en">Confirm & Pay Online</span><span data-lang="ja">予約を確定・オンライン決済</span></button>
           <p class="mform-note"><span data-lang="zh">Stripe 加密支付 · 即时确认</span><span data-lang="en">Stripe encrypted payment · Instant confirmation</span><span data-lang="ja">Stripe 暗号化決済・即時確認</span></p>
         </div>

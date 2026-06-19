@@ -819,13 +819,6 @@
 
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)">
-        <span><span data-lang="zh">取消政策是怎样的？</span><span data-lang="en">What is the cancellation policy?</span><span data-lang="ja">キャンセルポリシーについて教えてください。</span></span><span class="arrow">▼</span>
-      </button>
-      <div class="faq-a"><span data-lang="zh">入住前 72 小时（3天）内取消免手续费；超过此期限取消将收取第一晚房费作为违约金。如需取消，请尽快通过邮件或 LINE 联系我们。</span><span data-lang="en">Free cancellation is available up to 72 hours before check-in. Cancellations after this period will be charged the first night's fee. Please contact us via email or LINE as soon as possible to cancel.</span><span data-lang="ja">チェックイン72時間前までは無料でキャンセルが可能です。それ以降のキャンセルは初泊分を請求いたします。キャンセルの際はできるだけ早く、メールまたはLINEでご連絡ください。</span></div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
         <span><span data-lang="zh">距东京铁塔有多远？</span><span data-lang="en">How far is it from Tokyo Tower?</span><span data-lang="ja">東京タワーまでの距離は？</span></span><span class="arrow">▼</span>
       </button>
       <div class="faq-a"><span data-lang="zh">民宿距东京铁塔步行约 8 分钟，非常方便。出行也可乘坐都营三田线或浅草线，交通便利，可轻松到达市内各主要景点。</span><span data-lang="en">The guesthouse is approximately 8 minutes' walk from Tokyo Tower. You can also use the Toei Mita or Asakusa subway lines for easy access to Tokyo's main attractions.</span><span data-lang="ja">当施設から東京タワーまで徒歩約8分です。都営三田線・浅草線を利用すれば、都内主要スポットへのアクセスも便利です。</span></div>
@@ -947,6 +940,11 @@
           </select>
         </div>
         <div id="mfd-error" class="mform-error" style="display:none"></div>
+        <div style="background:#fff7ed;border:1px solid #f59e0b;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400e;margin-bottom:10px;line-height:1.6">
+          ⚠️ <span data-lang="zh"><b>不可取消提示：</b>本预订为不可取消价格，支付成功后不支持退款，请确认日期无误后再提交。</span>
+          <span data-lang="ja"><b>キャンセル不可のご案内：</b>本予約は取消不可のプランです。お支払い完了後の返金はいたしかねます。日程をご確認の上、ご予約ください。</span>
+          <span data-lang="en"><b>Non-Refundable Notice:</b> This booking is non-refundable. No refunds will be issued after payment. Please confirm your dates before submitting.</span>
+        </div>
         <button class="mform-submit" id="mfd-btn" onclick="confirmModalDates()" disabled>
           <span data-lang="zh">请先选择日期</span><span data-lang="en">Select dates first</span><span data-lang="ja">日付を選択してください</span>
         </button>
@@ -998,6 +996,11 @@
           <input class="mform-input" id="mf-phone" type="tel" placeholder="+81 90-0000-0000">
         </div>
         <div id="mf-error" class="mform-error" style="display:none"></div>
+        <div style="background:#fff7ed;border:1px solid #f59e0b;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400e;margin-bottom:10px;line-height:1.6">
+          ⚠️ <span data-lang="zh"><b>不可取消提示：</b>本预订为不可取消价格，支付成功后不支持退款，请确认日期无误后再提交。</span>
+          <span data-lang="ja"><b>キャンセル不可のご案内：</b>本予約は取消不可のプランです。お支払い完了後の返金はいたしかねます。日程をご確認の上、ご予約ください。</span>
+          <span data-lang="en"><b>Non-Refundable Notice:</b> This booking is non-refundable. No refunds will be issued after payment. Please confirm your dates before submitting.</span>
+        </div>
         <button class="mform-submit" id="mf-btn" onclick="submitBooking()"><span data-lang="zh">确认预订 · 在线支付</span><span data-lang="en">Confirm &amp; Pay Online</span><span data-lang="ja">予約を確定・オンライン決済</span></button>
         <p class="mform-note"><span data-lang="zh">Stripe 加密支付 · 即时确认</span><span data-lang="en">Stripe encrypted payment · Instant confirmation</span><span data-lang="ja">Stripe 暗号化決済・即時確認</span></p>
       </div>
