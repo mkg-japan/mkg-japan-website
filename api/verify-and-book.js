@@ -62,8 +62,9 @@ module.exports = async function handler(req, res) {
 
     // 3. Create SmartOrder reservation
     const token = await getToken();
+    const hotelId = meta.hotelId || HOTEL_ID;
     const payload = {
-      hotelId: HOTEL_ID,
+      hotelId,
       checkIn: meta.checkIn,
       checkOut: meta.checkOut,
       adultCount:  Number(meta.adultCount)  || 2,
@@ -82,7 +83,7 @@ module.exports = async function handler(req, res) {
       },
     };
 
-    const br = await fetch(`${BASE_URL}/booking/api/v3/hotels/${HOTEL_ID}/reservations/book`, {
+    const br = await fetch(`${BASE_URL}/booking/api/v3/hotels/${hotelId}/reservations/book`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
