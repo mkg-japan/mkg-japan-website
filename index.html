@@ -369,10 +369,11 @@
     @media (max-width: 640px){
       .wrap{width:min(100% - 24px,1160px)}
       .nav{height:64px}
-      .brand{gap:6px}
-      .brand img{width:54px}
+      .brand{gap:8px}
+      .brand img{height:36px;width:auto}
       .brand small{display:none}
-      .brand span{font-size:14px}
+      .brand span{font-size:13px}
+      .nav{gap:8px}
       .hero::before{background:linear-gradient(90deg,rgba(11,23,51,.96),rgba(11,23,51,.82)),url("assets/tokyo_hero.jpg") center/cover no-repeat}
       .hero-grid{padding:60px 0 90px;gap:32px}
       h1{font-size:clamp(32px,8vw,48px)}
@@ -452,11 +453,12 @@
     .mob-book-btn{
       display:none;align-items:center;
       background:var(--gold);color:var(--navy-2)!important;
-      border:none;border-radius:999px;padding:7px 14px;
-      font-size:13px;font-weight:800;cursor:pointer;
-      white-space:nowrap;font-family:inherit;
+      border:none;border-radius:999px;padding:7px 13px;
+      font-size:12px;font-weight:800;cursor:pointer;
+      white-space:nowrap;font-family:inherit;flex-shrink:0;
     }
     @media(max-width:960px){.mob-book-btn{display:flex}}
+    @media(max-width:400px){.mob-book-btn .mob-book-full{display:none}.mob-book-btn .mob-book-short{display:inline}}
     .mobile-lang-menu{
       display:none;position:absolute;top:calc(100% + 6px);right:0;
       background:#fff;border:1px solid var(--line);
@@ -543,7 +545,7 @@
           </div>
         </div>
       </nav>
-      <button class="mob-book-btn" onclick="toggleStayDd('mob')" id="mobBookBtn"><span data-i18n="nav.book">预订旅宿 · MKG Stay</span> ▾</button>
+      <button class="mob-book-btn" onclick="toggleStayDd('mob')" id="mobBookBtn"><span class="mob-book-full" data-i18n="nav.book">预订旅宿 · MKG Stay</span><span class="mob-book-short" style="display:none">MKG Stay</span> ▾</button>
       <div class="stay-dropdown" id="mobStayDd" style="position:absolute;top:64px;right:56px">
         <span class="stay-dd-hd" data-i18n="dd.operating">运营中</span>
         <a class="stay-dd-item on" href="home-shinjuku.html">MKG HOME 新宿</a>
