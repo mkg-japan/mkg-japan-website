@@ -63,16 +63,11 @@
     .prop-hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-80px;height:140px;background:var(--bg);transform:rotate(-2deg);z-index:2}
     /* 右侧预订卡片（玻璃感） */
     .hero-book-card{background:rgba(15,25,55,.75);backdrop-filter:blur(18px) saturate(1.2);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:28px;position:relative;z-index:1}
-    .hero-book-card-title{font-size:15px;font-weight:800;color:white;margin:0 0 20px;display:flex;align-items:center;justify-content:space-between}
-    .hero-book-card-badge{display:inline-flex;padding:3px 10px;border-radius:999px;background:rgba(201,166,91,.2);color:var(--gold-2);font-size:11px;font-weight:800;border:1px solid rgba(201,166,91,.3)}
-    .hbc-field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-    .hbc-field label{font-size:10px;font-weight:800;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase}
-    .hbc-field input,.hbc-field select{padding:10px 13px;border:1.5px solid rgba(255,255,255,.2);border-radius:10px;font-size:14px;font-family:inherit;color:var(--ink);background:rgba(255,255,255,.95);outline:none;transition:.2s;width:100%;box-sizing:border-box}
-    .hbc-field input:focus,.hbc-field select:focus{border-color:var(--gold)}
-    .hbc-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .btn-hbc-search{width:100%;padding:13px;border-radius:11px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;margin-top:4px}
-    .btn-hbc-search:hover{box-shadow:0 8px 20px rgba(201,166,91,.35);transform:translateY(-1px)}
-    .hbc-note{font-size:11px;color:rgba(255,255,255,.45);text-align:center;margin-top:10px;line-height:1.6}
+    .btn-book-main{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 20px;border-radius:12px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:15px;border:none;cursor:pointer;font-family:inherit;transition:.2s;text-decoration:none}
+    .btn-book-main:hover{box-shadow:0 8px 20px rgba(201,166,91,.35);transform:translateY(-1px)}
+    .hbc-divider{height:1px;background:rgba(255,255,255,.12);margin:16px 0}
+    .hbc-info{font-size:13px;color:rgba(255,255,255,.65);margin-top:14px;line-height:1.8}
+    .hbc-info b{color:rgba(255,255,255,.9)}
 
     /* ── Section titles ── */
     .section-title{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;padding-top:52px}
@@ -352,37 +347,30 @@
       </div>
     </div>
     <!-- 右侧预订卡片 -->
-    <div class="hero-book-card" id="booking-search">
-      <div class="hero-book-card-title">
-        <span><span data-lang="zh">查询空房 &amp; 预订</span><span data-lang="en">Check Availability</span><span data-lang="ja">空室確認 &amp; 予約</span></span>
-        <span class="hero-book-card-badge"><span data-lang="zh">官网直订</span><span data-lang="en">Direct</span><span data-lang="ja">公式直予約</span></span>
+    <div class="hero-book-card">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">
+        <span data-lang="zh">官网直订</span><span data-lang="ja">公式直予約</span><span data-lang="en">Book Direct</span>
       </div>
-      <div class="hbc-2col">
-        <div class="hbc-field">
-          <label><span data-lang="zh">入住日期</span><span data-lang="en">Check-in</span><span data-lang="ja">チェックイン</span></label>
-          <input type="date" id="bsb-ci">
-        </div>
-        <div class="hbc-field">
-          <label><span data-lang="zh">退房日期</span><span data-lang="en">Check-out</span><span data-lang="ja">チェックアウト</span></label>
-          <input type="date" id="bsb-co">
-        </div>
+      <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.5">
+        <span data-lang="zh">最低价保障 · 无平台手续费</span>
+        <span data-lang="ja">最低価格保証・手数料なし</span>
+        <span data-lang="en">Best Rate Guarantee · No Platform Fees</span>
       </div>
-      <div class="hbc-field">
-        <label><span data-lang="zh">入住人数</span><span data-lang="en">Guests</span><span data-lang="ja">人数</span></label>
-        <select id="bsb-guests">
-          <option value="1">1 名</option>
-          <option value="2" selected>2 名</option>
-          <option value="3">3 名</option>
-          <option value="4">4 名</option>
-          <option value="5">5 名</option>
-        </select>
+      <div style="font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:20px;line-height:1.6">
+        <span data-lang="zh">即时确认 · Stripe 加密支付</span>
+        <span data-lang="ja">即時確認・Stripe暗号化決済</span>
+        <span data-lang="en">Instant confirmation · Stripe secure payment</span>
       </div>
-      <button class="btn-hbc-search" id="bsbBtn" onclick="searchRooms()">
-        <span data-lang="zh">查询可用房间 →</span>
-        <span data-lang="en">Search Available Rooms →</span>
-        <span data-lang="ja">空室を検索 →</span>
+      <button class="btn-book-main" onclick="document.getElementById('rooms').scrollIntoView({behavior:'smooth'})">
+        <span data-lang="zh">选择房间，立即预订 →</span>
+        <span data-lang="ja">客室を選んで予約する →</span>
+        <span data-lang="en">Choose a Room &amp; Book →</span>
       </button>
-      <p class="hbc-note"><span data-lang="zh">官网直订无手续费 · Stripe 加密支付 · 即时确认</span><span data-lang="en">No platform fees · Stripe secure payment · Instant confirmation</span><span data-lang="ja">手数料無料 · Stripe暗号化 · 即時確認</span></p>
+      <div class="hbc-divider"></div>
+      <div class="hbc-info">
+        <div><b data-lang="zh">入住</b><b data-lang="ja">チェックイン</b><b data-lang="en">Check-in</b>：16:00〜</div>
+        <div><b data-lang="zh">退房</b><b data-lang="ja">チェックアウト</b><b data-lang="en">Check-out</b>：〜11:00</div>
+      </div>
     </div>
   </div>
 </section>
@@ -391,7 +379,7 @@
 <div class="wrap">
 
   <!-- ── 客室 ── -->
-  <div class="section-title"><span data-lang="zh">客室一览</span><span data-lang="en">Our Rooms</span><span data-lang="ja">客室一覧</span></div>
+  <div id="rooms" class="section-title"><span data-lang="zh">客室一览</span><span data-lang="en">Our Rooms</span><span data-lang="ja">客室一覧</span></div>
   <h2><span data-lang="zh">6间精品客室</span><span data-lang="en">6 Boutique Rooms</span><span data-lang="ja">6室のブティックルーム</span></h2>
   <p class="section-sub">
     <span data-lang="zh">全楼6间独立设计客室，每间配备全套厨房、独立卫浴及智能门锁。</span>
@@ -1167,23 +1155,6 @@
 
   function _nights(a,b){ return Math.round((new Date(b)-new Date(a))/86400000); }
 
-  // 初始化日期输入框最小值
-  (function initDateInputs(){
-    var today = new Date();
-    var todayStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
-    var tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate()+1);
-    var tomorrowStr = tomorrow.getFullYear()+'-'+String(tomorrow.getMonth()+1).padStart(2,'0')+'-'+String(tomorrow.getDate()).padStart(2,'0');
-    var ci = document.getElementById('bsb-ci');
-    var co = document.getElementById('bsb-co');
-    ci.min = todayStr;
-    co.min = tomorrowStr;
-    ci.addEventListener('change', function(){
-      var d = new Date(this.value); d.setDate(d.getDate()+1);
-      var mn = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-      co.min = mn;
-      if(co.value && co.value <= this.value){ co.value = mn; }
-    });
-  })();
 
   async function fetchAvail(guests){
     if(!ciDate||!coDate)return;
@@ -1202,52 +1173,6 @@
       availRooms=[];
       return false;
     }
-  }
-
-  async function searchRooms(){
-    var ci = document.getElementById('bsb-ci').value;
-    var co = document.getElementById('bsb-co').value;
-    var guests = document.getElementById('bsb-guests').value || '2';
-    var btn = document.getElementById('bsbBtn');
-    if(!ci || !co){
-      var lang = getLang();
-      alert(lang==='zh'?'请选择入住和退房日期':lang==='en'?'Please select check-in and check-out dates':'チェックイン・チェックアウト日を選択してください');
-      return;
-    }
-    if(co <= ci){
-      var lang2 = getLang();
-      alert(lang2==='zh'?'退房日期须晚于入住日期':lang2==='en'?'Check-out must be after check-in':'チェックアウトはチェックインより後の日付を選択してください');
-      return;
-    }
-    ciDate = ci; coDate = co;
-    btn.disabled = true;
-    var n = _nights(ci, co);
-    document.getElementById('mfs0-ci').textContent = ci;
-    document.getElementById('mfs0-co').textContent = co;
-    document.getElementById('mfs0-nights').textContent = n;
-    document.getElementById('mfs0-guests').textContent = guests;
-    document.getElementById('mformStep0').style.display='';
-    document.getElementById('mformStep1').style.display='none';
-    document.getElementById('mformLoading').style.display='flex';
-    document.getElementById('mformSuccess').style.display='none';
-    document.getElementById('mf0-error').style.display='none';
-    document.getElementById('bookingModal').classList.add('open');
-    document.body.style.overflow='hidden';
-    var ok = await fetchAvail(guests);
-    document.getElementById('mformLoading').style.display='none';
-    document.getElementById('mformStep0').style.display='';
-    btn.disabled = false;
-    if(!ok){
-      document.getElementById('mf0-error').textContent = _t('noRooms');
-      document.getElementById('mf0-error').style.display = '';
-      document.getElementById('roomSelectList').innerHTML = '';
-    } else {
-      renderRoomSelectList();
-    }
-  }
-
-  function openBooking(){
-    scrollToBooking();
   }
 
   var _currentRoomId = null;
