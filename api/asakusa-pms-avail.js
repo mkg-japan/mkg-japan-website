@@ -83,18 +83,22 @@ module.exports = async function handler(req, res) {
   try {
     const token = await getPmsToken();
 
-    // Wide checkin window: catch guests who checked in up to 60 days before checkIn
-    const wideStart = new Date(checkIn);
-    wideStart.setDate(wideStart.getDate() - 60);
-    const wideStartStr = wideStart.toISOString().split('T')[0];
-    // Wide checkout window: catch long-stay guests checking out up to 60 days after checkOut
-    const wideEnd = new Date(checkOut);
-    wideEnd.setDate(wideEnd.getDate() + 60);
-    const wideEndStr = wideEnd.toISOString().split('T')[0];
+    // PMS API limit: max 31-day span per query
+    // Query 1: guests who checked in up to 30 days before our checkIn (long-stay in-house)
+    const pastStart = new Date(checkIn); pastStart.setDate(pastStart.getDate() - 30);
+    const pastStartStr = pastStart.toISOString().split('T')[0];
+    // Query 2: guests checking in during our checkIn→checkOut window
+    // Query 3: guests checking out within 30 days from checkIn (catches anyone still here)
+    const futureEnd = new Date(checkIn); futureEnd.setDate(futureEnd.getDate() + 30);
+    const futureEndStr = futureEnd.toISOString().split('T')[0];
 
-    let ciOrders = [], coOrders = [], searchErrors = [];
-    try { ciOrders = await searchOrders(token, wideStartStr, checkOut,  2); } catch(e) { searchErrors.push('ci: '+e.message); }
-    try { coOrders = await searchOrders(token, checkIn,      wideEndStr, 3); } catch(e) { searchErrors.push('co: '+e.message); }
+    let searchErrors = [];
+    const [pastCiOrders, windowCiOrders, coOrders] = await Promise.all([
+      searchOrders(token, pastStartStr, checkIn,     2).catch(e => { searchErrors.push('past: '+e.message); return []; }),
+      searchOrders(token, checkIn,      checkOut,    2).catch(e => { searchErrors.push('ci: '+e.message);   return []; }),
+      searchOrders(token, checkIn,      futureEndStr,3).catch(e => { searchErrors.push('co: '+e.message);   return []; }),
+    ]);
+    const ciOrders = [...pastCiOrders, ...windowCiOrders];
 
     // searchOrders may return order objects or plain order numbers — normalise to strings
     const toNum = x => (x && typeof x === 'object') ? (x.orderNum || x.orderNo || x.id || JSON.stringify(x)) : String(x);
@@ -144,8 +148,9 @@ module.exports = async function handler(req, res) {
     const payload = { checkIn, checkOut, availability };
     if (debug) {
       payload._debug = {
-        wideStartStr, wideEndStr,
-        ciOrders_count: ciOrders.length,
+        pastStartStr, futureEndStr,
+        pastCiOrders_count: pastCiOrders.length,
+        windowCiOrders_count: windowCiOrders.length,
         coOrders_count: coOrders.length,
         searchErrors,
         allOrderNums,
