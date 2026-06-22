@@ -113,6 +113,7 @@ module.exports = async function handler(req, res) {
         });
 
         if (!overlaps) continue;
+        if (info.status === 40) continue; // cancelled
         if (!typeId) continue;
         if (!occupiedByType[typeId]) occupiedByType[typeId] = new Set();
         occupiedByType[typeId].add(info.roomSerialNum || info.roomTypeCode);
