@@ -100,8 +100,7 @@ module.exports = async function handler(req, res) {
     // searchOrders may return order objects or plain order numbers — normalise to strings
     const toNum = x => (x && typeof x === 'object') ? (x.orderNum || x.orderNo || x.id || JSON.stringify(x)) : String(x);
     const allOrderNums = [...new Set([...ciOrders, ...coOrders].map(toNum))];
-    const toFetch = allOrderNums.slice(0, 60);
-    const details = await Promise.all(toFetch.map(n => getOrderDetail(token, n).catch(() => null)));
+    const details = await Promise.all(allOrderNums.map(n => getOrderDetail(token, n).catch(() => null)));
 
     const occupiedByType = {};
     const debugRows = [];
@@ -124,7 +123,7 @@ module.exports = async function handler(req, res) {
         });
 
         if (!overlaps) continue;
-        if (info.status !== 40) continue; // only status=40 = confirmed booking
+        if (info.status !== 40 && info.status !== 50) continue; // 40=in-house 50=confirmed future
         if (!typeId) continue;
         if (!occupiedByType[typeId]) occupiedByType[typeId] = new Set();
         occupiedByType[typeId].add(info.roomSerialNum || info.roomTypeCode);
