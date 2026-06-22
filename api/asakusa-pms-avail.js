@@ -113,7 +113,7 @@ module.exports = async function handler(req, res) {
         });
 
         if (!overlaps) continue;
-        if (info.status === 40) continue; // cancelled
+        if (info.status !== 40) continue; // only status=40 = confirmed booking
         if (!typeId) continue;
         if (!occupiedByType[typeId]) occupiedByType[typeId] = new Set();
         occupiedByType[typeId].add(info.roomSerialNum || info.roomTypeCode);
