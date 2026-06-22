@@ -1077,11 +1077,13 @@
       var manualClosed=MANUAL_CLOSED.indexOf(ds2)!==-1;
       var blocked=modalPickStep===1&&cutoff&&ds2>cutoff;
       var tooClose=modalPickStep===1&&minCoDate&&ds2>modalCiDate&&ds2<minCoDate;
+      // manualClosed dates are always blocked regardless of pick step
+      var isCheckoutCandidate=modalPickStep===1&&modalCiDate&&ds2>modalCiDate;
       if(past||blocked){
         el.className=past?'cal-day past':'cal-day closed';
-      } else if(manualClosed&&modalPickStep!==1){
+      } else if(manualClosed){
         el.className='cal-day closed';
-      } else if(status==='Closed'&&modalPickStep!==1){
+      } else if(status==='Closed'&&!isCheckoutCandidate){
         el.className='cal-day closed';
       } else if(tooClose){
         el.className='cal-day closed';
@@ -1099,6 +1101,8 @@
   }
 
   function modalPickDate(ds){
+    var MANUAL_CLOSED=['2026-06-27'];
+    if(MANUAL_CLOSED.indexOf(ds)!==-1) return; // hard block — never allow as check-in
     if(modalPickStep===0||modalPickStep===2){
       modalCiDate=ds; modalCoDate=null; modalPickStep=1;
     } else {
