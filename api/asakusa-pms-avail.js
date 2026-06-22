@@ -123,7 +123,7 @@ module.exports = async function handler(req, res) {
         });
 
         if (!overlaps) continue;
-        if (info.status !== 40 && info.status !== 50) continue; // 40=in-house 50=confirmed future
+        if (info.status !== 40) continue; // only status=40 = confirmed/in-house booking
         if (!typeId) continue;
         if (!occupiedByType[typeId]) occupiedByType[typeId] = new Set();
         occupiedByType[typeId].add(info.roomSerialNum || info.roomTypeCode);
