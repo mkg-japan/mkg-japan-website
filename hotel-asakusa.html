@@ -1060,10 +1060,14 @@
       el.textContent=d;
       var past=ds2<todayStr;
       var status=modalAvailMap[ds2];
+      var MANUAL_CLOSED=['2026-06-27'];
+      var manualClosed=MANUAL_CLOSED.indexOf(ds2)!==-1;
       var blocked=modalPickStep===1&&cutoff&&ds2>cutoff;
       var tooClose=modalPickStep===1&&minCoDate&&ds2>modalCiDate&&ds2<minCoDate;
       if(past||blocked){
         el.className=past?'cal-day past':'cal-day closed';
+      } else if(manualClosed&&modalPickStep!==1){
+        el.className='cal-day closed';
       } else if(status==='Closed'&&modalPickStep!==1){
         el.className='cal-day closed';
       } else if(tooClose){
