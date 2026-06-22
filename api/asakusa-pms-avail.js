@@ -80,16 +80,24 @@ module.exports = async function handler(req, res) {
   try {
     const token = await getPmsToken();
 
-    const ciOrders   = await searchOrders(token, checkIn, checkOut, 2);
-    const coOrders   = await searchOrders(token, checkIn, checkOut, 3);
-    const pastStart  = new Date(checkIn);
-    pastStart.setDate(pastStart.getDate() - 90);
-    const pastOrders = await searchOrders(token, pastStart.toISOString().split('T')[0], checkIn, 2);
+    // Wide checkin window: catch guests who checked in up to 60 days before checkIn
+    const wideStart = new Date(checkIn);
+    wideStart.setDate(wideStart.getDate() - 60);
+    const wideStartStr = wideStart.toISOString().split('T')[0];
+    // Wide checkout window: catch long-stay guests checking out up to 60 days after checkOut
+    const wideEnd = new Date(checkOut);
+    wideEnd.setDate(wideEnd.getDate() + 60);
+    const wideEndStr = wideEnd.toISOString().split('T')[0];
+
+    const [ciOrders, coOrders] = await Promise.all([
+      searchOrders(token, wideStartStr, checkOut,  2),  // checkin-date query
+      searchOrders(token, checkIn,      wideEndStr, 3),  // checkout-date query
+    ]);
 
     // searchOrders may return order objects or plain order numbers — normalise to strings
     const toNum = x => (x && typeof x === 'object') ? (x.orderNum || x.orderNo || x.id || JSON.stringify(x)) : String(x);
-    const allOrderNums = [...new Set([...ciOrders, ...coOrders, ...pastOrders].map(toNum))];
-    const toFetch = allOrderNums.slice(0, 40);
+    const allOrderNums = [...new Set([...ciOrders, ...coOrders].map(toNum))];
+    const toFetch = allOrderNums.slice(0, 60);
     const details = await Promise.all(toFetch.map(n => getOrderDetail(token, n).catch(() => null)));
 
     const occupiedByType = {};
@@ -134,9 +142,8 @@ module.exports = async function handler(req, res) {
     const payload = { checkIn, checkOut, availability };
     if (debug) {
       payload._debug = {
-        ciOrders_raw: ciOrders.slice(0, 5),
-        coOrders_raw: coOrders.slice(0, 5),
-        pastOrders_raw: pastOrders.slice(0, 5),
+        ciOrders_count: ciOrders.length,
+        coOrders_count: coOrders.length,
         allOrderNums,
         rooms: debugRows,
       };
