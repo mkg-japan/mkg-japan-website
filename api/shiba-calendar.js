@@ -43,10 +43,11 @@ module.exports = async function handler(req, res) {
     if (roomTypeId) qs.set('roomTypeId', roomTypeId);
     const r = await fetch(`${BASE_URL}/booking/api/v3/calendar/${HOTEL_ID}?${qs}`, {
       headers: { Authorization: `Bearer ${token}` },
+      signal: AbortSignal.timeout(8000),
     });
     const data = await r.json();
     res.status(200).json(data);
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    res.status(503).json({ error: 'calendar_unavailable', message: e.message });
   }
 };

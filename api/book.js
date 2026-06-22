@@ -1,4 +1,5 @@
-// Vercel Function: proxy SmartOrder booking creation
+// DISABLED: This endpoint has been replaced by /api/create-checkout (Stripe payment required).
+// It is kept here for reference only and intentionally returns 410 Gone to prevent abuse.
 // POST /api/book  body: { checkIn, checkOut, adultCount, guestName, email, phone, note }
 
 const HOTEL_ID      = process.env.SMARTORDER_HOTEL_ID      || '51401486';
@@ -31,10 +32,9 @@ async function getToken() {
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') { res.status(200).end(); return; }
-  if (req.method !== 'POST') { return res.status(405).json({ error: 'Method not allowed' }); }
+  // This endpoint is permanently disabled. Use /api/create-checkout instead.
+  return res.status(410).json({ error: 'This endpoint is disabled. Use /api/create-checkout.' });
 
   const { checkIn, checkOut, adultCount, childCount, firstName, lastName, email, phone, note, roomId, rateId, totalAmount, currencyCode } = req.body || {};
   if (!checkIn || !checkOut || !firstName || !email) {

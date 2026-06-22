@@ -73,9 +73,14 @@ module.exports = async function handler(req, res) {
     });
     const availR = await fetch(`${BASE_URL}/booking/api/v3/avail/${hotelId}?${availQs}`, {
       headers: { Authorization: `Bearer ${token}` },
+      signal: AbortSignal.timeout(8000),
     });
     const availData = await availR.json();
-    const matchingRate = (availData.data?.roomRates || []).find(r => r.rateId === meta.rateId);
+    const roomRates = availData.data?.roomRates || [];
+    // If rateId is known, require exact match; otherwise just confirm any rate exists
+    const matchingRate = meta.rateId
+      ? roomRates.find(r => r.rateId === meta.rateId)
+      : roomRates[0];
     if (!matchingRate) {
       return res.status(409).json({
         error: 'sold_out',

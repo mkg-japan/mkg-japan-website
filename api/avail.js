@@ -43,10 +43,11 @@ module.exports = async function handler(req, res) {
     const qs = new URLSearchParams({ checkIn, checkOut, roomTypeId: ROOM_TYPE_ID, adultCount });
     const r = await fetch(`${BASE_URL}/booking/api/v3/avail/${HOTEL_ID}?${qs}`, {
       headers: { Authorization: `Bearer ${token}` },
+      signal: AbortSignal.timeout(8000),
     });
     const data = await r.json();
     res.status(200).json(data);
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    res.status(503).json({ error: 'avail_unavailable', message: e.message });
   }
 };
