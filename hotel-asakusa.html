@@ -224,6 +224,26 @@
     .mform-success .res-id{background:#f7f5f1;border-radius:10px;padding:10px 16px;font-size:13px;color:var(--navy);font-weight:700;margin-bottom:20px}
     @keyframes bspin{to{transform:rotate(360deg)}}
 
+    /* Date search bar */
+    .date-search-bar{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:18px 24px;margin-bottom:32px;display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;box-shadow:0 2px 12px rgba(11,23,51,.06)}
+    .dsb-field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:120px}
+    .dsb-field label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+    .dsb-field input,.dsb-field select{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;color:var(--navy);background:#fafaf8;outline:none;width:100%}
+    .dsb-field input:focus,.dsb-field select:focus{border-color:var(--gold)}
+    .dsb-btn{padding:11px 24px;border-radius:10px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;border:none;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;align-self:flex-end}
+    .dsb-btn:disabled{opacity:.5;cursor:not-allowed}
+    .dsb-status{font-size:13px;color:var(--muted);margin-bottom:8px;min-height:18px}
+
+    /* Room card availability overlay */
+    .room-avail-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:4px 0}
+    .room-price-tag{font-size:13px;color:var(--muted)}
+    .room-price-tag strong{font-size:20px;color:var(--navy);font-weight:900}
+    .room-price-tag span.per{font-size:12px}
+    .btn-book-room.sold-out{background:#e0e0e0;color:#999;cursor:not-allowed;pointer-events:none}
+    .sold-out-badge{display:inline-block;padding:6px 14px;border-radius:8px;background:#f5f5f5;color:#999;font-size:13px;font-weight:700;border:1.5px solid #e0e0e0}
+    .room-entry.unavailable{opacity:.65}
+    @media(max-width:640px){.date-search-bar{flex-direction:column}.dsb-field{min-width:100%}}
+
     /* ── Responsive ── */
     @media(max-width:900px){
       .prop-hero-inner{grid-template-columns:1fr}
@@ -345,10 +365,36 @@
   <div class="wrap">
     <div class="section-label"><span data-lang="zh">客室类型</span><span data-lang="ja">客室タイプ</span><span data-lang="en">Room Types</span></div>
     <h2 class="section-title"><span data-lang="zh">选择您的客室</span><span data-lang="ja">客室を選ぶ</span><span data-lang="en">Choose Your Room</span></h2>
+
+    <!-- Date search bar -->
+    <div class="date-search-bar" id="dateSearchBar">
+      <div class="dsb-field">
+        <label><span data-lang="zh">入住日期</span><span data-lang="ja">チェックイン</span><span data-lang="en">Check-in</span></label>
+        <input type="date" id="dsbCi" min="">
+      </div>
+      <div class="dsb-field">
+        <label><span data-lang="zh">退房日期</span><span data-lang="ja">チェックアウト</span><span data-lang="en">Check-out</span></label>
+        <input type="date" id="dsbCo" min="">
+      </div>
+      <div class="dsb-field" style="max-width:90px">
+        <label><span data-lang="zh">人数</span><span data-lang="ja">人数</span><span data-lang="en">Guests</span></label>
+        <select id="dsbGuests">
+          <option value="1">1</option>
+          <option value="2" selected>2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+      <button class="dsb-btn" id="dsbBtn" onclick="searchAvailability()">
+        <span data-lang="zh">查询空房</span><span data-lang="ja">空室を検索</span><span data-lang="en">Search</span>
+      </button>
+    </div>
+    <div class="dsb-status" id="dsbStatus"></div>
+
     <p class="section-sub"><span data-lang="zh">4种日式精品客室，全部配备独立卫浴、智能门锁与高速 Wi-Fi</span><span data-lang="ja">4タイプの和風精品客室、全室バスルーム・スマートロック・高速Wi-Fi完備</span><span data-lang="en">4 Japanese-style boutique rooms, all with private bathroom, smart lock and high-speed Wi-Fi</span></p>
 
     <!-- 高级家庭间 Superior Family Room -->
-    <div class="room-entry">
+    <div class="room-entry" data-room-id="900014418">
       <div class="room-entry-layout">
         <div class="room-main-photo" onclick="lbOpen(roomImgs.superior,0)">
           <img src="assets/asakusa/superior/667273812.jpg" alt="高级家庭间">
@@ -373,9 +419,12 @@
             </div>
           </div>
           <div>
-            <button class="btn-book-room" onclick="openRoomBooking('900014418','高级家庭房','Superior Family Room','スーペリアファミリールーム')">
-              <span data-lang="zh">查询此房间日期 →</span><span data-lang="ja">この客室の空室を確認 →</span><span data-lang="en">Check &amp; Book This Room →</span>
-            </button>
+            <div class="room-avail-bar" id="avail-900014418">
+              <div class="room-price-tag" id="price-900014418"><span data-lang="zh">选择上方日期查看价格</span><span data-lang="ja">上で日付を選択してください</span><span data-lang="en">Select dates above to see price</span></div>
+              <button class="btn-book-room" id="btn-900014418" onclick="bookRoom('900014418','高级家庭房','Superior Family Room','スーペリアファミリールーム')" disabled style="opacity:.45;cursor:not-allowed">
+                <span data-lang="zh">预订此房间 →</span><span data-lang="ja">この客室を予約 →</span><span data-lang="en">Book This Room →</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -401,7 +450,7 @@
     </div>
 
     <!-- 豪华套房 Deluxe Suite -->
-    <div class="room-entry">
+    <div class="room-entry" data-room-id="900014420">
       <div class="room-entry-layout">
         <div class="room-main-photo" onclick="lbOpen(roomImgs.deluxe,0)">
           <img src="assets/asakusa/deluxe/667274556.jpg" alt="豪华套房">
@@ -424,9 +473,12 @@
             <div class="room-capacity">👥 <span data-lang="zh">1〜4名 · 推荐最多2位成人</span><span data-lang="ja">1〜4名 · 大人2名までのご利用を推奨</span><span data-lang="en">1–4 guests · Recommended for up to 2 adults</span></div>
           </div>
           <div>
-            <button class="btn-book-room" onclick="openRoomBooking('900014420','豪华套房','Deluxe Suite','デラックススイート')">
-              <span data-lang="zh">查询此房间日期 →</span><span data-lang="ja">この客室の空室を確認 →</span><span data-lang="en">Check &amp; Book This Room →</span>
-            </button>
+            <div class="room-avail-bar" id="avail-900014420">
+              <div class="room-price-tag" id="price-900014420"><span data-lang="zh">选择上方日期查看价格</span><span data-lang="ja">上で日付を選択してください</span><span data-lang="en">Select dates above to see price</span></div>
+              <button class="btn-book-room" id="btn-900014420" onclick="bookRoom('900014420','豪华套房','Deluxe Suite','デラックススイート')" disabled style="opacity:.45;cursor:not-allowed">
+                <span data-lang="zh">预订此房间 →</span><span data-lang="ja">この客室を予約 →</span><span data-lang="en">Book This Room →</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -451,7 +503,7 @@
     </div>
 
     <!-- 豪华小型套房 Deluxe Compact Suite -->
-    <div class="room-entry">
+    <div class="room-entry" data-room-id="900014419">
       <div class="room-entry-layout">
         <div class="room-main-photo" onclick="lbOpen(roomImgs['deluxe-s'],0)">
           <img src="assets/asakusa/deluxe-s/667592817.jpg" alt="豪华小型套房">
@@ -474,9 +526,12 @@
             <div class="room-capacity">👥 <span data-lang="zh">1〜3名 · 推荐最多2位成人</span><span data-lang="ja">1〜3名 · 大人2名まで推奨</span><span data-lang="en">1–3 guests · Recommended for up to 2 adults</span></div>
           </div>
           <div>
-            <button class="btn-book-room" onclick="openRoomBooking('900014419','豪华小型套房','Deluxe Compact Suite','デラックスコンパクトスイート')">
-              <span data-lang="zh">查询此房间日期 →</span><span data-lang="ja">この客室の空室を確認 →</span><span data-lang="en">Check &amp; Book This Room →</span>
-            </button>
+            <div class="room-avail-bar" id="avail-900014419">
+              <div class="room-price-tag" id="price-900014419"><span data-lang="zh">选择上方日期查看价格</span><span data-lang="ja">上で日付を選択してください</span><span data-lang="en">Select dates above to see price</span></div>
+              <button class="btn-book-room" id="btn-900014419" onclick="bookRoom('900014419','豪华小型套房','Deluxe Compact Suite','デラックスコンパクトスイート')" disabled style="opacity:.45;cursor:not-allowed">
+                <span data-lang="zh">预订此房间 →</span><span data-lang="ja">この客室を予約 →</span><span data-lang="en">Book This Room →</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -501,7 +556,7 @@
     </div>
 
     <!-- 舒适三人间 Comfortable Triple -->
-    <div class="room-entry">
+    <div class="room-entry" data-room-id="900014417">
       <div class="room-entry-layout">
         <div class="room-main-photo" onclick="lbOpen(roomImgs.triple,0)">
           <img src="assets/asakusa/triple/667583036.jpg" alt="舒适三人间">
@@ -524,9 +579,12 @@
             <div class="room-capacity">👥 <span data-lang="zh">1〜3名 · 推荐最多2位成人</span><span data-lang="ja">1〜3名 · 大人2名まで推奨</span><span data-lang="en">1–3 guests · Recommended for up to 2 adults</span></div>
           </div>
           <div>
-            <button class="btn-book-room" onclick="openRoomBooking('900014417','舒适三人间','Comfortable Triple','コンフォートトリプル')">
-              <span data-lang="zh">查询此房间日期 →</span><span data-lang="ja">この客室の空室を確認 →</span><span data-lang="en">Check &amp; Book This Room →</span>
-            </button>
+            <div class="room-avail-bar" id="avail-900014417">
+              <div class="room-price-tag" id="price-900014417"><span data-lang="zh">选择上方日期查看价格</span><span data-lang="ja">上で日付を選択してください</span><span data-lang="en">Select dates above to see price</span></div>
+              <button class="btn-book-room" id="btn-900014417" onclick="bookRoom('900014417','舒适三人间','Comfortable Triple','コンフォートトリプル')" disabled style="opacity:.45;cursor:not-allowed">
+                <span data-lang="zh">预订此房间 →</span><span data-lang="ja">この客室を予約 →</span><span data-lang="en">Book This Room →</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -983,6 +1041,33 @@
     var lang = getLang();
     var displayName = lang==='zh' ? zhName : lang==='en' ? enName : jaName;
     document.getElementById('mfd-room-name').textContent = displayName;
+    // If dates already selected via search bar, skip to avail check
+    if(_searchCi && _searchCo && modalPickStep===2){
+      modalCiDate = _searchCi; modalCoDate = _searchCo;
+      document.getElementById('bookingModal').classList.add('open');
+      document.body.style.overflow='hidden';
+      document.getElementById('mformStepDates').style.display='none';
+      document.getElementById('mformStep1').style.display='';
+      document.getElementById('mformLoading').style.display='none';
+      document.getElementById('mformSuccess').style.display='none';
+      document.getElementById('mfd-error').style.display='none';
+      updateModalDatesBar();
+      var info = _availResult[roomId];
+      if(info && info.available){
+        var nights = Math.round((new Date(_searchCo)-new Date(_searchCi))/86400000);
+        document.getElementById('mfd-room-rate').textContent = nights+(lang==='ja'?'泊':lang==='en'?' nights':' 晚')+' · ¥'+Number(info.totalAmount).toLocaleString();
+        // Pre-populate summary fields
+        ciDate=_searchCi; coDate=_searchCo;
+        document.getElementById('mfs-ci').textContent=ciDate;
+        document.getElementById('mfs-co').textContent=coDate;
+        document.getElementById('mfs-nights').textContent=nights;
+        document.getElementById('mfs-guests').textContent=_searchGuests;
+        document.getElementById('mfs-room').textContent=displayName;
+        document.getElementById('mfs-total').textContent='¥'+Number(info.totalAmount).toLocaleString();
+        selectedRoom={roomId:roomId,rateId:info.rateId,roomName:displayName,totalAmount:info.totalAmount};
+      }
+      return;
+    }
     document.getElementById('mfd-room-rate').textContent = lang==='ja'?'日程を選択して料金を確認':lang==='en'?'Select dates to see price':'选择日期查看价格';
     modalAvailMap = {}; modalLoadingMonths = {};
     modalCiDate = null; modalCoDate = null; modalPickStep = 0;
@@ -1303,6 +1388,129 @@
   function lbClose(){document.getElementById('lb').classList.remove('open')}
   function lbNav(d){lbIdx=(lbIdx+d+lbImgs.length)%lbImgs.length;document.getElementById('lbImg').src=lbImgs[lbIdx];document.getElementById('lbCounter').textContent=(lbIdx+1)+' / '+lbImgs.length}
   document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)lbClose()});
+
+  // ── Date search bar ──────────────────────────────────────────────────────
+  var _searchCi = null, _searchCo = null, _searchGuests = 2;
+  var _availResult = {};  // roomId → {available, totalAmount, avgDaily, nights, rateId}
+
+  (function initDateInputs(){
+    var today = new Date();
+    var fmt = function(d){ return d.toISOString().split('T')[0]; };
+    var tom = new Date(today); tom.setDate(tom.getDate()+1);
+    document.getElementById('dsbCi').min = fmt(today);
+    document.getElementById('dsbCo').min = fmt(tom);
+    document.getElementById('dsbCi').addEventListener('change', function(){
+      var ci = new Date(this.value);
+      var minCo = new Date(ci); minCo.setDate(minCo.getDate()+1);
+      document.getElementById('dsbCo').min = minCo.toISOString().split('T')[0];
+      if(document.getElementById('dsbCo').value && document.getElementById('dsbCo').value <= this.value){
+        document.getElementById('dsbCo').value = minCo.toISOString().split('T')[0];
+      }
+    });
+  })();
+
+  async function searchAvailability(){
+    var ci = document.getElementById('dsbCi').value;
+    var co = document.getElementById('dsbCo').value;
+    var guests = parseInt(document.getElementById('dsbGuests').value)||2;
+    if(!ci||!co||co<=ci){
+      var lang=getLang();
+      setDsbStatus(lang==='ja'?'チェックイン・アウト日を正しく選択してください':lang==='en'?'Please select valid check-in and check-out dates':'请选择正确的入住/退房日期','error');
+      return;
+    }
+    _searchCi=ci; _searchCo=co; _searchGuests=guests;
+    var lang=getLang();
+    document.getElementById('dsbBtn').disabled=true;
+    setDsbStatus(lang==='ja'?'空室を確認中…':lang==='en'?'Checking availability…':'正在查询空房…','loading');
+    resetRoomCards();
+    try{
+      var r = await fetch('/api/asakusa-avail?checkIn='+ci+'&checkOut='+co+'&adultCount='+guests);
+      var j = await r.json();
+      if(!j.data||!j.data.roomRates){
+        setDsbStatus(lang==='ja'?'データ取得に失敗しました。しばらくしてから再度お試しください。':lang==='en'?'Failed to fetch availability. Please try again.':'查询失败，请稍后重试。','error');
+        document.getElementById('dsbBtn').disabled=false;
+        return;
+      }
+      // Build availability map: roomId → best direct rate
+      _availResult = {};
+      var DIRECT = '1126061761074001';
+      var roomRates = j.data.roomRates;
+      Object.keys(ROOM_DATA).forEach(function(rid){
+        var rates = roomRates.filter(function(x){ return String(x.roomId)===String(rid); });
+        var best = rates.find(function(x){ return x.rateId===DIRECT; });
+        if(!best && rates.length) best = rates.sort(function(a,b){return a.totalAmount-b.totalAmount;})[0];
+        if(best){
+          _availResult[rid]={available:true,totalAmount:best.totalAmount,avgDaily:best.averageDailyAmount,nights:best.nights,rateId:best.rateId};
+        } else {
+          _availResult[rid]={available:false};
+        }
+      });
+      var nights = Math.round((new Date(co)-new Date(ci))/86400000);
+      var anyAvail = Object.values(_availResult).some(function(v){return v.available;});
+      setDsbStatus(anyAvail
+        ?(lang==='ja'?nights+'泊の空室が見つかりました':lang==='en'?'Available rooms found for '+nights+' night'+(nights>1?'s':''):nights+'晚有空房，请选择房型预订')
+        :(lang==='ja'?'ご指定の日程はすべて満室です。日程を変更してください。':lang==='en'?'No rooms available for selected dates. Please try different dates.':'所选日期全部满房，请更换日期。')
+      ,'');
+      updateRoomCards(ci,co,guests);
+    }catch(e){
+      setDsbStatus(lang==='ja'?'ネットワークエラーが発生しました':lang==='en'?'Network error. Please retry.':'网络错误，请重试。','error');
+    }
+    document.getElementById('dsbBtn').disabled=false;
+  }
+
+  function setDsbStatus(msg,type){
+    var el=document.getElementById('dsbStatus');
+    el.textContent=msg;
+    el.style.color=type==='error'?'#c0392b':type==='loading'?'var(--muted)':'var(--navy)';
+  }
+
+  function resetRoomCards(){
+    var lang=getLang();
+    Object.keys(ROOM_DATA).forEach(function(rid){
+      var btn=document.getElementById('btn-'+rid);
+      var price=document.getElementById('price-'+rid);
+      if(btn){btn.disabled=true;btn.style.opacity='.45';btn.style.cursor='not-allowed';btn.classList.remove('sold-out');}
+      if(price){price.innerHTML='<span style="color:var(--muted);font-size:13px">'+(lang==='ja'?'確認中…':lang==='en'?'Checking…':'查询中…')+'</span>';}
+      var entry=document.querySelector('[data-room-id="'+rid+'"]');
+      if(entry)entry.classList.remove('unavailable');
+    });
+  }
+
+  function updateRoomCards(ci,co,guests){
+    var lang=getLang();
+    var nights=Math.round((new Date(co)-new Date(ci))/86400000);
+    Object.keys(_availResult).forEach(function(rid){
+      var info=_availResult[rid];
+      var btn=document.getElementById('btn-'+rid);
+      var price=document.getElementById('price-'+rid);
+      var entry=document.querySelector('[data-room-id="'+rid+'"]');
+      if(!btn||!price) return;
+      if(info.available){
+        btn.disabled=false;btn.style.opacity='';btn.style.cursor='';btn.classList.remove('sold-out');
+        var perNight=Math.round(info.avgDaily);
+        price.innerHTML='<strong>¥'+Number(perNight).toLocaleString()+'</strong><span class="per"> /'+
+          (lang==='ja'?'泊':lang==='en'?'night':'晚')+' · '+nights+(lang==='ja'?'泊合計':lang==='en'?' nights total':' 晚合计')+
+          ' <strong>¥'+Number(info.totalAmount).toLocaleString()+'</strong></span>';
+        if(entry)entry.classList.remove('unavailable');
+      } else {
+        btn.disabled=true;btn.style.opacity='';btn.style.cursor='not-allowed';btn.classList.add('sold-out');
+        price.innerHTML='<span class="sold-out-badge">'+(lang==='ja'?'満室':lang==='en'?'Sold Out':'满房')+'</span>';
+        if(entry)entry.classList.add('unavailable');
+      }
+    });
+  }
+
+  function bookRoom(roomId, zhName, enName, jaName){
+    if(!_searchCi||!_searchCo){
+      var lang=getLang();
+      document.getElementById('rooms').scrollIntoView({behavior:'smooth'});
+      setDsbStatus(lang==='ja'?'先に日付を選択してください':lang==='en'?'Please select dates first':'请先选择日期','error');
+      return;
+    }
+    // Pre-fill dates into modal and open it
+    modalCiDate=_searchCi; modalCoDate=_searchCo; modalPickStep=2;
+    openRoomBooking(roomId, zhName, enName, jaName);
+  }
 
   function getLang(){return sessionStorage.getItem('mkgjp_lang')||'zh'}
   function setLang(l){
