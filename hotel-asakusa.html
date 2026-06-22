@@ -1424,27 +1424,45 @@
     setDsbStatus(lang==='ja'?'空室を確認中…':lang==='en'?'Checking availability…':'正在查询空房…','loading');
     resetRoomCards();
     try{
-      var r = await fetch('/api/asakusa-avail?checkIn='+ci+'&checkOut='+co+'&adultCount='+guests);
-      var j = await r.json();
-      if(!j.data||!j.data.roomRates){
-        setDsbStatus(lang==='ja'?'データ取得に失敗しました。しばらくしてから再度お試しください。':lang==='en'?'Failed to fetch availability. Please try again.':'查询失败，请稍后重试。','error');
-        document.getElementById('dsbBtn').disabled=false;
-        return;
-      }
-      // Build availability map: roomId → best direct rate
-      _availResult = {};
+      // Query PMS (real occupancy) + SmartOrder (pricing) in parallel
+      var results = await Promise.all([
+        fetch('/api/asakusa-pms-avail?checkIn='+ci+'&checkOut='+co).then(function(r){return r.json();}),
+        fetch('/api/asakusa-avail?checkIn='+ci+'&checkOut='+co+'&adultCount='+guests).then(function(r){return r.json();}),
+      ]);
+      var pmsRes = results[0];
+      var availRes = results[1];
+
+      // Build pricing map from SmartOrder (price source only)
+      var priceMap = {};
       var DIRECT = '1126061761074001';
-      var roomRates = j.data.roomRates;
+      if(availRes.data && Array.isArray(availRes.data.roomRates)){
+        var roomRates = availRes.data.roomRates;
+        Object.keys(ROOM_DATA).forEach(function(rid){
+          var rates = roomRates.filter(function(x){ return String(x.roomId)===String(rid); });
+          var best = rates.find(function(x){ return x.rateId===DIRECT; });
+          if(!best && rates.length) best = rates.sort(function(a,b){return a.totalAmount-b.totalAmount;})[0];
+          if(best) priceMap[rid]={totalAmount:best.totalAmount,avgDaily:best.averageDailyAmount,nights:best.nights,rateId:best.rateId};
+        });
+      }
+
+      // Use PMS for availability truth; fall back to SmartOrder if PMS failed
+      var pmsAvail = (pmsRes && pmsRes.availability) ? pmsRes.availability : null;
+      _availResult = {};
       Object.keys(ROOM_DATA).forEach(function(rid){
-        var rates = roomRates.filter(function(x){ return String(x.roomId)===String(rid); });
-        var best = rates.find(function(x){ return x.rateId===DIRECT; });
-        if(!best && rates.length) best = rates.sort(function(a,b){return a.totalAmount-b.totalAmount;})[0];
-        if(best){
-          _availResult[rid]={available:true,totalAmount:best.totalAmount,avgDaily:best.averageDailyAmount,nights:best.nights,rateId:best.rateId};
+        var isAvail;
+        if(pmsAvail){
+          isAvail = pmsAvail[rid] ? pmsAvail[rid].available : false;
         } else {
-          _availResult[rid]={available:false};
+          isAvail = !!priceMap[rid];
+        }
+        var p = priceMap[rid];
+        if(isAvail && p){
+          _availResult[rid]={available:true,totalAmount:p.totalAmount,avgDaily:p.avgDaily,nights:p.nights,rateId:p.rateId};
+        } else {
+          _availResult[rid]={available:isAvail};
         }
       });
+
       var nights = Math.round((new Date(co)-new Date(ci))/86400000);
       var anyAvail = Object.values(_availResult).some(function(v){return v.available;});
       setDsbStatus(anyAvail
