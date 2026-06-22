@@ -49,9 +49,12 @@ async function searchOrders(token, beginDate, endDate, dateType) {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ hotelNum: HOTEL_NUM, beginDate, endDate, dateType, pageNum: 1, pageSize: 200 }),
-    signal: AbortSignal.timeout(8000),
+    signal: AbortSignal.timeout(12000),
   });
   const j = await r.json();
+  if (j.code !== undefined && j.code !== 0 && j.code !== 200) {
+    throw new Error(`PMS search error (dateType=${dateType}): code=${j.code} msg=${j.msg || j.message}`);
+  }
   return (j.data && j.data.list) ? j.data.list : [];
 }
 
@@ -89,10 +92,9 @@ module.exports = async function handler(req, res) {
     wideEnd.setDate(wideEnd.getDate() + 60);
     const wideEndStr = wideEnd.toISOString().split('T')[0];
 
-    const [ciOrders, coOrders] = await Promise.all([
-      searchOrders(token, wideStartStr, checkOut,  2),  // checkin-date query
-      searchOrders(token, checkIn,      wideEndStr, 3),  // checkout-date query
-    ]);
+    let ciOrders = [], coOrders = [], searchErrors = [];
+    try { ciOrders = await searchOrders(token, wideStartStr, checkOut,  2); } catch(e) { searchErrors.push('ci: '+e.message); }
+    try { coOrders = await searchOrders(token, checkIn,      wideEndStr, 3); } catch(e) { searchErrors.push('co: '+e.message); }
 
     // searchOrders may return order objects or plain order numbers — normalise to strings
     const toNum = x => (x && typeof x === 'object') ? (x.orderNum || x.orderNo || x.id || JSON.stringify(x)) : String(x);
@@ -142,8 +144,10 @@ module.exports = async function handler(req, res) {
     const payload = { checkIn, checkOut, availability };
     if (debug) {
       payload._debug = {
+        wideStartStr, wideEndStr,
         ciOrders_count: ciOrders.length,
         coOrders_count: coOrders.length,
+        searchErrors,
         allOrderNums,
         rooms: debugRows,
       };
