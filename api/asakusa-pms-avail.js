@@ -75,47 +75,50 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'checkIn and checkOut required' });
   }
 
+  const debug = req.query.debug === '1';
+
   try {
     const token = await getPmsToken();
 
-    // Find all orders overlapping [checkIn, checkOut):
-    // 1) Orders checking IN before our checkOut (and presumably checking out after our checkIn)
-    // 2) Query past 90 days up to checkOut for check-in, plus filter by checkOut > checkIn
-    const ciOrders  = await searchOrders(token, checkIn, checkOut, 2);  // checking in during our window
-    const coOrders  = await searchOrders(token, checkIn, checkOut, 3);  // checking out during our window
-
-    // Also catch long-stay guests who checked in before our checkIn
-    const pastStart = new Date(checkIn);
+    const ciOrders   = await searchOrders(token, checkIn, checkOut, 2);
+    const coOrders   = await searchOrders(token, checkIn, checkOut, 3);
+    const pastStart  = new Date(checkIn);
     pastStart.setDate(pastStart.getDate() - 90);
     const pastOrders = await searchOrders(token, pastStart.toISOString().split('T')[0], checkIn, 2);
 
-    const allOrderNums = [...new Set([...ciOrders, ...coOrders, ...pastOrders])];
-
-    // Fetch details in parallel (cap at 30 to avoid timeout)
-    const toFetch = allOrderNums.slice(0, 30);
+    // searchOrders may return order objects or plain order numbers — normalise to strings
+    const toNum = x => (x && typeof x === 'object') ? (x.orderNum || x.orderNo || x.id || JSON.stringify(x)) : String(x);
+    const allOrderNums = [...new Set([...ciOrders, ...coOrders, ...pastOrders].map(toNum))];
+    const toFetch = allOrderNums.slice(0, 40);
     const details = await Promise.all(toFetch.map(n => getOrderDetail(token, n).catch(() => null)));
 
-    // Count occupied rooms per type for the requested period
-    const occupiedByType = {}; // typeId → Set of room numbers
+    const occupiedByType = {};
+    const debugRows = [];
 
     for (const d of details) {
       if (!d) continue;
       for (const info of (d.accomOrderInfos || [])) {
-        if (info.status === 40) continue; // cancelled
-        const roomCi = (info.checkInTime || '').slice(0, 10);
+        const roomCi = (info.checkInTime  || '').slice(0, 10);
         const roomCo = (info.checkOutTime || '').slice(0, 10);
-        // Overlaps our period: roomCi < checkOut AND roomCo > checkIn
-        if (roomCi < checkOut && roomCo > checkIn) {
-          const typeId = String(info.roomTypeCode || ROOM_TYPE_MAP[info.roomSerialNum] || '');
-          if (typeId) {
-            if (!occupiedByType[typeId]) occupiedByType[typeId] = new Set();
-            occupiedByType[typeId].add(info.roomSerialNum);
-          }
-        }
+        const overlaps = roomCi < checkOut && roomCo > checkIn;
+        const typeId = String(info.roomTypeCode || ROOM_TYPE_MAP[info.roomSerialNum] || '');
+
+        if (debug) debugRows.push({
+          orderNum: d.orderNum,
+          roomSerialNum: info.roomSerialNum,
+          roomTypeCode: info.roomTypeCode,
+          resolvedTypeId: typeId,
+          status: info.status,
+          roomCi, roomCo, overlaps,
+        });
+
+        if (!overlaps) continue;
+        if (!typeId) continue;
+        if (!occupiedByType[typeId]) occupiedByType[typeId] = new Set();
+        occupiedByType[typeId].add(info.roomSerialNum || info.roomTypeCode);
       }
     }
 
-    // Build availability result
     const availability = {};
     for (const [typeId, total] of Object.entries(TYPE_TOTAL)) {
       const occupied = occupiedByType[typeId] ? occupiedByType[typeId].size : 0;
@@ -127,7 +130,17 @@ module.exports = async function handler(req, res) {
       };
     }
 
-    res.status(200).json({ checkIn, checkOut, availability });
+    const payload = { checkIn, checkOut, availability };
+    if (debug) {
+      payload._debug = {
+        ciOrders_raw: ciOrders.slice(0, 5),
+        coOrders_raw: coOrders.slice(0, 5),
+        pastOrders_raw: pastOrders.slice(0, 5),
+        allOrderNums,
+        rooms: debugRows,
+      };
+    }
+    res.status(200).json(payload);
   } catch (e) {
     res.status(503).json({ error: 'pms_unavailable', message: e.message });
   }
