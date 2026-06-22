@@ -6,7 +6,7 @@
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const HOTEL_ID         = process.env.SMARTORDER_HOTEL_ID      || '51401486';
+const HOTEL_ID         = process.env.SMARTORDER_HOTEL_ID      || '86177544';
 const CLIENT_ID        = process.env.SMARTORDER_CLIENT_ID     || '1513859491169472512';
 const CLIENT_SECRET    = process.env.SMARTORDER_CLIENT_SECRET || 'UJKaBl2TYGngV8DQMSCv2Gx6UZtYYcYh';
 const PAYMENT_METHOD   = process.env.SMARTORDER_PAYMENT_METHOD || 'Stripe';
@@ -62,9 +62,32 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // 3. Create SmartOrder reservation
+    // 3. Re-check availability before booking (guard against overbooking after payment)
     const token = await getToken();
     const hotelId = meta.hotelId || HOTEL_ID;
+    const availQs = new URLSearchParams({
+      checkIn: meta.checkIn,
+      checkOut: meta.checkOut,
+      adultCount: meta.adultCount || '2',
+      roomTypeId: meta.roomId || '',
+    });
+    const availR = await fetch(`${BASE_URL}/booking/api/v3/avail/${hotelId}?${availQs}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const availData = await availR.json();
+    const matchingRate = (availData.data?.roomRates || []).find(r => r.rateId === meta.rateId);
+    if (!matchingRate) {
+      return res.status(409).json({
+        error: 'sold_out',
+        message: 'This room is no longer available for the selected dates. Please contact us for a refund.',
+      });
+    }
+    // Re-verify price matches what was charged (prevent price tampering)
+    if (Math.abs(matchingRate.totalAmount - Number(meta.totalAmount)) > 1) {
+      console.error(`Price mismatch: charged=${meta.totalAmount} current=${matchingRate.totalAmount}`);
+    }
+
+    // 4. Create SmartOrder reservation
     const payload = {
       hotelId,
       checkIn: meta.checkIn,

@@ -1025,11 +1025,24 @@
       var url = '/api/asakusa-calendar?startDate='+s+'&endDate='+e+'&adultCount=2&roomTypeId='+rd.typeId;
       var r = await fetch(url);
       var j = await r.json();
+      if(j.error==='calendar_unavailable'){
+        var lang=getLang();
+        showBookingErr(lang==='ja'?'予約システムに一時的な障害が発生しています。お電話またはメールにてご予約ください。':
+          lang==='en'?'Booking system is temporarily unavailable. Please contact us by phone or email.':
+          '预订系统暂时无法访问，请通过电话或邮件与我们联系预订。');
+        return;
+      }
       if(j.data && j.data.dailyAvails){
         j.data.dailyAvails.forEach(function(d){ modalAvailMap[d.date] = d.status; });
         renderModalCalendar();
       }
-    } catch(err){ console.warn('modal-calendar error', err); }
+    } catch(err){
+      console.warn('modal-calendar error', err);
+      var lang=getLang();
+      showBookingErr(lang==='ja'?'ネットワークエラーが発生しました。しばらくしてから再度お試しください。':
+        lang==='en'?'Network error. Please try again shortly.':
+        '网络错误，请稍后重试。');
+    }
   }
 
   function renderModalCalendar(){
@@ -1236,6 +1249,12 @@
             '<div><span>Check-out</span><strong>'+d.checkOut+'</strong></div>'+
             '<div class="sum-total">'+_t('summaryTotal')(d.totalAmount)+'</div>';
           document.getElementById('mformSuccess').style.display='';
+        } else if(d.error==='sold_out'){
+          document.getElementById('mformStepDates').style.display='';
+          var lang=getLang();
+          showBookingErr(lang==='ja'?'申し訳ございません。ご選択の日程はすでに満室となりました。ご不便をおかけして申し訳ありません。払い戻しについてはフロントまでご連絡ください。':
+            lang==='en'?'Sorry, this room is no longer available for your selected dates. Please contact us at the front desk for a full refund.':
+            '非常抱歉，您所选日期的客室已满房。请联系我们的前台处理退款，给您带来不便深表歉意。');
         } else {
           document.getElementById('mformStepDates').style.display='';
           showBookingErr(_t('errConfirm'));

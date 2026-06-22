@@ -4,6 +4,33 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const BASE = process.env.SITE_URL || 'https://mkg-japan-website.vercel.app';
 
+const HOTEL_ID      = '86177544';
+const CLIENT_ID     = process.env.SMARTORDER_CLIENT_ID     || '1513859491169472512';
+const CLIENT_SECRET = process.env.SMARTORDER_CLIENT_SECRET || 'UJKaBl2TYGngV8DQMSCv2Gx6UZtYYcYh';
+const TOKEN_URL     = 'https://idp.smartorder.ai/realms/smartorder-booking-api/protocol/openid-connect/token';
+const BOOKING_URL   = 'https://api-open-booking.smartorder.ai';
+const DIRECT_RATE_ID = '1126061761074001';
+
+async function getSmartOrderToken() {
+  const params = new URLSearchParams({ grant_type: 'client_credentials', client_id: CLIENT_ID, client_secret: CLIENT_SECRET });
+  const r = await fetch(TOKEN_URL, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: params.toString() });
+  const j = await r.json();
+  return j.access_token;
+}
+
+async function getVerifiedPrice(checkIn, checkOut, adultCount, roomTypeId) {
+  try {
+    const token = await getSmartOrderToken();
+    const qs = new URLSearchParams({ checkIn, checkOut, adultCount: String(adultCount || 2), roomTypeId: roomTypeId || '' });
+    const r = await fetch(`${BOOKING_URL}/booking/api/v3/avail/${HOTEL_ID}?${qs}`, { headers: { Authorization: `Bearer ${token}` } });
+    const j = await r.json();
+    const match = (j.data?.roomRates || []).find(x => x.rateId === DIRECT_RATE_ID);
+    return match ? match.totalAmount : null;
+  } catch (e) {
+    return null;
+  }
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -21,7 +48,13 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  const amount = Number(totalAmount);
+  // Server-side price verification — prevent frontend price tampering
+  const verifiedAmount = await getVerifiedPrice(checkIn, checkOut, adultCount, roomId);
+  const clientAmount = Number(totalAmount);
+  if (verifiedAmount !== null && Math.abs(verifiedAmount - clientAmount) > 1) {
+    return res.status(400).json({ error: `Price mismatch: expected ${verifiedAmount}, got ${clientAmount}` });
+  }
+  const amount = verifiedAmount || clientAmount;
   if (!amount || amount < 50) {
     return res.status(400).json({ error: `Invalid totalAmount: ${totalAmount}` });
   }
