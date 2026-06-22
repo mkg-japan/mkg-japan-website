@@ -52,9 +52,6 @@ async function searchOrders(token, beginDate, endDate, dateType) {
     signal: AbortSignal.timeout(12000),
   });
   const j = await r.json();
-  if (j.code !== undefined && j.code !== 0 && j.code !== 1 && j.code !== 200) {
-    throw new Error(`PMS search error (dateType=${dateType}): code=${j.code} msg=${j.msg || j.message}`);
-  }
   return (j.data && j.data.list) ? j.data.list : [];
 }
 
