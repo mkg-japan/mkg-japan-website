@@ -46,6 +46,8 @@ module.exports = async function handler(req, res) {
       signal: AbortSignal.timeout(8000),
     });
     const data = await r.json();
+    // NOTE: SmartOrder /calendar endpoint ignores roomTypeId and always returns
+    // hotel-level availability. Per-room-type filtering is enforced at /avail stage.
     res.status(200).json(data);
   } catch (e) {
     // Return a safe fallback so the calendar doesn't silently show wrong availability

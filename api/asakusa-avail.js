@@ -45,6 +45,13 @@ module.exports = async function handler(req, res) {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await r.json();
+    // SmartOrder avail returns ALL room types regardless of roomTypeId param.
+    // Filter server-side so the frontend only sees the requested room type.
+    if (roomTypeId && data.data && Array.isArray(data.data.roomRates)) {
+      data.data.roomRates = data.data.roomRates.filter(
+        rr => String(rr.roomId) === String(roomTypeId)
+      );
+    }
     res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: e.message });
