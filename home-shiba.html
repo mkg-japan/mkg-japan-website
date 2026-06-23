@@ -147,6 +147,22 @@
     .book-card-badge{display:inline-flex;padding:3px 9px;border-radius:999px;background:#e8f3ee;color:var(--green);font-size:11px;font-weight:800}
     .book-card-note{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6}
 
+    /* ── Date Search Bar ── */
+    .date-search-bar{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:18px 24px;margin-bottom:32px;display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;box-shadow:0 2px 12px rgba(11,23,51,.06)}
+    .dsb-field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:120px}
+    .dsb-field label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+    .dsb-field input,.dsb-field select{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;color:var(--navy);background:#fafaf8;outline:none;width:100%}
+    .dsb-field input:focus,.dsb-field select:focus{border-color:var(--gold)}
+    .dsb-btn{padding:11px 24px;border-radius:10px;background:var(--gold);color:var(--navy-2);font-weight:800;font-size:14px;border:none;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;align-self:flex-end}
+    .dsb-btn:disabled{opacity:.5;cursor:not-allowed}
+    .dsb-status{font-size:13px;color:var(--muted);margin-bottom:8px;min-height:18px}
+    .room-avail-price{font-size:13px;color:var(--muted);margin-bottom:8px}
+    .room-avail-price strong{font-size:18px;color:var(--navy);font-weight:900}
+    .btn-book-room.sold-out{background:#e0e0e0;color:#999;cursor:not-allowed;pointer-events:none}
+    .sold-out-badge{display:inline-block;padding:6px 14px;border-radius:8px;background:#f5f5f5;color:#999;font-size:13px;font-weight:700;border:1.5px solid #e0e0e0}
+    .room-entry.unavailable{opacity:.65}
+    @media(max-width:640px){.date-search-bar{flex-direction:column}.dsb-field{min-width:100%}}
+
     /* ── Calendar Widget ── */
     .cal-widget{margin-bottom:12px}
     .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
@@ -397,6 +413,32 @@
     <span data-lang="ja">全6室を独立設計。全室フルキッチン・専用バスルーム・スマートロック完備。</span>
   </p>
 
+  <!-- ── 日期搜索栏 ── -->
+  <div class="date-search-bar" id="dateSearchBar">
+    <div class="dsb-field">
+      <label><span data-lang="zh">入住日期</span><span data-lang="ja">チェックイン</span><span data-lang="en">Check-in</span></label>
+      <input type="date" id="dsbCi" min="">
+    </div>
+    <div class="dsb-field">
+      <label><span data-lang="zh">退房日期</span><span data-lang="ja">チェックアウト</span><span data-lang="en">Check-out</span></label>
+      <input type="date" id="dsbCo" min="">
+    </div>
+    <div class="dsb-field" style="max-width:90px">
+      <label><span data-lang="zh">人数</span><span data-lang="ja">人数</span><span data-lang="en">Guests</span></label>
+      <select id="dsbGuests">
+        <option value="1">1</option>
+        <option value="2" selected>2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <button class="dsb-btn" id="dsbBtn" onclick="searchAvailabilityShiba()">
+      <span data-lang="zh">查询空房</span><span data-lang="ja">空室を検索</span><span data-lang="en">Search</span>
+    </button>
+  </div>
+  <div class="dsb-status" id="dsbStatus"></div>
+
   <!-- ── 101室 ── -->
   <div class="room-entry" id="r101">
     <div class="room-entry-layout">
@@ -423,7 +465,8 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 2 人</span><span data-lang="en">1 – 2 guests</span><span data-lang="ja">1〜2名</span></span>
-          <button class="btn-book-room" onclick="openRoomBooking('101','101室','Room 101','101号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
+          <div id="price-900014422" class="room-avail-price"></div>
+          <button class="btn-book-room" id="btn-900014422" onclick="openRoomBooking('101','101室','Room 101','101号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -475,7 +518,8 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 5 人</span><span data-lang="en">1 – 5 guests</span><span data-lang="ja">1〜5名</span></span>
-          <button class="btn-book-room" onclick="openRoomBooking('102','102室','Room 102','102号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
+          <div id="price-900014421" class="room-avail-price"></div>
+          <button class="btn-book-room" id="btn-900014421" onclick="openRoomBooking('102','102室','Room 102','102号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -526,7 +570,8 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 3 人</span><span data-lang="en">1 – 3 guests</span><span data-lang="ja">1〜3名</span></span>
-          <button class="btn-book-room" onclick="openRoomBooking('201','201室','Room 201','201号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
+          <div id="price-900014423" class="room-avail-price"></div>
+          <button class="btn-book-room" id="btn-900014423" onclick="openRoomBooking('201','201室','Room 201','201号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -577,7 +622,8 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 3 人</span><span data-lang="en">1 – 3 guests</span><span data-lang="ja">1〜3名</span></span>
-          <button class="btn-book-room" onclick="openRoomBooking('202','202室','Room 202','202号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
+          <div id="price-900014424" class="room-avail-price"></div>
+          <button class="btn-book-room" id="btn-900014424" onclick="openRoomBooking('202','202室','Room 202','202号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -628,7 +674,8 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 4 人</span><span data-lang="en">1 – 4 guests</span><span data-lang="ja">1〜4名</span></span>
-          <button class="btn-book-room" onclick="openRoomBooking('301','301室','Room 301','301号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
+          <div id="price-900014425" class="room-avail-price"></div>
+          <button class="btn-book-room" id="btn-900014425" onclick="openRoomBooking('301','301室','Room 301','301号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -678,7 +725,8 @@
         </div>
         <div class="room-footer">
           <span class="room-capacity">👤 <span data-lang="zh">1 – 2 人</span><span data-lang="en">1 – 2 guests</span><span data-lang="ja">1〜2名</span></span>
-          <button class="btn-book-room" onclick="openRoomBooking('401','401室','Room 401','401号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
+          <div id="price-900014426" class="room-avail-price"></div>
+          <button class="btn-book-room" id="btn-900014426" onclick="openRoomBooking('401','401室','Room 401','401号室')"><span data-lang="zh">查询此房间日期 →</span><span data-lang="en">Check &amp; Book This Room →</span><span data-lang="ja">この客室の空室を確認 →</span></button>
         </div>
       </div>
     </div>
@@ -1118,31 +1166,40 @@
   var ciDate = null, coDate = null;
   var totalPrice = null, availRooms = [], selectedRoom = null;
 
+  // ROOM_DATA keyed by typeId (SmartOrder roomId), value has roomNum for lookup
   var ROOM_DATA = {
-    '101': { typeId: '900014422' },
-    '102': { typeId: '900014421' },
-    '201': { typeId: '900014423' },
-    '202': { typeId: '900014424' },
-    '301': { typeId: '900014425' },
-    '401': { typeId: '900014426' },
+    '900014422': { typeId: '900014422', roomNum: '101' },
+    '900014421': { typeId: '900014421', roomNum: '102' },
+    '900014423': { typeId: '900014423', roomNum: '201' },
+    '900014424': { typeId: '900014424', roomNum: '202' },
+    '900014425': { typeId: '900014425', roomNum: '301' },
+    '900014426': { typeId: '900014426', roomNum: '401' },
   };
   // rateId for 単独網站価格 (homezhi1 — direct booking rate plan)
   var DIRECT_RATE_ID = '1126061550297001';
-  var _liveRateCache = {};  // key: "roomId-ci-co-guests" → { amount, rateId }
+  var _liveRateCache = {};  // key: "typeId-ci-co-guests" → { amount, rateId }
 
-  async function fetchLiveRate(roomId, ci, co, guests){
-    var key = roomId+'-'+ci+'-'+co+'-'+(guests||2);
+  // Date search bar state
+  var _searchCi = null, _searchCo = null, _searchGuests = 2, _searchPickStep = 0;
+  var _availResult = {};  // typeId → {available, totalAmount, avgDaily, nights, rateId}
+
+  // fetchLiveRate: typeId is the SmartOrder roomId (e.g. '900014422')
+  async function fetchLiveRate(typeId, ci, co, guests){
+    var key = typeId+'-'+ci+'-'+co+'-'+(guests||2);
     if(_liveRateCache[key]) return _liveRateCache[key];
-    var rd = ROOM_DATA[roomId];
+    var rd = ROOM_DATA[typeId];
     if(!rd) return null;
     try {
-      var url = '/api/shiba-avail?checkIn='+ci+'&checkOut='+co+'&adultCount='+(guests||2)+'&roomTypeId='+rd.typeId;
+      // Query without roomTypeId to get all rooms (API returns 18 entries: 6 rooms × 3 rates)
+      var url = '/api/shiba-avail?checkIn='+ci+'&checkOut='+co+'&adultCount='+(guests||2);
       var r = await fetch(url);
       var j = await r.json();
       if(!j.data || !j.data.roomRates) return null;
-      // Prefer 単独網站価格, fallback to cheapest
-      var match = j.data.roomRates.find(function(x){ return x.rateId===DIRECT_RATE_ID; });
-      if(!match) match = j.data.roomRates.sort(function(a,b){return a.totalAmount-b.totalAmount;})[0];
+      // Filter by this room's typeId first to avoid cross-room price mixing
+      var roomRates = j.data.roomRates.filter(function(x){ return String(x.roomId)===typeId; });
+      if(!roomRates.length) return null;
+      var match = roomRates.find(function(x){ return x.rateId===DIRECT_RATE_ID; });
+      if(!match) match = roomRates.sort(function(a,b){return a.totalAmount-b.totalAmount;})[0];
       if(!match) return null;
       var result = { totalAmount: match.totalAmount, averageDaily: match.averageDailyAmount, rateId: match.rateId, nights: match.nights };
       _liveRateCache[key] = result;
@@ -1178,15 +1235,48 @@
     }
   }
 
-  var _currentRoomId = null;
+  var _currentRoomId = null;  // stores roomNum ('101' etc.) for modal calendar
+  var _currentTypeId = null;  // stores typeId ('900014422' etc.)
 
   function openRoomBooking(roomId, zhName, enName, jaName){
+    // roomId is roomNum string ('101', '102', etc.)
     _currentRoomId = roomId;
+    // Find corresponding typeId
+    var typeId = Object.keys(ROOM_DATA).find(function(k){ return ROOM_DATA[k].roomNum===roomId; });
+    _currentTypeId = typeId || null;
     var lang = getLang();
     var displayName = lang==='zh' ? zhName : lang==='en' ? enName : jaName;
-    var rd = ROOM_DATA[roomId];
     document.getElementById('mfd-room-name').textContent = roomId + '室 · ' + displayName;
-    document.getElementById('mfd-room-rate').textContent = lang==='ja'?'日程を選択して料金を確認':'Select dates to see price';
+
+    // If dates already searched, skip directly to step1 with pre-filled data
+    if(_searchCi && _searchCo && _searchPickStep===2 && typeId){
+      modalCiDate = _searchCi; modalCoDate = _searchCo;
+      document.getElementById('bookingModal').classList.add('open');
+      document.body.style.overflow='hidden';
+      document.getElementById('mformStepDates').style.display='none';
+      document.getElementById('mformStep0').style.display='none';
+      document.getElementById('mformStep1').style.display='';
+      document.getElementById('mformLoading').style.display='none';
+      document.getElementById('mformSuccess').style.display='none';
+      document.getElementById('mfd-error').style.display='none';
+      updateModalDatesBar();
+      var info = _availResult[typeId];
+      if(info && info.available){
+        var nights = Math.round((new Date(_searchCo)-new Date(_searchCi))/86400000);
+        document.getElementById('mfd-room-rate').textContent = nights+(lang==='ja'?'泊':lang==='en'?' nights':' 晚')+' · ¥'+Number(info.totalAmount).toLocaleString();
+        ciDate=_searchCi; coDate=_searchCo;
+        document.getElementById('mfs-ci').textContent=ciDate;
+        document.getElementById('mfs-co').textContent=coDate;
+        document.getElementById('mfs-nights').textContent=nights;
+        document.getElementById('mfs-guests').textContent=_searchGuests;
+        document.getElementById('mfs-room').textContent=roomId+'室 · '+displayName;
+        document.getElementById('mfs-total').textContent='¥'+Number(info.totalAmount).toLocaleString();
+        selectedRoom={roomId:typeId,rateId:info.rateId,roomName:roomId+'室 · '+displayName,totalAmount:info.totalAmount};
+      }
+      return;
+    }
+
+    document.getElementById('mfd-room-rate').textContent = lang==='ja'?'日程を選択して料金を確認':lang==='en'?'Select dates to see price':'选择日期查看价格';
     // Reset calendar state
     modalAvailMap = {}; modalLoadingMonths = {};
     modalCiDate = null; modalCoDate = null; modalPickStep = 0;
@@ -1218,16 +1308,17 @@
   }
 
   async function fetchModalCalendarMonth(roomId, y, m){
-    var key = roomId+'-'+y+'-'+String(m+1).padStart(2,'0');
+    // roomId here is roomNum ('101' etc.), find typeId
+    var typeId = Object.keys(ROOM_DATA).find(function(k){ return ROOM_DATA[k].roomNum===roomId; });
+    if(!typeId) return;
+    var key = typeId+'-'+y+'-'+String(m+1).padStart(2,'0');
     if(modalLoadingMonths[key]) return;
     modalLoadingMonths[key] = true;
-    var rd = ROOM_DATA[roomId];
-    if(!rd) return;
     var s = y+'-'+String(m+1).padStart(2,'0')+'-01';
     var last = new Date(y,m+1,0).getDate();
     var e = y+'-'+String(m+1).padStart(2,'0')+'-'+String(last).padStart(2,'0');
     try {
-      var url = '/api/shiba-calendar?startDate='+s+'&endDate='+e+'&adultCount=2&roomTypeId='+rd.typeId;
+      var url = '/api/shiba-calendar?startDate='+s+'&endDate='+e+'&adultCount=2&roomTypeId='+typeId;
       var r = await fetch(url);
       var j = await r.json();
       if(j.data && j.data.dailyAvails){
@@ -1323,10 +1414,10 @@
       var guests=document.getElementById('mfd-guests')?document.getElementById('mfd-guests').value:'2';
       document.getElementById('mfd-price-area').innerHTML='<div class="price-ph" style="color:var(--muted);font-size:14px">价格查询中…</div>';
       btn.disabled=true;
-      var _rd=ROOM_DATA[_currentRoomId];
-      var _typeId=_rd?_rd.typeId:'';
+      // _currentTypeId is the SmartOrder roomId (typeId)
+      var _typeId=_currentTypeId||'';
       Promise.all([
-        fetchLiveRate(_currentRoomId,modalCiDate,modalCoDate,guests),
+        fetchLiveRate(_typeId,modalCiDate,modalCoDate,guests),
         fetch('/api/pms-avail?hotel=shiba&checkIn='+modalCiDate+'&checkOut='+modalCoDate).then(function(r){return r.json();}).catch(function(){return null;}),
       ]).then(function(results){
         var live=results[0], pmsRes=results[1];
@@ -1363,11 +1454,11 @@
     if(!modalCiDate||!modalCoDate) return;
     var n=_nights(modalCiDate,modalCoDate);
     var guests=document.getElementById('mfd-guests')?document.getElementById('mfd-guests').value:'2';
-    var rd=ROOM_DATA[_currentRoomId];
-    var cacheKey=_currentRoomId+'-'+modalCiDate+'-'+modalCoDate+'-'+guests;
+    var typeId=_currentTypeId||'';
+    var cacheKey=typeId+'-'+modalCiDate+'-'+modalCoDate+'-'+guests;
     var live=_liveRateCache[cacheKey];
     selectedRoom={
-      roomId: rd?rd.typeId:'',
+      roomId: typeId,
       rateId: live?live.rateId:'',
       roomName: document.getElementById('mfd-room-name').textContent,
       totalAmount: live?live.totalAmount:0,
@@ -1433,7 +1524,7 @@
     document.getElementById('mformStep1').style.display='none';
     document.getElementById('mformLoading').style.display='flex';
     try {
-      var guests=document.getElementById('bsb-guests').value||'2';
+      var guests=document.getElementById('mfd-guests')?document.getElementById('mfd-guests').value:String(_searchGuests||2);
       var res=await fetch('/api/shiba-checkout',{
         method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
@@ -1597,6 +1688,136 @@
     document.querySelectorAll('.faq-a.open').forEach(function(x){ x.classList.remove('open'); });
     document.querySelectorAll('.faq-q.open').forEach(function(x){ x.classList.remove('open'); });
     if(!isOpen){ a.classList.add('open'); btn.classList.add('open'); }
+  }
+
+  // ── Date Search Bar (Shiba) ──
+  (function initShibaDateInputs(){
+    var today = new Date();
+    var fmt = function(d){ return d.toISOString().split('T')[0]; };
+    var tom = new Date(today); tom.setDate(tom.getDate()+1);
+    var ci = document.getElementById('dsbCi');
+    var co = document.getElementById('dsbCo');
+    if(!ci||!co) return;
+    ci.min = fmt(today);
+    co.min = fmt(tom);
+    ci.addEventListener('change', function(){
+      var d = new Date(this.value);
+      var minCo = new Date(d); minCo.setDate(minCo.getDate()+1);
+      co.min = minCo.toISOString().split('T')[0];
+      if(co.value && co.value <= this.value){
+        co.value = minCo.toISOString().split('T')[0];
+      }
+    });
+  })();
+
+  function setDsbStatus(msg, type){
+    var el = document.getElementById('dsbStatus');
+    if(!el) return;
+    el.textContent = msg;
+    el.style.color = type==='error' ? '#c0392b' : type==='loading' ? 'var(--muted)' : 'var(--navy)';
+  }
+
+  async function searchAvailabilityShiba(){
+    var ci = document.getElementById('dsbCi').value;
+    var co = document.getElementById('dsbCo').value;
+    var guests = parseInt(document.getElementById('dsbGuests').value)||2;
+    var lang = getLang();
+    if(!ci||!co||co<=ci){
+      setDsbStatus(lang==='ja'?'チェックイン・アウト日を正しく選択してください':lang==='en'?'Please select valid check-in and check-out dates':'请选择正确的入住/退房日期','error');
+      return;
+    }
+    _searchCi=ci; _searchCo=co; _searchGuests=guests; _searchPickStep=0;
+    document.getElementById('dsbBtn').disabled=true;
+    setDsbStatus(lang==='ja'?'空室を確認中…':lang==='en'?'Checking availability…':'正在查询空房…','loading');
+    resetRoomCardsShiba();
+    try{
+      var results = await Promise.all([
+        fetch('/api/pms-avail?hotel=shiba&checkIn='+ci+'&checkOut='+co).then(function(r){return r.json();}),
+        fetch('/api/shiba-avail?checkIn='+ci+'&checkOut='+co+'&adultCount='+guests).then(function(r){return r.json();}),
+      ]);
+      var pmsRes = results[0];
+      var availRes = results[1];
+
+      // Build pricing map from SmartOrder, filtered per room
+      var priceMap = {};
+      if(availRes.data && Array.isArray(availRes.data.roomRates)){
+        var allRates = availRes.data.roomRates;
+        Object.keys(ROOM_DATA).forEach(function(tid){
+          var rates = allRates.filter(function(x){ return String(x.roomId)===tid; });
+          var best = rates.find(function(x){ return x.rateId===DIRECT_RATE_ID; });
+          if(!best && rates.length) best = rates.sort(function(a,b){return a.totalAmount-b.totalAmount;})[0];
+          if(best) priceMap[tid]={totalAmount:best.totalAmount,avgDaily:best.averageDailyAmount,nights:best.nights,rateId:best.rateId};
+        });
+      }
+
+      // PMS for availability truth; fallback to SmartOrder if PMS failed
+      var pmsAvail = (pmsRes && pmsRes.availability) ? pmsRes.availability : null;
+      _availResult = {};
+      Object.keys(ROOM_DATA).forEach(function(tid){
+        var isAvail;
+        if(pmsAvail){
+          // PMS keyed by typeId
+          isAvail = pmsAvail[tid] ? pmsAvail[tid].available : false;
+        } else {
+          isAvail = !!priceMap[tid];
+        }
+        var p = priceMap[tid];
+        if(isAvail && p){
+          _availResult[tid]={available:true,totalAmount:p.totalAmount,avgDaily:p.avgDaily,nights:p.nights,rateId:p.rateId};
+        } else {
+          _availResult[tid]={available:isAvail};
+        }
+      });
+
+      _searchPickStep = 2;
+      var nights = Math.round((new Date(co)-new Date(ci))/86400000);
+      var anyAvail = Object.values(_availResult).some(function(v){return v.available;});
+      setDsbStatus(anyAvail
+        ?(lang==='ja'?nights+'泊の空室が見つかりました':lang==='en'?'Available rooms found for '+nights+' night'+(nights>1?'s':''):nights+'晚有空房，请选择房间预订')
+        :(lang==='ja'?'ご指定の日程はすべて満室です。日程を変更してください。':lang==='en'?'No rooms available for selected dates. Please try different dates.':'所选日期全部满房，请更换日期。')
+      ,'');
+      updateRoomCardsShiba(ci,co,guests);
+    }catch(e){
+      setDsbStatus(lang==='ja'?'ネットワークエラーが発生しました':lang==='en'?'Network error. Please retry.':'网络错误，请重试。','error');
+      _searchPickStep=0;
+    }
+    document.getElementById('dsbBtn').disabled=false;
+  }
+
+  function resetRoomCardsShiba(){
+    var lang = getLang();
+    Object.keys(ROOM_DATA).forEach(function(tid){
+      var btn = document.getElementById('btn-'+tid);
+      var price = document.getElementById('price-'+tid);
+      if(btn){btn.disabled=true;btn.style.opacity='.45';btn.style.cursor='not-allowed';btn.classList.remove('sold-out');}
+      if(price){price.innerHTML='<span style="color:var(--muted);font-size:13px">'+(lang==='ja'?'確認中…':lang==='en'?'Checking…':'查询中…')+'</span>';}
+      var entry = document.querySelector('[id="r'+ROOM_DATA[tid].roomNum+'"]');
+      if(entry) entry.classList.remove('unavailable');
+    });
+  }
+
+  function updateRoomCardsShiba(ci, co, guests){
+    var lang = getLang();
+    var nights = Math.round((new Date(co)-new Date(ci))/86400000);
+    Object.keys(_availResult).forEach(function(tid){
+      var info = _availResult[tid];
+      var btn = document.getElementById('btn-'+tid);
+      var price = document.getElementById('price-'+tid);
+      var entry = document.querySelector('[id="r'+ROOM_DATA[tid].roomNum+'"]');
+      if(!btn||!price) return;
+      if(info.available){
+        btn.disabled=false;btn.style.opacity='';btn.style.cursor='';btn.classList.remove('sold-out');
+        var perNight = Math.round(info.avgDaily);
+        price.innerHTML='<strong>¥'+Number(perNight).toLocaleString()+'</strong><span style="color:var(--muted);font-size:13px"> /'+
+          (lang==='ja'?'泊':lang==='en'?'night':'晚')+' · '+nights+(lang==='ja'?'泊合計':lang==='en'?' nights total':' 晚合计')+
+          ' <strong>¥'+Number(info.totalAmount).toLocaleString()+'</strong></span>';
+        if(entry) entry.classList.remove('unavailable');
+      } else {
+        btn.disabled=true;btn.style.opacity='';btn.style.cursor='not-allowed';btn.classList.add('sold-out');
+        price.innerHTML='<span class="sold-out-badge">'+(lang==='ja'?'満室':lang==='en'?'Sold Out':'满房')+'</span>';
+        if(entry) entry.classList.add('unavailable');
+      }
+    });
   }
 </script>
 
