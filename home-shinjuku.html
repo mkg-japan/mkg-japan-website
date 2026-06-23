@@ -1038,8 +1038,19 @@
       document.getElementById('priceArea').innerHTML = `<div class="price-ph">${t('priceLoading')}</div>`;
       document.getElementById('cardPriceArea').innerHTML = `<div class="book-card-price-ph">${t('priceLoadingCard')}</div>`;
       try {
-        const r = await fetch(`/api/avail?checkIn=${ciDate}&checkOut=${coDate}&adultCount=2`);
-        const j = await r.json();
+        const [j, pmsRes] = await Promise.all([
+          fetch(`/api/avail?checkIn=${ciDate}&checkOut=${coDate}&adultCount=2`).then(r=>r.json()),
+          fetch(`/api/pms-avail?hotel=shinjuku&checkIn=${ciDate}&checkOut=${coDate}`).then(r=>r.json()).catch(()=>null),
+        ]);
+        // PMS is the source of truth for availability
+        const pmsAvail = pmsRes && pmsRes.availability ? pmsRes.availability : null;
+        const pmsOk = !pmsAvail || !pmsAvail['905007308'] || pmsAvail['905007308'].available;
+        if (!pmsOk) {
+          const _l = getLang(); const msg = _l==='ja' ? 'この日程は満室です' : _l==='en' ? 'Not available for these dates' : '该日期已满，请选择其他日期';
+          document.getElementById('priceArea').innerHTML = `<div class="price-ph" style="color:var(--red)">${msg}</div>`;
+          document.getElementById('cardPriceArea').innerHTML = `<div class="book-card-price-ph" style="color:var(--red)">${msg}</div>`;
+          return;
+        }
         if (j.data && j.data.roomRates && j.data.roomRates.length > 0) {
           const rr = j.data.roomRates[0];
           _bookRoomId = rr.roomId;

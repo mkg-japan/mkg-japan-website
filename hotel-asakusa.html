@@ -1426,7 +1426,7 @@
     try{
       // Query PMS (real occupancy) + SmartOrder (pricing) in parallel
       var results = await Promise.all([
-        fetch('/api/asakusa-pms-avail?checkIn='+ci+'&checkOut='+co).then(function(r){return r.json();}),
+        fetch('/api/pms-avail?hotel=asakusa&checkIn='+ci+'&checkOut='+co).then(function(r){return r.json();}),
         fetch('/api/asakusa-avail?checkIn='+ci+'&checkOut='+co+'&adultCount='+guests).then(function(r){return r.json();}),
       ]);
       var pmsRes = results[0];

@@ -1323,7 +1323,19 @@
       var guests=document.getElementById('mfd-guests')?document.getElementById('mfd-guests').value:'2';
       document.getElementById('mfd-price-area').innerHTML='<div class="price-ph" style="color:var(--muted);font-size:14px">价格查询中…</div>';
       btn.disabled=true;
-      fetchLiveRate(_currentRoomId,modalCiDate,modalCoDate,guests).then(function(live){
+      var _rd=ROOM_DATA[_currentRoomId];
+      var _typeId=_rd?_rd.typeId:'';
+      Promise.all([
+        fetchLiveRate(_currentRoomId,modalCiDate,modalCoDate,guests),
+        fetch('/api/pms-avail?hotel=shiba&checkIn='+modalCiDate+'&checkOut='+modalCoDate).then(function(r){return r.json();}).catch(function(){return null;}),
+      ]).then(function(results){
+        var live=results[0], pmsRes=results[1];
+        var pmsAvail=pmsRes&&pmsRes.availability?pmsRes.availability:null;
+        var pmsOk=!pmsAvail||!pmsAvail[_typeId]||pmsAvail[_typeId].available;
+        if(!pmsOk){
+          document.getElementById('mfd-price-area').innerHTML='<div class="price-ph" style="color:var(--red);font-size:13px">'+(lang==='ja'?'この日程は満室です':lang==='en'?'Not available for these dates':'该日期已满，请选择其他日期')+'</div>';
+          return;
+        }
         if(!live){
           document.getElementById('mfd-price-area').innerHTML='<div class="price-ph" style="color:var(--red);font-size:13px">该日期暂无报价，请联系我们</div>';
           return;
