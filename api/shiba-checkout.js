@@ -28,7 +28,7 @@ async function getVerifiedPrice(checkIn, checkOut, adultCount, roomTypeId) {
       signal: AbortSignal.timeout(8000),
     });
     const j = await r.json();
-    const match = (j.data?.roomRates || []).find(x => x.rateId === DIRECT_RATE_ID);
+    const match = (j.data?.roomRates || []).find(x => String(x.roomId) === String(roomTypeId) && x.rateId === DIRECT_RATE_ID);
     return match ? match.totalAmount : null;
   } catch (e) {
     return null;

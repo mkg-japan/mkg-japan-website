@@ -1246,7 +1246,7 @@
     _currentTypeId = typeId || null;
     var lang = getLang();
     var displayName = lang==='zh' ? zhName : lang==='en' ? enName : jaName;
-    document.getElementById('mfd-room-name').textContent = roomId + '室 · ' + displayName;
+    document.getElementById('mfd-room-name').textContent = displayName;
 
     // If dates already searched, skip directly to step1 with pre-filled data
     if(_searchCi && _searchCo && _searchPickStep===2 && typeId){
@@ -1269,9 +1269,9 @@
         document.getElementById('mfs-co').textContent=coDate;
         document.getElementById('mfs-nights').textContent=nights;
         document.getElementById('mfs-guests').textContent=_searchGuests;
-        document.getElementById('mfs-room').textContent=roomId+'室 · '+displayName;
+        document.getElementById('mfs-room').textContent=displayName;
         document.getElementById('mfs-total').textContent='¥'+Number(info.totalAmount).toLocaleString();
-        selectedRoom={roomId:typeId,rateId:info.rateId,roomName:roomId+'室 · '+displayName,totalAmount:info.totalAmount};
+        selectedRoom={roomId:typeId,rateId:info.rateId,roomName:displayName,totalAmount:info.totalAmount};
       }
       return;
     }
