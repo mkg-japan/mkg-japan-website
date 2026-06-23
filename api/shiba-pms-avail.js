@@ -2,8 +2,8 @@
 // GET /api/shiba-pms-avail?checkIn=YYYY-MM-DD&checkOut=YYYY-MM-DD
 
 const HOTEL_NUM     = '30958695';
-const PMS_CLIENT_ID = '1487118111575543808';
-const PMS_SECRET    = 'IYnSyEEnZ5dckZkc437q8DX8HXk6zWsD';
+const PMS_CLIENT_ID = '1513859491169472512';
+const PMS_SECRET    = 'UJKaBl2TYGngV8DQMSCv2Gx6UZtYYcYh';
 const TOKEN_URL     = 'https://idp.smartorder.ai/realms/smartorder-booking-api/protocol/openid-connect/token';
 const PMS_BASE      = 'https://api-open-pms.smartorder.ai';
 
