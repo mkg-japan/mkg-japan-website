@@ -24,7 +24,7 @@ async function getVerifiedPrice(checkIn, checkOut, adultCount, roomTypeId) {
     const qs = new URLSearchParams({ checkIn, checkOut, adultCount: String(adultCount || 2), roomTypeId: roomTypeId || '' });
     const r = await fetch(`${BOOKING_URL}/booking/api/v3/avail/${HOTEL_ID}?${qs}`, { headers: { Authorization: `Bearer ${token}` } });
     const j = await r.json();
-    const match = (j.data?.roomRates || []).find(x => x.rateId === DIRECT_RATE_ID);
+    const match = (j.data?.roomRates || []).find(x => String(x.roomId) === String(roomTypeId) && x.rateId === DIRECT_RATE_ID);
     return match ? match.totalAmount : null;
   } catch (e) {
     return null;
