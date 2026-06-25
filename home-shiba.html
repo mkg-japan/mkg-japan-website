@@ -745,10 +745,10 @@
       </div>
       <div class="room-info">
         <div>
-          <div class="room-type-label"><span data-lang="zh">顶层豪华套房</span><span data-lang="en">Penthouse Suite</span><span data-lang="ja">ペントハウススイート</span></div>
+          <div class="room-type-label"><span data-lang="zh">行政套房</span><span data-lang="en">Penthouse Suite</span><span data-lang="ja">ペントハウススイート</span></div>
           <h3>401 <span data-lang="zh">室</span><span data-lang="en"></span><span data-lang="ja">号室</span></h3>
           <p class="room-desc">
-            <span data-lang="zh">4楼顶层豪华套房，超大卧室配备木纹TV装饰墙、全遮光帘及独立厨房区，奢华宽敞，适合高端商务出行及家庭度假。</span>
+            <span data-lang="zh">4楼行政套房，超大卧室配备木纹TV装饰墙、全遮光帘及独立厨房区，奢华宽敞，适合高端商务出行及家庭度假。</span>
             <span data-lang="en">4F penthouse suite with oversized bedroom featuring a wood-finish TV accent wall, blackout curtains, and a separate kitchen zone. Luxurious and spacious — ideal for premium business travel or family stays.</span>
             <span data-lang="ja">4階ペントハウススイート。木目調TVアクセントウォール、完全遮光カーテン、独立キッチンゾーンを備えた超広々寝室。ハイエンド出張やファミリー旅行に最適な贅沢な空間です。</span>
           </p>
@@ -782,7 +782,7 @@
     <div class="room-floorplan-info">
       <div class="room-floorplan-label"><span data-lang="zh">户型图</span><span data-lang="en">Floor Plan</span><span data-lang="ja">間取り図</span></div>
       <div class="room-floorplan-area">28 <small>㎡</small></div>
-      <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-lang="zh">4楼 · 顶层豪华套房 · 1〜2名</span><span data-lang="en">4F · Penthouse Suite · 1–2 guests</span><span data-lang="ja">4F · ペントハウス · 1〜2名</span></div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-lang="zh">4楼 · 行政套房 · 1〜2名</span><span data-lang="en">4F · Penthouse Suite · 1–2 guests</span><span data-lang="ja">4F · ペントハウス · 1〜2名</span></div>
     </div>
   </div>
   </div>
@@ -1205,12 +1205,12 @@
 
   // ROOM_DATA keyed by typeId (SmartOrder roomId), value has roomNum for lookup
   var ROOM_DATA = {
-    '900014422': { typeId: '900014422', roomNum: '101' },
-    '900014421': { typeId: '900014421', roomNum: '102' },
-    '900014423': { typeId: '900014423', roomNum: '201' },
-    '900014424': { typeId: '900014424', roomNum: '202' },
-    '900014425': { typeId: '900014425', roomNum: '301' },
-    '900014426': { typeId: '900014426', roomNum: '401' },
+    '900014422': { typeId: '900014422', roomNum: '101', maxGuest: 2 },
+    '900014421': { typeId: '900014421', roomNum: '102', maxGuest: 5 },
+    '900014423': { typeId: '900014423', roomNum: '201', maxGuest: 3 },
+    '900014424': { typeId: '900014424', roomNum: '202', maxGuest: 3 },
+    '900014425': { typeId: '900014425', roomNum: '301', maxGuest: 4 },
+    '900014426': { typeId: '900014426', roomNum: '401', maxGuest: 2 },
   };
   // rateId for 単独網站価格 (homezhi1 — direct booking rate plan)
   var DIRECT_RATE_ID = '1126061550297001';
@@ -1288,6 +1288,7 @@
     // If dates already searched, skip directly to step1 with pre-filled data
     if(_searchCi && _searchCo && _searchPickStep===2 && typeId){
       modalCiDate = _searchCi; modalCoDate = _searchCo;
+      document.getElementById('mfd-guests').value = _searchGuests || 2;
       document.getElementById('bookingModal').classList.add('open');
       document.body.style.overflow='hidden';
       document.getElementById('mformStepDates').style.display='none';
@@ -1838,10 +1839,18 @@
     var nights = Math.round((new Date(co)-new Date(ci))/86400000);
     Object.keys(_availResult).forEach(function(tid){
       var info = _availResult[tid];
+      var rd = ROOM_DATA[tid];
       var btn = document.getElementById('btn-'+tid);
       var price = document.getElementById('price-'+tid);
-      var entry = document.querySelector('[id="r'+ROOM_DATA[tid].roomNum+'"]');
+      var entry = document.querySelector('[id="r'+rd.roomNum+'"]');
       if(!btn||!price) return;
+      if(rd.maxGuest && guests > rd.maxGuest){
+        btn.disabled=true;btn.style.opacity='';btn.style.cursor='not-allowed';btn.classList.add('sold-out');
+        var overMsg=lang==='ja'?'定員超過（最大'+rd.maxGuest+'名）':lang==='en'?'Exceeds capacity (max '+rd.maxGuest+')':'超出容纳人数（最多'+rd.maxGuest+'名）';
+        price.innerHTML='<span class="sold-out-badge">'+overMsg+'</span>';
+        if(entry) entry.classList.add('unavailable');
+        return;
+      }
       if(info.available){
         btn.disabled=false;btn.style.opacity='';btn.style.cursor='';btn.classList.remove('sold-out');
         var perNight = Math.round(info.avgDaily);
