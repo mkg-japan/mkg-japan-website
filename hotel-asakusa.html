@@ -1083,6 +1083,7 @@
     // If dates already selected via search bar, skip to avail check
     if(_searchCi && _searchCo && modalPickStep===2){
       modalCiDate = _searchCi; modalCoDate = _searchCo;
+      document.getElementById('mfd-guests').value = _searchGuests || 2;
       document.getElementById('bookingModal').classList.add('open');
       document.body.style.overflow='hidden';
       document.getElementById('mformStepDates').style.display='none';
