@@ -21,7 +21,9 @@ async function getSmartOrderToken() {
 async function getVerifiedPrice(checkIn, checkOut, adultCount, roomTypeId) {
   try {
     const token = await getSmartOrderToken();
-    const qs = new URLSearchParams({ checkIn, checkOut, adultCount: String(adultCount || 2), roomTypeId: roomTypeId || '' });
+    // Do NOT pass roomTypeId to SmartOrder — it changes the returned price.
+    // Query all rooms (same as client), then filter by roomId.
+    const qs = new URLSearchParams({ checkIn, checkOut, adultCount: String(adultCount || 2) });
     const r = await fetch(`${BOOKING_URL}/booking/api/v3/avail/${HOTEL_ID}?${qs}`, { headers: { Authorization: `Bearer ${token}` } });
     const j = await r.json();
     const match = (j.data?.roomRates || []).find(x => String(x.roomId) === String(roomTypeId) && x.rateId === DIRECT_RATE_ID);
