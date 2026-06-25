@@ -985,10 +985,10 @@
 <script>
   // ── 预订系统 ──
   var ROOM_DATA = {
-    '900014417': { typeId: '900014417' },
-    '900014418': { typeId: '900014418' },
-    '900014419': { typeId: '900014419' },
-    '900014420': { typeId: '900014420' },
+    '900014417': { typeId: '900014417', maxGuest: 3 },
+    '900014418': { typeId: '900014418', maxGuest: 4 },
+    '900014419': { typeId: '900014419', maxGuest: 3 },
+    '900014420': { typeId: '900014420', maxGuest: 4 },
   };
 
   var DIRECT_RATE_ID = '1126061761074001';
@@ -1538,10 +1538,19 @@
     var nights=Math.round((new Date(co)-new Date(ci))/86400000);
     Object.keys(_availResult).forEach(function(rid){
       var info=_availResult[rid];
+      var rd=ROOM_DATA[rid];
       var btn=document.getElementById('btn-'+rid);
       var price=document.getElementById('price-'+rid);
       var entry=document.querySelector('[data-room-id="'+rid+'"]');
       if(!btn||!price) return;
+      // 人数超出房间上限 → 显示灰色不可订
+      if(rd && rd.maxGuest && guests > rd.maxGuest){
+        btn.disabled=true;btn.style.opacity='';btn.style.cursor='not-allowed';btn.classList.add('sold-out');
+        var overMsg=lang==='ja'?'定員超過（最大'+rd.maxGuest+'名）':lang==='en'?'Exceeds capacity (max '+rd.maxGuest+')':'超出容纳人数（最多'+rd.maxGuest+'名）';
+        price.innerHTML='<span class="sold-out-badge">'+overMsg+'</span>';
+        if(entry)entry.classList.add('unavailable');
+        return;
+      }
       if(info.available){
         btn.disabled=false;btn.style.opacity='';btn.style.cursor='';btn.classList.remove('sold-out');
         var perNight=Math.round(info.avgDaily);
