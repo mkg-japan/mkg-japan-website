@@ -1804,7 +1804,9 @@
         if(isAvail && p){
           _availResult[tid]={available:true,totalAmount:p.totalAmount,avgDaily:p.avgDaily,nights:p.nights,rateId:p.rateId};
         } else {
-          _availResult[tid]={available:isAvail};
+          // Only mark available when BOTH pms clears AND SmartOrder returns a price.
+          // If SmartOrder has the room locked (stop-sell), p is null → unavailable.
+          _availResult[tid]={available:false};
         }
       });
 
