@@ -125,9 +125,9 @@ module.exports = async function handler(req, res) {
         });
 
         if (!overlaps) continue;
-        // Count reserved(10), confirmed(20), guaranteed(30), in-house(40), hold/保留(50) as occupied.
-        // Skip cancelled(60/80) and checked-out(90/100) orders.
-        const ACTIVE = new Set([10, 20, 30, 40, 50]);
+        // Count reserved(10), confirmed(20), guaranteed(30), in-house(40/70), hold/保留(50) as occupied.
+        // Skip cancelled(60) and checked-out(80/90/100) orders.
+        const ACTIVE = new Set([10, 20, 30, 40, 50, 70]);
         if (!ACTIVE.has(info.status)) continue;
         if (!typeId) continue;
         if (!occupiedByType[typeId]) occupiedByType[typeId] = new Set();
