@@ -1494,6 +1494,8 @@
         if(pmsAvail){
           isAvail = pmsAvail[rid] ? pmsAvail[rid].available : false;
         } else {
+          // PMS unavailable: fall back to SmartOrder avail.
+          // SmartOrder only returns a room when freeRooms > 0, so price presence = available.
           isAvail = !!priceMap[rid];
         }
         var p = priceMap[rid];

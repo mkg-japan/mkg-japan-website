@@ -1796,6 +1796,8 @@
           // PMS keyed by typeId
           isAvail = pmsAvail[tid] ? pmsAvail[tid].available : false;
         } else {
+          // PMS unavailable: fall back to SmartOrder avail.
+          // SmartOrder only returns a room when freeRooms > 0, so price presence = available.
           isAvail = !!priceMap[tid];
         }
         var p = priceMap[tid];

@@ -46,6 +46,13 @@ module.exports = async function handler(req, res) {
       signal: AbortSignal.timeout(8000),
     });
     const data = await r.json();
+    // SmartOrder avail returns ALL room types regardless of roomTypeId param.
+    // Filter server-side so the frontend only sees the requested room type.
+    if (roomTypeId && data.data && Array.isArray(data.data.roomRates)) {
+      data.data.roomRates = data.data.roomRates.filter(
+        rr => String(rr.roomId) === String(roomTypeId)
+      );
+    }
     res.status(200).json(data);
   } catch (e) {
     res.status(503).json({ error: 'avail_unavailable', message: e.message });
