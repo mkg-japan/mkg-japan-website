@@ -279,6 +279,7 @@
     .room-price-tag strong{font-size:20px;color:var(--navy);font-weight:900}
     .room-price-tag span.per{font-size:12px}
     .btn-book-room.sold-out{background:#e0e0e0;color:#999;cursor:not-allowed;pointer-events:none}
+    .btn-book-room.pending{background:transparent;border:2px solid var(--gold);color:var(--navy);opacity:.85}
     .sold-out-badge{display:inline-block;padding:6px 14px;border-radius:8px;background:#f5f5f5;color:#999;font-size:13px;font-weight:700;border:1.5px solid #e0e0e0}
     .room-entry.unavailable{opacity:.65}
     @media(max-width:640px){.date-search-bar{flex-direction:column}.dsb-field{min-width:100%}}
@@ -460,7 +461,7 @@
           <div>
             <div class="room-avail-bar" id="avail-900014418">
               <div class="room-price-tag" id="price-900014418"><span data-lang="zh">选择上方日期查看价格</span><span data-lang="ja">上で日付を選択してください</span><span data-lang="en">Select dates above to see price</span></div>
-              <button class="btn-book-room" id="btn-900014418" onclick="bookRoom('900014418','高级家庭房','Superior Family Room','スーペリアファミリールーム')" disabled style="opacity:.45;cursor:not-allowed">
+              <button class="btn-book-room" id="btn-900014418" onclick="bookRoom('900014418','高级家庭房','Superior Family Room','スーペリアファミリールーム')" >
                 <span data-lang="zh">预订此房间 →</span><span data-lang="ja">この客室を予約 →</span><span data-lang="en">Book This Room →</span>
               </button>
             </div>
@@ -514,7 +515,7 @@
           <div>
             <div class="room-avail-bar" id="avail-900014420">
               <div class="room-price-tag" id="price-900014420"><span data-lang="zh">选择上方日期查看价格</span><span data-lang="ja">上で日付を選択してください</span><span data-lang="en">Select dates above to see price</span></div>
-              <button class="btn-book-room" id="btn-900014420" onclick="bookRoom('900014420','豪华套房','Deluxe Suite','デラックススイート')" disabled style="opacity:.45;cursor:not-allowed">
+              <button class="btn-book-room" id="btn-900014420" onclick="bookRoom('900014420','豪华套房','Deluxe Suite','デラックススイート')" >
                 <span data-lang="zh">预订此房间 →</span><span data-lang="ja">この客室を予約 →</span><span data-lang="en">Book This Room →</span>
               </button>
             </div>
@@ -567,7 +568,7 @@
           <div>
             <div class="room-avail-bar" id="avail-900014419">
               <div class="room-price-tag" id="price-900014419"><span data-lang="zh">选择上方日期查看价格</span><span data-lang="ja">上で日付を選択してください</span><span data-lang="en">Select dates above to see price</span></div>
-              <button class="btn-book-room" id="btn-900014419" onclick="bookRoom('900014419','豪华小型套房','Deluxe Compact Suite','デラックスコンパクトスイート')" disabled style="opacity:.45;cursor:not-allowed">
+              <button class="btn-book-room" id="btn-900014419" onclick="bookRoom('900014419','豪华小型套房','Deluxe Compact Suite','デラックスコンパクトスイート')" >
                 <span data-lang="zh">预订此房间 →</span><span data-lang="ja">この客室を予約 →</span><span data-lang="en">Book This Room →</span>
               </button>
             </div>
@@ -620,7 +621,7 @@
           <div>
             <div class="room-avail-bar" id="avail-900014417">
               <div class="room-price-tag" id="price-900014417"><span data-lang="zh">选择上方日期查看价格</span><span data-lang="ja">上で日付を選択してください</span><span data-lang="en">Select dates above to see price</span></div>
-              <button class="btn-book-room" id="btn-900014417" onclick="bookRoom('900014417','舒适三人间','Comfortable Triple','コンフォートトリプル')" disabled style="opacity:.45;cursor:not-allowed">
+              <button class="btn-book-room" id="btn-900014417" onclick="bookRoom('900014417','舒适三人间','Comfortable Triple','コンフォートトリプル')" >
                 <span data-lang="zh">预订此房间 →</span><span data-lang="ja">この客室を予約 →</span><span data-lang="en">Book This Room →</span>
               </button>
             </div>
@@ -1527,7 +1528,7 @@
     Object.keys(ROOM_DATA).forEach(function(rid){
       var btn=document.getElementById('btn-'+rid);
       var price=document.getElementById('price-'+rid);
-      if(btn){btn.disabled=true;btn.style.opacity='.45';btn.style.cursor='not-allowed';btn.classList.remove('sold-out');}
+      if(btn){btn.disabled=false;btn.style.opacity='';btn.style.cursor='';btn.classList.remove('sold-out','pending');}
       if(price){price.innerHTML='<span style="color:var(--muted);font-size:13px">'+(lang==='ja'?'確認中…':lang==='en'?'Checking…':'查询中…')+'</span>';}
       var entry=document.querySelector('[data-room-id="'+rid+'"]');
       if(entry)entry.classList.remove('unavailable');
@@ -1553,7 +1554,7 @@
         return;
       }
       if(info.available){
-        btn.disabled=false;btn.style.opacity='';btn.style.cursor='';btn.classList.remove('sold-out');
+        btn.disabled=false;btn.style.opacity='';btn.style.cursor='';btn.classList.remove('sold-out');btn.classList.remove('pending');
         var perNight=Math.round(info.avgDaily);
         price.innerHTML='<strong>¥'+Number(perNight).toLocaleString()+'</strong><span class="per"> /'+
           (lang==='ja'?'泊':lang==='en'?'night':'晚')+' · '+nights+(lang==='ja'?'泊合計':lang==='en'?' nights total':' 晚合计')+

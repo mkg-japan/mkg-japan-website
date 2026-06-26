@@ -1826,7 +1826,7 @@
     Object.keys(ROOM_DATA).forEach(function(tid){
       var btn = document.getElementById('btn-'+tid);
       var price = document.getElementById('price-'+tid);
-      if(btn){btn.disabled=true;btn.style.opacity='.45';btn.style.cursor='not-allowed';btn.classList.remove('sold-out');}
+      if(btn){btn.disabled=false;btn.style.opacity='';btn.style.cursor='';btn.classList.remove('sold-out');}
       if(price){price.innerHTML='<span style="color:var(--muted);font-size:13px">'+(lang==='ja'?'確認中…':lang==='en'?'Checking…':'查询中…')+'</span>';}
       var entry = document.querySelector('[id="r'+ROOM_DATA[tid].roomNum+'"]');
       if(entry) entry.classList.remove('unavailable');
