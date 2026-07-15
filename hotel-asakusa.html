@@ -308,7 +308,7 @@
     }
   </style>
 </head>
-<body class="lang-en">
+<body class="lang-ja">
 
 <header class="topbar">
   <div class="wrap nav">
@@ -1584,13 +1584,7 @@
     openRoomBooking(roomId, zhName, enName, jaName);
   }
 
-  function detectLang(){
-    var nav=(navigator.language||navigator.userLanguage||'').toLowerCase();
-    if(nav.startsWith('ja')) return 'ja';
-    if(nav.startsWith('zh')) return 'zh';
-    return 'en';
-  }
-  function getLang(){return sessionStorage.getItem('mkgjp_lang')||detectLang()}
+  function getLang(){return sessionStorage.getItem('mkgjp_lang')||'ja'}
   function setLang(l){
     document.body.className='lang-'+l;
     sessionStorage.setItem('mkgjp_lang',l);
@@ -1602,7 +1596,7 @@
   document.addEventListener('click',function(e){if(!e.target.closest('.desk-lang-wrap'))closeLang()});
 
   (function(){
-    var l=sessionStorage.getItem('mkgjp_lang')||detectLang();
+    var l=sessionStorage.getItem('mkgjp_lang')||'ja';
     setLang(l);
   })();
 </script>
