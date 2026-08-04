@@ -125,9 +125,10 @@ module.exports = async function handler(req, res) {
         });
 
         if (!overlaps) continue;
-        // Count reserved(10), confirmed(20), guaranteed(30), in-house(40/70), hold/保留(50) as occupied.
-        // Skip cancelled(60) and checked-out(80/90/100) orders.
-        const ACTIVE = new Set([10, 20, 30, 40, 50, 70]);
+        // 只有确认占房才算：reserved(10)、confirmed(20)、guaranteed(30)、in-house(40)、待离店(70)。
+        // 剔除 hold/保留(50)—— PMS 界面上不显示为占用，多为已取消或未确认的渠道占位。
+        // 跳过 cancelled(60) 和 checked-out(80/90/100)。
+        const ACTIVE = new Set([10, 20, 30, 40, 70]);
         if (!ACTIVE.has(info.status)) continue;
         if (!typeId) continue;
         if (!occupiedByType[typeId]) occupiedByType[typeId] = new Set();
