@@ -433,6 +433,9 @@
 
     <p class="section-sub"><span data-lang="zh">4种日式精品客室，全部配备独立卫浴、智能门锁与高速 Wi-Fi</span><span data-lang="ja">4タイプの和風精品客室、全室バスルーム・スマートロック・高速Wi-Fi完備</span><span data-lang="en">4 Japanese-style boutique rooms, all with private bathroom, smart lock and high-speed Wi-Fi</span></p>
 
+    <!-- 组合方案（接力预订）——单房型无法整段入住时展示；URL 加 ?combo=1 才启用（灰度） -->
+    <div id="combo-section" style="display:none;margin:20px 0 30px"></div>
+
     <!-- 高级家庭间 Superior Family Room -->
     <div class="room-entry" data-room-id="900014418">
       <div class="room-entry-layout">
@@ -1515,6 +1518,12 @@
         :(lang==='ja'?'ご指定の日程はすべて満室です。日程を変更してください。':lang==='en'?'No rooms available for selected dates. Please try different dates.':'所选日期全部满房，请更换日期。')
       ,'');
       updateRoomCards(ci,co,guests);
+      // 灰度：无单房型可整段入住 且 URL 含 ?combo=1 → 拉取组合方案
+      if(!anyAvail && nights>=2 && isComboEnabled()){
+        fetchAndRenderCombos(ci,co,guests);
+      } else {
+        var cs=document.getElementById('combo-section'); if(cs){cs.style.display='none';cs.innerHTML='';}
+      }
     }catch(e){
       setDsbStatus(lang==='ja'?'ネットワークエラーが発生しました':lang==='en'?'Network error. Please retry.':'网络错误，请重试。','error');
     }
@@ -1582,6 +1591,111 @@
     // Pre-fill dates into modal and open it
     modalCiDate=_searchCi; modalCoDate=_searchCo; modalPickStep=2;
     openRoomBooking(roomId, zhName, enName, jaName);
+  }
+
+  // ────────────────────────────────────────────────────────────
+  // 组合方案（接力预订）—— 灰度：URL 加 ?combo=1 才启用
+  // ────────────────────────────────────────────────────────────
+  function isComboEnabled(){
+    try { return new URLSearchParams(window.location.search).get('combo') === '1'; }
+    catch(e){ return false; }
+  }
+
+  function fmtDate(s, lang){
+    var d = new Date(s);
+    var m = d.getMonth()+1, dd = d.getDate();
+    if(lang==='ja') return d.getFullYear()+'年'+m+'月'+dd+'日';
+    if(lang==='en') return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m-1]+' '+dd;
+    return m+'月'+dd+'日';
+  }
+
+  async function fetchAndRenderCombos(ci, co, guests){
+    var lang = getLang();
+    var cs = document.getElementById('combo-section');
+    if(!cs) return;
+    cs.style.display = 'block';
+    cs.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);font-size:14px">'+
+      (lang==='ja'?'組合せプラン検索中…':lang==='en'?'Searching combo plans…':'正在查找组合方案…')+'</div>';
+    try {
+      var r = await fetch('/api/asakusa-combo?checkIn='+ci+'&checkOut='+co+'&adultCount='+guests);
+      var j = await r.json();
+      var combos = (j && j.combos) || [];
+      if(!combos.length){
+        cs.innerHTML = '<div style="background:#f7f5f1;border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;color:var(--muted);font-size:14px">'+
+          (lang==='ja'?'ご指定の日程は組合せプランもご用意できません。':lang==='en'?'No combo plans available for these dates.':'所选日期暂无可用的组合方案。')+
+          '</div>';
+        return;
+      }
+      cs.innerHTML = renderCombosHtml(combos, lang);
+    } catch(e){
+      cs.innerHTML = '<div style="color:#c0392b;padding:16px">'+
+        (lang==='ja'?'組合せ検索に失敗しました。':lang==='en'?'Combo search failed.':'组合方案查询失败。')+'</div>';
+    }
+  }
+
+  function renderCombosHtml(combos, lang){
+    var titleTxt = lang==='ja' ? '組合せプラン（途中お部屋替え1回）' : lang==='en' ? 'Combo Plans (1 room change)' : '组合方案（中途换房 1 次）';
+    var subTxt   = lang==='ja' ? '単一のお部屋で全泊はご案内できませんが、以下の組合せでご宿泊いただけます。全プラン3% OFF。' :
+                   lang==='en' ? 'No single room covers the whole stay, but the following combos work — all with 3% off.' :
+                                 '所选日期无单一房间可整段入住，以下组合方案可满足您的入住需求，全部享 3% 折扣。';
+    var callTxt  = lang==='ja' ? '📞 電話予約 03-6279-2482' : lang==='en' ? '📞 Call to Book 03-6279-2482' : '📞 电话预约 03-6279-2482';
+    var noteTxt  = lang==='ja' ? '※ 途中お部屋替えの詳細はスタッフがご案内します。中間日の朝10時までにチェックアウト、15時から新しいお部屋にチェックイン可能。' :
+                   lang==='en' ? '※ Room-change details will be arranged by our staff. Check-out by 10:00 on the transfer day, new room ready from 15:00.' :
+                                 '※ 换房当日请于上午10:00前退房，下午15:00起可入住新房间；具体安排由前台协助。';
+
+    var html = '<div style="background:linear-gradient(135deg,#fffbf2,#fff);border:2px solid var(--gold);border-radius:16px;padding:24px 22px;box-shadow:0 6px 24px rgba(201,166,91,.15)">'+
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">'+
+        '<span style="background:var(--gold);color:#fff;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.05em">MKG DIRECT</span>'+
+        '<h3 style="margin:0;font-size:18px;color:var(--navy);letter-spacing:-.01em">'+titleTxt+'</h3>'+
+      '</div>'+
+      '<p style="margin:6px 0 18px;color:var(--muted);font-size:13px;line-height:1.6">'+subTxt+'</p>';
+
+    combos.forEach(function(c, i){
+      var s1 = c.segments[0], s2 = c.segments[1];
+      var badge = c.crossType
+        ? (lang==='ja'?'客室タイプ変更あり':lang==='en'?'Cross Room Type':'跨房型')
+        : (lang==='ja'?'同タイプ内で移動':lang==='en'?'Same Room Type':'同房型');
+      var name1 = s1.roomName[lang] || s1.roomName.zh;
+      var name2 = s2.roomName[lang] || s2.roomName.zh;
+      var nightTxt = lang==='ja'?'泊':lang==='en'?'night(s)':'晚';
+      var perNight = lang==='ja'?'／泊':lang==='en'?'/night':'/晚';
+
+      html += '<div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:12px">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">'+
+          '<span style="font-weight:800;color:var(--navy);font-size:15px">'+(lang==='ja'?'プラン':lang==='en'?'Plan':'方案')+' '+(i+1)+'</span>'+
+          '<span style="background:#f0e6d2;color:#8a6d1a;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700">'+badge+'</span>'+
+        '</div>'+
+        // 段1
+        '<div style="display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 12px;background:#fafaf7;border-radius:8px;margin-bottom:6px">'+
+          '<div style="font-size:12px;color:var(--muted);white-space:nowrap">'+fmtDate(s1.checkIn,lang)+' → '+fmtDate(s1.checkOut,lang)+'</div>'+
+          '<div style="font-weight:700;color:var(--navy);font-size:14px">'+name1+' <span style="color:var(--muted);font-weight:400;font-size:12px">('+ (lang==='ja'?'部屋':lang==='en'?'room':'房号') +' '+s1.roomSerialNum+')</span></div>'+
+          '<div style="text-align:right;white-space:nowrap"><strong style="color:var(--navy)">¥'+Number(s1.totalAmount).toLocaleString()+'</strong><span style="font-size:11px;color:var(--muted)"> · '+s1.nights+nightTxt+'</span></div>'+
+        '</div>'+
+        // 换房箭头
+        '<div style="text-align:center;color:var(--gold);font-size:13px;margin:2px 0;font-weight:800">↓ '+(lang==='ja'?'お部屋替え':lang==='en'?'Room Change':'换房')+' ↓</div>'+
+        // 段2
+        '<div style="display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 12px;background:#fafaf7;border-radius:8px;margin-bottom:14px">'+
+          '<div style="font-size:12px;color:var(--muted);white-space:nowrap">'+fmtDate(s2.checkIn,lang)+' → '+fmtDate(s2.checkOut,lang)+'</div>'+
+          '<div style="font-weight:700;color:var(--navy);font-size:14px">'+name2+' <span style="color:var(--muted);font-weight:400;font-size:12px">('+ (lang==='ja'?'部屋':lang==='en'?'room':'房号') +' '+s2.roomSerialNum+')</span></div>'+
+          '<div style="text-align:right;white-space:nowrap"><strong style="color:var(--navy)">¥'+Number(s2.totalAmount).toLocaleString()+'</strong><span style="font-size:11px;color:var(--muted)"> · '+s2.nights+nightTxt+'</span></div>'+
+        '</div>'+
+        // 价格汇总
+        '<div style="border-top:1px dashed var(--line);padding-top:12px;display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:8px">'+
+          '<div style="font-size:12px;color:var(--muted)">'+
+            (lang==='ja'?'小計':lang==='en'?'Subtotal':'原价合计')+' <span style="text-decoration:line-through">¥'+Number(c.grossTotal).toLocaleString()+'</span>'+
+            ' &nbsp;·&nbsp; '+(lang==='ja'?'公式直予約割引':lang==='en'?'Direct Booking Discount':'官网直订折扣')+' <span style="color:#16866a;font-weight:700">-¥'+Number(c.discountAmount).toLocaleString()+' (3%)</span>'+
+          '</div>'+
+          '<div style="font-size:20px;font-weight:900;color:var(--navy)">¥'+Number(c.netTotal).toLocaleString()+' <span style="font-size:11px;color:var(--muted);font-weight:400">JPY</span></div>'+
+        '</div>'+
+        '<div style="margin-top:12px;text-align:right">'+
+          '<a href="tel:0362792482" style="display:inline-block;background:var(--navy);color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">'+callTxt+'</a>'+
+        '</div>'+
+      '</div>';
+    });
+
+    html += '<p style="margin:14px 0 0;color:var(--muted);font-size:12px;line-height:1.6">'+noteTxt+'</p>';
+    html += '</div>';
+    return html;
   }
 
   function getLang(){return sessionStorage.getItem('mkgjp_lang')||'ja'}
