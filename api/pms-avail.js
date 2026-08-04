@@ -89,7 +89,8 @@ module.exports = async function handler(req, res) {
   }
 
   const { hotelNum, clientId, secret, roomTypeMap, typeTotal } = HOTELS[hotel];
-  const debug = req.query.debug === '1';
+  const debug   = req.query.debug   === '1';
+  const perroom = req.query.perroom === '1';
 
   try {
     const token = await getToken(clientId, secret);
@@ -109,6 +110,12 @@ module.exports = async function handler(req, res) {
 
     const occupiedByType = {};
     const debugRows = [];
+    // perRoom 输出：{ '101': { typeId, occupiedNights:[YYYY-MM-DD,...] } }
+    // occupiedNights 只记录落在 [checkIn, checkOut) 内的"入住晚"（不含退房当天）。
+    const perRoom = {};
+    for (const roomSerialNum of Object.keys(roomTypeMap)) {
+      perRoom[roomSerialNum] = { typeId: roomTypeMap[roomSerialNum], occupiedNights: [] };
+    }
 
     for (const d of details) {
       if (!d) continue;
@@ -133,6 +140,19 @@ module.exports = async function handler(req, res) {
         if (!typeId) continue;
         if (!occupiedByType[typeId]) occupiedByType[typeId] = new Set();
         occupiedByType[typeId].add(info.roomSerialNum || typeId);
+
+        // 记录该房号在 [checkIn, checkOut) 内被占的每晚
+        const rsn = info.roomSerialNum;
+        if (rsn && perRoom[rsn]) {
+          const winStart = roomCi < checkIn  ? checkIn  : roomCi;
+          const winEnd   = roomCo > checkOut ? checkOut : roomCo;
+          const d0 = new Date(winStart);
+          const dEnd = new Date(winEnd);
+          while (d0 < dEnd) {
+            perRoom[rsn].occupiedNights.push(d0.toISOString().split('T')[0]);
+            d0.setDate(d0.getDate() + 1);
+          }
+        }
       }
     }
 
@@ -143,6 +163,13 @@ module.exports = async function handler(req, res) {
     }
 
     const payload = { hotel, checkIn, checkOut, availability };
+    if (perroom) {
+      // 排序去重每间房的占用晚数
+      for (const rsn of Object.keys(perRoom)) {
+        perRoom[rsn].occupiedNights = [...new Set(perRoom[rsn].occupiedNights)].sort();
+      }
+      payload.perRoom = perRoom;
+    }
     if (debug) payload._debug = {
       allOrderNums_count: allOrderNums.length,
       pastCi: pastCiOrders.length, windowCi: windowCiOrders.length, co: coOrders.length,
