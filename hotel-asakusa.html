@@ -1002,7 +1002,7 @@
   var _i18n = {
     zh: {
       calMonth: function(y,m){ return y+'年 '+(m+1)+'月'; },
-      perNight: '/晚', totalLabel: '合计',
+      perNight: '／晚', totalLabel: '合计',
       pricePhArea: '选择日期后显示价格',
       priceLoading: '正在获取价格…',
       nightsX: function(n,p){ return n+'晚 × ¥'+Number(p).toLocaleString(); },
@@ -1032,7 +1032,7 @@
     },
     ja: {
       calMonth: function(y,m){ return y+'年'+(m+1)+'月'; },
-      perNight: '/泊', totalLabel: '合計',
+      perNight: '／泊', totalLabel: '合計',
       pricePhArea: '日付を選択すると料金が表示されます',
       priceLoading: '料金を取得中…',
       nightsX: function(n,p){ return n+'泊 × ¥'+Number(p).toLocaleString(); },
@@ -1658,7 +1658,7 @@
       var name1 = s1.roomName[lang] || s1.roomName.zh;
       var name2 = s2.roomName[lang] || s2.roomName.zh;
       var nightTxt = lang==='ja'?'泊':lang==='en'?'night(s)':'晚';
-      var perNight = lang==='ja'?'／泊':lang==='en'?'/night':'/晚';
+      var perNight = lang==='ja'?'／泊':lang==='en'?'/night':'／晚';
 
       html += '<div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:12px">'+
         '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">'+
