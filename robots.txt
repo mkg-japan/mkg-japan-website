@@ -1,38 +1,61 @@
 # MKG Japan 公式サイト robots.txt
-# 一般検索エンジン向け
+# 一般検索エンジン・AI 検索クローラー向け（公開営銷コンテンツ）
 User-agent: *
 Allow: /
 Disallow: /api/
 
-# AI 学習クローラーの拒否（無断転載・学習利用の防止）
+# Search and training crawlers are allowed below; their purposes differ.
+# Allowing crawling does not guarantee indexing or AI recommendations.
 User-agent: GPTBot
-Disallow: /
+Allow: /
+Disallow: /api/
 
 User-agent: ChatGPT-User
-Disallow: /
+Allow: /
+Disallow: /api/
 
 User-agent: OAI-SearchBot
-Disallow: /
+Allow: /
+Disallow: /api/
 
 User-agent: ClaudeBot
-Disallow: /
+Allow: /
+Disallow: /api/
 
 User-agent: Claude-Web
-Disallow: /
+Allow: /
+Disallow: /api/
 
 User-agent: anthropic-ai
-Disallow: /
+Allow: /
+Disallow: /api/
 
 User-agent: Google-Extended
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
+Allow: /
+Disallow: /api/
 
 User-agent: PerplexityBot
-Disallow: /
+Allow: /
+Disallow: /api/
 
 User-agent: Perplexity-User
+Allow: /
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /api/
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+Disallow: /api/
+
+# 以下は引き続き拒否：学習専用スクレイパ系 / 評判の悪いボット
+User-agent: CCBot
 Disallow: /
 
 User-agent: Bytespider
@@ -41,16 +64,7 @@ Disallow: /
 User-agent: Amazonbot
 Disallow: /
 
-User-agent: Applebot-Extended
-Disallow: /
-
 User-agent: FacebookBot
-Disallow: /
-
-User-agent: Meta-ExternalAgent
-Disallow: /
-
-User-agent: Meta-ExternalFetcher
 Disallow: /
 
 User-agent: cohere-ai

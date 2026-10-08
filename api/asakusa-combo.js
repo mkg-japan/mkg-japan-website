@@ -4,8 +4,8 @@
 // 规则：
 //   - 最多 1 次换房（也就是 2 段）
 //   - 允许跨房型
-//   - 每段价格取 SmartOrder DIRECT rate；合计后再打 3% 折
-//   - 返回按 折后合计价 升序的 Top 方案（默认 10 个）
+//   - 每段价格取 SmartOrder DIRECT rate；两段合计即为总价
+//   - 返回按 合计价 升序的 Top 方案（默认 10 个）
 //
 // 只在客人搜索的日期段没有单一房型能完整入住（type-level 全部 sold_out）时才有意义调用；
 // 前端会在 no-avail 时主动 fetch 这个接口。
@@ -16,7 +16,6 @@ const CLIENT_SECRET = process.env.SMARTORDER_CLIENT_SECRET || 'UJKaBl2TYGngV8DQM
 const TOKEN_URL     = 'https://idp.smartorder.ai/realms/smartorder-booking-api/protocol/openid-connect/token';
 const BASE_URL      = 'https://api-open-booking.smartorder.ai';
 const DIRECT_RATE   = '1126061761074001';
-const DISCOUNT_PCT  = 0.03;   // 3% 直订组合折扣
 
 // 浅草房号 → 房型ID / 名称 / 容量 —— 与 pms-avail.js / hotel-asakusa.html 保持一致
 const ROOM_MAP = {
@@ -170,25 +169,20 @@ module.exports = async function handler(req, res) {
         priceOf(c.t2, c.mid, checkOut),
       ]);
       if (!p1 || !p2) continue;
-      const gross = p1.totalAmount + p2.totalAmount;
-      const discount = Math.round(gross * DISCOUNT_PCT);
-      const net = gross - discount;
+      const total = p1.totalAmount + p2.totalAmount;
       enriched.push({
         segments: [
           { checkIn, checkOut: c.mid, roomTypeId: c.t1, roomSerialNum: c.room1, nights: p1.nights, totalAmount: p1.totalAmount, averageDailyAmount: p1.averageDailyAmount, rateId: p1.rateId, roomName: TYPE_INFO[c.t1] },
           { checkIn: c.mid, checkOut, roomTypeId: c.t2, roomSerialNum: c.room2, nights: p2.nights, totalAmount: p2.totalAmount, averageDailyAmount: p2.averageDailyAmount, rateId: p2.rateId, roomName: TYPE_INFO[c.t2] },
         ],
         crossType: c.t1 !== c.t2,
-        grossTotal: gross,
-        discountPct: DISCOUNT_PCT,
-        discountAmount: discount,
-        netTotal: net,
+        totalAmount: total,
         currencyCode: 'JPY',
       });
     }
 
-    // 4. 排序：折后合计价升序；返回 Top 8
-    enriched.sort((a, b) => a.netTotal - b.netTotal);
+    // 4. 排序：合计价升序；返回 Top 8
+    enriched.sort((a, b) => a.totalAmount - b.totalAmount);
     res.status(200).json({
       checkIn, checkOut, adultCount: guests, nights,
       count: enriched.length,

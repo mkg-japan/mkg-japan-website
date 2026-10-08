@@ -1,32 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.mkgjp.com/</loc>
-    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.mkgjp.com/assets/tokyo_hero.jpg</image:loc>
+      <image:caption>MKG Japan — Tokyo real estate investment and hotel operations</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.mkgjp.com/hotel-asakusa.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.mkgjp.com/assets/asakusa/g1.jpg</image:loc>
+      <image:caption>MKG HOTEL Asakusa — boutique hotel in Komagata, Taito, Tokyo</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.mkgjp.com/assets/asakusa/superior/667273812.jpg</image:loc>
+      <image:caption>Superior Family Room — MKG HOTEL Asakusa</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.mkgjp.com/assets/asakusa/deluxe/667274556.jpg</image:loc>
+      <image:caption>Deluxe Suite — MKG HOTEL Asakusa</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.mkgjp.com/assets/asakusa/deluxe-s/667592817.jpg</image:loc>
+      <image:caption>Deluxe Compact Suite — MKG HOTEL Asakusa</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.mkgjp.com/assets/asakusa/triple/667583036.jpg</image:loc>
+      <image:caption>Comfortable Triple Room — MKG HOTEL Asakusa</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.mkgjp.com/home-shiba.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.mkgjp.com/home-shinjuku.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.mkgjp.com/faq.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
